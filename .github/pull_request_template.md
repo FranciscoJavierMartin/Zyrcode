@@ -43,3 +43,5 @@ What types of changes does your code introduce? Put an `x` in all the boxes that
 - [ ] I have added tests to cover my changes.
 - [ ] All new and existing tests passed.
 - [ ] I have added or updated the correspondant stories.
+- [ ] The changes I made, look good on desktop and mobile devices.
+- [ ] Works in different browsers.
