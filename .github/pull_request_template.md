@@ -1,9 +1,9 @@
 ---
 name: Pull Request Template
-about: Use this template to create a pull request for the Venice.ai project.
+about: Use this template to create a pull request for the Zyrcode project.
 title: ''
 labels: ''
-assignees: ''
+assignees: '@FranciscoJavierMartin'
 
 ---
 
@@ -39,7 +39,6 @@ What types of changes does your code introduce? Put an `x` in all the boxes that
 - [ ] My code follows the code style of this project.
 - [ ] My change requires a change to the documentation.
 - [ ] I have updated the documentation accordingly.
-- [ ] I have read the **CONTRIBUTING** document.
 - [ ] I have added tests to cover my changes.
 - [ ] All new and existing tests passed.
 - [ ] I have added or updated the correspondant stories.
