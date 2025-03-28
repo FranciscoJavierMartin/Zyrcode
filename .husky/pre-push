@@ -1,3 +1,3 @@
 bun lint
-bun test:unit
+bun test:unit:run
 bun test:e2e
