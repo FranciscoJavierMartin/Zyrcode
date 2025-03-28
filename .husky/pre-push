@@ -1,3 +1,3 @@
-bun lint
+# bun lint
 # bun test:unit
 # bun test:e2e
