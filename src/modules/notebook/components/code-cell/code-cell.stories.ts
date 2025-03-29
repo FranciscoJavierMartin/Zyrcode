@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 import CodeCell from './code-cell.vue';
 
 const meta = {
-  title: 'Example/CodeCell',
+  title: 'Notebook/CodeCell',
   component: CodeCell,
   tags: ['autodocs'],
   argTypes: {},

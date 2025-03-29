@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import HomePage from '@/pages/HomePage/HomePage.vue';
-import { i18n } from '@/i18n';
+import HomePage from '@/modules/home/pages/home-page.vue';
+import i18n from '@/i18n';
 
 describe('<HomePage />', () => {
   test('renders heading', () => {
