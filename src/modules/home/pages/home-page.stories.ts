@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import CodeCell from './code-cell.vue';
+import HomePage from './home-page.vue';
 
 const meta = {
-  title: 'Notebook/CodeCell',
-  component: CodeCell,
+  title: 'Pages/Home',
+  component: HomePage,
   tags: ['autodocs'],
   argTypes: {},
   args: {},
-} satisfies Meta<typeof CodeCell>;
+} satisfies Meta<typeof HomePage>;
 
 export default meta;
 
