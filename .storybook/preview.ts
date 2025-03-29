@@ -1,5 +1,5 @@
 import { setup, type Preview } from '@storybook/vue3';
-import { i18n } from '@/i18n';
+import i18n from '@/i18n';
 import router from '@/router';
 import '@/assets/styles.css';
 
