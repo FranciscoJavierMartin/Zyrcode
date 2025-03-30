@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import App from '@/app-root.vue';
+import App from '@/app.vue';
 import router from '@/router';
 import i18n from '@/i18n';
 import '@/assets/styles.css';
