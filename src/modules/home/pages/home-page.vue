@@ -31,12 +31,14 @@
   </div>
 </template>
 
-<style scoped>
+<style>
+@reference '@/assets/styles.css';
+
 .quote-typing {
+  @apply w-64 overflow-hidden border-r-[3px] text-lg whitespace-nowrap;
   animation:
     typing 2s steps(28),
     blink 0.5s step-end infinite alternate;
-  @apply w-64 overflow-hidden border-r-[3px] text-lg whitespace-nowrap;
 }
 
 @keyframes typing {
