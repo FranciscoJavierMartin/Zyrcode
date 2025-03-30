@@ -1,3 +1,7 @@
 {
-  "hello": "¡Hola, mundo!"
+  "appName": "Zyrcode",
+  "home": {
+    "createNotebookButton": "Crea un notebook",
+    "subtitle": "Donde el código encuentra creatividad."
+  }
 }

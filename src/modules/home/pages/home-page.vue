@@ -17,19 +17,21 @@
         </div>
 
         <h1 class="text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
-          Zyrcode
+          {{ $t('appName') }}
         </h1>
-        <p class="quote-typing">&quot;Where Code Meets Creativity.&quot;</p>
+        <p class="quote-typing">&quot;{{ $t('home.subtitle') }}&quot;</p>
         <a
           href="#"
           class="bg-muted hover:text-muted rounded-2xl border px-4 py-1.5 text-sm font-medium shadow-lg transition-colors hover:bg-black"
         >
-          Create a notebook
+          {{ $t('home.createNotebookButton') }}
         </a>
       </div>
     </header>
   </div>
 </template>
+
+<script setup lang="ts"></script>
 
 <style>
 @reference '@/assets/styles.css';
