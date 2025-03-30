@@ -1,20 +1,19 @@
 name: Tests e2e
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: deployment_status
 
 jobs:
   test:
+    if: github.event.deployment_status.state == 'success'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          bun-version: 1.1.42
+          bun-version: 1.2.7
       - name: Install dependencies
         run: bun install --frozen-lockfile
       - name: Install Playwright Browsers
