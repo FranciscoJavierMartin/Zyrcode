@@ -24,6 +24,6 @@ jobs:
       - name: Lint
         run: bun lint
       - name: build
-        run: bun build
+        run: bun build-only
       - name: unit tests
         run: bun test:unit
