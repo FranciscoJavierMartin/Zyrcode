@@ -10,7 +10,7 @@ describe('<HomePage />', () => {
         plugins: [i18n],
       },
     });
-    expect(wrapper.find('h1').text()).toBe('Zyrcode');
+    expect(wrapper.find('h1').text()).toBe('Zyrcode1');
     expect(wrapper.find('h2').text()).toBe('Hello, world!');
   });
 });
