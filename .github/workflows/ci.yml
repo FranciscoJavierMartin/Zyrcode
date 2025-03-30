@@ -23,6 +23,8 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Lint
         run: bun lint
+      - name: Check types
+        run: bun type-check
       - name: build
         run: bun build-only
       - name: unit tests
