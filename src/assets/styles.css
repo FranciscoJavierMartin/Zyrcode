@@ -1,1 +1,18 @@
 @import 'tailwindcss';
+
+:root {
+  --muted: 220 14.3% 95.9%;
+  --muted-foreground: 220 8.9% 46.1%;
+}
+
+@theme {
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+}
+
+@utility container {
+  @media screen and (min-width: 1400px) {
+    margin-inline: auto;
+    padding-inline: 2rem;
+  }
+}
