@@ -19,7 +19,7 @@
         <h1 class="text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
           Zyrcode
         </h1>
-        <p>&quot;Where Code Meets Creativity.&quot;</p>
+        <p class="quote-typing">&quot;Where Code Meets Creativity.&quot;</p>
         <a
           href="#"
           class="bg-muted hover:text-muted rounded-2xl border px-4 py-1.5 text-sm font-medium shadow-lg transition-colors hover:bg-black"
@@ -30,3 +30,24 @@
     </header>
   </div>
 </template>
+
+<style scoped>
+.quote-typing {
+  animation:
+    typing 2s steps(28),
+    blink 0.5s step-end infinite alternate;
+  @apply w-64 overflow-hidden border-r-[3px] text-lg whitespace-nowrap;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+</style>
