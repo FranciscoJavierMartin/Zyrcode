@@ -10,6 +10,7 @@ export default defineConfig({
   server: {
     port: 3080,
   },
+  base: process.env.CI ? '/zyrcode/' : '/',
   plugins: [vue(), tailwindcss(), vueDevTools()],
   resolve: {
     alias: {
