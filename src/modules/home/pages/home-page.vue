@@ -20,23 +20,20 @@
           {{ $t('appName') }}
         </h1>
         <p class="quote-typing">&quot;{{ $t('home.subtitle') }}&quot;</p>
-        <!-- <router-link
+        <router-link
           :to="{ name: ROUTES.NOTEBOOK.name }"
-          href="#"
           class="bg-muted hover:text-muted rounded-2xl border px-4 py-1.5 text-sm font-medium shadow-lg transition-colors hover:bg-black"
         >
           {{ $t('home.createNotebookButton') }}
-        </router-link> -->
-        <a
-          href="#"
-          class="bg-muted hover:text-muted rounded-2xl border px-4 py-1.5 text-sm font-medium shadow-lg transition-colors hover:bg-black"
-        >
-          {{ $t('home.createNotebookButton') }}
-        </a>
+        </router-link>
       </div>
     </header>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ROUTES } from '@/router/routes';
+</script>
 
 <style>
 @reference '@/assets/styles.css';

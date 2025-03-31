@@ -16,7 +16,7 @@ describe('<HomePage />', () => {
       'Where Code Meets Creativity.',
     );
     const createNotebookButton = wrapper.find('a');
-    expect(createNotebookButton.attributes('href')).toBe('#');
+    expect(createNotebookButton.attributes('href')).toBe('/notebook');
     expect(createNotebookButton.text()).toBe('Create notebook');
   });
 });

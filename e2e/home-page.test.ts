@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Show heading', async ({ page }) => {
+test('Show header and links on home page', async ({ page }) => {
   await page.goto('/');
 
   await expect(page).toHaveTitle(/Zyrcode/);
@@ -8,4 +8,7 @@ test('Show heading', async ({ page }) => {
   await expect(
     page.getByRole('link', { name: 'Create notebook' }),
   ).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Create notebook' }),
+  ).toHaveAttribute('href', '/notebook');
 });
