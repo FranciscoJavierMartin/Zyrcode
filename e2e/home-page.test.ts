@@ -10,5 +10,5 @@ test('Show header and links on home page', async ({ page }) => {
   ).toBeVisible();
   await expect(
     page.getByRole('link', { name: 'Create notebook' }),
-  ).toHaveAttribute('href', '/notebook');
+  ).toHaveAttribute('href', '/Zyrcode/notebook');
 });
