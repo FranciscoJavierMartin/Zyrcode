@@ -20,7 +20,8 @@
     "format": "prettier --write src/",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "check-locale-keys": "bun ./scripts/check-locale-keys.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.17",
