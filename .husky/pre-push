@@ -1,3 +1,4 @@
 bun lint
+bun check-locale-keys
 bun test:unit
 bun test:e2e
