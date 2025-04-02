@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="editor" ref="editor"></div>
+    <div class="editor" ref="editor" />
   </div>
 </template>
 
