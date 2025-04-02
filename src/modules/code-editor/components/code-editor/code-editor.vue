@@ -5,27 +5,32 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, useTemplateRef, ref, onUnmounted } from 'vue';
+import { onMounted, useTemplateRef, onUnmounted } from 'vue';
 import * as monaco from 'monaco-editor';
 import type { MonacoCodeEditor } from '@/modules/code-editor/interfaces/code-editor';
 import '@/modules/code-editor/utils/worker';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
 let editor: MonacoCodeEditor | null = null;
-const code = ref<string>('');
+
+const props = defineProps<{ language: string }>();
+
+const code = defineModel({ required: true, type: String });
 
 function handleCodeEditorMounted(editor: MonacoCodeEditor): void {
-  console.log('Code Editor mounted:', editor);
+  editor.onDidChangeModelContent(() => {
+    code.value = editor.getValue();
+  });
 }
 
 onMounted(() => {
   if (editorRef.value) {
-    const model = monaco.editor.createModel(code.value, 'javascript');
+    const model = monaco.editor.createModel(code.value, props.language);
 
     editor = monaco.editor.create(editorRef.value, {
       model,
       value: code.value,
-      language: 'javascript',
+      language: props.language,
       minimap: { enabled: false },
     });
 

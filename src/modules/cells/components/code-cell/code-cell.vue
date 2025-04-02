@@ -1,6 +1,7 @@
 <template>
   <div>
-    <CodeEditor />
+    <CodeEditor v-model="input" language="typescript" />
+    <p>{{ input }}</p>
   </div>
 </template>
 
