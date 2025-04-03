@@ -35,5 +35,6 @@ self.MonacoEnvironment = {
   },
 };
 
-console.log('Test', monaco.languages.typescript);
+// The ? is necessary to avoid errors on tests. In development and production,
+// works fine.
 monaco.languages.typescript?.typescriptDefaults.setEagerModelSync(true);
