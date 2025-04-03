@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { onMounted, useTemplateRef, onUnmounted } from 'vue';
-import * as monaco from 'monaco-editor';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import type { MonacoCodeEditor } from '@/modules/code-editor/interfaces/code-editor';
 import '@/modules/code-editor/utils/worker';
 
@@ -47,7 +47,7 @@ onUnmounted(() => {
 
 <style scoped>
 .editor {
-  width: 200px;
-  height: 200px;
+  width: 500px;
+  height: 300px;
 }
 </style>
