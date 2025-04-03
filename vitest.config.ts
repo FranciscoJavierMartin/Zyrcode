@@ -6,6 +6,13 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
+      alias: [
+        {
+          find: /^monaco-editor$/,
+          replacement:
+            __dirname + '/node_modules/monaco-editor/esm/vs/editor/editor.api',
+        },
+      ],
       environment: 'jsdom',
       exclude: [...configDefaults.exclude, 'e2e/**'],
       root: fileURLToPath(new URL('./', import.meta.url)),
