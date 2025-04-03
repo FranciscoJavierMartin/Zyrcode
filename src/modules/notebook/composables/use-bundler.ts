@@ -1,4 +1,4 @@
-import { onBeforeMount, onMounted, onUnmounted } from 'vue';
+import { onBeforeMount, onUnmounted } from 'vue';
 import { startService, stopService } from '@/modules/cells/helpers/bundler';
 
 export default function useBundler() {
