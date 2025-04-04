@@ -1,13 +1,23 @@
 <template>
   <div>
-    <CodeEditor v-model="input" language="typescript" />
-    <p>{{ input }}</p>
+    <CodeEditor v-model="code" language="typescript" />
+    <p>{{ transpiledCode }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import CodeEditor from '@/modules/code-editor/components/code-editor/code-editor.vue';
+import { debounce } from '@/modules/common/helpers/debounce';
+import { transpile } from '@/modules/cells/helpers/bundler';
 
-const input = ref('const a = 12356;');
+const code = ref<string>(`const a = 12356;\nconsole.log(a);`);
+const transpiledCode = ref<string>('');
+
+watch(
+  () => code.value,
+  debounce(async (newValue: string) => {
+    transpiledCode.value = await transpile(newValue);
+  }, 500),
+);
 </script>
