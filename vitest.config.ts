@@ -13,7 +13,7 @@ export default mergeConfig(
             __dirname + '/node_modules/monaco-editor/esm/vs/editor/editor.api',
         },
       ],
-      environment: 'jsdom',
+      environment: 'happy-dom',
       exclude: [...configDefaults.exclude, 'e2e/**'],
       root: fileURLToPath(new URL('./', import.meta.url)),
       reporters: ['default', 'html'],
