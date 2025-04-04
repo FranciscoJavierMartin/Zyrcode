@@ -33,6 +33,17 @@
 
 <script setup lang="ts">
 import { ROUTES } from '@/router/routes';
+import { onMounted } from 'vue';
+import { callOllamaAPI, getOllamaModels } from './ai';
+
+onMounted(() => {
+  callOllamaAPI()
+    .then((res) => res.text())
+    .then(console.log)
+    .catch(console.log);
+
+  getOllamaModels().then(console.log);
+});
 </script>
 
 <style>
