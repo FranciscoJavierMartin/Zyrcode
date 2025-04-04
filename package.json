@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
+    "prebuild-only": "cp ./node_modules/esbuild-wasm/esbuild.wasm ./public",
     "preview": "vite preview",
     "test:unit": "vitest run",
     "test:watch": "vitest",
@@ -20,10 +21,15 @@
     "format": "prettier --write src/",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "check-locale-keys": "bun ./scripts/check-locale-keys.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.17",
+    "ai": "^4.3.0",
+    "esbuild-wasm": "^0.25.2",
+    "monaco-editor": "^0.52.2",
+    "ollama-ai-provider": "^1.2.0",
     "pinia": "^3.0.1",
     "tailwindcss": "^4.0.17",
     "vue": "^3.5.13",
@@ -56,6 +62,7 @@
     "eslint-plugin-storybook": "^0.12.0",
     "eslint-plugin-vue": "~10.0.0",
     "eslint-plugin-vuejs-accessibility": "^2.4.1",
+    "happy-dom": "^17.4.4",
     "husky": "^9.1.7",
     "jiti": "^2.4.2",
     "jsdom": "^26.0.0",

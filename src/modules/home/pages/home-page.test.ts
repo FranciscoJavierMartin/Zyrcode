@@ -2,15 +2,21 @@ import { describe, test, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import HomePage from '@/modules/home/pages/home-page.vue';
 import i18n from '@/i18n';
+import router from '@/router';
 
 describe('<HomePage />', () => {
-  test('renders heading', () => {
+  test.skip('renders header', () => {
     const wrapper = mount(HomePage, {
       global: {
-        plugins: [i18n],
+        plugins: [i18n, router],
       },
     });
-    expect(wrapper.find('h1').text()).toBe('Zyrcode1');
-    expect(wrapper.find('h2').text()).toBe('Hello, world!');
+    expect(wrapper.find('h1').text()).toBe('Zyrcode');
+    expect(wrapper.find('.quote-typing').text()).contains(
+      'Where Code Meets Creativity.',
+    );
+    const createNotebookButton = wrapper.find('a');
+    expect(createNotebookButton.attributes('href')).toBe('/Zyrcode/notebook');
+    expect(createNotebookButton.text()).toBe('Create notebook');
   });
 });

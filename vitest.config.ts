@@ -6,10 +6,17 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
-      environment: 'jsdom',
+      alias: [
+        {
+          find: /^monaco-editor$/,
+          replacement:
+            __dirname + '/node_modules/monaco-editor/esm/vs/editor/editor.api',
+        },
+      ],
+      environment: 'happy-dom',
       exclude: [...configDefaults.exclude, 'e2e/**'],
       root: fileURLToPath(new URL('./', import.meta.url)),
-      reporters: ['html'],
+      reporters: ['default', 'html'],
       coverage: {
         provider: 'v8',
         reporter: ['text', 'json', 'html'],
