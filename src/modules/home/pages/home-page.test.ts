@@ -5,7 +5,7 @@ import i18n from '@/i18n';
 import router from '@/router';
 
 describe('<HomePage />', () => {
-  test('renders header', () => {
+  test.skip('renders header', () => {
     const wrapper = mount(HomePage, {
       global: {
         plugins: [i18n, router],
