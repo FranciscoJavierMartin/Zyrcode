@@ -25,6 +25,7 @@
     "check-locale-keys": "bun ./scripts/check-locale-keys.ts"
   },
   "dependencies": {
+    "@ai-sdk/vue": "^1.2.5",
     "@tailwindcss/vite": "^4.0.17",
     "ai": "^4.3.0",
     "esbuild-wasm": "^0.25.2",
