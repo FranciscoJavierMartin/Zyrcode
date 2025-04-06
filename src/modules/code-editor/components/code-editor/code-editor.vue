@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button @click="debouncedSuggestions">Call ollama</button>
     <div class="editor" ref="editor" />
   </div>
 </template>
@@ -12,6 +13,7 @@ import type { MonacoCodeEditor } from '@/modules/code-editor/interfaces/code-edi
 import '@/modules/code-editor/utils/worker';
 import { generateInstructions } from '@/modules/code-editor/helpers/prompts';
 import type { CoreMessage, Message } from 'ai';
+import ollama from 'ollama/browser';
 
 let editor: MonacoCodeEditor | null = null;
 
@@ -32,6 +34,57 @@ function handleCodeEditorMounted(editor: MonacoCodeEditor): void {
 
 function debouncedSuggestions() {
   console.log('debouncedSuggestions');
+
+  console.log('Before call');
+  // ollama
+  //   .chat({
+  //     model: 'qwen2.5-coder:0.5b',
+  //     messages: [
+  //       {
+  //         content: 'Tell me a joke',
+  //         role: 'user',
+  //       },
+  //     ],
+  //     options: {
+  //       temperature: 0.1,
+  //       num_predict: 150,
+  //     },
+  //   })
+  //   .then((res) => {
+  //     console.log('Then');
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.log('Catch');
+  //     console.log(err);
+  //   });
+
+  fetch('http://localhost:11434/api/chat', {
+    method: 'POST',
+    body: JSON.stringify({
+      model: 'qwen2.5-coder:0.5b',
+      messages: [
+        {
+          content: 'Tell me a joke',
+          role: 'user',
+        },
+      ],
+      stream: false,
+      options: {
+        temperature: 0.1,
+        num_predict: 150,
+      },
+    }),
+  })
+    .then((res) => res.json())
+    .then(console.log)
+    .catch((err) => {
+      console.log('Catch');
+      console.log(err);
+    });
+
+  console.log('End call');
+
   if (editor) {
     const model = editor?.getModel();
 
@@ -70,24 +123,12 @@ function debouncedSuggestions() {
         //     console.log(newCompletion);
         //   })
         //   .catch(console.log);
-
-        complete('', {
-          body: { messages },
-        })
-          .then((newCompletion) => {
-            console.log(newCompletion);
-          })
-          .catch(console.log);
       }
     } else {
       cachedSuggestions.value = [];
     }
   }
 }
-
-setInterval(() => {
-  debouncedSuggestions();
-}, 1000);
 
 onMounted(() => {
   if (editorRef.value) {
