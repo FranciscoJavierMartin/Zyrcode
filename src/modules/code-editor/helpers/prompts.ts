@@ -1,4 +1,6 @@
-export function generateInstructions(language: string) {
+import type { Message } from 'ai';
+
+export function generateInstructions(language: string): Omit<Message, 'id'> {
   return {
     content: `## Task: Code Completion
 
