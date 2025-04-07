@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="debouncedSuggestions">Call ollama</button>
+    <!-- <button @click="debouncedSuggestions">Call ollama</button> -->
     <div class="editor" ref="editor" />
   </div>
 </template>
@@ -32,14 +32,16 @@ const { complete, completion } = useCompletion({
 function handleCodeEditorMounted(editor: MonacoCodeEditor): void {
   editor.onDidChangeModelContent(() => {
     code.value = editor.getValue();
+    startOrResetFetching(editor);
   });
 }
 
-async function debouncedSuggestions(): Promise<void> {
+async function debouncedSuggestions(editor: MonacoCodeEditor): Promise<void> {
   if (editor) {
-    const model = editor?.getModel();
+    console.log(editor.getModel());
+    const model = editor.getModel();
 
-    if (model && model?.getValue()) {
+    if (model && model.getValue()) {
       const position = editor.getPosition()!;
       const currentLine = model.getLineContent(position.lineNumber);
       const offset = model.getOffsetAt(position);
@@ -115,6 +117,83 @@ async function debouncedSuggestions(): Promise<void> {
   }
 }
 
+function startOrResetFetching(editor: MonacoCodeEditor) {
+  if (fetchSuggestionsInterval.value === undefined) {
+    debouncedSuggestions(editor);
+
+    fetchSuggestionsInterval.value = setInterval(
+      () => debouncedSuggestions(editor),
+      refreshInterval,
+    );
+  }
+
+  clearTimeout(timeout.value);
+
+  timeout.value = setTimeout(() => {
+    if (fetchSuggestionsInterval.value !== undefined) {
+      clearInterval(fetchSuggestionsInterval.value);
+      fetchSuggestionsInterval.value = undefined;
+    }
+  }, refreshInterval * 2);
+}
+
+watch(
+  [completion, cachedSuggestions, props.language],
+  (newValue, oldValue, onCleanup) => {
+    const provider = monaco.languages.registerInlineCompletionsProvider(
+      props.language,
+      {
+        freeInlineCompletions: () => {},
+        provideInlineCompletions: async (
+          model: monaco.editor.ITextModel,
+          position: monaco.Position,
+        ) => {
+          // Filter cached suggestions to include only those that start with the current word at the cursor position
+          const suggestions: monaco.languages.InlineCompletion[] =
+            cachedSuggestions.value
+              .map((suggestion) => ({
+                ...suggestion,
+                insertText:
+                  typeof suggestion.insertText === 'string'
+                    ? suggestion.insertText
+                    : suggestion.insertText.snippet,
+              }))
+              .filter((suggestion) =>
+                suggestion.insertText.startsWith(
+                  model.getValueInRange(suggestion.range!),
+                ),
+              );
+
+          const localSuggestions: monaco.languages.InlineCompletion[] =
+            suggestions.filter(
+              (suggestion) =>
+                suggestion.range!.startLineNumber === position.lineNumber &&
+                suggestion.range!.startColumn >= position.column - 3,
+            );
+
+          return !/[a-zA-Z0-9\s]/.test(
+            model.getValue().charAt(position.column - 2),
+          )
+            ? {
+                items: [],
+              }
+            : {
+                items: localSuggestions.map((suggestion) =>
+                  new CompletionFormatter(model, position).format(
+                    suggestion.insertText as string,
+                    suggestion.range!,
+                  ),
+                ),
+              };
+        },
+      },
+    );
+    onCleanup(() => {
+      provider.dispose();
+    });
+  },
+);
+
 onMounted(() => {
   if (editorRef.value) {
     const model = monaco.editor.createModel(code.value, props.language);
@@ -124,6 +203,13 @@ onMounted(() => {
       value: code.value,
       language: props.language,
       minimap: { enabled: false },
+      wordBasedSuggestions: 'off',
+      inlineSuggest: {
+        enabled: true,
+        mode: 'subword',
+        showToolbar: 'onHover',
+        suppressSuggestions: false,
+      },
     });
 
     handleCodeEditorMounted(editor);
@@ -133,6 +219,14 @@ onMounted(() => {
 onUnmounted(() => {
   if (editor) {
     editor.dispose();
+  }
+
+  if (fetchSuggestionsInterval.value) {
+    clearInterval(fetchSuggestionsInterval.value);
+  }
+
+  if (timeout.value) {
+    clearTimeout(timeout.value);
   }
 });
 </script>
