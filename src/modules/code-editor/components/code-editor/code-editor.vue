@@ -3,19 +3,28 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, useTemplateRef, ref, onUnmounted } from 'vue';
+import {
+  onMounted,
+  useTemplateRef,
+  ref,
+  onUnmounted,
+  watch,
+  onWatcherCleanup,
+} from 'vue';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import '@/modules/code-editor/utils/worker';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
-const editor = ref<monaco.editor.IStandaloneCodeEditor>();
+let editor: monaco.editor.IStandaloneCodeEditor;
 const props = defineProps<{ language: string }>();
 const code = defineModel({ required: true, type: String });
-const inlineCompletionProvider = ref<monaco.IDisposable>();
+let inlineCompletionsProvider: monaco.IDisposable;
 
-inlineCompletionProvider.value =
-  monaco.languages.registerInlineCompletionsProvider(props.language, {
+function registerInlineCompletionsProvider(
+  language: string,
+): monaco.IDisposable {
+  return monaco.languages.registerInlineCompletionsProvider(language, {
     freeInlineCompletions: () => {},
     provideInlineCompletions: async (
       model: monaco.editor.ITextModel,
@@ -57,20 +66,36 @@ inlineCompletionProvider.value =
       };
     },
   });
+}
+
+watch(
+  () => props.language,
+  (newLanguage: string) => {
+    inlineCompletionsProvider = registerInlineCompletionsProvider(newLanguage);
+    onWatcherCleanup(() => {
+      inlineCompletionsProvider.dispose();
+    });
+  },
+  { immediate: true },
+);
 
 onMounted(() => {
   if (editorRef.value) {
-    editor.value = monaco.editor.create(editorRef.value, {
+    editor = monaco.editor.create(editorRef.value, {
       value: code.value,
       language: props.language,
       minimap: { enabled: false },
+    });
+
+    editor.onDidChangeModelContent(() => {
+      code.value = editor.getValue();
     });
   }
 });
 
 onUnmounted(() => {
-  if (editor.value) {
-    editor.value.dispose();
+  if (editor) {
+    editor.dispose();
   }
 });
 </script>
