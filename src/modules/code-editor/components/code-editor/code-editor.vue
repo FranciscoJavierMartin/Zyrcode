@@ -21,7 +21,7 @@ const editorRef = useTemplateRef<HTMLDivElement>('editor');
 const editorId = ref('');
 const props = defineProps<{ language: string }>();
 const code = defineModel({ required: true, type: String });
-let inlineCompletionsProvider: monaco.IDisposable | undefined;
+const inlineCompletionsProvider = ref<monaco.IDisposable | undefined>();
 
 const editor = computed<monaco.editor.ICodeEditor | undefined>(() =>
   monaco.editor.getEditors().find((e) => e.getId() === editorId.value),
@@ -82,9 +82,11 @@ function registerInlineCompletionsProvider(
 watch(
   () => props.language,
   (newLanguage: string) => {
-    inlineCompletionsProvider = registerInlineCompletionsProvider(newLanguage);
+    inlineCompletionsProvider.value =
+      registerInlineCompletionsProvider(newLanguage);
+
     onWatcherCleanup(() => {
-      inlineCompletionsProvider?.dispose();
+      inlineCompletionsProvider.value?.dispose();
     });
   },
   { immediate: true },
@@ -111,7 +113,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  inlineCompletionsProvider?.dispose();
+  inlineCompletionsProvider.value?.dispose();
   editor.value?.dispose();
 });
 </script>
