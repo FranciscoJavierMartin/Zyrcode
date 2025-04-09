@@ -6,20 +6,21 @@
 import {
   onMounted,
   useTemplateRef,
-  ref,
-  onUnmounted,
   watch,
   onWatcherCleanup,
+  onBeforeUnmount,
+  ref,
 } from 'vue';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import '@/modules/code-editor/utils/worker';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
+import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-formatter';
+import '@/modules/code-editor/utils/worker';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
-let editor: monaco.editor.IStandaloneCodeEditor;
 const props = defineProps<{ language: string }>();
 const code = defineModel({ required: true, type: String });
-let inlineCompletionsProvider: monaco.IDisposable;
+let editor: monaco.editor.IStandaloneCodeEditor | undefined;
+let inlineCompletionsProvider: monaco.IDisposable | undefined;
 
 function registerInlineCompletionsProvider(
   language: string,
@@ -43,7 +44,7 @@ function registerInlineCompletionsProvider(
       const suggestion = await getSuggestion(
         textBeforeCursor,
         textBeforeCursorOnCurrentLine,
-        props.language,
+        language,
       );
 
       const startLineNumber = position.lineNumber;
@@ -62,7 +63,12 @@ function registerInlineCompletionsProvider(
               endColumn,
             ),
           },
-        ],
+        ].map((suggestion) =>
+          new CompletionFormatter(model, position).format(
+            suggestion.insertText,
+            suggestion.range,
+          ),
+        ),
       };
     },
   });
@@ -73,7 +79,7 @@ watch(
   (newLanguage: string) => {
     inlineCompletionsProvider = registerInlineCompletionsProvider(newLanguage);
     onWatcherCleanup(() => {
-      inlineCompletionsProvider.dispose();
+      inlineCompletionsProvider?.dispose();
     });
   },
   { immediate: true },
@@ -81,22 +87,25 @@ watch(
 
 onMounted(() => {
   if (editorRef.value) {
+    const model = monaco.editor.createModel(code.value, props.language);
+
     editor = monaco.editor.create(editorRef.value, {
       value: code.value,
+      model,
+
       language: props.language,
       minimap: { enabled: false },
     });
 
     editor.onDidChangeModelContent(() => {
-      code.value = editor.getValue();
+      code.value = editor?.getModel()?.getValue() ?? '';
     });
   }
 });
 
-onUnmounted(() => {
-  if (editor) {
-    editor.dispose();
-  }
+onBeforeUnmount(() => {
+  inlineCompletionsProvider?.dispose();
+  editor?.dispose();
 });
 </script>
 

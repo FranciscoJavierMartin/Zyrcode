@@ -51,6 +51,8 @@ export class CompletionFormatter {
 
     return this.matchCompletionBrackets()
       .ignoreBlankLines()
+      .trimStart()
+      .stripMarkdownAndSuggestionText()
       .removeDuplicateStartOfSuggestions()
       .removeUnnecessaryMiddleQuote()
       .preventDuplicateLines()
