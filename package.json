@@ -25,10 +25,12 @@
     "check-locale-keys": "bun ./scripts/check-locale-keys.ts"
   },
   "dependencies": {
+    "@ai-sdk/vue": "^1.2.5",
     "@tailwindcss/vite": "^4.0.17",
     "ai": "^4.3.0",
     "esbuild-wasm": "^0.25.2",
     "monaco-editor": "^0.52.2",
+    "ollama": "^0.5.14",
     "ollama-ai-provider": "^1.2.0",
     "pinia": "^3.0.1",
     "tailwindcss": "^4.0.17",

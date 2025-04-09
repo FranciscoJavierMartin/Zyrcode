@@ -24,3 +24,24 @@ export async function getOllamaModels(): Promise<string[]> {
 
   return models.map((model: { model: string }) => model.model);
 }
+
+export async function completeWithOllama(
+  input: RequestInfo | URL,
+  init?: RequestInit,
+): Promise<Response> {
+  const {
+    messages,
+    model: modelName,
+    maxTokens = 150,
+    temperature = 0.1,
+  } = JSON.parse(init?.body as string);
+
+  const stream = streamText({
+    model: ollama(modelName),
+    maxTokens,
+    temperature,
+    messages,
+  });
+
+  return stream.toDataStreamResponse();
+}
