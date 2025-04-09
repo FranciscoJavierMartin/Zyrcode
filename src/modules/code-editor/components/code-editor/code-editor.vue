@@ -10,6 +10,7 @@ import {
   onWatcherCleanup,
   onBeforeUnmount,
   ref,
+  computed,
 } from 'vue';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
@@ -17,10 +18,14 @@ import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-fo
 import '@/modules/code-editor/utils/worker';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
+const editorId = ref('');
 const props = defineProps<{ language: string }>();
 const code = defineModel({ required: true, type: String });
-let editor: monaco.editor.IStandaloneCodeEditor | undefined;
 let inlineCompletionsProvider: monaco.IDisposable | undefined;
+
+const editor = computed<monaco.editor.ICodeEditor | undefined>(() =>
+  monaco.editor.getEditors().find((e) => e.getId() === editorId.value),
+);
 
 function registerInlineCompletionsProvider(
   language: string,
@@ -89,23 +94,25 @@ onMounted(() => {
   if (editorRef.value) {
     const model = monaco.editor.createModel(code.value, props.language);
 
-    editor = monaco.editor.create(editorRef.value, {
-      value: code.value,
-      model,
+    editorId.value = monaco.editor
+      .create(editorRef.value, {
+        value: code.value,
+        model,
 
-      language: props.language,
-      minimap: { enabled: false },
-    });
+        language: props.language,
+        minimap: { enabled: false },
+      })
+      .getId();
 
-    editor.onDidChangeModelContent(() => {
-      code.value = editor?.getModel()?.getValue() ?? '';
+    editor.value?.onDidChangeModelContent(() => {
+      code.value = editor.value?.getValue() ?? '';
     });
   }
 });
 
 onBeforeUnmount(() => {
   inlineCompletionsProvider?.dispose();
-  editor?.dispose();
+  editor.value?.dispose();
 });
 </script>
 
