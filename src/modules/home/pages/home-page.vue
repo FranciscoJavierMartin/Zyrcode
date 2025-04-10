@@ -15,17 +15,17 @@
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div>
-
-        <h1 class="text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1
+          class="text-foreground text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl"
+        >
           {{ $t('appName') }}
         </h1>
         <p class="quote-typing">&quot;{{ $t('home.subtitle') }}&quot;</p>
-        <router-link
-          :to="{ name: ROUTES.NOTEBOOK.name }"
-          class="bg-muted hover:text-muted rounded-2xl border px-4 py-1.5 text-sm font-medium shadow-lg transition-colors hover:bg-black"
-        >
-          {{ $t('home.createNotebookButton') }}
-        </router-link>
+        <Button variant="hover" as-child>
+          <router-link :to="{ name: ROUTES.NOTEBOOK.name }">
+            {{ $t('home.createNotebookButton') }}
+          </router-link>
+        </Button>
       </div>
     </header>
   </div>
@@ -35,6 +35,7 @@
 import { ROUTES } from '@/router/routes';
 import { onMounted } from 'vue';
 import { callOllamaAPI, getOllamaModels } from './ai';
+import { Button } from '@/components/ui/button';
 
 onMounted(() => {
   callOllamaAPI()
@@ -50,7 +51,7 @@ onMounted(() => {
 @reference '@/assets/styles.css';
 
 .quote-typing {
-  @apply w-64 overflow-hidden border-r-[3px] text-lg whitespace-nowrap;
+  @apply border-r-foreground text-foreground w-64 overflow-hidden border-r-[3px] text-lg whitespace-nowrap;
   animation:
     typing 2s steps(28),
     blink 0.5s step-end infinite alternate;
