@@ -1,7 +1,12 @@
 {
   "appName": "Zyrcode",
+  "a11y": {
+    "toggleTheme": "Cambiar tema"
+  },
   "home": {
     "createNotebookButton": "Crea un notebook",
     "subtitle": "Donde el código encuentra creatividad."
-  }
+  },
+  "notebooks": "Notebooks",
+  "settings": "Ajustes"
 }
