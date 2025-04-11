@@ -1,4 +1,5 @@
 import * as esbuild from 'esbuild-wasm';
+import { db } from '@/modules/common/helpers/package-cache';
 
 export default function fetchPlugin(inputCode: string): esbuild.Plugin {
   return {
@@ -10,6 +11,14 @@ export default function fetchPlugin(inputCode: string): esbuild.Plugin {
           loader: 'jsx',
           contents: inputCode,
         }),
+      );
+
+      build.onLoad(
+        { filter: /.*/ },
+        async (
+          args: esbuild.OnLoadArgs,
+        ): Promise<esbuild.OnLoadResult | undefined> =>
+          (await db.packages.get(args.path))?.content,
       );
 
       build.onLoad(
@@ -29,13 +38,18 @@ export default function fetchPlugin(inputCode: string): esbuild.Plugin {
                     style.innerHTML = \`${escaped}\`;
                     document.head.appendChild(style);`;
 
-          const res: esbuild.OnLoadResult = {
+          const content: esbuild.OnLoadResult = {
             loader: 'jsx',
             contents,
             resolveDir,
           };
 
-          return res;
+          await db.packages.add({
+            path: args.path,
+            content,
+          });
+
+          return content;
         },
       );
 
@@ -51,6 +65,11 @@ export default function fetchPlugin(inputCode: string): esbuild.Plugin {
             contents,
             resolveDir,
           };
+
+          await db.packages.add({
+            path: args.path,
+            content,
+          });
 
           return content;
         },
