@@ -17,6 +17,7 @@ import prettier from 'prettier';
 import parserBabel from 'prettier/plugins/babel';
 import parserEstree from 'prettier/plugins/estree';
 import parserTypeScript from 'prettier/plugins/typescript';
+import { useColorMode } from '@vueuse/core';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
 import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-formatter';
 import '@/modules/code-editor/utils/worker';
@@ -26,7 +27,7 @@ const editorId = ref('');
 const props = defineProps<{ language: string }>();
 const code = defineModel({ required: true, type: String });
 const inlineCompletionsProvider = ref<monaco.IDisposable | undefined>();
-
+const theme = useColorMode({ disableTransition: false });
 const editor = computed<monaco.editor.ICodeEditor | undefined>(() =>
   monaco.editor.getEditors().find((e) => e.getId() === editorId.value),
 );
@@ -108,6 +109,14 @@ watch(
     onWatcherCleanup(() => {
       inlineCompletionsProvider.value?.dispose();
     });
+  },
+  { immediate: true },
+);
+
+watch(
+  theme,
+  (newTheme) => {
+    monaco.editor.setTheme(newTheme === 'light' ? 'vs' : 'vs-dark');
   },
   { immediate: true },
 );

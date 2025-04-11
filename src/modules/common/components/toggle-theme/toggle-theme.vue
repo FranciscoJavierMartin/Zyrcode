@@ -15,13 +15,13 @@
 </template>
 
 <script setup lang="ts">
-import { Button } from '@/modules/common/components/ui/button';
 import { useColorMode } from '@vueuse/core';
 import { Sun, Moon } from 'lucide-vue-next';
+import { Button } from '@/modules/common/components/ui/button';
 
-const mode = useColorMode({ disableTransition: false });
+const theme = useColorMode({ disableTransition: false });
 
 function toggleTheme(): void {
-  mode.value = mode.value === 'light' ? 'dark' : 'light';
+  theme.value = theme.value === 'light' ? 'dark' : 'light';
 }
 </script>
