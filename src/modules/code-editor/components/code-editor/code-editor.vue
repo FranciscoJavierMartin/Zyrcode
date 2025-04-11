@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <div ref="editor" class="code-editor" />
-    <button @click="formatCode">Format</button>
-  </div>
+  <div ref="editor" class="code-editor" />
 </template>
 
 <script setup lang="ts">
@@ -123,9 +120,9 @@ onMounted(() => {
       .create(editorRef.value, {
         value: code.value,
         model,
-
         language: props.language,
         minimap: { enabled: false },
+        automaticLayout: true,
       })
       .getId();
 
@@ -143,7 +140,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .code-editor {
-  height: 300px;
+  height: 100%;
   width: 100%;
 }
 </style>

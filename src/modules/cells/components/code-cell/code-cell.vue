@@ -1,7 +1,14 @@
 <template>
   <div>
-    <CodeEditor v-model="code" language="typescript" />
-    <CodePreview :code="transpiledCode" />
+    <ResizablePanelGroup direction="horizontal" class="min-h-[300px] w-full">
+      <ResizablePanel :default-size="50">
+        <CodeEditor v-model="code" language="typescript" />
+      </ResizablePanel>
+      <ResizableHandle with-handle />
+      <ResizablePanel :default-size="50">
+        <CodePreview :code="transpiledCode" />
+      </ResizablePanel>
+    </ResizablePanelGroup>
   </div>
 </template>
 
@@ -11,6 +18,9 @@ import CodeEditor from '@/modules/code-editor/components/code-editor/code-editor
 import { debounce } from '@/modules/common/helpers/debounce';
 import { transpile } from '@/modules/cells/helpers/bundler';
 import CodePreview from '@/modules/cells/components/code-preview/code-preview.vue';
+import ResizableHandle from '@/modules/common/components/ui/resizable/ResizableHandle.vue';
+import ResizablePanel from '@/modules/common/components/ui/resizable/ResizablePanel.vue';
+import ResizablePanelGroup from '@/modules/common/components/ui/resizable/ResizablePanelGroup.vue';
 
 const code = ref<string>(`const a = 12356;\nconsole.log(a);`);
 const transpiledCode = ref<string>('');

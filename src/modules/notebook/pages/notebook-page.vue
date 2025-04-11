@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-13">
     <CodeCell />
   </div>
 </template>

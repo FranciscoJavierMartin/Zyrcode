@@ -1,5 +1,5 @@
 <template>
-  <nav class="fixed flex w-full p-2">
+  <nav class="fixed top-0 flex w-full p-2">
     <router-link :to="{ name: ROUTES.HOME.name }" class="ml-4 flex-1 text-xl">
       {{ $t('appName') }}
     </router-link>

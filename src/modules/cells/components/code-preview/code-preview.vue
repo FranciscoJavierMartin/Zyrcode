@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="code-preview">
     <iframe
       title="code preview"
       ref="iframe-preview"
@@ -25,9 +25,13 @@ watch(
 </script>
 
 <style scoped>
-iframe {
-  width: 100%;
-  height: 400px;
-  border: 1px solid #ccc;
+.code-preview {
+  height: 100%;
+
+  iframe {
+    width: 100%;
+    height: 400px;
+    border: 1px solid #ccc;
+  }
 }
 </style>
