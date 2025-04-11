@@ -29,5 +29,5 @@
 import { Icon } from '@iconify/vue';
 import { ROUTES } from '@/router/routes';
 import ToggleTheme from '@/modules/common/components/toggle-theme/toggle-theme.vue';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/modules/common/components/ui/button';
 </script>

@@ -35,7 +35,7 @@
 import { onMounted } from 'vue';
 import { ROUTES } from '@/router/routes';
 import { callOllamaAPI, getOllamaModels } from './ai';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/modules/common/components/ui/button';
 
 onMounted(() => {
   callOllamaAPI()
