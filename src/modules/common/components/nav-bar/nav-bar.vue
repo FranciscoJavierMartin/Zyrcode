@@ -4,22 +4,19 @@
       {{ $t('appName') }}
     </router-link>
     <div class="flex flex-none items-center gap-3">
-      <Button variant="hover" as-child class="bg-background cursor-pointer">
+      <Button
+        v-for="button of buttons"
+        :key="button.route"
+        variant="hover"
+        as-child
+        class="bg-background cursor-pointer"
+      >
         <router-link
-          :to="{ name: ROUTES.NOTEBOOK.name }"
+          :to="{ name: button.route }"
           active-class="bg-foreground !text-background"
         >
-          <span class="hidden md:block">{{ $t('notebooks') }}</span>
-          <NotebookPen class="block size-[1.2rem] md:hidden" />
-        </router-link>
-      </Button>
-      <Button variant="hover" as-child class="bg-background cursor-pointer">
-        <router-link
-          :to="{ name: ROUTES.SETTINGS.name }"
-          active-class="bg-foreground !text-background"
-        >
-          <span class="hidden md:block">{{ $t('settings') }}</span>
-          <Settings class="block size-[1.2rem] md:hidden" />
+          <span class="hidden md:block">{{ $t(button.label) }}</span>
+          <Component :is="button.icon" class="block size-[1.2rem] md:hidden" />
         </router-link>
       </Button>
       <ToggleTheme />
@@ -32,4 +29,17 @@ import { ROUTES } from '@/router/routes';
 import ToggleTheme from '@/modules/common/components/toggle-theme/toggle-theme.vue';
 import { Button } from '@/modules/common/components/ui/button';
 import { NotebookPen, Settings } from 'lucide-vue-next';
+
+const buttons = [
+  {
+    route: ROUTES.NOTEBOOK.name,
+    icon: NotebookPen,
+    label: 'notebooks',
+  },
+  {
+    route: ROUTES.SETTINGS.name,
+    icon: Settings,
+    label: 'settings',
+  },
+];
 </script>
