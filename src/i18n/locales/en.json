@@ -1,5 +1,8 @@
 {
   "appName": "Zyrcode",
+  "a11y": {
+    "toggleTheme": "Toggle theme"
+  },
   "home": {
     "createNotebookButton": "Create notebook",
     "subtitle": "Where Code Meets Creativity."
