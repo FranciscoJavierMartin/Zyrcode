@@ -22,6 +22,7 @@ import parserEstree from 'prettier/plugins/estree';
 import parserTypeScript from 'prettier/plugins/typescript';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
 import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-formatter';
+import LanguageSelector from '@/modules/code-editor/components/language-selector/language-selector.vue';
 import '@/modules/code-editor/utils/worker';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
