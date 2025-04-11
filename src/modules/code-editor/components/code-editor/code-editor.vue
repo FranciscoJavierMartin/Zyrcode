@@ -1,5 +1,8 @@
 <template>
-  <div ref="editor" class="code-editor" />
+  <div>
+    <div ref="editor" class="code-editor" />
+    <button @click="formatCode">Format</button>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -13,6 +16,10 @@ import {
   computed,
 } from 'vue';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import prettier from 'prettier';
+import parserBabel from 'prettier/plugins/babel';
+import parserEstree from 'prettier/plugins/estree';
+import parserTypeScript from 'prettier/plugins/typescript';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
 import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-formatter';
 import '@/modules/code-editor/utils/worker';
@@ -26,6 +33,22 @@ const inlineCompletionsProvider = ref<monaco.IDisposable | undefined>();
 const editor = computed<monaco.editor.ICodeEditor | undefined>(() =>
   monaco.editor.getEditors().find((e) => e.getId() === editorId.value),
 );
+
+async function formatCode(): Promise<void> {
+  const formattedCode = await prettier
+    .format(code.value, {
+      parser: 'babel-ts',
+      plugins: [parserBabel, parserTypeScript, parserEstree],
+      tabWidth: 2,
+      semi: true,
+      singleQuote: true,
+      trailingComma: 'all',
+      printWidth: 80,
+    })
+    .then((res) => res.replace(/\n$/, ''));
+
+  editor.value?.setValue(formattedCode);
+}
 
 function registerInlineCompletionsProvider(
   language: string,
