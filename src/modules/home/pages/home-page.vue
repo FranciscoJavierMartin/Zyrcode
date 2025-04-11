@@ -32,8 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import { ROUTES } from '@/router/routes';
 import { onMounted } from 'vue';
+import { ROUTES } from '@/router/routes';
 import { callOllamaAPI, getOllamaModels } from './ai';
 import { Button } from '@/components/ui/button';
 
