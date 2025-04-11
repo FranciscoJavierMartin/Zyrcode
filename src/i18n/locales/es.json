@@ -6,5 +6,7 @@
   "home": {
     "createNotebookButton": "Crea un notebook",
     "subtitle": "Donde el código encuentra creatividad."
-  }
+  },
+  "notebooks": "Notebooks",
+  "settings": "Ajustes"
 }

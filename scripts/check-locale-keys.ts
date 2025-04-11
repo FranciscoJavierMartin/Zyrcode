@@ -14,6 +14,7 @@ const languales = Object.keys(locales);
  */
 function getKeysFromLocale(locale: Locale): string[] {
   return Object.entries(locale)
+    .filter(([key]) => !!key)
     .map(([key, value]) =>
       typeof value === 'string'
         ? key
