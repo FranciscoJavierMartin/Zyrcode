@@ -13,11 +13,10 @@
         <Button
           v-if="isLargeScreen"
           variant="hover"
-          class="button-icon"
+          class="button-icon group"
           @click="toggleDirection"
         >
-          <Rows2 v-if="direction === 'horizontal'" />
-          <Columns2 v-else />
+          <SplitIcon :is-horizontal="direction === 'horizontal'" />
         </Button>
         <Button variant="hover" class="button-icon" @click="format">
           <PencilRuler class="size-5" />
@@ -37,9 +36,9 @@
         <CodePreview :code="transpiledCode" />
       </ResizablePanel>
     </ResizablePanelGroup>
-  </div>
-  <div class="flex w-full justify-center py-4">
-    <Button>{{ $t('notebook.addCell') }}</Button>
+    <div class="flex w-full justify-center py-4">
+      <Button>{{ $t('notebook.addCell') }}</Button>
+    </div>
   </div>
 </template>
 
@@ -53,16 +52,11 @@ import ResizableHandle from '@/modules/common/components/ui/resizable/ResizableH
 import ResizablePanel from '@/modules/common/components/ui/resizable/ResizablePanel.vue';
 import ResizablePanelGroup from '@/modules/common/components/ui/resizable/ResizablePanelGroup.vue';
 import Button from '@/modules/common/components/ui/button/Button.vue';
-import {
-  ArrowDown,
-  ArrowUp,
-  PencilRuler,
-  Columns2,
-  Rows2,
-} from 'lucide-vue-next';
+import { ArrowDown, ArrowUp, PencilRuler } from 'lucide-vue-next';
 import { useMediaQuery } from '@vueuse/core';
 import LanguageSelector from '@/modules/cells/components/language-selector/language-selector.vue';
 import type { Language } from '@/modules/cells/interfaces/languages';
+import SplitIcon from '@/modules/common/components/icons/split-icon.vue';
 
 const code = ref<string>(`const a = 12356;\nconsole.log(a);`);
 const language = ref<Language>('typescript');
