@@ -5,12 +5,14 @@
         {{ language }}
       </Button>
     </DropdownMenuTrigger>
-    <DropdownMenuContent class="w-56" align="end">
+    <DropdownMenuContent align="end">
       <DropdownMenuRadioGroup v-model="language">
-        <DropdownMenuRadioItem value="typescript">
+        <DropdownMenuRadioItem value="typescript" class="language-option">
+          <TypescriptIcon />
           TypeScript
         </DropdownMenuRadioItem>
-        <DropdownMenuRadioItem value="javascript">
+        <DropdownMenuRadioItem value="javascript" class="language-option">
+          <JavascriptIcon />
           JavaScript
         </DropdownMenuRadioItem>
       </DropdownMenuRadioGroup>
@@ -19,6 +21,8 @@
 </template>
 
 <script lang="ts" setup>
+import JavascriptIcon from '@/modules/common/components/icons/javascript-icon.vue';
+import TypescriptIcon from '@/modules/common/components/icons/typescript-icon.vue';
 import { Button } from '@/modules/common/components/ui/button';
 import {
   DropdownMenu,
@@ -33,3 +37,14 @@ const language = defineModel({
   required: true,
 });
 </script>
+
+<style>
+.language-option {
+  padding-left: 8px;
+  color: red;
+
+  > span {
+    display: none;
+  }
+}
+</style>
