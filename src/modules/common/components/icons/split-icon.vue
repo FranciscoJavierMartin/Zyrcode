@@ -1,10 +1,25 @@
 <template>
-  <div :class="['border-foreground size-5 rounded-sm border-2', props.class]">
+  <div
+    :class="[
+      'border-foreground group-hover:border-background size-5 rounded-[4px] border-2',
+      props.class,
+    ]"
+  >
     <div
-      class="animate-horizontal border-foreground -mt-[3px] -ml-0.5 h-px w-5 translate-y-2.5 border"
+      :class="[
+        'animate-horizontal border-foreground group-hover:border-background -mt-[3px] -ml-0.5 h-px w-5 translate-y-2.5 border',
+        {
+          'scale-0': isHorizontal,
+        },
+      ]"
     />
     <div
-      class="animate-vertical border-foreground -mt-px -ml-[3px] h-5 w-px translate-x-2.5 border"
+      :class="[
+        'animate-vertical border-foreground group-hover:border-background -mt-px -ml-[3px] h-5 w-px translate-x-2.5 border',
+        {
+          'scale-0': !isHorizontal,
+        },
+      ]"
     />
   </div>
 </template>
@@ -21,7 +36,7 @@ const props = withDefaults(
 <style scoped>
 .animate-horizontal {
   /* animation: animate-ruler 2s alternate ease-in-out; */
-  transition: scale 2s;
+  /* transition: scale 2s; */
 }
 
 .animate-vertical {
