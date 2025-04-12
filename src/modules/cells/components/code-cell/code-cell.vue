@@ -1,13 +1,15 @@
 <template>
-  <div class="flex flex-col">
+  <div class="container flex flex-col">
     <div class="mb-2 flex px-2">
       <div class="flex flex-1 gap-2">
         <Button
+          variant="hover"
           class="grid size-8 cursor-pointer place-content-center rounded p-1 shadow-sm"
         >
           <ArrowUp class="size-[1.2rem]" />
         </Button>
         <Button
+          variant="hover"
           class="grid size-8 cursor-pointer place-content-center rounded p-1 shadow-sm"
         >
           <ArrowDown class="size-[1.2rem]" />
@@ -15,6 +17,7 @@
       </div>
       <div class="flex gap-2">
         <Button
+          variant="hover"
           class="grid cursor-pointer place-content-center rounded p-1 shadow-sm"
           @click="toggleDirection"
         >
@@ -22,8 +25,9 @@
           <Columns2 v-else />
         </Button>
         <Button
-          @click="format"
+          variant="hover"
           class="grid cursor-pointer place-content-center rounded p-1 shadow-sm"
+          @click="format"
         >
           <PencilRuler class="size-[1.2rem]" />
         </Button>
@@ -42,6 +46,9 @@
       </ResizablePanel>
     </ResizablePanelGroup>
   </div>
+  <div class="flex w-full justify-center py-4">
+    <Button>{{ $t('notebook.addCell') }}</Button>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -53,6 +60,7 @@ import CodePreview from '@/modules/cells/components/code-preview/code-preview.vu
 import ResizableHandle from '@/modules/common/components/ui/resizable/ResizableHandle.vue';
 import ResizablePanel from '@/modules/common/components/ui/resizable/ResizablePanel.vue';
 import ResizablePanelGroup from '@/modules/common/components/ui/resizable/ResizablePanelGroup.vue';
+import Button from '@/modules/common/components/ui/button/Button.vue';
 import {
   ArrowDown,
   ArrowUp,
