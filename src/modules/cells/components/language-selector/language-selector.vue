@@ -1,12 +1,12 @@
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger as-chil class="w-32">
+    <DropdownMenuTrigger as-chil>
       <Button
         variant="outline"
-        class="bg-background h-8 w-32 cursor-pointer rounded capitalize shadow-xs"
+        class="bg-background size-8 cursor-pointer rounded capitalize shadow-xs lg:w-32"
       >
         <Component :is="languageIcon" />
-        {{ language }}
+        <span class="hidden lg:block">{{ language }}</span>
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
