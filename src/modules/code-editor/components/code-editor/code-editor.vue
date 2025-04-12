@@ -20,11 +20,12 @@ import parserTypeScript from 'prettier/plugins/typescript';
 import { useColorMode } from '@vueuse/core';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
 import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-formatter';
+import type { Language } from '@/modules/cells/interfaces/languages';
 import '@/modules/code-editor/utils/worker';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
 const editorId = ref('');
-const props = defineProps<{ language: string }>();
+const props = defineProps<{ language: Language }>();
 const code = defineModel({ required: true, type: String });
 const inlineCompletionsProvider = ref<monaco.IDisposable | undefined>();
 const theme = useColorMode({ disableTransition: false });
@@ -105,6 +106,7 @@ watch(
   (newLanguage: string) => {
     inlineCompletionsProvider.value =
       registerInlineCompletionsProvider(newLanguage);
+    editor.value?.setModel(monaco.editor.createModel(code.value, newLanguage));
 
     onWatcherCleanup(() => {
       inlineCompletionsProvider.value?.dispose();

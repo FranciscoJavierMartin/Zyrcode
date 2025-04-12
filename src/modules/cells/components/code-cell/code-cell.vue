@@ -22,6 +22,7 @@
         <Button variant="hover" class="button-icon" @click="format">
           <PencilRuler class="size-5" />
         </Button>
+        <LanguageSelector v-model="language" />
       </div>
     </div>
     <ResizablePanelGroup
@@ -29,7 +30,7 @@
       class="min-h-[500px] w-full lg:min-h-[300px]"
     >
       <ResizablePanel :default-size="50">
-        <CodeEditor v-model="code" language="typescript" ref="editor" />
+        <CodeEditor v-model="code" :language ref="editor" />
       </ResizablePanel>
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
@@ -60,8 +61,11 @@ import {
   Rows2,
 } from 'lucide-vue-next';
 import { useMediaQuery } from '@vueuse/core';
+import LanguageSelector from '@/modules/cells/components/language-selector/language-selector.vue';
+import type { Language } from '@/modules/cells/interfaces/languages';
 
 const code = ref<string>(`const a = 12356;\nconsole.log(a);`);
+const language = ref<Language>('typescript');
 const transpiledCode = ref<string>('');
 const editor = useTemplateRef('editor');
 const isLargeScreen = useMediaQuery('(min-width: 1024px)');
