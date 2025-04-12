@@ -9,7 +9,7 @@
         :key="button.route"
         variant="hover"
         as-child
-        class="bg-background cursor-pointer"
+        class="cursor-pointer"
       >
         <router-link
           :to="{ name: button.route }"

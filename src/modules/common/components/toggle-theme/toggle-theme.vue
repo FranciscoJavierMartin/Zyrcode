@@ -1,9 +1,5 @@
 <template>
-  <Button
-    variant="hover"
-    @click="toggleTheme"
-    class="bg-background size-9 cursor-pointer"
-  >
+  <Button variant="hover" @click="toggleTheme" class="size-9 cursor-pointer">
     <Moon
       class="absolute size-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
     />

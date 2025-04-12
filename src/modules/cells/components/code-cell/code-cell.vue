@@ -87,6 +87,6 @@ watch(
 @reference '@/assets/styles.css';
 
 .button-icon {
-  @apply bg-background grid size-8 cursor-pointer place-content-center rounded shadow-sm;
+  @apply grid size-8 cursor-pointer place-content-center rounded shadow-sm;
 }
 </style>
