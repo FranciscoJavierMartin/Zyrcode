@@ -1,3 +1,12 @@
+<template>
+  <DropdownMenuTrigger
+    data-slot="dropdown-menu-trigger"
+    v-bind="forwardedProps"
+  >
+    <slot />
+  </DropdownMenuTrigger>
+</template>
+
 <script setup lang="ts">
 import {
   DropdownMenuTrigger,
@@ -9,12 +18,3 @@ const props = defineProps<DropdownMenuTriggerProps>();
 
 const forwardedProps = useForwardProps(props);
 </script>
-
-<template>
-  <DropdownMenuTrigger
-    data-slot="dropdown-menu-trigger"
-    v-bind="forwardedProps"
-  >
-    <slot />
-  </DropdownMenuTrigger>
-</template>

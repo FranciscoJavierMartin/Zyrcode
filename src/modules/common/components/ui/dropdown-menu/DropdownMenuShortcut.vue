@@ -1,12 +1,3 @@
-<script setup lang="ts">
-import type { HTMLAttributes } from 'vue';
-import { cn } from '@/modules/common/helpers/utils';
-
-const props = defineProps<{
-  class?: HTMLAttributes['class'];
-}>();
-</script>
-
 <template>
   <span
     data-slot="dropdown-menu-shortcut"
@@ -17,3 +8,12 @@ const props = defineProps<{
     <slot />
   </span>
 </template>
+
+<script setup lang="ts">
+import type { HTMLAttributes } from 'vue';
+import { cn } from '@/modules/common/helpers/utils';
+
+const props = defineProps<{
+  class?: HTMLAttributes['class'];
+}>();
+</script>
