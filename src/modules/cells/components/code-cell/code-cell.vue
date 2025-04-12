@@ -4,13 +4,13 @@
       <div class="flex flex-1 gap-2">
         <Button
           variant="hover"
-          class="grid size-8 cursor-pointer place-content-center rounded p-1 shadow-sm"
+          class="grid size-8 cursor-pointer place-content-center rounded shadow-sm"
         >
           <ArrowUp class="size-[1.2rem]" />
         </Button>
         <Button
           variant="hover"
-          class="grid size-8 cursor-pointer place-content-center rounded p-1 shadow-sm"
+          class="grid size-8 cursor-pointer place-content-center rounded shadow-sm"
         >
           <ArrowDown class="size-[1.2rem]" />
         </Button>
@@ -18,7 +18,7 @@
       <div class="flex gap-2">
         <Button
           variant="hover"
-          class="grid cursor-pointer place-content-center rounded p-1 shadow-sm"
+          class="grid size-8 cursor-pointer place-content-center rounded shadow-sm"
           @click="toggleDirection"
         >
           <Rows2 v-if="direction === 'horizontal'" />
@@ -26,7 +26,7 @@
         </Button>
         <Button
           variant="hover"
-          class="grid cursor-pointer place-content-center rounded p-1 shadow-sm"
+          class="grid size-8 cursor-pointer place-content-center rounded shadow-sm"
           @click="format"
         >
           <PencilRuler class="size-[1.2rem]" />
