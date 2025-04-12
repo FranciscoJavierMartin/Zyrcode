@@ -5,7 +5,7 @@
         variant="outline"
         class="bg-background size-8 cursor-pointer rounded capitalize shadow-xs lg:w-32"
       >
-        <Component :is="languageIcon" />
+        <Component :is="languageIcon" v-memo="[language]" />
         <span class="hidden lg:block">{{ language }}</span>
       </Button>
     </DropdownMenuTrigger>
@@ -29,8 +29,10 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
 import JavascriptIcon from '@/modules/common/components/icons/javascript-icon.vue';
 import TypescriptIcon from '@/modules/common/components/icons/typescript-icon.vue';
+import MarkdownIcon from '@/modules/common/components/icons/markdown-icon.vue';
 import { Button } from '@/modules/common/components/ui/button';
 import {
   DropdownMenu,
@@ -40,8 +42,6 @@ import {
   DropdownMenuTrigger,
 } from '@/modules/common/components/ui/dropdown-menu';
 import type { Language } from '@/modules/cells/interfaces/languages';
-import MarkdownIcon from '@/modules/common/components/icons/markdown-icon.vue';
-import { computed } from 'vue';
 
 const language = defineModel<Language>({
   required: true,
@@ -53,10 +53,13 @@ const languageIcon = computed(() => {
   switch (language.value) {
     case 'javascript':
       icon = JavascriptIcon;
+      break;
     case 'typescript':
       icon = TypescriptIcon;
+      break;
     case 'markdown':
       icon = MarkdownIcon;
+      break;
   }
 
   return icon;
