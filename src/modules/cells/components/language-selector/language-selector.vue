@@ -41,7 +41,6 @@ const language = defineModel({
 <style>
 .language-option {
   padding-left: 8px;
-  color: red;
 
   > span {
     display: none;
