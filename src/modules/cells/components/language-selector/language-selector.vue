@@ -5,9 +5,7 @@
         variant="outline"
         class="bg-background h-8 w-32 cursor-pointer rounded capitalize shadow-xs"
       >
-        <TypescriptIcon v-if="language === 'typescript'" />
-        <JavascriptIcon v-if="language === 'javascript'" />
-        <MarkdownIcon v-if="language === 'markdown'" />
+        <Component :is="languageIcon" />
         {{ language }}
       </Button>
     </DropdownMenuTrigger>
@@ -43,9 +41,25 @@ import {
 } from '@/modules/common/components/ui/dropdown-menu';
 import type { Language } from '@/modules/cells/interfaces/languages';
 import MarkdownIcon from '@/modules/common/components/icons/markdown-icon.vue';
+import { computed } from 'vue';
 
 const language = defineModel<Language>({
   required: true,
+});
+
+const languageIcon = computed(() => {
+  let icon;
+
+  switch (language.value) {
+    case 'javascript':
+      icon = JavascriptIcon;
+    case 'typescript':
+      icon = TypescriptIcon;
+    case 'markdown':
+      icon = MarkdownIcon;
+  }
+
+  return icon;
 });
 </script>
 
