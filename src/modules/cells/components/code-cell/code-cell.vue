@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <div class="flex flex-col">
+    <div>
+      <Button @click="format">format</Button>
+    </div>
     <ResizablePanelGroup direction="horizontal" class="min-h-[300px] w-full">
       <ResizablePanel :default-size="50">
-        <CodeEditor v-model="code" language="typescript" />
+        <CodeEditor v-model="code" language="typescript" ref="editor" />
       </ResizablePanel>
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
@@ -13,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, useTemplateRef, watch } from 'vue';
 import CodeEditor from '@/modules/code-editor/components/code-editor/code-editor.vue';
 import { debounce } from '@/modules/common/helpers/debounce';
 import { transpile } from '@/modules/cells/helpers/bundler';
@@ -24,6 +27,11 @@ import ResizablePanelGroup from '@/modules/common/components/ui/resizable/Resiza
 
 const code = ref<string>(`const a = 12356;\nconsole.log(a);`);
 const transpiledCode = ref<string>('');
+const editor = useTemplateRef('editor');
+
+function format(): void {
+  editor.value?.formatCode();
+}
 
 watch(
   () => code.value,

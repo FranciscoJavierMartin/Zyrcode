@@ -145,6 +145,8 @@ onBeforeUnmount(() => {
   inlineCompletionsProvider.value?.dispose();
   editor.value?.dispose();
 });
+
+defineExpose({ formatCode });
 </script>
 
 <style scoped>
