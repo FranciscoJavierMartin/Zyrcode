@@ -1,5 +1,5 @@
 <template>
-  <div ref="editor" class="code-editor" />
+  <div ref="editor" class="size-full" />
 </template>
 
 <script setup lang="ts">
@@ -148,10 +148,3 @@ onBeforeUnmount(() => {
 
 defineExpose({ formatCode });
 </script>
-
-<style scoped>
-.code-editor {
-  height: 100%;
-  width: 100%;
-}
-</style>

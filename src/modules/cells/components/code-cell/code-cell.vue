@@ -2,33 +2,19 @@
   <div class="container flex flex-col">
     <div class="mb-2 flex px-3">
       <div class="flex flex-1 gap-2">
-        <Button
-          variant="hover"
-          class="bg-background grid size-8 cursor-pointer place-content-center rounded shadow-sm"
-        >
+        <Button variant="hover" class="button-icon">
           <ArrowUp class="size-5" />
         </Button>
-        <Button
-          variant="hover"
-          class="bg-background grid size-8 cursor-pointer place-content-center rounded shadow-sm"
-        >
+        <Button variant="hover" class="button-icon">
           <ArrowDown class="size-5" />
         </Button>
       </div>
       <div class="flex gap-2">
-        <Button
-          variant="hover"
-          class="bg-background grid size-8 cursor-pointer place-content-center rounded shadow-sm"
-          @click="toggleDirection"
-        >
+        <Button variant="hover" class="button-icon" @click="toggleDirection">
           <Rows2 v-if="direction === 'horizontal'" />
           <Columns2 v-else />
         </Button>
-        <Button
-          variant="hover"
-          class="bg-background grid size-8 cursor-pointer place-content-center rounded shadow-sm"
-          @click="format"
-        >
+        <Button variant="hover" class="button-icon" @click="format">
           <PencilRuler class="size-5" />
         </Button>
       </div>
@@ -96,3 +82,11 @@ watch(
   { immediate: true },
 );
 </script>
+
+<style scoped>
+@reference '@/assets/styles.css';
+
+.button-icon {
+  @apply bg-background grid size-8 cursor-pointer place-content-center rounded shadow-sm;
+}
+</style>
