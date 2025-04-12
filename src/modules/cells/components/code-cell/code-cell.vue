@@ -10,13 +10,20 @@
         </Button>
       </div>
       <div class="flex">
+        <button
+          class="cursor-pointer rounded p-1 shadow-sm"
+          @click="toggleDirection"
+        >
+          <Rows2 v-if="direction === 'horizontal'" />
+          <Columns2 v-else />
+        </button>
         <Button @click="format" class="cursor-pointer rounded p-1 shadow-sm">
           <PencilRuler class="size-[1.2rem]" />
         </Button>
       </div>
     </div>
     <ResizablePanelGroup
-      :direction="isLargeScreen ? 'horizontal' : 'vertical'"
+      :direction="panelSplitDirection"
       class="min-h-[300px] w-full"
     >
       <ResizablePanel :default-size="50">
@@ -31,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useTemplateRef, watch } from 'vue';
+import { computed, ref, useTemplateRef, watch } from 'vue';
 import CodeEditor from '@/modules/code-editor/components/code-editor/code-editor.vue';
 import { debounce } from '@/modules/common/helpers/debounce';
 import { transpile } from '@/modules/cells/helpers/bundler';
@@ -39,16 +46,31 @@ import CodePreview from '@/modules/cells/components/code-preview/code-preview.vu
 import ResizableHandle from '@/modules/common/components/ui/resizable/ResizableHandle.vue';
 import ResizablePanel from '@/modules/common/components/ui/resizable/ResizablePanel.vue';
 import ResizablePanelGroup from '@/modules/common/components/ui/resizable/ResizablePanelGroup.vue';
-import { ArrowDown, ArrowUp, PencilRuler } from 'lucide-vue-next';
+import {
+  ArrowDown,
+  ArrowUp,
+  PencilRuler,
+  Columns2,
+  Rows2,
+} from 'lucide-vue-next';
 import { useMediaQuery } from '@vueuse/core';
 
 const code = ref<string>(`const a = 12356;\nconsole.log(a);`);
 const transpiledCode = ref<string>('');
 const editor = useTemplateRef('editor');
 const isLargeScreen = useMediaQuery('(min-width: 1024px)');
+const direction = ref<'horizontal' | 'vertical'>('horizontal');
+const panelSplitDirection = computed<'horizontal' | 'vertical'>(() =>
+  isLargeScreen.value ? direction.value : 'vertical',
+);
 
 function format(): void {
   editor.value?.formatCode();
+}
+
+function toggleDirection(): void {
+  direction.value =
+    direction.value === 'horizontal' ? 'vertical' : 'horizontal';
 }
 
 watch(
