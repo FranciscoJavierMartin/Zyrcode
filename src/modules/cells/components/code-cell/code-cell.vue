@@ -2,22 +2,29 @@
   <div class="flex flex-col">
     <div class="mb-2 flex px-2">
       <div class="flex flex-1 gap-2">
-        <Button class="cursor-pointer rounded p-1 shadow-sm">
+        <Button
+          class="grid size-8 cursor-pointer place-content-center rounded p-1 shadow-sm"
+        >
           <ArrowUp class="size-[1.2rem]" />
         </Button>
-        <Button class="cursor-pointer rounded p-1 shadow-sm">
+        <Button
+          class="grid size-8 cursor-pointer place-content-center rounded p-1 shadow-sm"
+        >
           <ArrowDown class="size-[1.2rem]" />
         </Button>
       </div>
-      <div class="flex">
-        <button
-          class="cursor-pointer rounded p-1 shadow-sm"
+      <div class="flex gap-2">
+        <Button
+          class="grid cursor-pointer place-content-center rounded p-1 shadow-sm"
           @click="toggleDirection"
         >
           <Rows2 v-if="direction === 'horizontal'" />
           <Columns2 v-else />
-        </button>
-        <Button @click="format" class="cursor-pointer rounded p-1 shadow-sm">
+        </Button>
+        <Button
+          @click="format"
+          class="grid cursor-pointer place-content-center rounded p-1 shadow-sm"
+        >
           <PencilRuler class="size-[1.2rem]" />
         </Button>
       </div>
