@@ -1,21 +1,32 @@
 <template>
-  <div class="size-32 rounded-md border-2 border-blue-500">
+  <div :class="['border-foreground size-5 rounded-sm border-2', props.class]">
     <div
-      class="animate-horizontal -mt-1 -ml-0.5 h-px w-32 translate-y-16 border border-red-500"
+      class="animate-horizontal border-foreground -mt-[3px] -ml-0.5 h-px w-5 translate-y-2.5 border"
     />
-    <div
-      class="animate-vertical -ml-1 h-32 w-px translate-x-16 border border-green-500"
-    />
+    <!-- <div
+      class="animate-vertical -ml-1 h-5 w-px translate-x-2.5 border border-foreground"
+    /> -->
   </div>
 </template>
 
+<script setup lang="ts">
+const props = withDefaults(
+  defineProps<{ isHorizontal: boolean; class?: string }>(),
+  {
+    class: '',
+  },
+);
+</script>
+
 <style scoped>
 .animate-horizontal {
-  /* animation: animate-ruler 2s infinite alternate ease-in-out; */
+  /* animation: animate-ruler 2s alternate ease-in-out; */
+  transition: scale 2s;
 }
 
 .animate-vertical {
-  /* animation: animate-ruler 2s infinite alternate ease-in-out; */
+  /* animation: animate-ruler 2s reverse ease-in-out; */
+  /* scale: 0; */
 }
 
 @keyframes animate-ruler {
