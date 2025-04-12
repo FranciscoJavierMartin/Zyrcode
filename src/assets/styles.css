@@ -44,8 +44,16 @@
   --color-muted-foreground: hsl(var(--muted-foreground));
 }
 
+/* TODO: if it not used then, remove it */
 @utility container {
   @media screen and (min-width: 1400px) {
+    margin-inline: auto;
+    padding-inline: 2rem;
+  }
+}
+
+@utility container-lg {
+  @media screen and (min-width: 1024px) {
     margin-inline: auto;
     padding-inline: 2rem;
   }

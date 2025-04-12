@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div class="h-full">
     <iframe
       title="code preview"
       ref="iframe-preview"
       :srcdoc="previewHTMLContainer"
       sandbox="allow-scripts"
+      class="w-full"
     />
   </div>
 </template>
@@ -23,11 +24,3 @@ watch(
   { immediate: true },
 );
 </script>
-
-<style scoped>
-iframe {
-  width: 100%;
-  height: 400px;
-  border: 1px solid #ccc;
-}
-</style>
