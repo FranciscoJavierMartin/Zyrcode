@@ -7,7 +7,7 @@
   >
     <div
       :class="[
-        'animate-horizontal border-foreground group-hover:border-background -mt-[3px] -ml-0.5 h-px w-5 translate-y-2.5 border',
+        'ruler -mt-[3px] -ml-0.5 h-px w-5 translate-y-2.5',
         {
           'scale-0': isHorizontal,
         },
@@ -15,7 +15,7 @@
     />
     <div
       :class="[
-        'animate-vertical border-foreground group-hover:border-background -mt-px -ml-[3px] h-5 w-px translate-x-2.5 border',
+        'ruler -mt-px -ml-[3px] h-5 w-px translate-x-2.5',
         {
           'scale-0': !isHorizontal,
         },
@@ -34,22 +34,9 @@ const props = withDefaults(
 </script>
 
 <style scoped>
-.animate-horizontal {
-  /* animation: animate-ruler 2s alternate ease-in-out; */
-  /* transition: scale 2s; */
-}
+@reference '@/assets/styles.css';
 
-.animate-vertical {
-  /* animation: animate-ruler 2s reverse ease-in-out; */
-  /* scale: 0; */
-}
-
-@keyframes animate-ruler {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
+.ruler {
+  @apply border-foreground group-hover:border-background border transition-transform duration-[5s];
 }
 </style>
