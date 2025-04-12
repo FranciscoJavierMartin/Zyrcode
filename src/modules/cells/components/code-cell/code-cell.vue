@@ -10,7 +10,12 @@
         </Button>
       </div>
       <div class="flex gap-2">
-        <Button variant="hover" class="button-icon" @click="toggleDirection">
+        <Button
+          v-if="isLargeScreen"
+          variant="hover"
+          class="button-icon"
+          @click="toggleDirection"
+        >
           <Rows2 v-if="direction === 'horizontal'" />
           <Columns2 v-else />
         </Button>
