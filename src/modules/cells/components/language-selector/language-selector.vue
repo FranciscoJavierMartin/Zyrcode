@@ -1,7 +1,12 @@
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger as-child>
-      <Button variant="hover" class="h-8 cursor-pointer rounded shadow-sm">
+    <DropdownMenuTrigger as-chil class="w-32">
+      <Button
+        variant="outline"
+        class="bg-background h-8 cursor-pointer rounded capitalize shadow-xs"
+      >
+        <TypescriptIcon v-if="language === 'typescript'" />
+        <JavascriptIcon v-if="language === 'javascript'" />
         {{ language }}
       </Button>
     </DropdownMenuTrigger>
@@ -31,9 +36,9 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/modules/common/components/ui/dropdown-menu';
+import type { Language } from '@/modules/cells/interfaces/languages';
 
-const language = defineModel({
-  type: String,
+const language = defineModel<Language>({
   required: true,
 });
 </script>
