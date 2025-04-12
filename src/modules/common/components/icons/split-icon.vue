@@ -10,7 +10,7 @@
         'ruler -mt-[3px] -ml-0.5 h-px w-5 translate-y-2.5',
         {
           'scale-0': isHorizontal,
-          'delay-750': !isHorizontal,
+          'delay-300': !isHorizontal,
         },
       ]"
     />
@@ -19,7 +19,7 @@
         'ruler -mt-px -ml-[3px] h-5 w-px translate-x-2.5',
         {
           'scale-0': !isHorizontal,
-          'delay-750': isHorizontal,
+          'delay-300': isHorizontal,
         },
       ]"
     />
@@ -39,6 +39,6 @@ const props = withDefaults(
 @reference '@/assets/styles.css';
 
 .ruler {
-  @apply border-foreground group-hover:border-background border transition-transform duration-750;
+  @apply border-foreground group-hover:border-background border transition-transform duration-300;
 }
 </style>
