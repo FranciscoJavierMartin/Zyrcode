@@ -8,5 +8,8 @@
     "subtitle": "Donde el código encuentra creatividad."
   },
   "notebooks": "Notebooks",
+  "notebook": {
+    "addCell": "Agregar celda"
+  },
   "settings": "Ajustes"
 }

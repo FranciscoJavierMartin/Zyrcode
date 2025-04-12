@@ -8,5 +8,8 @@
     "subtitle": "Where Code Meets Creativity."
   },
   "notebooks": "Notebooks",
+  "notebook": {
+    "addCell": "Add cell below"
+  },
   "settings": "Settings"
 }

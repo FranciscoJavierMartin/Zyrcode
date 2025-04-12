@@ -1,5 +1,5 @@
 <template>
-  <nav class="fixed flex w-full p-2">
+  <nav class="fixed top-0 flex w-full p-2">
     <router-link :to="{ name: ROUTES.HOME.name }" class="ml-4 flex-1 text-xl">
       {{ $t('appName') }}
     </router-link>
@@ -9,14 +9,14 @@
         :key="button.route"
         variant="hover"
         as-child
-        class="bg-background cursor-pointer"
+        class="cursor-pointer"
       >
         <router-link
           :to="{ name: button.route }"
           active-class="bg-foreground !text-background"
         >
           <span class="hidden md:block">{{ $t(button.label) }}</span>
-          <Component :is="button.icon" class="block size-[1.2rem] md:hidden" />
+          <Component :is="button.icon" class="block size-5 md:hidden" />
         </router-link>
       </Button>
       <ToggleTheme />
