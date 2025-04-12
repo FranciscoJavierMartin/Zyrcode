@@ -3,9 +3,9 @@
     <div
       class="animate-horizontal border-foreground -mt-[3px] -ml-0.5 h-px w-5 translate-y-2.5 border"
     />
-    <!-- <div
-      class="animate-vertical -ml-1 h-5 w-px translate-x-2.5 border border-foreground"
-    /> -->
+    <div
+      class="animate-vertical border-foreground -mt-px -ml-[3px] h-5 w-px translate-x-2.5 border"
+    />
   </div>
 </template>
 
