@@ -16,7 +16,7 @@
           active-class="bg-foreground !text-background"
         >
           <span class="hidden md:block">{{ $t(button.label) }}</span>
-          <Component :is="button.icon" class="block size-[1.2rem] md:hidden" />
+          <Component :is="button.icon" class="block size-5 md:hidden" />
         </router-link>
       </Button>
       <ToggleTheme />

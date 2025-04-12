@@ -1,18 +1,18 @@
 <template>
   <div class="container flex flex-col">
-    <div class="mb-2 flex px-2">
+    <div class="mb-2 flex px-3">
       <div class="flex flex-1 gap-2">
         <Button
           variant="hover"
           class="grid size-8 cursor-pointer place-content-center rounded shadow-sm"
         >
-          <ArrowUp class="size-[1.2rem]" />
+          <ArrowUp class="size-5" />
         </Button>
         <Button
           variant="hover"
           class="grid size-8 cursor-pointer place-content-center rounded shadow-sm"
         >
-          <ArrowDown class="size-[1.2rem]" />
+          <ArrowDown class="size-5" />
         </Button>
       </div>
       <div class="flex gap-2">
@@ -29,7 +29,7 @@
           class="grid size-8 cursor-pointer place-content-center rounded shadow-sm"
           @click="format"
         >
-          <PencilRuler class="size-[1.2rem]" />
+          <PencilRuler class="size-5" />
         </Button>
       </div>
     </div>
