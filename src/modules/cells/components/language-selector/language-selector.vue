@@ -3,10 +3,11 @@
     <DropdownMenuTrigger as-chil class="w-32">
       <Button
         variant="outline"
-        class="bg-background h-8 cursor-pointer rounded capitalize shadow-xs"
+        class="bg-background h-8 w-32 cursor-pointer rounded capitalize shadow-xs"
       >
         <TypescriptIcon v-if="language === 'typescript'" />
         <JavascriptIcon v-if="language === 'javascript'" />
+        <MarkdownIcon v-if="language === 'markdown'" />
         {{ language }}
       </Button>
     </DropdownMenuTrigger>
