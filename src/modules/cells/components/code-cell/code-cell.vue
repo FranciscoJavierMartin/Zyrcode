@@ -1,5 +1,5 @@
 <template>
-  <div class="container flex flex-col">
+  <div class="flex flex-col">
     <div class="mb-2 flex px-3">
       <div class="flex flex-1 gap-2">
         <Button variant="hover" class="button-icon">
@@ -21,7 +21,7 @@
     </div>
     <ResizablePanelGroup
       :direction="panelSplitDirection"
-      class="min-h-[300px] w-full"
+      class="min-h-[500px] w-full lg:min-h-[300px]"
     >
       <ResizablePanel :default-size="50">
         <CodeEditor v-model="code" language="typescript" ref="editor" />
