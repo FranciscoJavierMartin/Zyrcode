@@ -49,7 +49,6 @@ export default defineConfigWithVueTs(
           order: ['template', 'script', 'style'],
         },
       ],
-      '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
 );
