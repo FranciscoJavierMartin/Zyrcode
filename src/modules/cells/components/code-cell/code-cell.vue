@@ -15,7 +15,10 @@
         </Button>
       </div>
     </div>
-    <ResizablePanelGroup direction="horizontal" class="min-h-[300px] w-full">
+    <ResizablePanelGroup
+      :direction="isLargeScreen ? 'horizontal' : 'vertical'"
+      class="min-h-[300px] w-full"
+    >
       <ResizablePanel :default-size="50">
         <CodeEditor v-model="code" language="typescript" ref="editor" />
       </ResizablePanel>
