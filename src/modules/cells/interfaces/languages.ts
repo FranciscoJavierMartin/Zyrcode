@@ -1,1 +1,1 @@
-export type Language = 'javascript' | 'typescript';
+export type Language = 'javascript' | 'typescript' | 'markdown';

@@ -20,6 +20,10 @@
           <JavascriptIcon />
           JavaScript
         </DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="markdown" class="language-option">
+          <MarkdownIcon />
+          Markdown
+        </DropdownMenuRadioItem>
       </DropdownMenuRadioGroup>
     </DropdownMenuContent>
   </DropdownMenu>
@@ -37,6 +41,7 @@ import {
   DropdownMenuTrigger,
 } from '@/modules/common/components/ui/dropdown-menu';
 import type { Language } from '@/modules/cells/interfaces/languages';
+import MarkdownIcon from '@/modules/common/components/icons/markdown-icon.vue';
 
 const language = defineModel<Language>({
   required: true,
