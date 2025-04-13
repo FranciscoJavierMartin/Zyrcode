@@ -3,12 +3,6 @@ import fetchPlugin from '@/modules/cells/helpers/plugins/fetch.plugin';
 import unpkgPathPlugin from '@/modules/cells/helpers/plugins/unpkg-path.plugin';
 import type { TranspiledCode, Language } from '@/modules/cells/interfaces/code';
 
-export const entryPoints: Record<Language, string> = {
-  javascript: 'index.js',
-  typescript: 'index.ts',
-  markdown: 'index.md',
-};
-
 export async function startService(): Promise<void> {
   await esbuild.initialize({
     worker: true,
@@ -31,7 +25,7 @@ export async function transpile(
       entryPoints: ['index.js'],
       bundle: true,
       write: false,
-      plugins: [unpkgPathPlugin(language), fetchPlugin(code, language)],
+      plugins: [unpkgPathPlugin(), fetchPlugin(code, language)],
       define: {
         'process.env.NODE_ENV': '"production"',
         global: 'window',

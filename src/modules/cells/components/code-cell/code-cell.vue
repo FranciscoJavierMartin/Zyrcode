@@ -97,6 +97,7 @@ watchDebounced(
   {
     debounce: 500,
     immediate: true,
+    rejectOnCancel: true,
   },
 );
 </script>

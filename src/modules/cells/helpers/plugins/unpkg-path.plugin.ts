@@ -1,8 +1,6 @@
 import * as esbuild from 'esbuild-wasm';
-import { entryPoints } from '@/modules/cells/helpers/bundler';
-import type { Language } from '@/modules/cells/interfaces/languages';
 
-export default function unpkgPathPlugin(language: Language): esbuild.Plugin {
+export default function unpkgPathPlugin(): esbuild.Plugin {
   return {
     name: 'unpkg-path-plugin',
     setup(build: esbuild.PluginBuild): void {
