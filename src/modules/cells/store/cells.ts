@@ -4,7 +4,7 @@ import type { CellsState, Cell } from '@/modules/cells/interfaces/cells';
 
 export const useCellsStore = defineStore('cells', () => {
   const state = reactive<CellsState>({
-    order: ['a', 'b'],
+    order: ['a', 'b', 'c'],
     cells: {
       a: {
         id: 'a',
@@ -14,6 +14,11 @@ export const useCellsStore = defineStore('cells', () => {
       b: {
         id: 'b',
         content: 'console.log("Hello world! from TypeScript!");',
+        language: 'javascript',
+      },
+      c: {
+        id: 'c',
+        content: 'console.log("Third cell!");',
         language: 'javascript',
       },
     },
@@ -47,5 +52,7 @@ export const useCellsStore = defineStore('cells', () => {
     delete state.cells[id];
   }
 
-  return { cells, updateCell, addCellBelow, removeCell };
+  function moveUp(id: string): void {}
+
+  return { cells, updateCell, addCellBelow, removeCell, moveUp };
 });

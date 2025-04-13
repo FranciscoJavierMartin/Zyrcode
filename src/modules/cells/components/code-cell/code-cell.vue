@@ -2,10 +2,10 @@
   <div class="flex flex-col">
     <div class="mb-2 flex px-3">
       <div class="flex flex-1 gap-2">
-        <Button variant="hover" class="button-icon">
+        <Button :disabled="isFirstCell" variant="hover" class="button-icon">
           <ArrowUp class="size-5" />
         </Button>
-        <Button variant="hover" class="button-icon">
+        <Button :disabled="isLastCell" variant="hover" class="button-icon">
           <ArrowDown class="size-5" />
         </Button>
       </div>
@@ -74,6 +74,10 @@ const isLargeScreen = useMediaQuery('(min-width: 1024px)');
 const direction = ref<'horizontal' | 'vertical'>('horizontal');
 const panelSplitDirection = computed<'horizontal' | 'vertical'>(() =>
   isLargeScreen.value ? direction.value : 'vertical',
+);
+const isFirstCell = computed<boolean>(() => store.cells[0].id === props.id);
+const isLastCell = computed<boolean>(
+  () => store.cells[store.cells.length - 1].id === props.id,
 );
 const store = useCellsStore();
 
