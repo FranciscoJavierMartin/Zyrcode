@@ -1,14 +1,15 @@
 <template>
-  <AlertDialog>
+  <AlertDialog :open="isAlertDialogOpen">
     <AlertDialogTrigger as-child>
       <Button
         variant="hover"
         class="button-icon dark:text-foreground dark:hover:text-background text-red-500"
+        @click="isAlertDialogOpen = true"
       >
         <Trash2 class="size-5" />
       </Button>
     </AlertDialogTrigger>
-    <AlertDialogContent>
+    <AlertDialogContent @interact-outside="closeAlertDialog">
       <AlertDialogHeader>
         <AlertDialogTitle>{{ $t('notebook.areYouSure') }}</AlertDialogTitle>
         <AlertDialogDescription>
@@ -16,10 +17,10 @@
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <AlertDialogCancel class="cursor-pointer">
+        <AlertDialogCancel class="cursor-pointer" @click="closeAlertDialog">
           {{ $t('cancel') }}
         </AlertDialogCancel>
-        <AlertDialogAction as-child class="cursor-pointer p-0">
+        <AlertDialogAction as-child class="cursor-pointer">
           <Button variant="destructive" @click="removeCell">
             {{ $t('remove') }}
           </Button>
@@ -30,6 +31,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -45,10 +47,15 @@ import { Button } from '@/modules/common/components/ui/button';
 import { Trash2 } from 'lucide-vue-next';
 import { useCellsStore } from '@/modules/cells/store/cells';
 
+const isAlertDialogOpen = ref<boolean>(false);
 const props = defineProps<{ id: string }>();
 const store = useCellsStore();
 
 function removeCell(): void {
   store.removeCell(props.id);
+}
+
+function closeAlertDialog(): void {
+  isAlertDialogOpen.value = false;
 }
 </script>
