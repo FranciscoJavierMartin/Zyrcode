@@ -75,8 +75,8 @@ const panelSplitDirection = computed<'horizontal' | 'vertical'>(() =>
 );
 const store = useCellsStore();
 
-function format(): void {
-  editor.value?.formatCode();
+async function format(): Promise<void> {
+  await editor.value?.formatCode();
 }
 
 function toggleDirection(): void {
