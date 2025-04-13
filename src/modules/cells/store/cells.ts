@@ -27,5 +27,19 @@ export const useCellsStore = defineStore('cells', () => {
     state.cells[id].language = language;
   }
 
-  return { cells, updateCell };
+  function addCellBelow(id: string): void {
+    // Random Id
+    const newCellId: string = Date.now().toString();
+    const previousIndex = state.order.indexOf(id);
+
+    state.cells[newCellId] = {
+      id: newCellId,
+      content: '',
+      language: 'javascript',
+    };
+
+    state.order.splice(previousIndex + 1, 0, newCellId);
+  }
+
+  return { cells, updateCell, addCellBelow };
 });
