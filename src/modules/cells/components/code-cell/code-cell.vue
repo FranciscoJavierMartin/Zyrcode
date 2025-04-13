@@ -5,7 +5,12 @@
         <Button :disabled="isFirstCell" variant="hover" class="button-icon">
           <ArrowUp class="size-5" />
         </Button>
-        <Button :disabled="isLastCell" variant="hover" class="button-icon">
+        <Button
+          :disabled="isLastCell"
+          variant="hover"
+          class="button-icon"
+          @click="moveDown"
+        >
           <ArrowDown class="size-5" />
         </Button>
       </div>
@@ -100,6 +105,10 @@ function updateCode(content: string): void {
 
 function addCellBelow(): void {
   store.addCellBelow(props.id);
+}
+
+function moveDown(): void {
+  store.moveDown(props.id);
 }
 
 watchDebounced(
