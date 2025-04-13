@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full">
+  <div class="relative h-full">
     <iframe
       title="code preview"
       ref="iframe-preview"
@@ -7,6 +7,9 @@
       sandbox="allow-scripts"
       class="w-full"
     />
+    <div v-if="error" class="absolute top-2.5 left-2.5 text-red-500">
+      {{ error }}
+    </div>
   </div>
 </template>
 
@@ -14,7 +17,9 @@
 import { useTemplateRef, watch } from 'vue';
 import { previewHTMLContainer } from '@/modules/cells/helpers/preview-html-container';
 const iframe = useTemplateRef<HTMLIFrameElement>('iframe-preview');
-const props = defineProps<{ code: string }>();
+const props = withDefaults(defineProps<{ code: string; error?: string }>(), {
+  error: '',
+});
 
 watch(
   () => props.code,

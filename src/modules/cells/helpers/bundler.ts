@@ -1,6 +1,7 @@
 import * as esbuild from 'esbuild-wasm';
 import fetchPlugin from '@/modules/cells/helpers/plugins/fetch.plugin';
 import unpkgPathPlugin from '@/modules/cells/helpers/plugins/unpkg-path.plugin';
+import type { TranspiledCode } from '@/modules/cells/interfaces/code';
 
 export async function startService(): Promise<void> {
   await esbuild.initialize({
@@ -13,8 +14,8 @@ export async function stopService(): Promise<void> {
   await esbuild.stop();
 }
 
-export async function transpile(code: string): Promise<string> {
-  let result: string;
+export async function transpile(code: string): Promise<TranspiledCode> {
+  let result: TranspiledCode;
 
   try {
     const codeTranspiled = await esbuild.build({
@@ -28,10 +29,16 @@ export async function transpile(code: string): Promise<string> {
       },
     });
 
-    result = codeTranspiled.outputFiles[0].text;
+    result = {
+      code: codeTranspiled.outputFiles[0].text,
+      error: '',
+    };
   } catch (error) {
     console.log(error);
-    result = 'Error';
+    result = {
+      code: '',
+      error: (error as Error).message,
+    };
   }
 
   return result;

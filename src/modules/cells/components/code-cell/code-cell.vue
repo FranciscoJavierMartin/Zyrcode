@@ -33,7 +33,7 @@
       </ResizablePanel>
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
-        <CodePreview :code="transpiledCode" />
+        <CodePreview :code="transpiledCode" :error />
       </ResizablePanel>
     </ResizablePanelGroup>
     <div class="flex w-full justify-center py-4">
@@ -55,12 +55,23 @@ import Button from '@/modules/common/components/ui/button/Button.vue';
 import { ArrowDown, ArrowUp, PencilRuler } from 'lucide-vue-next';
 import { useMediaQuery } from '@vueuse/core';
 import LanguageSelector from '@/modules/cells/components/language-selector/language-selector.vue';
-import type { Language } from '@/modules/cells/interfaces/languages';
+import type { Language } from '@/modules/cells/interfaces/code';
 import SplitIcon from '@/modules/common/components/icons/split-icon.vue';
 
-const code = ref<string>(`const a = 12356;\nconsole.log(a);`);
+const code = ref<string>(`import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+
+const a = 12356;
+console.log(a);
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <h1>Hello world!</h1>
+  </StrictMode>
+);`);
 const language = ref<Language>('typescript');
 const transpiledCode = ref<string>('');
+const error = ref<string>('');
 const editor = useTemplateRef('editor');
 const isLargeScreen = useMediaQuery('(min-width: 1024px)');
 const direction = ref<'horizontal' | 'vertical'>('horizontal');
@@ -80,7 +91,9 @@ function toggleDirection(): void {
 watch(
   () => code.value,
   debounce(async (newValue: string) => {
-    transpiledCode.value = await transpile(newValue);
+    const result = await transpile(newValue);
+    transpiledCode.value = result.code;
+    error.value = result.error;
   }, 500),
   { immediate: true },
 );
