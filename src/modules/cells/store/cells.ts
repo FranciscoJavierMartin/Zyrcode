@@ -22,5 +22,10 @@ export const useCellsStore = defineStore('cells', () => {
     state.order.map((id) => state.cells[id]),
   );
 
-  return { cells };
+  function updateCell({ id, content, language }: Cell): void {
+    state.cells[id].content = content;
+    state.cells[id].language = language;
+  }
+
+  return { cells, updateCell };
 });

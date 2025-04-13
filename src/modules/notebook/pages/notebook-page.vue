@@ -1,6 +1,12 @@
 <template>
   <div class="mt-13">
-    <CodeCell v-for="cell of cells" :key="cell.id" />
+    <CodeCell
+      v-for="cell of cells"
+      :key="cell.id"
+      :id="cell.id"
+      :code="cell.content"
+      :language="cell.language"
+    />
   </div>
 </template>
 
