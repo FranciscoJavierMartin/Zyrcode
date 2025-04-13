@@ -19,10 +19,10 @@
           <JavascriptIcon />
           JavaScript
         </DropdownMenuRadioItem>
-        <DropdownMenuRadioItem value="markdown" class="language-option">
+        <!-- <DropdownMenuRadioItem value="markdown" class="language-option">
           <MarkdownIcon />
           Markdown
-        </DropdownMenuRadioItem>
+        </DropdownMenuRadioItem> -->
       </DropdownMenuRadioGroup>
     </DropdownMenuContent>
   </DropdownMenu>
