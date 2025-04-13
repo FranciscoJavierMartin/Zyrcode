@@ -43,7 +43,7 @@ import {
 } from '@/modules/common/components/ui/dropdown-menu';
 import type { Language } from '@/modules/cells/interfaces/code';
 
-const language = defineModel<Language>({
+const language = defineModel<Language>('language', {
   required: true,
 });
 

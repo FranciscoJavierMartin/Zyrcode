@@ -21,7 +21,7 @@
         <Button variant="hover" class="button-icon" @click="format">
           <PencilRuler class="size-5" />
         </Button>
-        <LanguageSelector v-model="language" />
+        <LanguageSelector :language @update:language="updateLanguage" />
       </div>
     </div>
     <ResizablePanelGroup
@@ -29,7 +29,13 @@
       class="min-h-[500px] w-full lg:min-h-[300px]"
     >
       <ResizablePanel :default-size="50">
-        <CodeEditor v-model="code" :language ref="editor" />
+        <CodeEditor
+          :id
+          :code
+          :language
+          ref="editor"
+          @update:code="updateCode"
+        />
       </ResizablePanel>
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
@@ -56,19 +62,9 @@ import { useMediaQuery, watchDebounced } from '@vueuse/core';
 import LanguageSelector from '@/modules/cells/components/language-selector/language-selector.vue';
 import type { Language } from '@/modules/cells/interfaces/code';
 import SplitIcon from '@/modules/common/components/icons/split-icon.vue';
+import { useCellsStore } from '@/modules/cells/store/cells';
 
-const code = ref<string>(`import React, { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-
-const a = 12356;
-console.log(a);
-
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <h1>Hello world!</h1>
-  </StrictMode>
-);`);
-const language = ref<Language>('typescript');
+const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
 const error = ref<string>('');
 const editor = useTemplateRef('editor');
@@ -77,9 +73,10 @@ const direction = ref<'horizontal' | 'vertical'>('horizontal');
 const panelSplitDirection = computed<'horizontal' | 'vertical'>(() =>
   isLargeScreen.value ? direction.value : 'vertical',
 );
+const store = useCellsStore();
 
-function format(): void {
-  editor.value?.formatCode();
+async function format(): Promise<void> {
+  await editor.value?.formatCode();
 }
 
 function toggleDirection(): void {
@@ -87,8 +84,16 @@ function toggleDirection(): void {
     direction.value === 'horizontal' ? 'vertical' : 'horizontal';
 }
 
+function updateLanguage(language: Language): void {
+  store.updateCell({ id: props.id, content: props.code, language });
+}
+
+function updateCode(content: string): void {
+  store.updateCell({ id: props.id, content, language: props.language });
+}
+
 watchDebounced(
-  () => [code.value, language.value],
+  () => [props.code, props.language],
   async ([newCode, newLanguage]) => {
     const result = await transpile(newCode, newLanguage as Language);
     transpiledCode.value = result.code;

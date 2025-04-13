@@ -20,13 +20,15 @@ import parserTypeScript from 'prettier/plugins/typescript';
 import { useColorMode } from '@vueuse/core';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
 import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-formatter';
-import type { Language } from '@/modules/cells/interfaces/code';
 import '@/modules/code-editor/utils/worker';
+import type { Language } from '@/modules/cells/interfaces/code';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
 const editorId = ref('');
-const props = defineProps<{ language: Language }>();
-const code = defineModel({ required: true, type: String });
+const props = defineProps<{ id: string; language: Language }>();
+const code = defineModel<string>('code', {
+  required: true,
+});
 const inlineCompletionsProvider = ref<monaco.IDisposable | undefined>();
 const theme = useColorMode({ disableTransition: false });
 const editor = computed<monaco.editor.ICodeEditor | undefined>(() =>
