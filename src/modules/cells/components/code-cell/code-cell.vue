@@ -58,8 +58,18 @@ import LanguageSelector from '@/modules/cells/components/language-selector/langu
 import type { Language } from '@/modules/cells/interfaces/languages';
 import SplitIcon from '@/modules/common/components/icons/split-icon.vue';
 
-const code = ref<string>(`const a = 12356;\nconsole.log(a);`);
-const language = ref<Language>('typescript');
+const code = ref<string>(`import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+
+const a = 12356;
+console.log(a);
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <h1>Hello world!</h1>
+  </StrictMode>
+);`);
+const language = ref<Language>('javascript');
 const transpiledCode = ref<string>('');
 const editor = useTemplateRef('editor');
 const isLargeScreen = useMediaQuery('(min-width: 1024px)');
