@@ -16,9 +16,13 @@
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <AlertDialogCancel>{{ $t('cancel') }}</AlertDialogCancel>
-        <AlertDialogAction @click="removeCell">
-          {{ $t('remove') }}
+        <AlertDialogCancel class="cursor-pointer">
+          {{ $t('cancel') }}
+        </AlertDialogCancel>
+        <AlertDialogAction as-child class="cursor-pointer p-0">
+          <Button variant="destructive" @click="removeCell">
+            {{ $t('remove') }}
+          </Button>
         </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
