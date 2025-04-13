@@ -1,6 +1,13 @@
 import * as esbuild from 'esbuild-wasm';
 import fetchPlugin from '@/modules/cells/helpers/plugins/fetch.plugin';
 import unpkgPathPlugin from '@/modules/cells/helpers/plugins/unpkg-path.plugin';
+import type { Language } from '@/modules/cells/interfaces/languages';
+
+export const entryPoints: Record<Language, string> = {
+  javascript: 'index.js',
+  typescript: 'index.ts',
+  markdown: 'index.md',
+};
 
 export async function startService(): Promise<void> {
   await esbuild.initialize({
@@ -13,7 +20,10 @@ export async function stopService(): Promise<void> {
   await esbuild.stop();
 }
 
-export async function transpile(code: string): Promise<string> {
+export async function transpile(
+  code: string,
+  language: Language,
+): Promise<string> {
   let result: string;
 
   try {
@@ -21,7 +31,7 @@ export async function transpile(code: string): Promise<string> {
       entryPoints: ['index.js'],
       bundle: true,
       write: false,
-      plugins: [unpkgPathPlugin(), fetchPlugin(code)],
+      plugins: [unpkgPathPlugin(language), fetchPlugin(code, language)],
       define: {
         'process.env.NODE_ENV': '"production"',
         global: 'window',

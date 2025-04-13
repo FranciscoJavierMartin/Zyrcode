@@ -80,7 +80,7 @@ function toggleDirection(): void {
 watch(
   () => code.value,
   debounce(async (newValue: string) => {
-    transpiledCode.value = await transpile(newValue);
+    transpiledCode.value = await transpile(newValue, language.value);
   }, 500),
   { immediate: true },
 );

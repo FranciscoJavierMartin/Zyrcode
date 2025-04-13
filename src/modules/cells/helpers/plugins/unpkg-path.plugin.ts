@@ -1,6 +1,8 @@
 import * as esbuild from 'esbuild-wasm';
+import { entryPoints } from '@/modules/cells/helpers/bundler';
+import type { Language } from '@/modules/cells/interfaces/languages';
 
-export default function unpkgPathPlugin(): esbuild.Plugin {
+export default function unpkgPathPlugin(language: Language): esbuild.Plugin {
   return {
     name: 'unpkg-path-plugin',
     setup(build: esbuild.PluginBuild): void {
@@ -28,12 +30,10 @@ export default function unpkgPathPlugin(): esbuild.Plugin {
         { filter: /.*/ },
         async (
           args: esbuild.OnResolveArgs,
-        ): Promise<esbuild.OnResolveResult> => {
-          return {
-            namespace: 'a',
-            path: `https://unpkg.com/${args.path}`,
-          };
-        },
+        ): Promise<esbuild.OnResolveResult> => ({
+          namespace: 'a',
+          path: `https://unpkg.com/${args.path}`,
+        }),
       );
     },
   };

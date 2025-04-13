@@ -1,7 +1,17 @@
 import * as esbuild from 'esbuild-wasm';
 import { db } from '@/modules/common/helpers/package-cache';
+import type { Language } from '@/modules/cells/interfaces/languages';
 
-export default function fetchPlugin(inputCode: string): esbuild.Plugin {
+const loaders: Record<Language, esbuild.Loader> = {
+  javascript: 'jsx',
+  typescript: 'tsx',
+  markdown: 'text',
+};
+
+export default function fetchPlugin(
+  inputCode: string,
+  language: Language,
+): esbuild.Plugin {
   return {
     name: 'fetch-plugin',
     setup(build: esbuild.PluginBuild): void {
