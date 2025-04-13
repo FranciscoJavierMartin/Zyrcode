@@ -21,7 +21,7 @@
         <Button variant="hover" class="button-icon" @click="format">
           <PencilRuler class="size-5" />
         </Button>
-        <RemoveCellDialog />
+        <RemoveCellDialog :id />
         <LanguageSelector :language @update:language="updateLanguage" />
       </div>
     </div>

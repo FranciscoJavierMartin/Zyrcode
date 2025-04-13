@@ -42,6 +42,8 @@ export const useCellsStore = defineStore('cells', () => {
   }
 
   function removeCell(id: string): void {
+    const index = state.order.indexOf(id);
+    state.order.splice(index, 1);
     delete state.cells[id];
   }
 

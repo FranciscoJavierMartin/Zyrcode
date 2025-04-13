@@ -10,15 +10,16 @@
     </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
-        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+        <AlertDialogTitle>{{ $t('notebook.areYouSure') }}</AlertDialogTitle>
         <AlertDialogDescription>
-          This action cannot be undone. This will permanently delete your
-          account and remove your data from our servers.
+          {{ $t('notebook.actionCannotBeUndo') }}
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction>Continue</AlertDialogAction>
+        <AlertDialogCancel>{{ $t('cancel') }}</AlertDialogCancel>
+        <AlertDialogAction @click="removeCell">
+          {{ $t('remove') }}
+        </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>
@@ -38,4 +39,12 @@ import {
 } from '@/modules//common/components/ui/alert-dialog';
 import { Button } from '@/modules/common/components/ui/button';
 import { Trash2 } from 'lucide-vue-next';
+import { useCellsStore } from '@/modules/cells/store/cells';
+
+const props = defineProps<{ id: string }>();
+const store = useCellsStore();
+
+function removeCell(): void {
+  store.removeCell(props.id);
+}
 </script>
