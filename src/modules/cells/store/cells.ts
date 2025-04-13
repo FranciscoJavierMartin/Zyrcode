@@ -28,6 +28,7 @@ export const useCellsStore = defineStore('cells', () => {
   }
 
   function addCellBelow(id: string): void {
+    // Random Id
     const newCellId: string = Date.now().toString();
     const previousIndex = state.order.indexOf(id);
 
