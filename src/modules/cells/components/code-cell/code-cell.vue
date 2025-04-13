@@ -113,11 +113,11 @@ function addCellBelow(): void {
 }
 
 function moveUp(): void {
-  store.moveUp(props.id);
+  store.moveCell(props.id, 'up');
 }
 
 function moveDown(): void {
-  store.moveDown(props.id);
+  store.moveCell(props.id, 'down');
 }
 
 watchDebounced(

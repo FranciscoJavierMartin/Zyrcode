@@ -52,29 +52,18 @@ export const useCellsStore = defineStore('cells', () => {
     delete state.cells[id];
   }
 
-  function moveDown(id: string): void {
+  function moveCell(id: string, direction: 'up' | 'down'): void {
     const currentIndex = state.order.indexOf(id);
-    const nextIndex = currentIndex + 1;
+    const targetIndex =
+      direction === 'up' ? currentIndex - 1 : currentIndex + 1;
 
-    if (nextIndex < state.order.length) {
-      [state.order[currentIndex], state.order[nextIndex]] = [
-        state.order[nextIndex],
+    if (targetIndex >= 0 && targetIndex < state.order.length) {
+      [state.order[currentIndex], state.order[targetIndex]] = [
+        state.order[targetIndex],
         state.order[currentIndex],
       ];
     }
   }
 
-  function moveUp(id: string): void {
-    const currentIndex = state.order.indexOf(id);
-    const previousIndex = currentIndex - 1;
-
-    if (previousIndex >= 0) {
-      [state.order[currentIndex], state.order[previousIndex]] = [
-        state.order[previousIndex],
-        state.order[currentIndex],
-      ];
-    }
-  }
-
-  return { cells, updateCell, addCellBelow, removeCell, moveDown, moveUp };
+  return { cells, updateCell, addCellBelow, removeCell, moveCell };
 });
