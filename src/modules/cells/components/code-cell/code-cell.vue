@@ -43,9 +43,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, useTemplateRef, watch } from 'vue';
+import { computed, ref, useTemplateRef } from 'vue';
 import CodeEditor from '@/modules/code-editor/components/code-editor/code-editor.vue';
-import { debounce } from '@/modules/common/helpers/debounce';
 import { transpile } from '@/modules/cells/helpers/bundler';
 import CodePreview from '@/modules/cells/components/code-preview/code-preview.vue';
 import ResizableHandle from '@/modules/common/components/ui/resizable/ResizableHandle.vue';
@@ -53,7 +52,7 @@ import ResizablePanel from '@/modules/common/components/ui/resizable/ResizablePa
 import ResizablePanelGroup from '@/modules/common/components/ui/resizable/ResizablePanelGroup.vue';
 import Button from '@/modules/common/components/ui/button/Button.vue';
 import { ArrowDown, ArrowUp, PencilRuler } from 'lucide-vue-next';
-import { useMediaQuery } from '@vueuse/core';
+import { useMediaQuery, watchDebounced } from '@vueuse/core';
 import LanguageSelector from '@/modules/cells/components/language-selector/language-selector.vue';
 import type { Language } from '@/modules/cells/interfaces/code';
 import SplitIcon from '@/modules/common/components/icons/split-icon.vue';
@@ -88,14 +87,18 @@ function toggleDirection(): void {
     direction.value === 'horizontal' ? 'vertical' : 'horizontal';
 }
 
-watch(
-  () => code.value,
-  debounce(async (newValue: string) => {
-    const result = await transpile(newValue);
+watchDebounced(
+  () => [code.value, language.value],
+  async ([newCode, newLanguage]) => {
+    const result = await transpile(newCode, newLanguage as Language);
     transpiledCode.value = result.code;
     error.value = result.error;
-  }, 500),
-  { immediate: true },
+  },
+  {
+    debounce: 500,
+    immediate: true,
+    rejectOnCancel: true,
+  },
 );
 </script>
 

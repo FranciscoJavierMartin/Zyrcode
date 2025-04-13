@@ -1,14 +1,24 @@
 import * as esbuild from 'esbuild-wasm';
 import { db } from '@/modules/common/helpers/package-cache';
+import type { Language } from '@/modules/cells/interfaces/code';
 
-export default function fetchPlugin(inputCode: string): esbuild.Plugin {
+const loaders: Record<Language, esbuild.Loader> = {
+  javascript: 'jsx',
+  typescript: 'tsx',
+  markdown: 'text',
+};
+
+export default function fetchPlugin(
+  inputCode: string,
+  language: Language,
+): esbuild.Plugin {
   return {
     name: 'fetch-plugin',
     setup(build: esbuild.PluginBuild): void {
       build.onLoad(
         { filter: /(^index\.js$)/ },
         async (): Promise<esbuild.OnLoadResult> => ({
-          loader: 'jsx',
+          loader: loaders[language],
           contents: inputCode,
         }),
       );
@@ -39,7 +49,7 @@ export default function fetchPlugin(inputCode: string): esbuild.Plugin {
                     document.head.appendChild(style);`;
 
           const content: esbuild.OnLoadResult = {
-            loader: 'jsx',
+            loader: loaders[language],
             contents,
             resolveDir,
           };
@@ -61,7 +71,7 @@ export default function fetchPlugin(inputCode: string): esbuild.Plugin {
           const resolveDir = new URL('./', response.url).pathname;
 
           const content: esbuild.OnLoadResult = {
-            loader: 'jsx',
+            loader: loaders[language],
             contents,
             resolveDir,
           };

@@ -28,12 +28,10 @@ export default function unpkgPathPlugin(): esbuild.Plugin {
         { filter: /.*/ },
         async (
           args: esbuild.OnResolveArgs,
-        ): Promise<esbuild.OnResolveResult> => {
-          return {
-            namespace: 'a',
-            path: `https://unpkg.com/${args.path}`,
-          };
-        },
+        ): Promise<esbuild.OnResolveResult> => ({
+          namespace: 'a',
+          path: `https://unpkg.com/${args.path}`,
+        }),
       );
     },
   };
