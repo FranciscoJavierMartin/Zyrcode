@@ -41,5 +41,9 @@ export const useCellsStore = defineStore('cells', () => {
     state.order.splice(previousIndex + 1, 0, newCellId);
   }
 
-  return { cells, updateCell, addCellBelow };
+  function removeCell(id: string): void {
+    delete state.cells[id];
+  }
+
+  return { cells, updateCell, addCellBelow, removeCell };
 });
