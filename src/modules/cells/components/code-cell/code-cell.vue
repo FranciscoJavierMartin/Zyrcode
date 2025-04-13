@@ -2,7 +2,12 @@
   <div class="flex flex-col">
     <div class="mb-2 flex px-3">
       <div class="flex flex-1 gap-2">
-        <Button :disabled="isFirstCell" variant="hover" class="button-icon">
+        <Button
+          :disabled="isFirstCell"
+          variant="hover"
+          class="button-icon"
+          @click="moveUp"
+        >
           <ArrowUp class="size-5" />
         </Button>
         <Button
@@ -105,6 +110,10 @@ function updateCode(content: string): void {
 
 function addCellBelow(): void {
   store.addCellBelow(props.id);
+}
+
+function moveUp(): void {
+  store.moveUp(props.id);
 }
 
 function moveDown(): void {

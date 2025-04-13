@@ -64,5 +64,17 @@ export const useCellsStore = defineStore('cells', () => {
     }
   }
 
-  return { cells, updateCell, addCellBelow, removeCell, moveDown };
+  function moveUp(id: string): void {
+    const currentIndex = state.order.indexOf(id);
+    const previousIndex = currentIndex - 1;
+
+    if (previousIndex >= 0) {
+      [state.order[currentIndex], state.order[previousIndex]] = [
+        state.order[previousIndex],
+        state.order[currentIndex],
+      ];
+    }
+  }
+
+  return { cells, updateCell, addCellBelow, removeCell, moveDown, moveUp };
 });
