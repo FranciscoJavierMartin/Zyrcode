@@ -20,7 +20,7 @@ import parserTypeScript from 'prettier/plugins/typescript';
 import { useColorMode } from '@vueuse/core';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
 import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-formatter';
-import type { Language } from '@/modules/cells/interfaces/languages';
+import type { Language } from '@/modules/cells/interfaces/code';
 import '@/modules/code-editor/utils/worker';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
