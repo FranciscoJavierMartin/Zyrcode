@@ -41,7 +41,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/modules/common/components/ui/dropdown-menu';
-import type { Language } from '@/modules/cells/interfaces/languages';
+import type { Language } from '@/modules/cells/interfaces/code';
 
 const language = defineModel<Language>({
   required: true,
