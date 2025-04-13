@@ -43,7 +43,7 @@
       </ResizablePanel>
     </ResizablePanelGroup>
     <div class="flex w-full justify-center py-4">
-      <Button>{{ $t('notebook.addCell') }}</Button>
+      <Button @click="addCellBelow">{{ $t('notebook.addCell') }}</Button>
     </div>
   </div>
 </template>
@@ -90,6 +90,10 @@ function updateLanguage(language: Language): void {
 
 function updateCode(content: string): void {
   store.updateCell({ id: props.id, content, language: props.language });
+}
+
+function addCellBelow(): void {
+  store.addCellBelow(props.id);
 }
 
 watchDebounced(
