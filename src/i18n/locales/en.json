@@ -9,7 +9,11 @@
   },
   "notebooks": "Notebooks",
   "notebook": {
-    "addCell": "Add cell below"
+    "addCell": "Add cell below",
+    "areYouSure": "Are you sure?",
+    "actionCannotBeUndo": "This action cannot be undone."
   },
-  "settings": "Settings"
+  "settings": "Settings",
+  "cancel": "Cancel",
+  "remove": "Remove"
 }

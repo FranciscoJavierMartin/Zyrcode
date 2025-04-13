@@ -21,6 +21,7 @@
         <Button variant="hover" class="button-icon" @click="format">
           <PencilRuler class="size-5" />
         </Button>
+        <RemoveCellDialog :id />
         <LanguageSelector :language @update:language="updateLanguage" />
       </div>
     </div>
@@ -63,6 +64,7 @@ import LanguageSelector from '@/modules/cells/components/language-selector/langu
 import type { Language } from '@/modules/cells/interfaces/code';
 import SplitIcon from '@/modules/common/components/icons/split-icon.vue';
 import { useCellsStore } from '@/modules/cells/store/cells';
+import RemoveCellDialog from '@/modules/cells/components/remove-cell-dialog/remove-cell-dialog.vue';
 
 const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
@@ -111,7 +113,7 @@ watchDebounced(
 );
 </script>
 
-<style scoped>
+<style>
 @reference '@/assets/styles.css';
 
 .button-icon {

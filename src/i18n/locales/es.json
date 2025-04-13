@@ -9,7 +9,11 @@
   },
   "notebooks": "Notebooks",
   "notebook": {
-    "addCell": "Agregar celda"
+    "addCell": "Agregar celda",
+    "areYouSure": "¿Estás seguro?",
+    "actionCannotBeUndo": "Esta acción no se puede deshacer."
   },
-  "settings": "Ajustes"
+  "settings": "Ajustes",
+  "cancel": "Cancelar",
+  "remove": "Borrar"
 }
