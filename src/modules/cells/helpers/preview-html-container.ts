@@ -4,6 +4,20 @@ export const previewHTMLContainer: string = `
   <body>
     <div id="root"></div>
     <script>
+      const _log = console.log;
+
+      console.log = function (...args) {
+        window.parent.postMessage(
+          {
+            source: 'iframe',
+            message: args,
+          },
+          '*',
+        );
+
+        _log.apply(console, args);
+      };
+
       window.addEventListener('message', (event) => {
         const handleError = (error) => {
           const root = document.getElementById('root');

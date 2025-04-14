@@ -14,12 +14,24 @@
 </template>
 
 <script setup lang="ts">
-import { useTemplateRef, watch } from 'vue';
+import { onBeforeUnmount, onMounted, useTemplateRef, watch } from 'vue';
 import { previewHTMLContainer } from '@/modules/cells/helpers/preview-html-container';
+
 const iframe = useTemplateRef<HTMLIFrameElement>('iframe-preview');
-const props = withDefaults(defineProps<{ code: string; error?: string }>(), {
-  error: '',
-});
+const props = withDefaults(
+  defineProps<{ id: string; code: string; error?: string }>(),
+  {
+    error: '',
+  },
+);
+
+function handleMessage(
+  response: MessageEvent<{ source: string; message: string[] }>,
+) {
+  if (response.data && response.data.source === 'iframe') {
+    console.log('Received message from iframe:', response.data.message);
+  }
+}
 
 watch(
   () => props.code,
@@ -28,4 +40,12 @@ watch(
   },
   { immediate: true },
 );
+
+onMounted(() => {
+  window.addEventListener('message', handleMessage);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('message', handleMessage);
+});
 </script>

@@ -50,7 +50,7 @@
       </ResizablePanel>
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
-        <CodePreview :code="transpiledCode" :error />
+        <CodePreview :id :code="transpiledCode" :error />
       </ResizablePanel>
     </ResizablePanelGroup>
     <div class="flex w-full justify-center py-4">
