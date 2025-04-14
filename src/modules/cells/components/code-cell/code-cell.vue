@@ -50,9 +50,10 @@
       </ResizablePanel>
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
-        <CodePreview :id :code="transpiledCode" :error />
+        <CodePreview :id :code="transpiledCode" :error v-model="outputs" />
       </ResizablePanel>
     </ResizablePanelGroup>
+    <!-- <OutputPreview :outputs /> -->
     <div class="flex w-full justify-center py-4">
       <Button @click="addCellBelow">{{ $t('notebook.addCell') }}</Button>
     </div>
@@ -75,10 +76,13 @@ import type { Language } from '@/modules/cells/interfaces/code';
 import SplitIcon from '@/modules/common/components/icons/split-icon.vue';
 import { useCellsStore } from '@/modules/cells/store/cells';
 import RemoveCellDialog from '@/modules/cells/components/remove-cell-dialog/remove-cell-dialog.vue';
+import OutputPreview from '@/modules/cells/components/output-preview/output-preview.vue';
+import type { OutputPreviewData } from '@/modules/cells/interfaces/preview';
 
 const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
 const error = ref<string>('');
+const outputs = ref<OutputPreviewData[]>([]);
 const editor = useTemplateRef('editor');
 const isLargeScreen = useMediaQuery('(min-width: 1024px)');
 const direction = ref<'horizontal' | 'vertical'>('horizontal');

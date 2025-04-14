@@ -16,6 +16,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, useTemplateRef, watch } from 'vue';
 import { getPreviewHTMLContainer } from '@/modules/cells/helpers/preview-html-container';
+import type { OutputPreviewData } from '@/modules/cells/interfaces/preview';
+import { generateRandomID } from '@/modules/common/helpers/random';
 
 const iframe = useTemplateRef<HTMLIFrameElement>('iframe-preview');
 const props = withDefaults(
@@ -24,20 +26,24 @@ const props = withDefaults(
     error: '',
   },
 );
+const output = defineModel<OutputPreviewData[]>({
+  required: true,
+});
 const previewHTMLContainer = getPreviewHTMLContainer(props.id);
 
 function handleMessage(
-  response: MessageEvent<{ source: string; message: string[]; id: string }>,
+  response: MessageEvent<{ source: string; message: unknown[]; id: string }>,
 ) {
   if (
     response.data &&
     response.data.source === 'code-preview' &&
     response.data.id === props.id
   ) {
-    console.log(
-      'Received message from iframe:',
-      response.data.message,
-      response.data.id,
+    output.value.push(
+      ...response.data.message.map<OutputPreviewData>((message) => ({
+        id: generateRandomID(),
+        data: message,
+      })),
     );
   }
 }
