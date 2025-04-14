@@ -1,9 +1,25 @@
-export const previewHTMLContainer: string = `
+export function getPreviewHTMLContainer(id: string): string {
+  return `
 <html>
   <head></head>
   <body>
     <div id="root"></div>
     <script>
+      const _log = console.log;
+
+      console.log = function (...args) {
+        window.parent.postMessage(
+          {
+            id: '${id}',
+            source: 'code-preview',
+            message: args,
+          },
+          '*',
+        );
+
+        _log.apply(console, args);
+      };
+
       window.addEventListener('message', (event) => {
         const handleError = (error) => {
           const root = document.getElementById('root');
@@ -33,3 +49,4 @@ export const previewHTMLContainer: string = `
   </body>
 </html>
 `;
+}

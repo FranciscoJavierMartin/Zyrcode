@@ -1,6 +1,6 @@
 import { computed, reactive } from 'vue';
 import { defineStore } from 'pinia';
-import type { CellsState, Cell } from '@/modules/cells/interfaces/cells';
+import type { CellsState, Cell } from '@/modules/cells/interfaces/store';
 
 export const useCellsStore = defineStore('cells', () => {
   const state = reactive<CellsState>({
@@ -8,7 +8,32 @@ export const useCellsStore = defineStore('cells', () => {
     cells: {
       a: {
         id: 'a',
-        content: 'console.log("Hello world! from JavaScript!");',
+        content: `
+        console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+        `,
         language: 'javascript',
       },
       b: {
