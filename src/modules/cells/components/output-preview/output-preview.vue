@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="bg-ring h-auto max-h-[300px] overflow-auto p-2"
+    class="bg-ring h-auto max-h-[300px] overflow-auto p-2 empty:p-0"
     style="interpolate-size: allow-keywords"
   >
     <li
