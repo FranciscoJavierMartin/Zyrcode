@@ -1,6 +1,6 @@
 import { computed, reactive } from 'vue';
 import { defineStore } from 'pinia';
-import type { CellsState, Cell } from '@/modules/cells/interfaces/cells';
+import type { CellsState, Cell } from '@/modules/cells/interfaces/store';
 
 export const useCellsStore = defineStore('cells', () => {
   const state = reactive<CellsState>({
