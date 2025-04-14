@@ -1,14 +1,16 @@
 <template>
-  <div
-    class="h-auto max-h-[300px] overflow-auto"
+  <ul
+    class="bg-ring h-auto max-h-[300px] overflow-auto p-2"
     style="interpolate-size: allow-keywords"
   >
-    <ul>
-      <li v-for="output of outputs" :key="output.id">
-        {{ output.data }}
-      </li>
-    </ul>
-  </div>
+    <li
+      v-for="output of outputs"
+      :key="output.id"
+      class="border-muted-foreground my-2 border-b pb-1 text-xs"
+    >
+      {{ output.data }}
+    </li>
+  </ul>
 </template>
 
 <script setup lang="ts">
