@@ -53,7 +53,7 @@
         <CodePreview :id :code="transpiledCode" :error v-model="outputs" />
       </ResizablePanel>
     </ResizablePanelGroup>
-    <!-- <OutputPreview :outputs /> -->
+    <OutputPreview :outputs />
     <div class="flex w-full justify-center py-4">
       <Button @click="addCellBelow">{{ $t('notebook.addCell') }}</Button>
     </div>
