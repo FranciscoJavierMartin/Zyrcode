@@ -6,7 +6,7 @@
     <li
       v-for="output of outputs"
       :key="output.id"
-      class="border-muted-foreground my-2 border-b pb-1 text-xs"
+      class="border-muted-foreground my-2 border-b pb-1 pl-1 text-xs first-of-type:mt-0 last-of-type:mb-0 last-of-type:border-none last-of-type:pb-0"
     >
       {{ output.data }}
     </li>
