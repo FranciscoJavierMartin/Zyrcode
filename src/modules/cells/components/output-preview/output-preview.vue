@@ -1,5 +1,5 @@
 <template>
-  <ul
+  <ol
     class="bg-ring h-auto max-h-[300px] overflow-auto p-2 empty:p-0"
     style="interpolate-size: allow-keywords"
   >
@@ -10,7 +10,7 @@
     >
       {{ output.data }}
     </li>
-  </ul>
+  </ol>
 </template>
 
 <script setup lang="ts">
