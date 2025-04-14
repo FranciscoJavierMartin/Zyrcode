@@ -43,6 +43,7 @@ export default defineConfigWithVueTs(
   {
     rules: {
       'vue/multi-word-component-names': 'off',
+      'vue/require-toggle-inside-transition': 'warn',
       'vue/block-order': [
         'error',
         {

@@ -8,7 +8,32 @@ export const useCellsStore = defineStore('cells', () => {
     cells: {
       a: {
         id: 'a',
-        content: 'console.log("Hello world! from JavaScript!");',
+        content: `
+        console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+console.log('Hello world! from JavaScr!');
+        `,
         language: 'javascript',
       },
       b: {
