@@ -1,4 +1,5 @@
-export const previewHTMLContainer: string = `
+export function getPreviewHTMLContainer(id: string): string {
+  return `
 <html>
   <head></head>
   <body>
@@ -9,7 +10,8 @@ export const previewHTMLContainer: string = `
       console.log = function (...args) {
         window.parent.postMessage(
           {
-            source: 'iframe',
+            id: '${id}',
+            source: 'code-preview',
             message: args,
           },
           '*',
@@ -47,3 +49,4 @@ export const previewHTMLContainer: string = `
   </body>
 </html>
 `;
+}

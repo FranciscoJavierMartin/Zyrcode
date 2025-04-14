@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, useTemplateRef, watch } from 'vue';
-import { previewHTMLContainer } from '@/modules/cells/helpers/preview-html-container';
+import { getPreviewHTMLContainer } from '@/modules/cells/helpers/preview-html-container';
 
 const iframe = useTemplateRef<HTMLIFrameElement>('iframe-preview');
 const props = withDefaults(
@@ -24,12 +24,21 @@ const props = withDefaults(
     error: '',
   },
 );
+const previewHTMLContainer = getPreviewHTMLContainer(props.id);
 
 function handleMessage(
-  response: MessageEvent<{ source: string; message: string[] }>,
+  response: MessageEvent<{ source: string; message: string[]; id: string }>,
 ) {
-  if (response.data && response.data.source === 'iframe') {
-    console.log('Received message from iframe:', response.data.message);
+  if (
+    response.data &&
+    response.data.source === 'code-preview' &&
+    response.data.id === props.id
+  ) {
+    console.log(
+      'Received message from iframe:',
+      response.data.message,
+      response.data.id,
+    );
   }
 }
 
