@@ -26,9 +26,9 @@ const props = withDefaults(
     error: '',
   },
 );
-const output = defineModel<OutputPreviewData[]>({
-  required: true,
-});
+const emit = defineEmits<{
+  (e: 'output', value: OutputPreviewData[]): void;
+}>();
 const previewHTMLContainer = getPreviewHTMLContainer(props.id);
 
 function handleMessage(
@@ -39,8 +39,9 @@ function handleMessage(
     response.data.source === 'code-preview' &&
     response.data.id === props.id
   ) {
-    output.value.push(
-      ...response.data.message.map<OutputPreviewData>((message) => ({
+    emit(
+      'output',
+      response.data.message.map<OutputPreviewData>((message) => ({
         id: generateRandomID(),
         data: message,
       })),

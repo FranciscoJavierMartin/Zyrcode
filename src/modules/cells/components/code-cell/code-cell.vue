@@ -50,7 +50,7 @@
       </ResizablePanel>
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
-        <CodePreview :id :code="transpiledCode" :error v-model="outputs" />
+        <CodePreview :id :code="transpiledCode" :error @output="addOutputs" />
       </ResizablePanel>
     </ResizablePanelGroup>
     <OutputPreview v-model="outputs" />
@@ -122,6 +122,10 @@ function moveUp(): void {
 
 function moveDown(): void {
   store.moveCell(props.id, 'down');
+}
+
+function addOutputs(data: OutputPreviewData[]): void {
+  outputs.value.push(...data);
 }
 
 watchDebounced(
