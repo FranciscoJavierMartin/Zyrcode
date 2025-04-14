@@ -66,9 +66,9 @@
     <Transition name="appear">
       <OutputPreview v-if="isOpenOutputs" v-model="outputs" />
     </Transition>
-    <!-- <div class="flex w-full justify-center py-4">
+    <div class="flex w-full justify-center py-4">
       <Button @click="addCellBelow">{{ $t('notebook.addCell') }}</Button>
-    </div> -->
+    </div>
   </div>
 </template>
 
