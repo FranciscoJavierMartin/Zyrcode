@@ -63,7 +63,9 @@
         <CodePreview :id :code="transpiledCode" :error @output="addOutputs" />
       </ResizablePanel>
     </ResizablePanelGroup>
-    <OutputPreview v-show="isOpenOutputs" v-model="outputs" />
+    <Transition name="appear">
+      <OutputPreview v-if="isOpenOutputs" v-model="outputs" />
+    </Transition>
     <!-- <div class="flex w-full justify-center py-4">
       <Button @click="addCellBelow">{{ $t('notebook.addCell') }}</Button>
     </div> -->

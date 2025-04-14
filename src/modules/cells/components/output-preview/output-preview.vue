@@ -1,13 +1,14 @@
 <template>
-  <Transition name="appear">
-    <div class="output-preview">
-      <ul>
-        <li v-for="output of outputs" :key="output.id">
-          {{ output.data }}
-        </li>
-      </ul>
-    </div>
-  </Transition>
+  <div
+    class="h-auto max-h-[300px] overflow-auto"
+    style="interpolate-size: allow-keywords"
+  >
+    <ul>
+      <li v-for="output of outputs" :key="output.id">
+        {{ output.data }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -17,16 +18,9 @@ const outputs = defineModel<OutputPreviewData[]>();
 </script>
 
 <style scoped>
-.output-preview {
-  overflow-y: scroll;
-  max-height: 300px;
-  interpolate-size: allow-keywords;
-  height: auto;
-}
-
 .appear-enter-active,
 .appear-leave-active {
-  transition: height 5.5s;
+  transition: height 0.5s;
 }
 
 .appear-enter-from,
