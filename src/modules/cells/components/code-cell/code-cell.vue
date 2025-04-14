@@ -21,6 +21,16 @@
       </div>
       <div class="flex gap-2">
         <Button
+          variant="hover"
+          class="button-icon"
+          @click="isOpenOutputs = !isOpenOutputs"
+        >
+          <Terminal class="size-5" />
+        </Button>
+        <Button variant="hover" class="button-icon" @click="clearOutputs">
+          <MessageCircleOff class="size-5" />
+        </Button>
+        <Button
           v-if="isLargeScreen"
           variant="hover"
           class="button-icon group"
@@ -53,10 +63,10 @@
         <CodePreview :id :code="transpiledCode" :error @output="addOutputs" />
       </ResizablePanel>
     </ResizablePanelGroup>
-    <OutputPreview v-model="outputs" />
-    <div class="flex w-full justify-center py-4">
+    <OutputPreview v-if="isOpenOutputs" v-model="outputs" />
+    <!-- <div class="flex w-full justify-center py-4">
       <Button @click="addCellBelow">{{ $t('notebook.addCell') }}</Button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -69,7 +79,13 @@ import ResizableHandle from '@/modules/common/components/ui/resizable/ResizableH
 import ResizablePanel from '@/modules/common/components/ui/resizable/ResizablePanel.vue';
 import ResizablePanelGroup from '@/modules/common/components/ui/resizable/ResizablePanelGroup.vue';
 import Button from '@/modules/common/components/ui/button/Button.vue';
-import { ArrowDown, ArrowUp, PencilRuler } from 'lucide-vue-next';
+import {
+  ArrowDown,
+  ArrowUp,
+  MessageCircleOff,
+  PencilRuler,
+  Terminal,
+} from 'lucide-vue-next';
 import { useMediaQuery, watchDebounced } from '@vueuse/core';
 import LanguageSelector from '@/modules/cells/components/language-selector/language-selector.vue';
 import type { Language } from '@/modules/cells/interfaces/code';
@@ -82,6 +98,7 @@ import type { OutputPreviewData } from '@/modules/cells/interfaces/preview';
 const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
 const error = ref<string>('');
+const isOpenOutputs = ref<boolean>(false);
 const outputs = ref<OutputPreviewData[]>([]);
 const editor = useTemplateRef('editor');
 const isLargeScreen = useMediaQuery('(min-width: 1024px)');
@@ -126,6 +143,10 @@ function moveDown(): void {
 
 function addOutputs(data: OutputPreviewData[]): void {
   outputs.value.push(...data);
+}
+
+function clearOutputs(): void {
+  outputs.value = [];
 }
 
 watchDebounced(

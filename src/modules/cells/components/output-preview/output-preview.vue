@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="max-h-[300px] w-full">
     <ul>
       <li v-for="output of outputs" :key="output.id">
         {{ output.data }}
