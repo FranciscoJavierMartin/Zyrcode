@@ -11,5 +11,5 @@
 <script setup lang="ts">
 import type { OutputPreviewData } from '@/modules/cells/interfaces/preview';
 
-defineProps<{ outputs: OutputPreviewData[] }>();
+const outputs = defineModel<OutputPreviewData[]>();
 </script>
