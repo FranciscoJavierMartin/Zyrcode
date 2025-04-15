@@ -7,20 +7,18 @@ export function getPreviewHTMLContainer(id: string): string {
     <script>
       const _log = console.log;
 
-
-
-
-
       console.log = function (...args) {
         const error = new Error();
         const stackLines = error.stack.split('\\n');
-        console.warn(stackLines);
+        const location = stackLines[2].trim().split(':');
+        const lineNumber = location[location.length - 2];
 
         window.parent.postMessage(
           {
             id: '${id}',
             source: 'code-preview',
             message: args,
+            lineNumber: +lineNumber,
           },
           '*',
         );

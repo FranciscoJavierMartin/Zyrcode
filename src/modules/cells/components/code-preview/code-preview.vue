@@ -35,7 +35,7 @@ function handleMessage(
   response: MessageEvent<{
     id: string;
     source: string;
-    line: string;
+    lineNumber: number;
     method: string;
     message: unknown[];
   }>,
