@@ -32,13 +32,20 @@ const emit = defineEmits<{
 const previewHTMLContainer = getPreviewHTMLContainer(props.id);
 
 function handleMessage(
-  response: MessageEvent<{ source: string; message: unknown[]; id: string }>,
+  response: MessageEvent<{
+    id: string;
+    source: string;
+    line: string;
+    method: string;
+    message: unknown[];
+  }>,
 ) {
   if (
     response.data &&
     response.data.source === 'code-preview' &&
     response.data.id === props.id
   ) {
+    console.log(response.data);
     emit(
       'output',
       response.data.message.map<OutputPreviewData>((message) => ({
