@@ -17,6 +17,7 @@ export function getPreviewHTMLContainer(id: string): string {
               id: '${id}',
               source: 'code-preview',
               message: args,
+              method,
               lineNumber: +lineNumber,
             },
             '*',

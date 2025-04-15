@@ -45,7 +45,6 @@ function handleMessage(
     response.data.source === 'code-preview' &&
     response.data.id === props.id
   ) {
-    console.log(response.data);
     emit(
       'output',
       response.data.message.map<OutputPreviewData>((message) => ({
