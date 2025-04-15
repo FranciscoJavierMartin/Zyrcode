@@ -5,26 +5,27 @@ export function getPreviewHTMLContainer(id: string): string {
   <body>
     <div id="root"></div>
     <script>
-      const _log = console.log;
-
-      console.log = function (...args) {
-        const error = new Error();
-        const stackLines = error.stack.split('\\n');
-        const location = stackLines[2].trim().split(':');
-        const lineNumber = location[location.length - 2];
-
-        window.parent.postMessage(
-          {
-            id: '${id}',
-            source: 'code-preview',
-            message: args,
-            lineNumber: +lineNumber,
-          },
-          '*',
-        );
-
-        _log.apply(console, args);
+      const enhanceConsoleMethod = (method) => {
+        const originalMethod = console[method];
+        console[method] = function (...args) {
+          const error = new Error();
+          const stackLines = error.stack.split('\\n');
+          const location = stackLines[2].trim().split(':');
+          const lineNumber = location[location.length - 2];
+          window.parent.postMessage(
+            {
+              id: '${id}',
+              source: 'code-preview',
+              message: args,
+              lineNumber: +lineNumber,
+            },
+            '*',
+          );
+          originalMethod.apply(console, args);
+        };
       };
+      const consoleMethods = ['log', 'error', 'warn', 'debug', 'info'];
+      consoleMethods.forEach((method) => enhanceConsoleMethod(method));
 
       window.addEventListener('message', (event) => {
         const handleError = (error) => {
@@ -56,137 +57,3 @@ export function getPreviewHTMLContainer(id: string): string {
 </html>
 `;
 }
-
-// (() => {
-//   const enhanceConsoleMethod = (method) => {
-//     const originalMethod = console[method];
-//     const logger = (...args) => {
-//       // const stackTrace = new Error().stack?.split(c);
-
-//       const errors =
-//         'Error\n    at console.logger [as log] (about:srcdoc…2:11), <anonymous>:4:3)\n    at about:srcdoc:37:11'
-//           // .replaceAll('\n', '\n')
-
-//           .split(':');
-//       const line = errors[errors.length - 2];
-
-//       // console.log(stackTrace)
-//     };
-
-//     console[method] = logger;
-//   };
-//   const consoleMethods = ['log', 'error', 'warn', 'debug'];
-//   consoleMethods.forEach((method) => enhanceConsoleMethod(method));
-// })();
-
-// (() => {
-//   const enhanceConsoleMethod = (method) => {
-//     console.debug(method);
-//     const originalMethod = console[method];
-//     const meto = (...args) => {
-//       const stackTrace = new Error().stack?.split('\n');
-//       const callerLine = stackTrace?.[2].trim();
-//       const line = callerLine?.split(':')[1] ?? '';
-
-//       window.parent.postMessage(
-//         {
-//           id: '${id}',
-//           source: 'code-preview',
-//           line,
-//           method,
-//           message: args,
-//         },
-//         '*',
-//       );
-
-//       originalMethod(...args);
-//     };
-
-//     console[method] = meto;
-//   };
-//   const consoleMethods = ['log', 'error', 'warn', 'debug'];
-//   consoleMethods.forEach((method) => enhanceConsoleMethod(method));
-// })();
-
-// (() => {
-//   const enhanceConsoleMethod = (method) => {
-//     const originalMethod = console[method];
-//     console.debug(method);
-//     const meto = (...args) => {
-//       const stackTrace = new Error().stack?.split('\n');
-//       const callerLine = stackTrace?.[2].trim();
-//       const line = callerLine?.split(':')[1] ?? '';
-
-//       window.parent.postMessage(
-//         {
-//           id: '${id}',
-//           source: 'code-preview',
-//           line,
-//           method,
-//           message: args,
-//         },
-//         '*',
-//       );
-
-//       originalMethod(...args);
-//     };
-
-//     console[method] = meto;
-//   };
-//   const consoleMethods = ['log', 'error', 'warn', 'debug'];
-//   consoleMethods.forEach((method) => enhanceConsoleMethod(method));
-// })();
-
-// (() => {
-//   const enhanceConsoleMethod = (method) => {
-//     const originalMethod = console[method];
-//     console.debug(method);
-//     console[method] = (...args) => {
-//       const stackTrace = new Error().stack?.split('\n');
-//       const callerLine = stackTrace?.[2].trim();
-//       const line = callerLine?.split(':')[1] ?? '';
-
-//       window.parent.postMessage(
-//         {
-//           id: '${id}',
-//           source: 'code-preview',
-//           line,
-//           method,
-//           message: args,
-//         },
-//         '*',
-//       );
-
-//       originalMethod(...args);
-//     };
-//   };
-//   const consoleMethods = ['log', 'error', 'warn', 'debug'];
-//   consoleMethods.forEach((method) => enhanceConsoleMethod(method));
-// })();
-
-// (function () {
-//   function enhanceConsoleMethod(method) {
-//     const originalMethod = console[method];
-
-//     console[method] = function (...args) {
-//       const stackTrace = new Error().stack?.split('\n');
-//       const callerLine = stackTrace?.[2].trim();
-//       const line = callerLine?.split(':')[1] ?? '';
-
-//       window.parent.postMessage(
-//         {
-//           id: '${id}',
-//           source: 'code-preview',
-//           line,
-//           method,
-//           message: args,
-//         },
-//         '*',
-//       );
-
-//       originalMethod(...args);
-//     };
-//   }
-//   const consoleMethods = ['log', 'error', 'warn', 'info', 'debug'];
-//   consoleMethods.forEach((method) => enhanceConsoleMethod(method));
-// })();
