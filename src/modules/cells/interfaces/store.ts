@@ -5,8 +5,3 @@ export interface Cell {
   content: string;
   language: Language;
 }
-
-export interface CellsState {
-  cells: Record<string, Cell>;
-  order: string[];
-}
