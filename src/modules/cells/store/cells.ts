@@ -4,8 +4,19 @@ import type { CellsState, Cell } from '@/modules/cells/interfaces/store';
 
 export const useCellsStore = defineStore('cells', () => {
   const state = reactive<CellsState>({
-    order: ['a', 'b', 'c'],
+    order: ['z', 'a', 'b', 'c'],
     cells: {
+      z: {
+        id: 'z',
+        language: 'javascript',
+        content: `
+  console.log('Log');
+  console.error('Error');
+  console.warn('Warn');
+  console.debug('Debug');
+  console.info('Info');
+        `,
+      },
       a: {
         id: 'a',
         content: `
