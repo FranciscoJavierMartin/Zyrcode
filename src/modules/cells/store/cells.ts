@@ -52,9 +52,17 @@ console.log('Hello world! from JavaScr!');
     state.order.map((id) => state.cells[id]),
   );
 
-  function updateCell({ id, content, language }: Cell): void {
-    state.cells[id].content = content;
+  function updateLanguage({
+    id,
+    language,
+  }: Pick<Cell, 'id' | 'language'>): void {
+    //FIXME: ¿Computed warning??
     state.cells[id].language = language;
+  }
+
+  function updateContent({ id, content }: Pick<Cell, 'id' | 'content'>): void {
+    //FIXME: ¿Computed warning??
+    state.cells[id].content = content;
   }
 
   function addCellBelow(id: string): void {
@@ -90,5 +98,12 @@ console.log('Hello world! from JavaScr!');
     }
   }
 
-  return { cells, updateCell, addCellBelow, removeCell, moveCell };
+  return {
+    cells,
+    updateContent,
+    updateLanguage,
+    addCellBelow,
+    removeCell,
+    moveCell,
+  };
 });
