@@ -5,6 +5,7 @@
       :id
       :is-large-screen
       :language
+      :are-outputs-available="outputs.length > 0"
       @format="format"
       @toggle-direction="toggleDirection"
       v-model:is-console-open="isConsoleOpen"

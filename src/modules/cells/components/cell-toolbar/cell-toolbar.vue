@@ -20,6 +20,7 @@
     </div>
     <div class="flex items-center gap-2">
       <IconTextButton
+        :disabled="!areOutputsAvailable"
         :text="
           isConsoleOpen
             ? $t('notebook.toolbar.hideConsole')
@@ -30,6 +31,7 @@
         <Terminal class="size-5" />
       </IconTextButton>
       <IconTextButton
+        :disabled="!areOutputsAvailable"
         :text="$t('notebook.toolbar.clearConsole')"
         @click="$emit('clear-outputs')"
       >
@@ -77,6 +79,7 @@ const props = defineProps<{
   direction: 'horizontal' | 'vertical';
   isLargeScreen: boolean;
   language: Language;
+  areOutputsAvailable: boolean;
 }>();
 defineEmits<{
   (e: 'format'): void;
