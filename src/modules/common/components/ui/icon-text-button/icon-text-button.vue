@@ -1,13 +1,20 @@
 <template>
-  <button class="icon-text-button">
+  <Primitive
+    data-slot="button"
+    :as="as"
+    :as-child="asChild"
+    class="icon-text-button"
+  >
     <div class="icon">
       <slot />
     </div>
     <span> {{ text }} </span>
-  </button>
+  </Primitive>
 </template>
 
 <script lang="ts" setup>
+import { Primitive } from 'reka-ui';
+
 defineProps<{ text: string }>();
 </script>
 
