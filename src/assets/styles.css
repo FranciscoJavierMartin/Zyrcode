@@ -140,4 +140,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .button-icon {
+    @apply grid size-8 cursor-pointer place-content-center rounded shadow-sm;
+  }
 }

@@ -11,7 +11,16 @@
   "notebook": {
     "addCell": "Agregar celda",
     "areYouSure": "¿Estás seguro?",
-    "actionCannotBeUndo": "Esta acción no se puede deshacer."
+    "actionCannotBeUndo": "Esta acción no se puede deshacer.",
+    "toolbar": {
+      "showConsole": "Mostrar consola",
+      "hideConsole": "Ocultar consola",
+      "clearConsole": "Limpiar consola",
+      "splitHorizontal": "Dividir horizontalmente",
+      "splitVertical": "Dividir verticalmente",
+      "formatCode": "Formatear código",
+      "removeCell": "Borrar celda"
+    }
   },
   "settings": "Ajustes",
   "cancel": "Cancelar",

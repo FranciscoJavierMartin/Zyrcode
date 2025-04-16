@@ -1,50 +1,17 @@
 <template>
   <div class="flex flex-col">
-    <div class="mb-2 flex px-3">
-      <div class="flex flex-1 gap-2">
-        <Button
-          :disabled="isFirstCell"
-          variant="hover"
-          class="button-icon"
-          @click="moveUp"
-        >
-          <ArrowUp class="size-5" />
-        </Button>
-        <Button
-          :disabled="isLastCell"
-          variant="hover"
-          class="button-icon"
-          @click="moveDown"
-        >
-          <ArrowDown class="size-5" />
-        </Button>
-      </div>
-      <div class="flex gap-2">
-        <Button
-          variant="hover"
-          class="button-icon"
-          @click="isOpenOutputs = !isOpenOutputs"
-        >
-          <Terminal class="size-5" />
-        </Button>
-        <Button variant="hover" class="button-icon" @click="clearOutputs">
-          <MessageCircleOff class="size-5" />
-        </Button>
-        <Button
-          v-if="isLargeScreen"
-          variant="hover"
-          class="button-icon group"
-          @click="toggleDirection"
-        >
-          <SplitIcon :is-horizontal="direction === 'horizontal'" />
-        </Button>
-        <Button variant="hover" class="button-icon" @click="format">
-          <PencilRuler class="size-5" />
-        </Button>
-        <RemoveCellDialog :id />
-        <LanguageSelector :language @update:language="updateLanguage" />
-      </div>
-    </div>
+    <CellToolbar
+      :direction
+      :id
+      :is-large-screen
+      :language
+      :are-outputs-available="outputs.length > 0"
+      :is-code-available="code.length > 0"
+      v-model:is-console-open="isConsoleOpen"
+      @format="format"
+      @toggle-direction="toggleDirection"
+      @clear-outputs="clearOutputs"
+    />
     <ResizablePanelGroup
       :direction="panelSplitDirection"
       class="min-h-[500px] w-full lg:min-h-[300px]"
@@ -64,7 +31,7 @@
       </ResizablePanel>
     </ResizablePanelGroup>
     <Transition name="appear">
-      <OutputPreview v-if="isOpenOutputs" v-model="outputs" />
+      <ConsolePreview v-if="isConsoleOpen" v-model="outputs" />
     </Transition>
     <div class="flex w-full justify-center py-4">
       <Button @click="addCellBelow">{{ $t('notebook.addCell') }}</Button>
@@ -81,26 +48,17 @@ import ResizableHandle from '@/modules/common/components/ui/resizable/ResizableH
 import ResizablePanel from '@/modules/common/components/ui/resizable/ResizablePanel.vue';
 import ResizablePanelGroup from '@/modules/common/components/ui/resizable/ResizablePanelGroup.vue';
 import Button from '@/modules/common/components/ui/button/Button.vue';
-import {
-  ArrowDown,
-  ArrowUp,
-  MessageCircleOff,
-  PencilRuler,
-  Terminal,
-} from 'lucide-vue-next';
 import { useMediaQuery, watchDebounced } from '@vueuse/core';
-import LanguageSelector from '@/modules/cells/components/language-selector/language-selector.vue';
 import type { Language } from '@/modules/cells/interfaces/code';
-import SplitIcon from '@/modules/common/components/icons/split-icon.vue';
 import { useCellsStore } from '@/modules/cells/store/cells';
-import RemoveCellDialog from '@/modules/cells/components/remove-cell-dialog/remove-cell-dialog.vue';
-import OutputPreview from '@/modules/cells/components/output-preview/output-preview.vue';
+import ConsolePreview from '@/modules/cells/components/console-preview/console-preview.vue';
 import type { OutputPreviewData } from '@/modules/cells/interfaces/preview';
+import CellToolbar from '@/modules/cells/components/cell-toolbar/cell-toolbar.vue';
 
 const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
 const error = ref<string>('');
-const isOpenOutputs = ref<boolean>(false);
+const isConsoleOpen = ref<boolean>(false);
 const outputs = ref<OutputPreviewData[]>([]);
 const editor = useTemplateRef('editor');
 const isLargeScreen = useMediaQuery('(min-width: 1024px)');
@@ -108,10 +66,7 @@ const direction = ref<'horizontal' | 'vertical'>('horizontal');
 const panelSplitDirection = computed<'horizontal' | 'vertical'>(() =>
   isLargeScreen.value ? direction.value : 'vertical',
 );
-const isFirstCell = computed<boolean>(() => store.cells[0].id === props.id);
-const isLastCell = computed<boolean>(
-  () => store.cells[store.cells.length - 1].id === props.id,
-);
+
 const store = useCellsStore();
 
 async function format(): Promise<void> {
@@ -123,24 +78,12 @@ function toggleDirection(): void {
     direction.value === 'horizontal' ? 'vertical' : 'horizontal';
 }
 
-function updateLanguage(language: Language): void {
-  store.updateCell({ id: props.id, content: props.code, language });
-}
-
 function updateCode(content: string): void {
-  store.updateCell({ id: props.id, content, language: props.language });
+  store.updateContent({ id: props.id, content });
 }
 
 function addCellBelow(): void {
   store.addCellBelow(props.id);
-}
-
-function moveUp(): void {
-  store.moveCell(props.id, 'up');
-}
-
-function moveDown(): void {
-  store.moveCell(props.id, 'down');
 }
 
 function addOutputs(data: OutputPreviewData[]): void {
@@ -165,11 +108,3 @@ watchDebounced(
   },
 );
 </script>
-
-<style>
-@reference '@/assets/styles.css';
-
-.button-icon {
-  @apply grid size-8 cursor-pointer place-content-center rounded shadow-sm;
-}
-</style>
