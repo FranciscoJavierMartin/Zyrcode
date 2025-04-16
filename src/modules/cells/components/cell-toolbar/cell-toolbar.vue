@@ -20,7 +20,7 @@
     </div>
     <div class="flex items-center gap-2">
       <IconTextButton text="Toggle console" @click="$emit('toggle-outputs')">
-        <Terminal class="size-5" />
+        <Terminal />
       </IconTextButton>
       <MyButton2 />
       <Button
