@@ -15,7 +15,7 @@ import { cn } from '@/modules/common/helpers/utils';
 import { Primitive, type PrimitiveProps } from 'reka-ui';
 import { type ButtonVariants, buttonVariants } from '.';
 
-export interface Props extends PrimitiveProps {
+interface Props extends PrimitiveProps {
   variant?: ButtonVariants['variant'];
   size?: ButtonVariants['size'];
   class?: HTMLAttributes['class'];
