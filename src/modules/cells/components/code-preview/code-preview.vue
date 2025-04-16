@@ -32,7 +32,13 @@ const emit = defineEmits<{
 const previewHTMLContainer = getPreviewHTMLContainer(props.id);
 
 function handleMessage(
-  response: MessageEvent<{ source: string; message: unknown[]; id: string }>,
+  response: MessageEvent<{
+    id: string;
+    source: string;
+    lineNumber: number;
+    method: string;
+    message: unknown[];
+  }>,
 ) {
   if (
     response.data &&

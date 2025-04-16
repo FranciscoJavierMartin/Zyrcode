@@ -3,8 +3,19 @@ import { defineStore } from 'pinia';
 import type { Cell } from '@/modules/cells/interfaces/store';
 
 export const useCellsStore = defineStore('cells', () => {
-  const order = ref<string[]>(['a', 'b', 'c']);
+  const order = ref<string[]>(['z', 'a', 'b', 'c']);
   const cells = reactive<Record<string, Cell>>({
+    z: {
+      id: 'z',
+      language: 'javascript',
+      content: `
+  console.log('Log');
+  console.error('Error');
+  console.warn('Warn');
+  console.debug('Debug');
+  console.info('Info');
+        `,
+    },
     a: {
       id: 'a',
       content: `

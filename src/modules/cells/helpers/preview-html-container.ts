@@ -5,20 +5,28 @@ export function getPreviewHTMLContainer(id: string): string {
   <body>
     <div id="root"></div>
     <script>
-      const _log = console.log;
-
-      console.log = function (...args) {
-        window.parent.postMessage(
-          {
-            id: '${id}',
-            source: 'code-preview',
-            message: args,
-          },
-          '*',
-        );
-
-        _log.apply(console, args);
+      const enhanceConsoleMethod = (method) => {
+        const originalMethod = console[method];
+        console[method] = function (...args) {
+          const error = new Error();
+          const stackLines = error.stack.split('\\n');
+          const location = stackLines[2].trim().split(':');
+          const lineNumber = location[location.length - 2];
+          window.parent.postMessage(
+            {
+              id: '${id}',
+              source: 'code-preview',
+              message: args,
+              method,
+              lineNumber: +lineNumber,
+            },
+            '*',
+          );
+          originalMethod.apply(console, args);
+        };
       };
+      const consoleMethods = ['log', 'error', 'warn', 'debug', 'info'];
+      consoleMethods.forEach((method) => enhanceConsoleMethod(method));
 
       window.addEventListener('message', (event) => {
         const handleError = (error) => {
@@ -33,7 +41,7 @@ export function getPreviewHTMLContainer(id: string): string {
         });
 
         try {
-          eval(event.data)
+          eval(event.data);
         } catch(error){
           if(error instanceof Error){
             return {
