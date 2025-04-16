@@ -18,6 +18,9 @@ button {
   gap: 5px;
   align-items: center;
   padding: 12px 8px;
+  max-width: 32px;
+  overflow: hidden;
+  transition: max-width 1s;
 
   &:hover {
     max-width: 300px;
