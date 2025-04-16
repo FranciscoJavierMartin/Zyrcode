@@ -1,7 +1,9 @@
 <template>
-  <button>
-    <Terminal class="icon" />
-    <span> Hakuna Matata </span>
+  <button
+    class="bg-foreground text-background relative flex h-8 items-center overflow-x-hidden"
+  >
+    <Terminal class="absolute top-1.5 left-1.5 size-5" />
+    <span class="ml-6 whitespace-nowrap"> Hakuna Matata </span>
   </button>
 </template>
 
@@ -11,32 +13,12 @@ import { Terminal } from 'lucide-vue-next';
 
 <style scoped>
 button {
-  background-color: #099;
-  color: white;
-  height: 32px;
-  display: flex;
-  align-items: center;
   padding: 12px 8px;
   max-width: 32px;
-  overflow: hidden;
   transition: max-width 1s;
-  position: relative;
 
   &:hover {
     max-width: 300px;
-  }
-
-  .icon {
-    width: 20px;
-    height: 20px;
-    top: 6px;
-    left: 6px;
-    position: absolute;
-  }
-
-  span {
-    white-space: nowrap;
-    margin-left: 24px;
   }
 }
 </style>
