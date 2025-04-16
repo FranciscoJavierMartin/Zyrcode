@@ -1,7 +1,7 @@
 <template>
-  <button>
+  <button class="h-8 w-8">
     <span class="short-text">
-      <Terminal class="icon" />
+      <Terminal class="size-5" />
     </span>
     <span class="long-text"> G R E E T I N G S! </span>
   </button>
@@ -13,8 +13,8 @@ import { Terminal } from 'lucide-vue-next';
 
 <style scoped>
 button {
-  width: 100px;
-  height: 70px;
+  /* width: 100px; */
+  /* height: 70px; */
   border: 1px solid red;
   background-color: #00a750;
   transition: all 1s;
@@ -50,8 +50,8 @@ button {
 
   .short-text {
     .icon {
-      width: 30px;
-      height: 30px;
+      /* width: 30px; */
+      /* height: 30px; */
     }
   }
 
