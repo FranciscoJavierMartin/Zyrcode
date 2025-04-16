@@ -24,14 +24,12 @@ button {
   &:hover {
     transition: all 1s cubic-bezier(0.62, 0.1, 0.5, 1);
     width: 250px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
 
     .long-text {
       transition:
         width 1s linear 1s,
         font-size 1s linear 1s;
-      margin-left: 45px;
+      margin-left: 30px;
       width: auto;
       display: block;
     }
