@@ -22,7 +22,9 @@
       <IconTextButton text="Toggle console" @click="$emit('toggle-outputs')">
         <Terminal class="size-5" />
       </IconTextButton>
-      <MyButton2 />
+      <IconTextButton text="Clear console" @click="$emit('clear-outputs')">
+        <MessageCircleOff class="size-5" />
+      </IconTextButton>
       <Button
         variant="hover"
         class="button-icon"
@@ -63,7 +65,6 @@ import { useCellsStore } from '@/modules/cells/store/cells';
 import type { Language } from '@/modules/cells/interfaces/code';
 import Button from '@/modules/common/components/ui/button/Button.vue';
 import IconTextButton from '@/modules/common/components/ui/icon-text-button/icon-text-button.vue';
-import MyButton2 from '@/modules/common/components/ui/button/my-button-2.vue';
 
 const props = defineProps<{
   id: string;
