@@ -20,8 +20,12 @@
     </div>
     <div class="flex items-center gap-2">
       <IconTextButton
-        :text="$t('notebook.toolbar.showConsole')"
-        @click="$emit('toggle-outputs')"
+        :text="
+          isConsoleOpen
+            ? $t('notebook.toolbar.hideConsole')
+            : $t('notebook.toolbar.showConsole')
+        "
+        @click="isConsoleOpen = !isConsoleOpen"
       >
         <Terminal class="size-5" />
       </IconTextButton>
@@ -77,9 +81,11 @@ const props = defineProps<{
 defineEmits<{
   (e: 'format'): void;
   (e: 'toggle-direction'): void;
-  (e: 'toggle-outputs'): void;
   (e: 'clear-outputs'): void;
 }>();
+const isConsoleOpen = defineModel<boolean>('is-console-open', {
+  required: true,
+});
 const store = useCellsStore();
 const isFirstCell = computed<boolean>(() => store.cells[0].id === props.id);
 const isLastCell = computed<boolean>(

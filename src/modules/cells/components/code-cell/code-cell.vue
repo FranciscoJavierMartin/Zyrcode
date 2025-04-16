@@ -7,7 +7,7 @@
       :language
       @format="format"
       @toggle-direction="toggleDirection"
-      @toggle-outputs="isOpenOutputs = !isOpenOutputs"
+      v-model:is-console-open="isConsoleOpen"
       @clear-outputs="clearOutputs"
     />
     <ResizablePanelGroup
@@ -29,7 +29,7 @@
       </ResizablePanel>
     </ResizablePanelGroup>
     <Transition name="appear">
-      <OutputPreview v-if="isOpenOutputs" v-model="outputs" />
+      <ConsolePreview v-if="isConsoleOpen" v-model="outputs" />
     </Transition>
     <div class="flex w-full justify-center py-4">
       <Button @click="addCellBelow">{{ $t('notebook.addCell') }}</Button>
@@ -49,14 +49,14 @@ import Button from '@/modules/common/components/ui/button/Button.vue';
 import { useMediaQuery, watchDebounced } from '@vueuse/core';
 import type { Language } from '@/modules/cells/interfaces/code';
 import { useCellsStore } from '@/modules/cells/store/cells';
-import OutputPreview from '@/modules/cells/components/output-preview/output-preview.vue';
+import ConsolePreview from '@/modules/cells/components/console-preview/console-preview.vue';
 import type { OutputPreviewData } from '@/modules/cells/interfaces/preview';
 import CellToolbar from '@/modules/cells/components/cell-toolbar/cell-toolbar.vue';
 
 const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
 const error = ref<string>('');
-const isOpenOutputs = ref<boolean>(false);
+const isConsoleOpen = ref<boolean>(false);
 const outputs = ref<OutputPreviewData[]>([]);
 const editor = useTemplateRef('editor');
 const isLargeScreen = useMediaQuery('(min-width: 1024px)');
