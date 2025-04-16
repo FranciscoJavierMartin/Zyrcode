@@ -3,7 +3,7 @@
     data-slot="button"
     :as="as"
     :as-child="asChild"
-    class="icon-text-button"
+    :class="cn('icon-text-button', props.class)"
   >
     <div class="icon">
       <slot />
@@ -13,9 +13,16 @@
 </template>
 
 <script lang="ts" setup>
-import { Primitive } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { Primitive, type PrimitiveProps } from 'reka-ui';
+import { cn } from '@/modules/common/helpers/utils';
 
-defineProps<{ text: string }>();
+interface Props extends PrimitiveProps {
+  text: string;
+  class?: HTMLAttributes['class'];
+}
+
+const props = withDefaults(defineProps<Props>(), { as: 'button' });
 </script>
 
 <style scoped>
