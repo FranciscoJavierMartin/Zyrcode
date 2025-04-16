@@ -15,12 +15,12 @@ button {
   color: white;
   height: 32px;
   display: flex;
-  gap: 5px;
   align-items: center;
   padding: 12px 8px;
   max-width: 32px;
   overflow: hidden;
   transition: max-width 1s;
+  position: relative;
 
   &:hover {
     max-width: 300px;
@@ -29,10 +29,14 @@ button {
   .icon {
     width: 20px;
     height: 20px;
+    top: 6px;
+    left: 6px;
+    position: absolute;
   }
 
   span {
     white-space: nowrap;
+    margin-left: 24px;
   }
 }
 </style>
