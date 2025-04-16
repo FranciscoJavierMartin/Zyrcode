@@ -18,14 +18,11 @@
         <ArrowDown class="size-5" />
       </Button>
     </div>
-    <div class="flex gap-2">
-      <Button
-        variant="hover"
-        class="button-icon"
-        @click="$emit('toggle-outputs')"
-      >
+    <div class="flex items-center gap-2">
+      <IconTextButton text="Toggle console" @click="$emit('toggle-outputs')">
         <Terminal class="size-5" />
-      </Button>
+      </IconTextButton>
+      <MyButton2 />
       <Button
         variant="hover"
         class="button-icon"
@@ -65,6 +62,8 @@ import RemoveCellDialog from '@/modules/cells/components/remove-cell-dialog/remo
 import { useCellsStore } from '@/modules/cells/store/cells';
 import type { Language } from '@/modules/cells/interfaces/code';
 import Button from '@/modules/common/components/ui/button/Button.vue';
+import IconTextButton from '@/modules/common/components/ui/icon-text-button/icon-text-button.vue';
+import MyButton2 from '@/modules/common/components/ui/button/my-button-2.vue';
 
 const props = defineProps<{
   id: string;
