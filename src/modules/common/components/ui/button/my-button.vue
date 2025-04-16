@@ -13,8 +13,6 @@ import { Terminal } from 'lucide-vue-next';
 
 <style scoped>
 button {
-  /* width: 100px; */
-  /* height: 70px; */
   border: 1px solid red;
   background-color: #00a750;
   transition: all 1s;
@@ -30,13 +28,11 @@ button {
 
     .long-text {
       transition:
-        opacity 1s,
         width 1s linear 1s,
         font-size 1s linear 1s;
-      opacity: 1;
       margin-left: 45px;
-      font-size: 20px;
       width: auto;
+      display: block;
     }
   }
 
@@ -48,21 +44,12 @@ button {
     line-height: 28px;
   }
 
-  .short-text {
-    .icon {
-      /* width: 30px; */
-      /* height: 30px; */
-    }
-  }
-
   .long-text {
-    transition: opacity 1s;
-    opacity: 0;
     white-space: nowrap;
     color: white;
-    font-size: 0;
     width: 0;
     margin: 0;
+    display: none;
   }
 }
 </style>
