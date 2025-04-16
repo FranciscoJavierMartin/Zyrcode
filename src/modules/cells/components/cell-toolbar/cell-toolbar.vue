@@ -19,30 +19,32 @@
       </Button>
     </div>
     <div class="flex items-center gap-2">
-      <IconTextButton text="Toggle console" @click="$emit('toggle-outputs')">
+      <IconTextButton
+        :text="$t('notebook.toolbar.showConsole')"
+        @click="$emit('toggle-outputs')"
+      >
         <Terminal class="size-5" />
       </IconTextButton>
-      <IconTextButton text="Clear console" @click="$emit('clear-outputs')">
-        <MessageCircleOff class="size-5" />
-      </IconTextButton>
-      <Button
-        variant="hover"
-        class="button-icon"
+      <IconTextButton
+        :text="$t('notebook.toolbar.clearConsole')"
         @click="$emit('clear-outputs')"
       >
         <MessageCircleOff class="size-5" />
-      </Button>
-      <Button
+      </IconTextButton>
+      <IconTextButton
         v-if="isLargeScreen"
-        variant="hover"
-        class="button-icon group"
+        :text="$t('notebook.toolbar.splitHorizontal')"
+        class="group"
         @click="$emit('toggle-direction')"
       >
         <SplitIcon :is-horizontal="direction === 'horizontal'" />
-      </Button>
-      <Button variant="hover" class="button-icon" @click="$emit('format')">
+      </IconTextButton>
+      <IconTextButton
+        :text="$t('notebook.toolbar.formatCode')"
+        @click="$emit('format')"
+      >
         <PencilRuler class="size-5" />
-      </Button>
+      </IconTextButton>
       <RemoveCellDialog :id />
       <LanguageSelector :language @update:language="updateLanguage" />
     </div>

@@ -11,7 +11,16 @@
   "notebook": {
     "addCell": "Add cell below",
     "areYouSure": "Are you sure?",
-    "actionCannotBeUndo": "This action cannot be undone."
+    "actionCannotBeUndo": "This action cannot be undone.",
+    "toolbar": {
+      "showConsole": "Show console",
+      "hideConsole": "Hide console",
+      "clearConsole": "Clear console",
+      "splitHorizontal": "Split horizontal",
+      "splitVertical": "Split vertical",
+      "formatCode": "Format code",
+      "removeCell": "Remove cell"
+    }
   },
   "settings": "Settings",
   "cancel": "Cancel",
