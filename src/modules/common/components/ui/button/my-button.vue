@@ -19,6 +19,7 @@ button {
   cursor: pointer;
   padding: 10px;
   color: white;
+  position: relative;
 
   &:hover {
     transition: all 1s cubic-bezier(0.62, 0.1, 0.5, 1);
@@ -39,9 +40,8 @@ button {
   span {
     color: white;
     position: absolute;
-    left: 25px;
-    top: 20px;
-    line-height: 28px;
+    top: 6px;
+    left: 6px;
   }
 
   .long-text {
