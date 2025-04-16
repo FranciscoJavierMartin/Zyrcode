@@ -14,29 +14,22 @@ button {
   background-color: #099;
   color: white;
   height: 32px;
-  display: inline-flex;
+  display: flex;
+  gap: 5px;
   align-items: center;
-  overflow: hidden;
-  width: auto;
-  max-width: 32px;
-  transition: max-width 1s;
+  padding: 12px 8px;
 
   &:hover {
     max-width: 300px;
   }
 
   .icon {
-    margin-right: 15px;
-    /* padding: 0px 8px; */
-    display: flex;
-    align-items: center;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
   }
 
   span {
     white-space: nowrap;
-    padding-right: 15px;
   }
 }
 </style>
