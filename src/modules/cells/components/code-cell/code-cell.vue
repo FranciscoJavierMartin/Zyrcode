@@ -6,9 +6,10 @@
       :is-large-screen
       :language
       :are-outputs-available="outputs.length > 0"
+      :is-code-available="code.length > 0"
+      v-model:is-console-open="isConsoleOpen"
       @format="format"
       @toggle-direction="toggleDirection"
-      v-model:is-console-open="isConsoleOpen"
       @clear-outputs="clearOutputs"
     />
     <ResizablePanelGroup

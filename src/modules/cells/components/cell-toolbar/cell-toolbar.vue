@@ -46,6 +46,7 @@
         <SplitIcon :is-horizontal="direction === 'horizontal'" />
       </IconTextButton>
       <IconTextButton
+        :disabled="!isCodeAvailable"
         :text="$t('notebook.toolbar.formatCode')"
         @click="$emit('format')"
       >
@@ -80,6 +81,7 @@ const props = defineProps<{
   isLargeScreen: boolean;
   language: Language;
   areOutputsAvailable: boolean;
+  isCodeAvailable: boolean;
 }>();
 defineEmits<{
   (e: 'format'): void;
