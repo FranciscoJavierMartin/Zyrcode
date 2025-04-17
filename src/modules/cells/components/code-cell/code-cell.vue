@@ -33,9 +33,6 @@
     <Transition name="appear">
       <ConsolePreview v-if="isConsoleOpen" v-model="outputs" />
     </Transition>
-    <!-- <div class="flex w-full justify-center py-4">
-      <Button @click="addCellBelow">{{ $t('notebook.addCell') }}</Button>
-    </div> -->
   </div>
 </template>
 
@@ -47,7 +44,6 @@ import CodePreview from '@/modules/cells/components/code-preview/code-preview.vu
 import ResizableHandle from '@/modules/common/components/ui/resizable/ResizableHandle.vue';
 import ResizablePanel from '@/modules/common/components/ui/resizable/ResizablePanel.vue';
 import ResizablePanelGroup from '@/modules/common/components/ui/resizable/ResizablePanelGroup.vue';
-import Button from '@/modules/common/components/ui/button/Button.vue';
 import { useMediaQuery, watchDebounced } from '@vueuse/core';
 import type { Language } from '@/modules/cells/interfaces/code';
 import { useCellsStore } from '@/modules/cells/store/cells';

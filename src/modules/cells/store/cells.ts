@@ -2,6 +2,7 @@ import { computed, reactive, ref } from 'vue';
 import { defineStore } from 'pinia';
 import type { Cell } from '@/modules/cells/interfaces/store';
 import type { Language } from '@/modules/cells/interfaces/code';
+import { generateRandomID } from '@/modules/common/helpers/random';
 
 export const useCellsStore = defineStore('cells', () => {
   const order = ref<string[]>(['z', 'a', 'b', 'c']);
@@ -89,6 +90,12 @@ console.log('Hello world! from JavaScr!');
     order.value.splice(previousIndex + 1, 0, newCellId);
   }
 
+  function addCellAtBottom(): void {
+    const previousId =
+      order.value[order.value.length - 1] ?? generateRandomID();
+    addCellBelow(previousId);
+  }
+
   function removeCell(id: string): void {
     const index = order.value.indexOf(id);
     order.value.splice(index, 1);
@@ -113,6 +120,7 @@ console.log('Hello world! from JavaScr!');
     updateContent,
     updateLanguage,
     addCellBelow,
+    addCellAtBottom,
     removeCell,
     moveCell,
   };
