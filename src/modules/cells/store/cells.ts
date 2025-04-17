@@ -2,7 +2,6 @@ import { computed, reactive, ref } from 'vue';
 import { defineStore } from 'pinia';
 import type { Cell } from '@/modules/cells/interfaces/store';
 import type { Language } from '@/modules/cells/interfaces/code';
-import { generateRandomID } from '@/modules/common/helpers/random';
 
 export const useCellsStore = defineStore('cells', () => {
   const order = ref<string[]>(['z', 'a', 'b', 'c']);
@@ -62,6 +61,7 @@ console.log('Hello world! from JavaScr!');
   const orderedCells = computed<Cell[]>(() =>
     order.value.map((id) => cells[id]),
   );
+  const isLastOne = computed<boolean>(() => order.value.length === 1);
 
   function updateLanguage({
     id,
@@ -92,14 +92,18 @@ console.log('Hello world! from JavaScr!');
 
   function addCellAtBottom(): void {
     const previousId =
-      order.value[order.value.length - 1] ?? generateRandomID();
+      order.value[order.value.length - 1] ?? Date.now().toString();
     addCellBelow(previousId);
   }
 
   function removeCell(id: string): void {
-    const index = order.value.indexOf(id);
-    order.value.splice(index, 1);
-    delete cells[id];
+    if (order.value.length > 1) {
+      const index = order.value.indexOf(id);
+      if (index !== -1) {
+        order.value.splice(index, 1);
+        delete cells[id];
+      }
+    }
   }
 
   function moveCell(id: string, direction: 'up' | 'down'): void {
@@ -123,5 +127,6 @@ console.log('Hello world! from JavaScr!');
     addCellAtBottom,
     removeCell,
     moveCell,
+    isLastOne,
   };
 });
