@@ -3,6 +3,7 @@
     <AlertDialogTrigger as-child>
       <TooltipButton :text="$t('notebook.toolbar.removeCell')">
         <Button
+          :disabled="store.isLastOne"
           variant="hover"
           class="button-icon group remove-cell-button"
           @click="isAlertDialogOpen = true"
