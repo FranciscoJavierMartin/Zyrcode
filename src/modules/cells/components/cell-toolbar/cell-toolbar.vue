@@ -57,13 +57,16 @@
           <SplitIcon :is-horizontal="direction === 'horizontal'" />
         </Button>
       </TooltipButton>
-      <IconTextButton
-        :disabled="!isCodeAvailable"
-        :text="$t('notebook.toolbar.formatCode')"
-        @click="$emit('format')"
-      >
-        <PencilRuler class="size-5" />
-      </IconTextButton>
+      <TooltipButton :text="$t('notebook.toolbar.formatCode')">
+        <Button
+          :disabled="!isCodeAvailable"
+          variant="hover"
+          class="button-icon"
+          @click="$emit('format')"
+        >
+          <PencilRuler class="size-5" />
+        </Button>
+      </TooltipButton>
       <RemoveCellDialog :id />
       <LanguageSelector :language @update:language="updateLanguage" />
     </div>
