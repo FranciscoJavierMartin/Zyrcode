@@ -88,7 +88,6 @@ import RemoveCellDialog from '@/modules/cells/components/remove-cell-dialog/remo
 import { useCellsStore } from '@/modules/cells/store/cells';
 import type { Language } from '@/modules/cells/interfaces/code';
 import Button from '@/modules/common/components/ui/button/Button.vue';
-import IconTextButton from '@/modules/common/components/ui/icon-text-button/icon-text-button.vue';
 import TooltipButton from '@/modules/common/components/ui/tooltip-button/tooltip-button.vue';
 
 const props = defineProps<{

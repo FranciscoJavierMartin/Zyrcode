@@ -1,13 +1,15 @@
 <template>
   <AlertDialog :open="isAlertDialogOpen">
     <AlertDialogTrigger as-child>
-      <IconTextButton
-        :text="$t('notebook.toolbar.removeCell')"
-        class="remove-cell-button group"
-        @click="isAlertDialogOpen = true"
-      >
-        <Trash2 class="size-5" />
-      </IconTextButton>
+      <TooltipButton :text="$t('notebook.toolbar.removeCell')">
+        <Button
+          variant="hover"
+          class="button-icon group remove-cell-button"
+          @click="isAlertDialogOpen = true"
+        >
+          <Trash2 class="size-5" />
+        </Button>
+      </TooltipButton>
     </AlertDialogTrigger>
     <AlertDialogContent @interact-outside="closeAlertDialog">
       <AlertDialogHeader>
@@ -46,7 +48,7 @@ import {
 import { Button } from '@/modules/common/components/ui/button';
 import { Trash2 } from 'lucide-vue-next';
 import { useCellsStore } from '@/modules/cells/store/cells';
-import IconTextButton from '@/modules/common/components/ui/icon-text-button/icon-text-button.vue';
+import TooltipButton from '@/modules/common/components/ui/tooltip-button/tooltip-button.vue';
 
 const isAlertDialogOpen = ref<boolean>(false);
 const props = defineProps<{ id: string }>();
@@ -66,7 +68,7 @@ function closeAlertDialog(): void {
 
 .remove-cell-button {
   svg {
-    @apply dark:text-foreground dark:hover:text-background hover:text-foreground group-hover:text-background text-red-500;
+    @apply group-hover:text-background dark:group-hover:text-background dark:text-foreground text-red-500;
   }
 }
 </style>
