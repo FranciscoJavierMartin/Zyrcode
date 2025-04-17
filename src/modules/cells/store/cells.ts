@@ -1,6 +1,7 @@
 import { computed, reactive, ref } from 'vue';
 import { defineStore } from 'pinia';
 import type { Cell } from '@/modules/cells/interfaces/store';
+import type { Language } from '@/modules/cells/interfaces/code';
 
 export const useCellsStore = defineStore('cells', () => {
   const order = ref<string[]>(['z', 'a', 'b', 'c']);
@@ -74,7 +75,7 @@ console.log('Hello world! from JavaScr!');
     cells[id].content = content;
   }
 
-  function addCellBelow(id: string): void {
+  function addCellBelow(id: string, language?: Language): void {
     // Random Id
     const newCellId: string = Date.now().toString();
     const previousIndex = order.value.indexOf(id);
@@ -82,7 +83,7 @@ console.log('Hello world! from JavaScr!');
     cells[newCellId] = {
       id: newCellId,
       content: '',
-      language: 'javascript',
+      language: language ?? 'javascript',
     };
 
     order.value.splice(previousIndex + 1, 0, newCellId);

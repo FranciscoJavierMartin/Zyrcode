@@ -9,7 +9,7 @@
   },
   "notebooks": "Notebooks",
   "notebook": {
-    "addCell": "Add cell below",
+    "addCell": "Add cell",
     "areYouSure": "Are you sure?",
     "actionCannotBeUndo": "This action cannot be undone.",
     "toolbar": {
@@ -19,7 +19,8 @@
       "splitHorizontal": "Split horizontal",
       "splitVertical": "Split vertical",
       "formatCode": "Format code",
-      "removeCell": "Remove cell"
+      "removeCell": "Remove cell",
+      "addCellBelow": "Add cell below"
     }
   },
   "settings": "Settings",

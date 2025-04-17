@@ -33,9 +33,9 @@
     <Transition name="appear">
       <ConsolePreview v-if="isConsoleOpen" v-model="outputs" />
     </Transition>
-    <div class="flex w-full justify-center py-4">
+    <!-- <div class="flex w-full justify-center py-4">
       <Button @click="addCellBelow">{{ $t('notebook.addCell') }}</Button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -80,10 +80,6 @@ function toggleDirection(): void {
 
 function updateCode(content: string): void {
   store.updateContent({ id: props.id, content });
-}
-
-function addCellBelow(): void {
-  store.addCellBelow(props.id);
 }
 
 function addOutputs(data: OutputPreviewData[]): void {
