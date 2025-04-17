@@ -1,6 +1,6 @@
 <template>
   <ol
-    class="h-auto max-h-[300px] overflow-auto"
+    class="mt-2 h-auto max-h-[300px] overflow-auto"
     style="interpolate-size: allow-keywords"
   >
     <li
@@ -31,12 +31,15 @@ const outputs = defineModel<OutputPreviewData[]>();
 
 .appear-enter-active,
 .appear-leave-active {
-  transition: height 0.5s;
+  transition:
+    height 0.5s,
+    margin-top 0.5s;
 }
 
 .appear-enter-from,
 .appear-leave-to {
   height: 0;
+  margin-top: 0;
 }
 
 .log-item {
