@@ -19,17 +19,22 @@
       </Button>
     </div>
     <div class="flex items-center gap-2">
-      <IconTextButton
-        :disabled="!areOutputsAvailable"
+      <TooltipButton
         :text="
           isConsoleOpen
             ? $t('notebook.toolbar.hideConsole')
             : $t('notebook.toolbar.showConsole')
         "
-        @click="isConsoleOpen = !isConsoleOpen"
       >
-        <Terminal class="size-5" />
-      </IconTextButton>
+        <Button
+          :disabled="!areOutputsAvailable"
+          variant="hover"
+          class="button-icon"
+          @click="isConsoleOpen = !isConsoleOpen"
+        >
+          <Terminal class="size-5" />
+        </Button>
+      </TooltipButton>
       <IconTextButton
         :disabled="!areOutputsAvailable"
         :text="$t('notebook.toolbar.clearConsole')"
@@ -74,6 +79,7 @@ import { useCellsStore } from '@/modules/cells/store/cells';
 import type { Language } from '@/modules/cells/interfaces/code';
 import Button from '@/modules/common/components/ui/button/Button.vue';
 import IconTextButton from '@/modules/common/components/ui/icon-text-button/icon-text-button.vue';
+import TooltipButton from '@/modules/common/components/ui/tooltip-button/tooltip-button.vue';
 
 const props = defineProps<{
   id: string;
