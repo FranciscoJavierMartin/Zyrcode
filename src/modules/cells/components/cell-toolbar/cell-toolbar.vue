@@ -35,13 +35,16 @@
           <Terminal class="size-5" />
         </Button>
       </TooltipButton>
-      <IconTextButton
-        :disabled="!areOutputsAvailable"
-        :text="$t('notebook.toolbar.clearConsole')"
-        @click="$emit('clear-outputs')"
-      >
-        <MessageCircleOff class="size-5" />
-      </IconTextButton>
+      <TooltipButton :text="$t('notebook.toolbar.clearConsole')">
+        <Button
+          :disabled="!areOutputsAvailable"
+          variant="hover"
+          class="button-icon"
+          @click="$emit('clear-outputs')"
+        >
+          <MessageCircleOff class="size-5" />
+        </Button>
+      </TooltipButton>
       <IconTextButton
         v-if="isLargeScreen"
         :text="$t('notebook.toolbar.splitHorizontal')"
