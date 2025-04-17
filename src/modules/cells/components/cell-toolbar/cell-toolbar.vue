@@ -68,6 +68,16 @@
         </Button>
       </TooltipButton>
       <RemoveCellDialog :id />
+      <TooltipButton :text="$t('notebook.toolbar.addCellBelow')">
+        <Button
+          :disabled="!isCodeAvailable"
+          variant="hover"
+          class="button-icon"
+          @click="addCellBelow"
+        >
+          <Plus class="size-5" />
+        </Button>
+      </TooltipButton>
       <LanguageSelector :language @update:language="updateLanguage" />
     </div>
   </div>
@@ -80,6 +90,7 @@ import {
   ArrowUp,
   MessageCircleOff,
   PencilRuler,
+  Plus,
   Terminal,
 } from 'lucide-vue-next';
 import LanguageSelector from '@/modules/cells/components/language-selector/language-selector.vue';
@@ -122,5 +133,9 @@ function moveUp(): void {
 
 function moveDown(): void {
   store.moveCell(props.id, 'down');
+}
+
+function addCellBelow(): void {
+  store.addCellBelow(props.id, props.language);
 }
 </script>
