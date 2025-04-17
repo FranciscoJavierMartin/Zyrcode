@@ -40,4 +40,16 @@ export default defineConfigWithVueTs(
   skipFormatting,
   ...pluginVueA11y.configs['flat/recommended'],
   ...pluginStorybook.configs['flat/recommended'],
+  {
+    rules: {
+      'vue/multi-word-component-names': 'off',
+      'vue/require-toggle-inside-transition': 'warn',
+      'vue/block-order': [
+        'error',
+        {
+          order: ['template', 'script', 'style'],
+        },
+      ],
+    },
+  },
 );

@@ -14,6 +14,7 @@ const languales = Object.keys(locales);
  */
 function getKeysFromLocale(locale: Locale): string[] {
   return Object.entries(locale)
+    .filter(([key]) => !!key)
     .map(([key, value]) =>
       typeof value === 'string'
         ? key
@@ -38,7 +39,8 @@ function crossProductWithoutDuplicates(keys: string[]): string[][] {
 
 const localesSet: LocaleKeys = Object.entries(locales).reduce<LocaleKeys>(
   (acc, [localeKey, locale]) => {
-    acc[localeKey] = new Set(getKeysFromLocale(locale));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    acc[localeKey] = new Set(getKeysFromLocale(locale as any));
     return acc;
   },
   {},

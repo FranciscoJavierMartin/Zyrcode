@@ -1,9 +1,33 @@
-export const previewHTMLContainer: string = `
+export function getPreviewHTMLContainer(id: string): string {
+  return `
 <html>
   <head></head>
   <body>
     <div id="root"></div>
     <script>
+      const enhanceConsoleMethod = (method) => {
+        const originalMethod = console[method];
+        console[method] = function (...args) {
+          const error = new Error();
+          const stackLines = error.stack.split('\\n');
+          const location = stackLines[2].trim().split(':');
+          const lineNumber = location[location.length - 2];
+          window.parent.postMessage(
+            {
+              id: '${id}',
+              source: 'code-preview',
+              message: args,
+              method,
+              lineNumber: +lineNumber,
+            },
+            '*',
+          );
+          originalMethod.apply(console, args);
+        };
+      };
+      const consoleMethods = ['log', 'error', 'warn', 'debug', 'info'];
+      consoleMethods.forEach((method) => enhanceConsoleMethod(method));
+
       window.addEventListener('message', (event) => {
         const handleError = (error) => {
           const root = document.getElementById('root');
@@ -17,7 +41,7 @@ export const previewHTMLContainer: string = `
         });
 
         try {
-          eval(event.data)
+          eval(event.data);
         } catch(error){
           if(error instanceof Error){
             return {
@@ -33,3 +57,4 @@ export const previewHTMLContainer: string = `
   </body>
 </html>
 `;
+}

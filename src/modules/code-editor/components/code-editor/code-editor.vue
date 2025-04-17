@@ -1,5 +1,5 @@
 <template>
-  <div ref="editor" class="code-editor" />
+  <div ref="editor" class="size-full" />
 </template>
 
 <script setup lang="ts">
@@ -13,19 +13,43 @@ import {
   computed,
 } from 'vue';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import prettier from 'prettier';
+import parserBabel from 'prettier/plugins/babel';
+import parserEstree from 'prettier/plugins/estree';
+import parserTypeScript from 'prettier/plugins/typescript';
+import { useColorMode } from '@vueuse/core';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
 import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-formatter';
 import '@/modules/code-editor/utils/worker';
+import type { Language } from '@/modules/cells/interfaces/code';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
 const editorId = ref('');
-const props = defineProps<{ language: string }>();
-const code = defineModel({ required: true, type: String });
+const props = defineProps<{ id: string; language: Language }>();
+const code = defineModel<string>('code', {
+  required: true,
+});
 const inlineCompletionsProvider = ref<monaco.IDisposable | undefined>();
-
+const theme = useColorMode({ disableTransition: false });
 const editor = computed<monaco.editor.ICodeEditor | undefined>(() =>
   monaco.editor.getEditors().find((e) => e.getId() === editorId.value),
 );
+
+async function formatCode(): Promise<void> {
+  const formattedCode = await prettier
+    .format(code.value, {
+      parser: 'babel-ts',
+      plugins: [parserBabel, parserTypeScript, parserEstree],
+      tabWidth: 2,
+      semi: true,
+      singleQuote: true,
+      trailingComma: 'all',
+      printWidth: 80,
+    })
+    .then((res) => res.replace(/\n$/, ''));
+
+  editor.value?.setValue(formattedCode);
+}
 
 function registerInlineCompletionsProvider(
   language: string,
@@ -84,10 +108,19 @@ watch(
   (newLanguage: string) => {
     inlineCompletionsProvider.value =
       registerInlineCompletionsProvider(newLanguage);
+    editor.value?.setModel(monaco.editor.createModel(code.value, newLanguage));
 
     onWatcherCleanup(() => {
       inlineCompletionsProvider.value?.dispose();
     });
+  },
+  { immediate: true },
+);
+
+watch(
+  theme,
+  (newTheme) => {
+    monaco.editor.setTheme(newTheme === 'light' ? 'vs' : 'vs-dark');
   },
   { immediate: true },
 );
@@ -100,9 +133,9 @@ onMounted(() => {
       .create(editorRef.value, {
         value: code.value,
         model,
-
         language: props.language,
         minimap: { enabled: false },
+        automaticLayout: true,
       })
       .getId();
 
@@ -116,11 +149,6 @@ onBeforeUnmount(() => {
   inlineCompletionsProvider.value?.dispose();
   editor.value?.dispose();
 });
-</script>
 
-<style scoped>
-.code-editor {
-  height: 300px;
-  width: 100%;
-}
-</style>
+defineExpose({ formatCode });
+</script>

@@ -1,7 +1,29 @@
 {
   "appName": "Zyrcode",
+  "a11y": {
+    "toggleTheme": "Toggle theme"
+  },
   "home": {
     "createNotebookButton": "Create notebook",
     "subtitle": "Where Code Meets Creativity."
-  }
+  },
+  "notebooks": "Notebooks",
+  "notebook": {
+    "addCell": "Add cell",
+    "areYouSure": "Are you sure?",
+    "actionCannotBeUndo": "This action cannot be undone.",
+    "toolbar": {
+      "showConsole": "Show console",
+      "hideConsole": "Hide console",
+      "clearConsole": "Clear console",
+      "splitHorizontal": "Split horizontal",
+      "splitVertical": "Split vertical",
+      "formatCode": "Format code",
+      "removeCell": "Remove cell",
+      "addCellBelow": "Add cell below"
+    }
+  },
+  "settings": "Settings",
+  "cancel": "Cancel",
+  "remove": "Remove"
 }
