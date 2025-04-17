@@ -4,60 +4,8 @@ import type { Cell } from '@/modules/cells/interfaces/store';
 import type { Language } from '@/modules/cells/interfaces/code';
 
 export const useCellsStore = defineStore('cells', () => {
-  const order = ref<string[]>(['z', 'a', 'b', 'c']);
-  const cells = reactive<Record<string, Cell>>({
-    z: {
-      id: 'z',
-      language: 'javascript',
-      content: `
-  console.log('Log');
-  console.error('Error');
-  console.warn('Warn');
-  console.debug('Debug');
-  console.info('Info');
-        `,
-    },
-    a: {
-      id: 'a',
-      content: `
-        console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-        `,
-      language: 'javascript',
-    },
-    b: {
-      id: 'b',
-      content: 'console.log("Hello world! from TypeScript!");',
-      language: 'javascript',
-    },
-    c: {
-      id: 'c',
-      content: 'console.log("Third cell!");',
-      language: 'javascript',
-    },
-  });
+  const order = ref<string[]>([]);
+  const cells = reactive<Record<string, Cell>>({});
   const orderedCells = computed<Cell[]>(() =>
     order.value.map((id) => cells[id]),
   );
