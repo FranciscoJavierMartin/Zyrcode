@@ -1,6 +1,6 @@
 <template>
   <ol
-    class="h-auto max-h-[300px] overflow-auto border border-red-500"
+    class="h-auto max-h-[300px] overflow-auto"
     style="interpolate-size: allow-keywords"
   >
     <li
@@ -40,7 +40,7 @@ const outputs = defineModel<OutputPreviewData[]>();
 }
 
 .log-item {
-  @apply border-b py-1.5 pl-2 text-xs first-of-type:pt-2 last-of-type:border-none last-of-type:pb-2;
+  @apply border-b border-slate-400 py-1.5 pl-2 text-xs first-of-type:pt-2 last-of-type:border-none last-of-type:pb-2;
 }
 
 .info,
@@ -51,11 +51,11 @@ const outputs = defineModel<OutputPreviewData[]>();
 
 .error {
   /* @apply bg-red-800/70; */
-  @apply bg-destructive-foreground/50;
+  @apply bg-destructive-foreground/50 text-background;
 }
 
 .warn {
-  @apply bg-yellow-700/50;
+  @apply text-background bg-yellow-700/50;
   /* @apply dark:bg-[#929123]; */
 }
 </style>
