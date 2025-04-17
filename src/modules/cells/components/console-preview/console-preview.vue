@@ -1,6 +1,6 @@
 <template>
   <ol
-    class="h-auto max-h-[300px] overflow-auto border border-red-500"
+    class="h-auto max-h-[300px] space-y-2 overflow-auto border border-red-500"
     style="interpolate-size: allow-keywords"
   >
     <li
@@ -40,7 +40,7 @@ const outputs = defineModel<OutputPreviewData[]>();
 }
 
 .log-item {
-  @apply my-2 border-b pb-1 pl-2 text-xs first-of-type:mt-0 first-of-type:pt-2 last-of-type:mb-0 last-of-type:border-none last-of-type:pb-2;
+  @apply border-b pb-1 pl-2 text-xs first-of-type:pt-2 last-of-type:border-none last-of-type:pb-2;
 }
 
 .log {
