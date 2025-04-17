@@ -14,7 +14,7 @@
       <div class="mx-auto flex max-w-6xl flex-col gap-10">
         <div v-for="i of [1, 2, 3]" :key="i">
           <div
-            class="grid-layout grid-cols-2 grid-rows-[40px_300px_40px] gap-2.5 lg:grid"
+            class="grid-layout grid grid-cols-1 grid-rows-[40px_100px_100px_40px] gap-2.5 lg:grid-cols-2 lg:grid-rows-[40px_300px_40px]"
           >
             <Skeleton
               class="grid-area-[toolbar] grid-area-toolbar h-full max-h-[300px] rounded-xl"
@@ -48,7 +48,11 @@ const { cells } = storeToRefs(useCellsStore());
 
 <style>
 .grid-layout {
-  grid-template-areas: 'toolbar toolbar' 'editor preview' 'console console';
+  grid-template-areas: 'toolbar' 'editor' 'preview' 'console';
+
+  @media (width >= 64rem /* 1024px */) {
+    grid-template-areas: 'toolbar toolbar' 'editor preview' 'console console';
+  }
 }
 
 .grid-area-toolbar {
