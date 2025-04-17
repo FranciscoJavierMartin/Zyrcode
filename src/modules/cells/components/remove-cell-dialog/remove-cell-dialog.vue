@@ -11,7 +11,10 @@
         </Button>
       </TooltipButton>
     </AlertDialogTrigger>
-    <AlertDialogContent @interact-outside="closeAlertDialog">
+    <AlertDialogContent
+      @interact-outside="closeAlertDialog"
+      @escape-key-down="closeAlertDialog"
+    >
       <AlertDialogHeader>
         <AlertDialogTitle>{{ $t('notebook.areYouSure') }}</AlertDialogTitle>
         <AlertDialogDescription class="text-foreground dark:text-foreground">
