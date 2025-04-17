@@ -1,6 +1,6 @@
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger as-chil>
+    <DropdownMenuTrigger as-child>
       <Button
         variant="outline"
         class="bg-background size-8 cursor-pointer rounded capitalize shadow-xs lg:w-32"
@@ -19,10 +19,10 @@
           <JavascriptIcon />
           JavaScript
         </DropdownMenuRadioItem>
-        <!-- <DropdownMenuRadioItem value="markdown" class="language-option">
+        <DropdownMenuRadioItem value="markdown" class="language-option">
           <MarkdownIcon />
           Markdown
-        </DropdownMenuRadioItem> -->
+        </DropdownMenuRadioItem>
       </DropdownMenuRadioGroup>
     </DropdownMenuContent>
   </DropdownMenu>

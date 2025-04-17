@@ -27,7 +27,17 @@
       </ResizablePanel>
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
-        <CodePreview :id :code="transpiledCode" :error @output="addOutputs" />
+        <CodePreview
+          v-if="language !== 'markdown'"
+          :id
+          :code="transpiledCode"
+          :error
+          @output="addOutputs"
+        />
+        <MarkdownPreview
+          v-else-if="language === 'markdown'"
+          :text="transpiledCode"
+        />
       </ResizablePanel>
     </ResizablePanelGroup>
     <Transition name="appear">
@@ -50,6 +60,8 @@ import { useCellsStore } from '@/modules/cells/store/cells';
 import ConsolePreview from '@/modules/cells/components/console-preview/console-preview.vue';
 import type { OutputPreviewData } from '@/modules/cells/interfaces/preview';
 import CellToolbar from '@/modules/cells/components/cell-toolbar/cell-toolbar.vue';
+import { parseMarkdown } from '@/modules/cells/helpers/markdown';
+import MarkdownPreview from '@/modules/cells/components/markdown-preview/markdown-preview.vue';
 
 const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
@@ -89,9 +101,15 @@ function clearOutputs(): void {
 watchDebounced(
   () => [props.code, props.language],
   async ([newCode, newLanguage]) => {
-    const result = await transpile(newCode, newLanguage as Language);
-    transpiledCode.value = result.code;
-    error.value = result.error;
+    if (newLanguage === 'javascript' || newLanguage === 'typescript') {
+      const result = await transpile(newCode, newLanguage as Language);
+      transpiledCode.value = result.code;
+      error.value = result.error;
+    } else if (newLanguage === 'markdown') {
+      const result = await parseMarkdown(newCode);
+      transpiledCode.value = result.code;
+      error.value = result.error;
+    }
   },
   {
     debounce: 500,
