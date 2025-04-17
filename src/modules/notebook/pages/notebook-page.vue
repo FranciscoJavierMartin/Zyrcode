@@ -13,11 +13,21 @@
     <template v-else>
       <div class="mx-auto flex max-w-6xl flex-col gap-10">
         <div v-for="i of [1, 2, 3]" :key="i">
-          <div class="mio grid gap-5">
-            <Skeleton class="h-[40px] rounded-xl" />
-            <Skeleton class="h-[300px] rounded-xl" />
-            <Skeleton class="h-[300px] rounded-xl" />
-            <Skeleton class="h-[40px] rounded-xl" />
+          <div
+            class="grid-layout grid-cols-2 grid-rows-[40px_300px_40px] gap-2.5 lg:grid"
+          >
+            <Skeleton
+              class="grid-area-[toolbar] grid-area-toolbar h-full max-h-[300px] rounded-xl"
+            />
+            <Skeleton
+              class="grid-area-[toolbar] grid-area-editor h-full max-h-[300px] rounded-xl"
+            />
+            <Skeleton
+              class="grid-area-[toolbar] grid-area-preview h-full max-h-[300px] rounded-xl"
+            />
+            <Skeleton
+              class="grid-area-[toolbar] grid-area-console h-full max-h-[300px] rounded-xl"
+            />
           </div>
         </div>
       </div>
@@ -37,27 +47,23 @@ const { cells } = storeToRefs(useCellsStore());
 </script>
 
 <style>
-.mio {
-  display: grid;
-  gap: 10px;
-  grid-template-rows: 40px 300px 40px;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: 'toolbar toolbar' 'code preview' 'console console';
+.grid-layout {
+  grid-template-areas: 'toolbar toolbar' 'editor preview' 'console console';
+}
 
-  > div:nth-child(1) {
-    grid-area: toolbar;
-  }
+.grid-area-toolbar {
+  grid-area: toolbar;
+}
 
-  > div:nth-child(2) {
-    grid-area: code;
-  }
+.grid-area-editor {
+  grid-area: editor;
+}
 
-  > div:nth-child(3) {
-    grid-area: preview;
-  }
+.grid-area-preview {
+  grid-area: preview;
+}
 
-  > div:nth-child(4) {
-    grid-area: console;
-  }
+.grid-area-console {
+  grid-area: console;
 }
 </style>
