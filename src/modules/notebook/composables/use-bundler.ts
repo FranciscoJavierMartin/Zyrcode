@@ -1,12 +1,20 @@
-import { onBeforeMount, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { startService, stopService } from '@/modules/cells/helpers/bundler';
 
 export default function useBundler() {
-  onBeforeMount(async () => {
+  const isServiceLoading = ref<boolean>(true);
+
+  onMounted(async () => {
+    isServiceLoading.value = true;
     await startService();
+    // isServiceLoading.value = false;
   });
 
   onUnmounted(async () => {
     await stopService();
   });
+
+  return {
+    isServiceLoading,
+  };
 }
