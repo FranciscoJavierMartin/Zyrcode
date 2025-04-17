@@ -46,16 +46,14 @@ const outputs = defineModel<OutputPreviewData[]>();
 .info,
 .debug,
 .log {
-  @apply bg-background;
+  @apply bg-background dark:bg-neutral-800;
 }
 
 .error {
-  /* @apply bg-red-800/70; */
-  @apply bg-destructive-foreground/50 text-background;
+  @apply bg-destructive-foreground/50 text-background dark:text-foreground;
 }
 
 .warn {
-  @apply text-background bg-yellow-700/50;
-  /* @apply dark:bg-[#929123]; */
+  @apply text-background dark:text-foreground bg-yellow-700/50;
 }
 </style>
