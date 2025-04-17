@@ -23,7 +23,11 @@
           {{ $t('cancel') }}
         </AlertDialogCancel>
         <AlertDialogAction as-child class="cursor-pointer">
-          <Button variant="destructive" @click="removeCell">
+          <Button
+            variant="destructive"
+            @click="removeCell"
+            class="text-background dark:text-foreground bg-destructive dark:bg-destructive"
+          >
             {{ $t('remove') }}
           </Button>
         </AlertDialogAction>
