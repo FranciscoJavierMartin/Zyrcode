@@ -45,14 +45,18 @@
           <MessageCircleOff class="size-5" />
         </Button>
       </TooltipButton>
-      <IconTextButton
-        v-if="isLargeScreen"
+      <TooltipButton
         :text="$t('notebook.toolbar.splitHorizontal')"
-        class="group"
-        @click="$emit('toggle-direction')"
+        v-if="isLargeScreen"
       >
-        <SplitIcon :is-horizontal="direction === 'horizontal'" />
-      </IconTextButton>
+        <Button
+          variant="hover"
+          class="button-icon group"
+          @click="$emit('toggle-direction')"
+        >
+          <SplitIcon :is-horizontal="direction === 'horizontal'" />
+        </Button>
+      </TooltipButton>
       <IconTextButton
         :disabled="!isCodeAvailable"
         :text="$t('notebook.toolbar.formatCode')"
