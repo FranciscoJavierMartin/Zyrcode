@@ -14,7 +14,7 @@
     <AlertDialogContent @interact-outside="closeAlertDialog">
       <AlertDialogHeader>
         <AlertDialogTitle>{{ $t('notebook.areYouSure') }}</AlertDialogTitle>
-        <AlertDialogDescription>
+        <AlertDialogDescription class="text-foreground dark:text-foreground">
           {{ $t('notebook.actionCannotBeUndo') }}
         </AlertDialogDescription>
       </AlertDialogHeader>
