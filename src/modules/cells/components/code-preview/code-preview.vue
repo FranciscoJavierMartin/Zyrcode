@@ -16,7 +16,10 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, useTemplateRef, watch } from 'vue';
 import { getPreviewHTMLContainer } from '@/modules/cells/helpers/preview-html-container';
-import type { OutputPreviewData } from '@/modules/cells/interfaces/preview';
+import type {
+  LogLevel,
+  OutputPreviewData,
+} from '@/modules/cells/interfaces/preview';
 import { generateRandomID } from '@/modules/common/helpers/random';
 
 const iframe = useTemplateRef<HTMLIFrameElement>('iframe-preview');
@@ -36,7 +39,7 @@ function handleMessage(
     id: string;
     source: string;
     lineNumber: number;
-    method: string;
+    method: LogLevel;
     message: unknown[];
   }>,
 ) {
@@ -50,6 +53,7 @@ function handleMessage(
       response.data.message.map<OutputPreviewData>((message) => ({
         id: generateRandomID(),
         data: message,
+        logLevel: response.data.method,
       })),
     );
   }
