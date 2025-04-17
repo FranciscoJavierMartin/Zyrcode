@@ -7,7 +7,7 @@ export default function useBundler() {
   onMounted(async () => {
     isServiceLoading.value = true;
     await startService();
-    // isServiceLoading.value = false;
+    isServiceLoading.value = false;
   });
 
   onUnmounted(async () => {

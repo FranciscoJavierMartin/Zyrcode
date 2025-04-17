@@ -1,14 +1,13 @@
 <template>
   <div class="mt-13">
     <template v-if="!isServiceLoading">
-      <!-- <CodeCell
+      <CodeCell
         v-for="cell of cells"
         :key="cell.id"
         :id="cell.id"
         :code="cell.content"
         :language="cell.language"
-      /> -->
-      <h1>Notebook page</h1>
+      />
     </template>
     <template v-else>
       <div class="mx-auto flex max-w-6xl flex-col gap-10">
