@@ -50,6 +50,12 @@ const outputs = defineModel<OutputPreviewData[]>();
 }
 
 .error {
-  @apply bg-red-800/70;
+  /* @apply bg-red-800/70; */
+  @apply bg-destructive-foreground/50;
+}
+
+.warn {
+  @apply bg-yellow-700/50;
+  /* @apply dark:bg-[#929123]; */
 }
 </style>
