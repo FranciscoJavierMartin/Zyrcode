@@ -19,39 +19,54 @@
       </Button>
     </div>
     <div class="flex items-center gap-2">
-      <IconTextButton
-        :disabled="!areOutputsAvailable"
+      <TooltipButton
         :text="
           isConsoleOpen
             ? $t('notebook.toolbar.hideConsole')
             : $t('notebook.toolbar.showConsole')
         "
-        @click="isConsoleOpen = !isConsoleOpen"
       >
-        <Terminal class="size-5" />
-      </IconTextButton>
-      <IconTextButton
-        :disabled="!areOutputsAvailable"
-        :text="$t('notebook.toolbar.clearConsole')"
-        @click="$emit('clear-outputs')"
-      >
-        <MessageCircleOff class="size-5" />
-      </IconTextButton>
-      <IconTextButton
-        v-if="isLargeScreen"
+        <Button
+          :disabled="!areOutputsAvailable"
+          variant="hover"
+          class="button-icon"
+          @click="isConsoleOpen = !isConsoleOpen"
+        >
+          <Terminal class="size-5" />
+        </Button>
+      </TooltipButton>
+      <TooltipButton :text="$t('notebook.toolbar.clearConsole')">
+        <Button
+          :disabled="!areOutputsAvailable"
+          variant="hover"
+          class="button-icon"
+          @click="$emit('clear-outputs')"
+        >
+          <MessageCircleOff class="size-5" />
+        </Button>
+      </TooltipButton>
+      <TooltipButton
         :text="$t('notebook.toolbar.splitHorizontal')"
-        class="group"
-        @click="$emit('toggle-direction')"
+        v-if="isLargeScreen"
       >
-        <SplitIcon :is-horizontal="direction === 'horizontal'" />
-      </IconTextButton>
-      <IconTextButton
-        :disabled="!isCodeAvailable"
-        :text="$t('notebook.toolbar.formatCode')"
-        @click="$emit('format')"
-      >
-        <PencilRuler class="size-5" />
-      </IconTextButton>
+        <Button
+          variant="hover"
+          class="button-icon group"
+          @click="$emit('toggle-direction')"
+        >
+          <SplitIcon :is-horizontal="direction === 'horizontal'" />
+        </Button>
+      </TooltipButton>
+      <TooltipButton :text="$t('notebook.toolbar.formatCode')">
+        <Button
+          :disabled="!isCodeAvailable"
+          variant="hover"
+          class="button-icon"
+          @click="$emit('format')"
+        >
+          <PencilRuler class="size-5" />
+        </Button>
+      </TooltipButton>
       <RemoveCellDialog :id />
       <LanguageSelector :language @update:language="updateLanguage" />
     </div>
@@ -73,7 +88,7 @@ import RemoveCellDialog from '@/modules/cells/components/remove-cell-dialog/remo
 import { useCellsStore } from '@/modules/cells/store/cells';
 import type { Language } from '@/modules/cells/interfaces/code';
 import Button from '@/modules/common/components/ui/button/Button.vue';
-import IconTextButton from '@/modules/common/components/ui/icon-text-button/icon-text-button.vue';
+import TooltipButton from '@/modules/common/components/ui/tooltip-button/tooltip-button.vue';
 
 const props = defineProps<{
   id: string;

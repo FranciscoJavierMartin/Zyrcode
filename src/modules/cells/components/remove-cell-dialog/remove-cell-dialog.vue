@@ -1,18 +1,23 @@
 <template>
   <AlertDialog :open="isAlertDialogOpen">
     <AlertDialogTrigger as-child>
-      <IconTextButton
-        :text="$t('notebook.toolbar.removeCell')"
-        class="remove-cell-button group"
-        @click="isAlertDialogOpen = true"
-      >
-        <Trash2 class="size-5" />
-      </IconTextButton>
+      <TooltipButton :text="$t('notebook.toolbar.removeCell')">
+        <Button
+          variant="hover"
+          class="button-icon group remove-cell-button"
+          @click="isAlertDialogOpen = true"
+        >
+          <Trash2 class="size-5" />
+        </Button>
+      </TooltipButton>
     </AlertDialogTrigger>
-    <AlertDialogContent @interact-outside="closeAlertDialog">
+    <AlertDialogContent
+      @interact-outside="closeAlertDialog"
+      @escape-key-down="closeAlertDialog"
+    >
       <AlertDialogHeader>
         <AlertDialogTitle>{{ $t('notebook.areYouSure') }}</AlertDialogTitle>
-        <AlertDialogDescription>
+        <AlertDialogDescription class="text-foreground dark:text-foreground">
           {{ $t('notebook.actionCannotBeUndo') }}
         </AlertDialogDescription>
       </AlertDialogHeader>
@@ -21,7 +26,11 @@
           {{ $t('cancel') }}
         </AlertDialogCancel>
         <AlertDialogAction as-child class="cursor-pointer">
-          <Button variant="destructive" @click="removeCell">
+          <Button
+            variant="destructive"
+            @click="removeCell"
+            class="text-background dark:text-foreground bg-destructive dark:bg-destructive"
+          >
             {{ $t('remove') }}
           </Button>
         </AlertDialogAction>
@@ -46,7 +55,7 @@ import {
 import { Button } from '@/modules/common/components/ui/button';
 import { Trash2 } from 'lucide-vue-next';
 import { useCellsStore } from '@/modules/cells/store/cells';
-import IconTextButton from '@/modules/common/components/ui/icon-text-button/icon-text-button.vue';
+import TooltipButton from '@/modules/common/components/ui/tooltip-button/tooltip-button.vue';
 
 const isAlertDialogOpen = ref<boolean>(false);
 const props = defineProps<{ id: string }>();
@@ -66,7 +75,7 @@ function closeAlertDialog(): void {
 
 .remove-cell-button {
   svg {
-    @apply dark:text-foreground dark:hover:text-background hover:text-foreground group-hover:text-background text-red-500;
+    @apply group-hover:text-background dark:group-hover:text-background dark:text-foreground text-red-500;
   }
 }
 </style>
