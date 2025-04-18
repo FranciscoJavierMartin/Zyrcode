@@ -1,7 +1,13 @@
 <template>
   <FormField v-slot="{ componentField }" name="model">
-    <FormItem>
-      <FormLabel>{{ label }}</FormLabel>
+    <FormItem
+      class="focus-within:border-muted-foreground border-l-2 py-0.5 pl-1 text-sm"
+    >
+      <div class="flex gap-1">
+        <span class="font-semibold">{{ sectionName }}:</span>
+        <FormLabel class="font-bold">{{ label }}</FormLabel>
+      </div>
+      <FormDescription class="text-xs"> {{ description }} </FormDescription>
       <Select v-bind="componentField" :id="name">
         <FormControl>
           <SelectTrigger>
@@ -20,7 +26,6 @@
           </SelectGroup>
         </SelectContent>
       </Select>
-      <FormDescription> {{ description }} </FormDescription>
     </FormItem>
   </FormField>
 </template>
