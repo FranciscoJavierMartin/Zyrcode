@@ -1,3 +1,7 @@
-import type { editorSchema } from '@/modules/settings/helpers/schemas';
+import type {
+  aiSchema,
+  editorSchema,
+} from '@/modules/settings/helpers/schemas';
 
-export type FormFields = keyof typeof editorSchema.shape;
+export type FormEditorFields = keyof typeof editorSchema.shape;
+export type FormAIFields = keyof typeof aiSchema.shape;

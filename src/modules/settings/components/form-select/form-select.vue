@@ -1,21 +1,26 @@
 <template>
   <FormField v-slot="{ componentField }" name="model">
     <FormItem>
-      <FormLabel>Email</FormLabel>
-      <Select v-bind="componentField" id="model">
+      <FormLabel>{{ label }}</FormLabel>
+      <Select v-bind="componentField" :id="name">
         <FormControl>
           <SelectTrigger>
-            <SelectValue placeholder="Select model" />
+            <SelectValue :placeholder="placeholder" />
           </SelectTrigger>
         </FormControl>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value="hello"> Hello </SelectItem>
-            <SelectItem value="world"> World </SelectItem>
+            <SelectItem
+              v-for="option of options"
+              :key="option.value"
+              :value="option.value"
+            >
+              {{ option.label }}
+            </SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
-      <FormDescription> Select your model. </FormDescription>
+      <FormDescription> {{ description }} </FormDescription>
     </FormItem>
   </FormField>
 </template>
@@ -36,4 +41,15 @@ import {
   SelectGroup,
   SelectItem,
 } from '@/modules/common/components/ui/select';
+import type { FormAIFields } from '@/modules/settings/interfaces/form';
+
+defineProps<{
+  name: string;
+  label: string;
+  description: string;
+  sectionName: string;
+  placeholder: string;
+  options: { value: string; label: string }[];
+  isFieldDirty: <TPath extends FormAIFields>(path: TPath) => boolean;
+}>();
 </script>

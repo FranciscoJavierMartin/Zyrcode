@@ -38,7 +38,7 @@ import {
   FormMessage,
 } from '@/modules/common/components/ui/form';
 import { Input } from '@/modules/common/components/ui/input';
-import type { FormFields } from '@/modules/settings/interfaces/form';
+import type { FormEditorFields } from '@/modules/settings/interfaces/form';
 
 defineProps<{
   name: string;
@@ -47,6 +47,6 @@ defineProps<{
   description: string;
   sectionName: string;
   placeholder: string;
-  isFieldDirty: <TPath extends FormFields>(path: TPath) => boolean;
+  isFieldDirty: <TPath extends FormEditorFields>(path: TPath) => boolean;
 }>();
 </script>

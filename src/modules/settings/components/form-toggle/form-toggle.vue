@@ -30,13 +30,13 @@ import {
   FormDescription,
   FormMessage,
 } from '@/modules/common/components/ui/form';
-import type { FormFields } from '@/modules/settings/interfaces/form';
+import type { FormEditorFields } from '@/modules/settings/interfaces/form';
 
 defineProps<{
   name: string;
   label: string;
   description: string;
   sectionName: string;
-  isFieldDirty: <TPath extends FormFields>(path: TPath) => boolean;
+  isFieldDirty: <TPath extends FormEditorFields>(path: TPath) => boolean;
 }>();
 </script>

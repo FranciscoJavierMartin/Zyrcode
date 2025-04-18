@@ -6,7 +6,7 @@
         <section>
           <h4>Editor</h4>
           <FormInput
-            :is-field-dirty="isFieldDirty"
+            :is-field-dirty="isFieldDirtyEditor"
             name="fontSize"
             type="number"
             label="Font Size"
@@ -15,7 +15,7 @@
             description="Controls the font size in pixels."
           />
           <FormInput
-            :is-field-dirty="isFieldDirty"
+            :is-field-dirty="isFieldDirtyEditor"
             name="tabSize"
             type="number"
             label="Tab Size"
@@ -24,7 +24,7 @@
             description="The number of spaces a tab is equal to."
           />
           <FormToggle
-            :is-field-dirty="isFieldDirty"
+            :is-field-dirty="isFieldDirtyEditor"
             name="showLineNumbers"
             label="Show line numbers"
             section-name="Editor"
@@ -40,7 +40,18 @@
       <form class="w-2/3 space-y-6" @submit.prevent="onSubmitAI">
         <section>
           <h4>IA Provider</h4>
-          <FormSelect />
+          <FormSelect
+            :is-field-dirty="isFieldDirtyAI"
+            name="autoCompleteModel"
+            label="IA model for code completion"
+            section-name="AI"
+            placeholder="Select AI model"
+            description="Select the model for code completion."
+            :options="[
+              { value: 'qwen2.5-coder:0.5b', label: 'qwen2.5-coder:0.5b' },
+              { value: 'qwen2.5-coder:1.5b', label: 'qwen2.5-coder:1.5b' },
+            ]"
+          />
         </section>
       </form>
     </main>
@@ -59,15 +70,20 @@ import { aiSchema, editorSchema } from '@/modules/settings/helpers/schemas';
 const formEditorSchema = toTypedSchema(editorSchema);
 const formAISchema = toTypedSchema(aiSchema);
 
-const { isFieldDirty, handleSubmit } = useForm({
-  validationSchema: formEditorSchema,
+const { isFieldDirty: isFieldDirtyEditor, handleSubmit: handleSubmitEditor } =
+  useForm({
+    validationSchema: formEditorSchema,
+  });
+
+const { isFieldDirty: isFieldDirtyAI, handleSubmit: handleSubmitAI } = useForm({
+  validationSchema: formAISchema,
 });
 
-const onSubmitEditor = handleSubmit((values: GenericObject) => {
+const onSubmitEditor = handleSubmitEditor((values: GenericObject) => {
   console.log('Form submitted:', values);
 });
 
-const onSubmitAI = handleSubmit((values: GenericObject) => {
+const onSubmitAI = handleSubmitAI((values: GenericObject) => {
   console.log('Form submitted:', values);
 });
 </script>
