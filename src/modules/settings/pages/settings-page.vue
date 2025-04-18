@@ -8,7 +8,9 @@
           name="fontSize"
           :validate-on-blur="!isFieldDirty"
         >
-          <FormItem class="text-sm">
+          <FormItem
+            class="border-muted-foreground border-l-2 py-0.5 pl-1 text-sm"
+          >
             <div class="flex gap-1">
               <span class="font-semibold">Editor:</span>
               <FormLabel class="font-bold">Font Size</FormLabel>
