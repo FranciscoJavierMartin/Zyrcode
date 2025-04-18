@@ -37,6 +37,15 @@
           />
           <FormInput
             :is-field-dirty="isFieldDirtyEditor"
+            name="ruler"
+            type="number"
+            label="Ruler"
+            placeholder="Ruler"
+            section-name="Editor"
+            description="Render vertical ruler after a certain number of monospace characters."
+          />
+          <FormInput
+            :is-field-dirty="isFieldDirtyEditor"
             name="fontSize"
             type="number"
             label="Font Size"

@@ -5,8 +5,8 @@ export const commonSchema = z.object({
 });
 
 export const editorSchema = z.object({
-  fontSize: z.number().min(6).max(30),
-  tabSize: z.number().min(2).max(30),
+  fontSize: z.number().int().min(6).max(30),
+  tabSize: z.number().int().min(2).max(30),
   showLineNumbers: z.boolean(),
   language: z.string().min(1),
   semi: z.boolean(),
@@ -14,7 +14,7 @@ export const editorSchema = z.object({
   jsxSingleQuote: z.boolean(),
   useTabs: z.boolean(),
   printWidth: z.number().int().min(70),
-  // ruler
+  ruler: z.number().int().min(70).max(256),
 });
 
 export const aiSchema = z.object({
