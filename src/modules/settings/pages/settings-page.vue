@@ -10,8 +10,8 @@
         >
           <FormItem class="text-sm">
             <div class="flex gap-1">
-              <span>Editor:</span>
-              <FormLabel>Font Size</FormLabel>
+              <span class="font-semibold">Editor:</span>
+              <FormLabel class="font-bold">Font Size</FormLabel>
             </div>
             <FormDescription class="text-xs">
               Controls the font size in pixels.
@@ -21,6 +21,7 @@
                 id="fontSize"
                 type="number"
                 placeholder="Font size"
+                class="h-7 w-max text-xs"
                 v-bind="componentField"
               />
             </FormControl>
