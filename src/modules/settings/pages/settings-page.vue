@@ -3,33 +3,36 @@
     <nav></nav>
     <main>
       <form class="w-2/3 space-y-6" @submit="onSubmit">
-        <FormField
-          v-slot="{ componentField }"
-          name="fontSize"
-          :validate-on-blur="!isFieldDirty"
-        >
-          <FormItem
-            class="focus-within:border-muted-foreground border-l-2 py-0.5 pl-1 text-sm"
+        <section>
+          <h4>Editor</h4>
+          <FormField
+            v-slot="{ componentField }"
+            name="fontSize"
+            :validate-on-blur="!isFieldDirty"
           >
-            <div class="flex gap-1">
-              <span class="font-semibold">Editor:</span>
-              <FormLabel class="font-bold">Font Size</FormLabel>
-            </div>
-            <FormDescription class="text-xs">
-              Controls the font size in pixels.
-            </FormDescription>
-            <FormControl>
-              <Input
-                id="fontSize"
-                type="number"
-                placeholder="Font size"
-                class="h-7 w-max text-xs"
-                v-bind="componentField"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        </FormField>
+            <FormItem
+              class="focus-within:border-muted-foreground border-l-2 py-0.5 pl-1 text-sm"
+            >
+              <div class="flex gap-1">
+                <span class="font-semibold">Editor:</span>
+                <FormLabel class="font-bold">Font Size</FormLabel>
+              </div>
+              <FormDescription class="text-xs">
+                Controls the font size in pixels.
+              </FormDescription>
+              <FormControl>
+                <Input
+                  id="fontSize"
+                  type="number"
+                  placeholder="Font size"
+                  class="h-7 w-max text-xs"
+                  v-bind="componentField"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+        </section>
         <Button type="submit"> Submit </Button>
       </form>
     </main>
