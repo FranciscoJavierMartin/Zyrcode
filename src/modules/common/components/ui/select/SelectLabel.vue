@@ -1,3 +1,12 @@
+<template>
+  <SelectLabel
+    data-slot="select-label"
+    :class="cn('px-2 py-1.5 text-sm font-medium', props.class)"
+  >
+    <slot />
+  </SelectLabel>
+</template>
+
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
 import { cn } from '@/modules/common/helpers/utils';
@@ -7,12 +16,3 @@ const props = defineProps<
   SelectLabelProps & { class?: HTMLAttributes['class'] }
 >();
 </script>
-
-<template>
-  <SelectLabel
-    data-slot="select-label"
-    :class="cn('px-2 py-1.5 text-sm font-medium', props.class)"
-  >
-    <slot />
-  </SelectLabel>
-</template>

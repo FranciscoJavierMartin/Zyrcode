@@ -1,3 +1,17 @@
+<template>
+  <SelectScrollUpButton
+    data-slot="select-scroll-up-button"
+    v-bind="forwardedProps"
+    :class="
+      cn('flex cursor-default items-center justify-center py-1', props.class)
+    "
+  >
+    <slot>
+      <ChevronUp class="size-4" />
+    </slot>
+  </SelectScrollUpButton>
+</template>
+
 <script setup lang="ts">
 import { cn } from '@/modules/common/helpers/utils';
 import { ChevronUp } from 'lucide-vue-next';
@@ -13,6 +27,7 @@ const props = defineProps<
 >();
 
 const delegatedProps = computed(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { class: _, ...delegated } = props;
 
   return delegated;
@@ -20,17 +35,3 @@ const delegatedProps = computed(() => {
 
 const forwardedProps = useForwardProps(delegatedProps);
 </script>
-
-<template>
-  <SelectScrollUpButton
-    data-slot="select-scroll-up-button"
-    v-bind="forwardedProps"
-    :class="
-      cn('flex cursor-default items-center justify-center py-1', props.class)
-    "
-  >
-    <slot>
-      <ChevronUp class="size-4" />
-    </slot>
-  </SelectScrollUpButton>
-</template>

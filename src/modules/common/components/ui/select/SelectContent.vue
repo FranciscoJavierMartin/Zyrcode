@@ -1,37 +1,3 @@
-<script setup lang="ts">
-import { cn } from '@/modules/common/helpers/utils';
-import {
-  SelectContent,
-  type SelectContentEmits,
-  type SelectContentProps,
-  SelectPortal,
-  SelectViewport,
-  useForwardPropsEmits,
-} from 'reka-ui';
-import { computed, type HTMLAttributes } from 'vue';
-import { SelectScrollDownButton, SelectScrollUpButton } from '.';
-
-defineOptions({
-  inheritAttrs: false,
-});
-
-const props = withDefaults(
-  defineProps<SelectContentProps & { class?: HTMLAttributes['class'] }>(),
-  {
-    position: 'popper',
-  },
-);
-const emits = defineEmits<SelectContentEmits>();
-
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
-
-  return delegated;
-});
-
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
-</script>
-
 <template>
   <SelectPortal>
     <SelectContent
@@ -62,3 +28,38 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     </SelectContent>
   </SelectPortal>
 </template>
+
+<script setup lang="ts">
+import { cn } from '@/modules/common/helpers/utils';
+import {
+  SelectContent,
+  type SelectContentEmits,
+  type SelectContentProps,
+  SelectPortal,
+  SelectViewport,
+  useForwardPropsEmits,
+} from 'reka-ui';
+import { computed, type HTMLAttributes } from 'vue';
+import { SelectScrollDownButton, SelectScrollUpButton } from '.';
+
+defineOptions({
+  inheritAttrs: false,
+});
+
+const props = withDefaults(
+  defineProps<SelectContentProps & { class?: HTMLAttributes['class'] }>(),
+  {
+    position: 'popper',
+  },
+);
+const emits = defineEmits<SelectContentEmits>();
+
+const delegatedProps = computed(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { class: _, ...delegated } = props;
+
+  return delegated;
+});
+
+const forwarded = useForwardPropsEmits(delegatedProps, emits);
+</script>
