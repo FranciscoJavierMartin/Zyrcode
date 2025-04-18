@@ -67,6 +67,20 @@
             section-name="Editor"
             description="Whether to use semicolons at the end of every line."
           />
+          <FormToggle
+            :is-field-dirty="isFieldDirtyEditor"
+            name="singleQuote"
+            label="Single quote"
+            section-name="Editor"
+            description="Use single instead of double quotes."
+          />
+          <FormToggle
+            :is-field-dirty="isFieldDirtyEditor"
+            name="jsxSingleQuote"
+            label="Jsx single quote"
+            section-name="Editor"
+            description="Use single instead of double quotes in JSX."
+          />
         </section>
         <section>
           <h4>Packages Cache</h4>

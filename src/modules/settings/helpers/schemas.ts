@@ -10,7 +10,9 @@ export const editorSchema = z.object({
   showLineNumbers: z.boolean(),
   language: z.string().min(1),
   semi: z.boolean(),
-  // singleQuote: true,
+  singleQuote: z.boolean(),
+  jsxSingleQuote: z.boolean(),
+  // use tabs or spaces for indentation
   // trailingComma: 'all',
   // printWidth: 80,
   // ruler
