@@ -20,6 +20,7 @@
   </FormField>
 </template>
 
+<!-- Add generic type -->
 <script setup lang="ts">
 import Checkbox from '@/modules/common/components/ui/checkbox/Checkbox.vue';
 import {

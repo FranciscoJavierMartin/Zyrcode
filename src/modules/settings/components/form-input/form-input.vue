@@ -28,6 +28,7 @@
   </FormField>
 </template>
 
+<!-- Add generic type -->
 <script setup lang="ts">
 import {
   FormField,

@@ -30,6 +30,19 @@
             section-name="Editor"
             description="The number of spaces a tab is equal to."
           />
+          <FormSelect
+            :is-field-dirty="isFieldDirtyEditor"
+            name="language"
+            label="Change editor language"
+            section-name="Editor"
+            placeholder="Set default language"
+            description="Select default language."
+            :options="[
+              { value: 'javascript', label: 'JavaScript' },
+              { value: 'typescript', label: 'TypeScript' },
+              { value: 'markdown', label: 'Markdown' },
+            ]"
+          />
         </section>
         <section>
           <h4>Packages Cache</h4>

@@ -31,7 +31,16 @@
   </FormField>
 </template>
 
-<script setup lang="ts">
+<!-- TODO: Add better generic types for the form fields  -->
+<script
+  setup
+  lang="ts"
+  generic="
+    T extends
+      | (<TPath extends FormEditorFields>(path: TPath) => boolean)
+      | (<TPath extends FormAIFields>(path: TPath) => boolean)
+  "
+>
 import {
   FormItem,
   FormField,
@@ -47,7 +56,7 @@ import {
   SelectGroup,
   SelectItem,
 } from '@/modules/common/components/ui/select';
-import type { FormAIFields } from '@/modules/settings/interfaces/form';
+import type { FormAIFields, FormEditorFields } from '../../interfaces/form';
 
 defineProps<{
   name: string;
@@ -56,6 +65,6 @@ defineProps<{
   sectionName: string;
   placeholder: string;
   options: { value: string; label: string }[];
-  isFieldDirty: <TPath extends FormAIFields>(path: TPath) => boolean;
+  isFieldDirty: T;
 }>();
 </script>

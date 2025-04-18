@@ -4,6 +4,7 @@ export const editorSchema = z.object({
   fontSize: z.number().min(6).max(30),
   tabSize: z.number().min(2).max(30),
   showLineNumbers: z.boolean(),
+  language: z.string().min(1),
   // Change app language (human)
   // Set default language (code)
   // semi: true,
