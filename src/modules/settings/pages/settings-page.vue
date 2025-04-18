@@ -42,6 +42,15 @@
           <h4>IA Provider</h4>
           <FormSelect
             :is-field-dirty="isFieldDirtyAI"
+            name="aiProvider"
+            label="IA provider"
+            section-name="AI"
+            placeholder="Select AI provider"
+            description="Select AI provider"
+            :options="[{ value: 'ollama', label: 'Ollama' }]"
+          />
+          <FormSelect
+            :is-field-dirty="isFieldDirtyAI"
             name="autoCompleteModel"
             label="IA model for code completion"
             section-name="AI"

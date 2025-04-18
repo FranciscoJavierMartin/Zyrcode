@@ -1,5 +1,5 @@
 <template>
-  <FormField v-slot="{ componentField }" name="model">
+  <FormField v-slot="{ componentField }" :name>
     <FormItem
       class="focus-within:border-muted-foreground border-l-2 py-0.5 pl-1 text-sm"
     >
@@ -21,6 +21,7 @@
               :key="option.value"
               :value="option.value"
             >
+              <!-- TODO: Add icon -->
               {{ option.label }}
             </SelectItem>
           </SelectGroup>
