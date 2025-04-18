@@ -5,33 +5,24 @@
       <form class="w-2/3 space-y-6" @submit="onSubmit">
         <section>
           <h4>Editor</h4>
-          <FormField
-            v-slot="{ componentField }"
+          <FormInput
+            :is-field-dirty="isFieldDirty"
             name="fontSize"
-            :validate-on-blur="!isFieldDirty"
-          >
-            <FormItem
-              class="focus-within:border-muted-foreground border-l-2 py-0.5 pl-1 text-sm"
-            >
-              <div class="flex gap-1">
-                <span class="font-semibold">Editor:</span>
-                <FormLabel class="font-bold">Font Size</FormLabel>
-              </div>
-              <FormDescription class="text-xs">
-                Controls the font size in pixels.
-              </FormDescription>
-              <FormControl>
-                <Input
-                  id="fontSize"
-                  type="number"
-                  placeholder="Font size"
-                  class="h-7 w-max text-xs"
-                  v-bind="componentField"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+            type="number"
+            label="Font Size"
+            placeholder="Font size"
+            section-name="Editor"
+            description="Controls the font size in pixels."
+          />
+          <FormInput
+            :is-field-dirty="isFieldDirty"
+            name="tabSize"
+            type="number"
+            label="Tab Size"
+            placeholder="Tab size"
+            section-name="Editor"
+            description="The number of spaces a tab is equal to."
+          />
         </section>
         <Button type="submit"> Submit </Button>
       </form>
@@ -43,20 +34,13 @@
 import { toTypedSchema } from '@vee-validate/zod';
 import * as z from 'zod';
 import { type GenericObject, useForm } from 'vee-validate';
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage,
-} from '@/modules/common/components/ui/form';
-import { Input } from '@/modules/common/components/ui/input';
 import { Button } from '@/modules/common/components/ui/button';
+import FormInput from '@/modules/settings/components/form-input/form-input.vue';
 
 const formSchema = toTypedSchema(
   z.object({
     fontSize: z.number().min(6).max(30),
+    tabSize: z.number().min(2).max(30),
   }),
 );
 
