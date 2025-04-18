@@ -2,12 +2,12 @@
   <div class="mt-13">
     <nav></nav>
     <main>
-      <!-- <form class="w-2/3 space-y-6" @submit.prevent="onSubmitCommon">
+      <form class="w-2/3 space-y-6" @submit.prevent="onSubmitCommon">
         <section>
           <h4>Common settings</h4>
           <FormSelect
             :is-field-dirty="isFieldDirtyCommon"
-            name="language"
+            name="appLanguage"
             label="Change app language"
             section-name="Langugage"
             placeholder="Set app language"
@@ -17,9 +17,10 @@
               { value: 'spanish', label: 'Spanish' },
             ]"
           />
+          <button type="submit">Submit</button>
         </section>
-      </form> -->
-      <form class="w-2/3 space-y-6" @submit="onSubmitEditor">
+      </form>
+      <form class="w-2/3 space-y-6" @submit.prevent="onSubmitEditor">
         <section>
           <h4>Editor</h4>
           <FormSelect
@@ -111,7 +112,7 @@
           <h4>Packages Cache</h4>
           <Button>Clear package cache</Button>
         </section>
-        <Button type="submit"> Submit </Button>
+        <!-- <Button type="submit"> Submit </Button> -->
       </form>
       <!--<form class="w-2/3 space-y-6" @submit.prevent="onSubmitAI">
         <section>
@@ -157,19 +158,23 @@ import {
 } from '@/modules/settings/helpers/schemas';
 import { watch } from 'vue';
 
-// const formCommonSchema = toTypedSchema(commonSchema);
+const formCommonSchema = toTypedSchema(commonSchema);
 const formEditorSchema = toTypedSchema(editorSchema);
 // const formAISchema = toTypedSchema(aiSchema);
 
-// const { isFieldDirty: isFieldDirtyCommon, handleSubmit: handleSubmitCommon } =
-//   useForm({
-//     validationSchema: formCommonSchema,
-//   });
+const {
+  isFieldDirty: isFieldDirtyCommon,
+  handleSubmit: handleSubmitCommon,
+  values: commonValues,
+} = useForm({
+  name: 'commonForm',
+  validationSchema: formCommonSchema,
+});
 
 const {
   isFieldDirty: isFieldDirtyEditor,
   handleSubmit: handleSubmitEditor,
-  values,
+  values: editorValues,
 } = useForm({
   name: 'editorForm',
   validationSchema: formEditorSchema,
@@ -179,9 +184,9 @@ const {
 //   validationSchema: formAISchema,
 // });
 
-// const onSubmitCommon = handleSubmitCommon((values: GenericObject) => {
-//   console.log('Form submitted:', values);
-// });
+const onSubmitCommon = handleSubmitCommon((values: GenericObject) => {
+  console.log('Form submitted:', values);
+});
 
 const onSubmitEditor = handleSubmitEditor((values: GenericObject) => {
   console.log('Form submitted:', values);
@@ -192,7 +197,15 @@ const onSubmitEditor = handleSubmitEditor((values: GenericObject) => {
 // });
 
 watch(
-  () => values,
+  () => commonValues,
+  (newValue) => {
+    console.log(newValue.appLanguage);
+  },
+  { deep: true },
+);
+
+watch(
+  editorValues,
   (newValues) => {
     console.log(newValues);
   },

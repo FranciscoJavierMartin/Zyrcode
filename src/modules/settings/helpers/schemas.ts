@@ -1,7 +1,7 @@
 import * as z from 'zod';
 
 export const commonSchema = z.object({
-  language: z.string().min(2).max(50),
+  appLanguage: z.string().min(2).max(50),
 });
 
 export const editorSchema = z.object({
