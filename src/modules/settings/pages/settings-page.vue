@@ -1,7 +1,7 @@
 <template>
-  <div class="mt-14 flex">
+  <div class="mt-13 flex">
     <nav>
-      <ul class="sticky top-14">
+      <ul class="sticky top-13">
         <li><a href="#section-1">Section 1</a></li>
         <li><a href="#section-2">Section 2</a></li>
         <li><a href="#section-3">Section 3</a></li>
