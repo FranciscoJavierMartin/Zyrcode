@@ -136,6 +136,7 @@ onMounted(() => {
         language: props.language,
         minimap: { enabled: false },
         automaticLayout: true,
+        // rulers: [80],
       })
       .getId();
 
