@@ -26,9 +26,7 @@
           <FormToggle
             :is-field-dirty="isFieldDirty"
             name="showLineNumbers"
-            type="number"
             label="Show line numbers"
-            placeholder="Tab size"
             section-name="Editor"
             description="The number of spaces a tab is equal to."
           />

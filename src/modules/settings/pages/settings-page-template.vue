@@ -103,6 +103,7 @@ function handleScroll() {
   const fromTop = window.scrollY;
 
   mainNavLinks.value?.forEach((link) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const section = document.querySelector((link as any).hash);
 
     if (
