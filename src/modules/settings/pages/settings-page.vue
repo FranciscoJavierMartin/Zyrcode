@@ -93,7 +93,40 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+
+const mainNavLinks = ref<NodeListOf<Element>>();
+const mainSections = ref<NodeListOf<Element>>();
+
+function handleScroll() {
+  const fromTop = window.scrollY;
+
+  mainNavLinks.value?.forEach((link) => {
+    const section = document.querySelector((link as any).hash);
+
+    if (
+      section.offsetTop <= fromTop &&
+      section.offsetTop + section.offsetHeight > fromTop
+    ) {
+      link.classList.add('current');
+    } else {
+      link.classList.remove('current');
+    }
+  });
+}
+
+onMounted(() => {
+  mainNavLinks.value = document.querySelectorAll('nav ul li a');
+  mainSections.value = document.querySelectorAll('main section');
+
+  window.addEventListener('scroll', handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+</script>
 
 <style scoped>
 nav {
