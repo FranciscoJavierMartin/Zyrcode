@@ -2,6 +2,23 @@
   <div class="mt-13">
     <nav></nav>
     <main>
+      <form class="w-2/3 space-y-6" @submit.prevent="onSubmitCommon">
+        <section>
+          <h4>Common settings</h4>
+          <FormSelect
+            :is-field-dirty="isFieldDirtyCommon"
+            name="language"
+            label="Change app language"
+            section-name="Langugage"
+            placeholder="Set app language"
+            description="Select app language."
+            :options="[
+              { value: 'english', label: 'English' },
+              { value: 'spanish', label: 'Spanish' },
+            ]"
+          />
+        </section>
+      </form>
       <form class="w-2/3 space-y-6" @submit.prevent="onSubmitEditor">
         <section>
           <h4>Editor</h4>
@@ -87,10 +104,20 @@ import { Button } from '@/modules/common/components/ui/button';
 import FormInput from '@/modules/settings/components/form-input/form-input.vue';
 import FormToggle from '@/modules/settings/components/form-toggle/form-toggle.vue';
 import FormSelect from '@/modules/settings/components/form-select/form-select.vue';
-import { aiSchema, editorSchema } from '@/modules/settings/helpers/schemas';
+import {
+  aiSchema,
+  commonSchema,
+  editorSchema,
+} from '@/modules/settings/helpers/schemas';
 
+const formCommonSchema = toTypedSchema(commonSchema);
 const formEditorSchema = toTypedSchema(editorSchema);
 const formAISchema = toTypedSchema(aiSchema);
+
+const { isFieldDirty: isFieldDirtyCommon, handleSubmit: handleSubmitCommon } =
+  useForm({
+    validationSchema: formCommonSchema,
+  });
 
 const { isFieldDirty: isFieldDirtyEditor, handleSubmit: handleSubmitEditor } =
   useForm({
@@ -99,6 +126,10 @@ const { isFieldDirty: isFieldDirtyEditor, handleSubmit: handleSubmitEditor } =
 
 const { isFieldDirty: isFieldDirtyAI, handleSubmit: handleSubmitAI } = useForm({
   validationSchema: formAISchema,
+});
+
+const onSubmitCommon = handleSubmitCommon((values: GenericObject) => {
+  console.log('Form submitted:', values);
 });
 
 const onSubmitEditor = handleSubmitEditor((values: GenericObject) => {

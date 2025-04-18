@@ -39,6 +39,7 @@
     T extends
       | (<TPath extends FormEditorFields>(path: TPath) => boolean)
       | (<TPath extends FormAIFields>(path: TPath) => boolean)
+      | (<TPath extends FormCommonFields>(path: TPath) => boolean)
   "
 >
 import {
@@ -56,7 +57,11 @@ import {
   SelectGroup,
   SelectItem,
 } from '@/modules/common/components/ui/select';
-import type { FormAIFields, FormEditorFields } from '../../interfaces/form';
+import type {
+  FormAIFields,
+  FormCommonFields,
+  FormEditorFields,
+} from '@/modules/settings/interfaces/form';
 
 defineProps<{
   name: string;

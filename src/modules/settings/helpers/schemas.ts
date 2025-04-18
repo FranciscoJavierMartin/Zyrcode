@@ -1,5 +1,9 @@
 import * as z from 'zod';
 
+export const commonSchema = z.object({
+  language: z.string().min(2).max(50),
+});
+
 export const editorSchema = z.object({
   fontSize: z.number().min(6).max(30),
   tabSize: z.number().min(2).max(30),
