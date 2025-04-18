@@ -81,6 +81,13 @@
             section-name="Editor"
             description="Use single instead of double quotes in JSX."
           />
+          <FormToggle
+            :is-field-dirty="isFieldDirtyEditor"
+            name="useTabs"
+            label="Use tabs"
+            section-name="Editor"
+            description="Indent lines with tabs"
+          />
         </section>
         <section>
           <h4>Packages Cache</h4>

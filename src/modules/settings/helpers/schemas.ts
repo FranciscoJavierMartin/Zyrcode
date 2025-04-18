@@ -12,7 +12,7 @@ export const editorSchema = z.object({
   semi: z.boolean(),
   singleQuote: z.boolean(),
   jsxSingleQuote: z.boolean(),
-  // use tabs or spaces for indentation
+  useTabs: z.boolean(),
   // trailingComma: 'all',
   // printWidth: 80,
   // ruler
