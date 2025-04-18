@@ -1,14 +1,15 @@
 <template>
   <FormField v-slot="{ value, handleChange }" type="checkbox" :name>
-    <FormItem
-      class="flex items-start space-y-0 gap-x-3 rounded-md border p-4 shadow"
-    >
-      <FormControl>
-        <Checkbox :model-value="value" @update:model-value="handleChange" />
-      </FormControl>
-      <div class="space-y-1 leading-none">
-        <FormLabel>{{ label }}</FormLabel>
-        <FormDescription>
+    <FormItem class="flex flex-col py-0.5 pl-1 text-sm">
+      <div class="flex gap-x-1">
+        <span class="font-semibold">{{ sectionName }}:</span>
+        <FormLabel class="font-bold">{{ label }}</FormLabel>
+      </div>
+      <div class="flex items-center gap-x-2">
+        <FormControl>
+          <Checkbox :model-value="value" @update:model-value="handleChange" />
+        </FormControl>
+        <FormDescription class="text-xs">
           {{ description }}
         </FormDescription>
         <FormMessage />
