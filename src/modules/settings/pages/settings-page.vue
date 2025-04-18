@@ -22,6 +22,19 @@
       <form class="w-2/3 space-y-6" @submit.prevent="onSubmitEditor">
         <section>
           <h4>Editor</h4>
+          <FormSelect
+            :is-field-dirty="isFieldDirtyEditor"
+            name="language"
+            label="Change editor language"
+            section-name="Editor"
+            placeholder="Set default language"
+            description="Select default language."
+            :options="[
+              { value: 'javascript', label: 'JavaScript' },
+              { value: 'typescript', label: 'TypeScript' },
+              { value: 'markdown', label: 'Markdown' },
+            ]"
+          />
           <FormInput
             :is-field-dirty="isFieldDirtyEditor"
             name="fontSize"
@@ -47,18 +60,12 @@
             section-name="Editor"
             description="The number of spaces a tab is equal to."
           />
-          <FormSelect
+          <FormToggle
             :is-field-dirty="isFieldDirtyEditor"
-            name="language"
-            label="Change editor language"
+            name="semi"
+            label="Semi"
             section-name="Editor"
-            placeholder="Set default language"
-            description="Select default language."
-            :options="[
-              { value: 'javascript', label: 'JavaScript' },
-              { value: 'typescript', label: 'TypeScript' },
-              { value: 'markdown', label: 'Markdown' },
-            ]"
+            description="Whether to use semicolons at the end of every line."
           />
         </section>
         <section>

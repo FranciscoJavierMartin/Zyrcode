@@ -9,9 +9,7 @@ export const editorSchema = z.object({
   tabSize: z.number().min(2).max(30),
   showLineNumbers: z.boolean(),
   language: z.string().min(1),
-  // Change app language (human)
-  // Set default language (code)
-  // semi: true,
+  semi: z.boolean(),
   // singleQuote: true,
   // trailingComma: 'all',
   // printWidth: 80,
