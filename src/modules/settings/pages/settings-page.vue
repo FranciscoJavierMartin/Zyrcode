@@ -2,24 +2,7 @@
   <div class="mt-13">
     <nav></nav>
     <main>
-      <form class="w-2/3 space-y-6" @submit.prevent="onSubmitCommon">
-        <section>
-          <h4>Common settings</h4>
-          <FormSelect
-            :is-field-dirty="isFieldDirtyCommon"
-            name="appLanguage"
-            label="Change app language"
-            section-name="Langugage"
-            placeholder="Set app language"
-            description="Select app language."
-            :options="[
-              { value: 'english', label: 'English' },
-              { value: 'spanish', label: 'Spanish' },
-            ]"
-          />
-          <button type="submit">Submit</button>
-        </section>
-      </form>
+      <CommonSettings />
       <form class="w-2/3 space-y-6" @submit.prevent="onSubmitEditor">
         <section>
           <h4>Editor</h4>
@@ -151,25 +134,12 @@ import { Button } from '@/modules/common/components/ui/button';
 import FormInput from '@/modules/settings/components/form-input/form-input.vue';
 import FormToggle from '@/modules/settings/components/form-toggle/form-toggle.vue';
 import FormSelect from '@/modules/settings/components/form-select/form-select.vue';
-import {
-  aiSchema,
-  commonSchema,
-  editorSchema,
-} from '@/modules/settings/helpers/schemas';
+import { aiSchema, editorSchema } from '@/modules/settings/helpers/schemas';
 import { watch } from 'vue';
+import CommonSettings from '../components/common-settings/common-settings.vue';
 
-const formCommonSchema = toTypedSchema(commonSchema);
 const formEditorSchema = toTypedSchema(editorSchema);
 // const formAISchema = toTypedSchema(aiSchema);
-
-const {
-  isFieldDirty: isFieldDirtyCommon,
-  handleSubmit: handleSubmitCommon,
-  values: commonValues,
-} = useForm({
-  name: 'commonForm',
-  validationSchema: formCommonSchema,
-});
 
 const {
   isFieldDirty: isFieldDirtyEditor,
@@ -184,10 +154,6 @@ const {
 //   validationSchema: formAISchema,
 // });
 
-const onSubmitCommon = handleSubmitCommon((values: GenericObject) => {
-  console.log('Form submitted:', values);
-});
-
 const onSubmitEditor = handleSubmitEditor((values: GenericObject) => {
   console.log('Form submitted:', values);
 });
@@ -195,14 +161,6 @@ const onSubmitEditor = handleSubmitEditor((values: GenericObject) => {
 // const onSubmitAI = handleSubmitAI((values: GenericObject) => {
 //   console.log('Form submitted:', values);
 // });
-
-watch(
-  () => commonValues,
-  (newValue) => {
-    console.log(newValue.appLanguage);
-  },
-  { deep: true },
-);
 
 watch(
   editorValues,
