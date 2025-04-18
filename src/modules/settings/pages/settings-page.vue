@@ -3,170 +3,19 @@
     <nav></nav>
     <main>
       <CommonSettings />
-      <form class="w-2/3 space-y-6" @submit.prevent="onSubmitEditor">
-        <section>
-          <h4>Editor</h4>
-          <FormSelect
-            :is-field-dirty="isFieldDirtyEditor"
-            name="language"
-            label="Change editor language"
-            section-name="Editor"
-            placeholder="Set default language"
-            description="Select default language."
-            :options="[
-              { value: 'javascript', label: 'JavaScript' },
-              { value: 'typescript', label: 'TypeScript' },
-              { value: 'markdown', label: 'Markdown' },
-            ]"
-          />
-          <FormInput
-            :is-field-dirty="isFieldDirtyEditor"
-            name="ruler"
-            type="number"
-            label="Ruler"
-            placeholder="Ruler"
-            section-name="Editor"
-            description="Render vertical ruler after a certain number of monospace characters."
-          />
-          <FormInput
-            :is-field-dirty="isFieldDirtyEditor"
-            name="fontSize"
-            type="number"
-            label="Font Size"
-            placeholder="Font size"
-            section-name="Editor"
-            description="Controls the font size in pixels."
-          />
-          <FormInput
-            :is-field-dirty="isFieldDirtyEditor"
-            name="tabSize"
-            type="number"
-            label="Tab Size"
-            placeholder="Tab size"
-            section-name="Editor"
-            description="The number of spaces a tab is equal to."
-          />
-          <FormInput
-            :is-field-dirty="isFieldDirtyEditor"
-            name="printWidth"
-            type="number"
-            label="Print width"
-            placeholder="Print width"
-            section-name="Editor"
-            description="Fit code within this line limit."
-          />
-          <FormToggle
-            :is-field-dirty="isFieldDirtyEditor"
-            name="showLineNumbers"
-            label="Show line numbers"
-            section-name="Editor"
-            description="The number of spaces a tab is equal to."
-          />
-          <FormToggle
-            :is-field-dirty="isFieldDirtyEditor"
-            name="semi"
-            label="Semi"
-            section-name="Editor"
-            description="Whether to use semicolons at the end of every line."
-          />
-          <FormToggle
-            :is-field-dirty="isFieldDirtyEditor"
-            name="singleQuote"
-            label="Single quote"
-            section-name="Editor"
-            description="Use single instead of double quotes."
-          />
-          <FormToggle
-            :is-field-dirty="isFieldDirtyEditor"
-            name="jsxSingleQuote"
-            label="Jsx single quote"
-            section-name="Editor"
-            description="Use single instead of double quotes in JSX."
-          />
-          <FormToggle
-            :is-field-dirty="isFieldDirtyEditor"
-            name="useTabs"
-            label="Use tabs"
-            section-name="Editor"
-            description="Indent lines with tabs"
-          />
-        </section>
-        <section>
-          <h4>Packages Cache</h4>
-          <Button>Clear package cache</Button>
-        </section>
-        <!-- <Button type="submit"> Submit </Button> -->
-      </form>
-      <!--<form class="w-2/3 space-y-6" @submit.prevent="onSubmitAI">
-        <section>
-          <h4>IA Provider</h4>
-          <FormSelect
-            :is-field-dirty="isFieldDirtyAI"
-            name="aiProvider"
-            label="IA provider"
-            section-name="AI"
-            placeholder="Select AI provider"
-            description="Select AI provider"
-            :options="[{ value: 'ollama', label: 'Ollama' }]"
-          />
-          <FormSelect
-            :is-field-dirty="isFieldDirtyAI"
-            name="autoCompleteModel"
-            label="IA model for code completion"
-            section-name="AI"
-            placeholder="Select AI model"
-            description="Select the model for code completion."
-            :options="[
-              { value: 'qwen2.5-coder:0.5b', label: 'qwen2.5-coder:0.5b' },
-              { value: 'qwen2.5-coder:1.5b', label: 'qwen2.5-coder:1.5b' },
-            ]"
-          />
-        </section>
-      </form>-->
+      <EditorSettings />
+      <AiSettings />
+      <section>
+        <h4>Packages Cache</h4>
+        <Button>Clear package cache</Button>
+      </section>
     </main>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { toTypedSchema } from '@vee-validate/zod';
-import { type GenericObject, useForm } from 'vee-validate';
 import { Button } from '@/modules/common/components/ui/button';
-import FormInput from '@/modules/settings/components/form-input/form-input.vue';
-import FormToggle from '@/modules/settings/components/form-toggle/form-toggle.vue';
-import FormSelect from '@/modules/settings/components/form-select/form-select.vue';
-import { aiSchema, editorSchema } from '@/modules/settings/helpers/schemas';
-import { watch } from 'vue';
-import CommonSettings from '../components/common-settings/common-settings.vue';
-
-const formEditorSchema = toTypedSchema(editorSchema);
-// const formAISchema = toTypedSchema(aiSchema);
-
-const {
-  isFieldDirty: isFieldDirtyEditor,
-  handleSubmit: handleSubmitEditor,
-  values: editorValues,
-} = useForm({
-  name: 'editorForm',
-  validationSchema: formEditorSchema,
-});
-
-// const { isFieldDirty: isFieldDirtyAI, handleSubmit: handleSubmitAI } = useForm({
-//   validationSchema: formAISchema,
-// });
-
-const onSubmitEditor = handleSubmitEditor((values: GenericObject) => {
-  console.log('Form submitted:', values);
-});
-
-// const onSubmitAI = handleSubmitAI((values: GenericObject) => {
-//   console.log('Form submitted:', values);
-// });
-
-watch(
-  editorValues,
-  (newValues) => {
-    console.log(newValues);
-  },
-  { deep: true },
-);
+import CommonSettings from '@/modules/settings/components/forms/common-settings/common-settings.vue';
+import EditorSettings from '@/modules/settings/components/forms/editor-settings/editor-settings.vue';
+import AiSettings from '@/modules/settings/components/forms/ai-settings/ai-settings.vue';
 </script>

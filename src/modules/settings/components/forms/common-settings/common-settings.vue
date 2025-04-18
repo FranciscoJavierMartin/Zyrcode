@@ -1,9 +1,9 @@
 <template>
-  <form class="w-2/3 space-y-6" @submit.prevent="onSubmitCommon">
+  <form class="w-2/3 space-y-6" @submit.prevent="onSubmit">
     <section>
       <h4>Common settings</h4>
       <FormSelect
-        :is-field-dirty="isFieldDirtyCommon"
+        :is-field-dirty="isFieldDirty"
         name="appLanguage"
         label="Change app language"
         section-name="Langugage"
@@ -14,10 +14,10 @@
           { value: 'spanish', label: 'Spanish' },
         ]"
       />
-      <button type="submit">Submit</button>
     </section>
   </form>
 </template>
+
 <script setup lang="ts">
 import { watch } from 'vue';
 import { useForm, type GenericObject } from 'vee-validate';
@@ -27,21 +27,17 @@ import FormSelect from '@/modules/settings/components/form-select/form-select.vu
 
 const formCommonSchema = toTypedSchema(commonSchema);
 
-const {
-  isFieldDirty: isFieldDirtyCommon,
-  handleSubmit: handleSubmitCommon,
-  values: commonValues,
-} = useForm({
+const { isFieldDirty, handleSubmit, values } = useForm({
   name: 'commonForm',
   validationSchema: formCommonSchema,
 });
 
-const onSubmitCommon = handleSubmitCommon((values: GenericObject) => {
+const onSubmit = handleSubmit((values: GenericObject) => {
   console.log('Form submitted:', values);
 });
 
 watch(
-  () => commonValues,
+  values,
   (newValue) => {
     console.log(newValue);
   },
