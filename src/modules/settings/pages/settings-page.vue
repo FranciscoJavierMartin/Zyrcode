@@ -32,17 +32,12 @@
 
 <script lang="ts" setup>
 import { toTypedSchema } from '@vee-validate/zod';
-import * as z from 'zod';
 import { type GenericObject, useForm } from 'vee-validate';
 import { Button } from '@/modules/common/components/ui/button';
 import FormInput from '@/modules/settings/components/form-input/form-input.vue';
+import { editorSchema } from '@/modules/settings/helpers/schemas';
 
-const formSchema = toTypedSchema(
-  z.object({
-    fontSize: z.number().min(6).max(30),
-    tabSize: z.number().min(2).max(30),
-  }),
-);
+const formSchema = toTypedSchema(editorSchema);
 
 const { isFieldDirty, handleSubmit } = useForm({
   validationSchema: formSchema,
