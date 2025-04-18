@@ -23,6 +23,15 @@
             section-name="Editor"
             description="The number of spaces a tab is equal to."
           />
+          <FormToggle
+            :is-field-dirty="isFieldDirty"
+            name="showLineNumbers"
+            type="number"
+            label="Show line numbers"
+            placeholder="Tab size"
+            section-name="Editor"
+            description="The number of spaces a tab is equal to."
+          />
         </section>
         <Button type="submit"> Submit </Button>
       </form>
@@ -35,6 +44,7 @@ import { toTypedSchema } from '@vee-validate/zod';
 import { type GenericObject, useForm } from 'vee-validate';
 import { Button } from '@/modules/common/components/ui/button';
 import FormInput from '@/modules/settings/components/form-input/form-input.vue';
+import FormToggle from '@/modules/settings/components/form-toggle/form-toggle.vue';
 import { editorSchema } from '@/modules/settings/helpers/schemas';
 
 const formSchema = toTypedSchema(editorSchema);

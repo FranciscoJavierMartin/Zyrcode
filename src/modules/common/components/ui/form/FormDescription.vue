@@ -1,3 +1,13 @@
+<template>
+  <p
+    :id="formDescriptionId"
+    data-slot="form-description"
+    :class="cn('text-muted-foreground text-sm', props.class)"
+  >
+    <slot />
+  </p>
+</template>
+
 <script lang="ts" setup>
 import type { HTMLAttributes } from 'vue';
 import { cn } from '@/modules/common/helpers/utils';
@@ -9,13 +19,3 @@ const props = defineProps<{
 
 const { formDescriptionId } = useFormField();
 </script>
-
-<template>
-  <p
-    :id="formDescriptionId"
-    data-slot="form-description"
-    :class="cn('text-muted-foreground text-sm', props.class)"
-  >
-    <slot />
-  </p>
-</template>

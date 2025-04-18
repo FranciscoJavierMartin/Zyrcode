@@ -1,3 +1,13 @@
+<template>
+  <ErrorMessage
+    :id="formMessageId"
+    data-slot="form-message"
+    as="p"
+    :name="toValue(name)"
+    :class="cn('text-destructive-foreground text-sm', props.class)"
+  />
+</template>
+
 <script lang="ts" setup>
 import { cn } from '@/modules/common/helpers/utils';
 import { ErrorMessage } from 'vee-validate';
@@ -10,13 +20,3 @@ const props = defineProps<{
 
 const { name, formMessageId } = useFormField();
 </script>
-
-<template>
-  <ErrorMessage
-    :id="formMessageId"
-    data-slot="form-message"
-    as="p"
-    :name="toValue(name)"
-    :class="cn('text-destructive-foreground text-sm', props.class)"
-  />
-</template>
