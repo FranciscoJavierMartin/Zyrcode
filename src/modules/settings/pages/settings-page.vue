@@ -31,6 +31,10 @@
             description="The number of spaces a tab is equal to."
           />
         </section>
+        <section>
+          <h4>Packages Cache</h4>
+          <Button>Clear package cache</Button>
+        </section>
         <Button type="submit"> Submit </Button>
       </form>
     </main>
