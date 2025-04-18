@@ -5,35 +5,30 @@
       <form class="w-2/3 space-y-6" @submit="onSubmit">
         <FormField
           v-slot="{ componentField }"
-          name="username"
+          name="fontSize"
           :validate-on-blur="!isFieldDirty"
         >
-          <FormItem>
-            <FormLabel>Username</FormLabel>
+          <FormItem class="text-sm">
+            <div class="flex gap-1">
+              <span>Editor:</span>
+              <FormLabel>Font Size</FormLabel>
+            </div>
+            <FormDescription class="text-xs">
+              Controls the font size in pixels.
+            </FormDescription>
             <FormControl>
               <Input
-                id="username"
-                type="text"
-                placeholder="Username"
+                id="fontSize"
+                type="number"
+                placeholder="Font size"
                 v-bind="componentField"
               />
             </FormControl>
-            <FormDescription>
-              This is your public display name,
-            </FormDescription>
             <FormMessage />
           </FormItem>
         </FormField>
         <Button type="submit"> Submit </Button>
       </form>
-      <!-- <form>
-        <h4>Editor</h4>
-        <div>
-          <label for="fontSize" class="flex gap-1"> Editor </label>
-          <input id="fontSize" name="fontSize" placeholder="Font Size" />
-          <p>Controls the font size in pixels.</p>
-        </div>
-      </form> -->
     </main>
   </div>
 </template>
@@ -55,7 +50,7 @@ import { Button } from '@/modules/common/components/ui/button';
 
 const formSchema = toTypedSchema(
   z.object({
-    username: z.string().min(2).max(50),
+    fontSize: z.number().min(6).max(30),
   }),
 );
 
