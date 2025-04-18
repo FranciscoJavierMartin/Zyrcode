@@ -53,6 +53,15 @@
             section-name="Editor"
             description="The number of spaces a tab is equal to."
           />
+          <FormInput
+            :is-field-dirty="isFieldDirtyEditor"
+            name="printWidth"
+            type="number"
+            label="Print width"
+            placeholder="Print width"
+            section-name="Editor"
+            description="Fit code within this line limit."
+          />
           <FormToggle
             :is-field-dirty="isFieldDirtyEditor"
             name="showLineNumbers"

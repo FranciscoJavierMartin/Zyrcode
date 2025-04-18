@@ -13,8 +13,7 @@ export const editorSchema = z.object({
   singleQuote: z.boolean(),
   jsxSingleQuote: z.boolean(),
   useTabs: z.boolean(),
-  // trailingComma: 'all',
-  // printWidth: 80,
+  printWidth: z.number().int().min(70),
   // ruler
 });
 
