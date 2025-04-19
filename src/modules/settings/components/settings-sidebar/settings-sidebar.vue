@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronDown, ChevronRight } from 'lucide-vue-next';
+import { ChevronRight } from 'lucide-vue-next';
 import {
   Sidebar,
   SidebarContent,
@@ -96,7 +96,7 @@ const items = [
     subItems: [
       {
         title: 'Formatter',
-        url: '#',
+        url: '#formatter-settings',
       },
     ],
   },
