@@ -1,6 +1,6 @@
 <template>
-  <form class="w-2/3 space-y-6" @submit.prevent="onSubmit">
-    <section>
+  <form @submit.prevent="onSubmit">
+    <section id="ai-settings">
       <h4>IA Provider</h4>
       <FormSelect
         :is-field-dirty="isFieldDirty"

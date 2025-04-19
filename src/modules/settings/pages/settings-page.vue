@@ -1,6 +1,12 @@
 <template>
-  <div class="mt-13">
-    <nav></nav>
+  <div class="container-lg mt-13 flex gap-5">
+    <nav class="flex flex-col">
+      <ol class="sticky top-20">
+        <li><a href="#common-settings"> Common </a></li>
+        <li><a href="#editor-settings"> Editor </a></li>
+        <li><a href="#ai-settings"> AI </a></li>
+      </ol>
+    </nav>
     <main>
       <CommonSettings />
       <EditorSettings />

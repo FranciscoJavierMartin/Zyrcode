@@ -1,6 +1,6 @@
 <template>
-  <form class="w-2/3 space-y-6" @submit.prevent="onSubmit">
-    <section>
+  <form @submit.prevent="onSubmit">
+    <section id="editor-settings">
       <h4>Editor settings</h4>
       <FormSelect
         :is-field-dirty="isFieldDirty"
