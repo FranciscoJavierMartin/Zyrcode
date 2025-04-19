@@ -1,6 +1,6 @@
 <template>
   <section id="common-settings">
-    <h4>Common settings</h4>
+    <h4 class="sticky top-13">Common settings</h4>
     <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"

@@ -10,6 +10,7 @@
         <Button>Clear package cache</Button>
       </section>
     </main>
+    <!-- 6,  -->
   </SidebarProvider>
 </template>
 
