@@ -24,14 +24,12 @@
         section-name="Editor"
         description="Render vertical ruler after a certain number of monospace characters."
       />
-      <FormInput
+      <FormToggle
         :is-field-dirty="isFieldDirty"
-        name="fontSize"
-        type="number"
-        label="Font Size"
-        placeholder="Font size"
+        name="showLineNumbers"
+        label="Show line numbers"
         section-name="Editor"
-        description="Controls the font size in pixels."
+        description="The number of spaces a tab is equal to."
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
@@ -39,7 +37,7 @@
         type="number"
         label="Tab Size"
         placeholder="Tab size"
-        section-name="Editor"
+        section-name="Formatter"
         description="The number of spaces a tab is equal to."
       />
       <FormInput
@@ -48,42 +46,44 @@
         type="number"
         label="Print width"
         placeholder="Print width"
-        section-name="Editor"
+        section-name="Formatter"
         description="Fit code within this line limit."
       />
-      <FormToggle
+      <FormInput
         :is-field-dirty="isFieldDirty"
-        name="showLineNumbers"
-        label="Show line numbers"
-        section-name="Editor"
-        description="The number of spaces a tab is equal to."
+        name="fontSize"
+        type="number"
+        label="Font Size"
+        placeholder="Font size"
+        section-name="Formatter"
+        description="Controls the font size in pixels."
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
         name="semi"
         label="Semi"
-        section-name="Editor"
+        section-name="Formatter"
         description="Whether to use semicolons at the end of every line."
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
         name="singleQuote"
         label="Single quote"
-        section-name="Editor"
+        section-name="Formatter"
         description="Use single instead of double quotes."
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
         name="jsxSingleQuote"
         label="Jsx single quote"
-        section-name="Editor"
+        section-name="Formatter"
         description="Use single instead of double quotes in JSX."
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
         name="useTabs"
         label="Use tabs"
-        section-name="Editor"
+        section-name="Formatter"
         description="Indent lines with tabs"
       />
     </form>
