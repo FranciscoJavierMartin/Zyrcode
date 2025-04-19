@@ -23,6 +23,9 @@
                       >
                         <a :href="item.url">
                           {{ item.title }}
+                          <ChevronDown
+                            class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
+                          />
                         </a>
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
@@ -55,6 +58,7 @@
 </template>
 
 <script setup lang="ts">
+import { ChevronDown } from 'lucide-vue-next';
 import {
   Sidebar,
   SidebarContent,
