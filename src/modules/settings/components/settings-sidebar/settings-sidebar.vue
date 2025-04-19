@@ -21,7 +21,7 @@
                         as-child
                         :is-active="item.title === 'Home'"
                       >
-                        <a :href="item.url">
+                        <a :href="item.url" class="flex">
                           {{ item.title }}
                           <ChevronDown
                             class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
@@ -88,10 +88,6 @@ const items = [
     subItems: [
       {
         title: 'Formatter',
-        url: '#',
-      },
-      {
-        title: 'Second',
         url: '#',
       },
     ],
