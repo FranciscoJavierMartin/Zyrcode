@@ -1,35 +1,35 @@
 <template>
   <FormField v-slot="{ componentField }" :name>
-    <FormItem
-      class="focus-within:border-muted-foreground border-l-2 border-transparent py-0.5 pl-1 text-sm"
-    >
-      <div class="flex gap-1">
-        <span class="font-semibold">{{ sectionName }}:</span>
-        <FormLabel class="font-bold">{{ label }}</FormLabel>
-      </div>
-      <FormDescription class="text-xs font-normal">
-        {{ description }}
-      </FormDescription>
-      <Select v-bind="componentField" :id="name">
-        <FormControl>
-          <SelectTrigger>
-            <SelectValue :placeholder="placeholder" />
-          </SelectTrigger>
-        </FormControl>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem
-              v-for="option of options"
-              :key="option.value"
-              :value="option.value"
-            >
-              <!-- TODO: Add icon -->
-              {{ option.label }}
-            </SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    </FormItem>
+    <div class="settings-form-item-wrapper">
+      <FormItem class="settings-form-item">
+        <div class="flex gap-1">
+          <span class="font-semibold">{{ sectionName }}:</span>
+          <FormLabel class="font-bold">{{ label }}</FormLabel>
+        </div>
+        <FormDescription class="text-xs font-normal">
+          {{ description }}
+        </FormDescription>
+        <Select v-bind="componentField" :id="name">
+          <FormControl>
+            <SelectTrigger>
+              <SelectValue :placeholder="placeholder" />
+            </SelectTrigger>
+          </FormControl>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem
+                v-for="option of options"
+                :key="option.value"
+                :value="option.value"
+              >
+                <!-- TODO: Add icon -->
+                {{ option.label }}
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </FormItem>
+    </div>
   </FormField>
 </template>
 

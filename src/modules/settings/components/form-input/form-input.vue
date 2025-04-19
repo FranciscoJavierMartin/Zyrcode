@@ -4,27 +4,27 @@
     :name
     :validate-on-blur="!isFieldDirty"
   >
-    <FormItem
-      class="focus-within:border-muted-foreground border-l-2 border-transparent py-0.5 pl-1 text-sm"
-    >
-      <div class="flex gap-1">
-        <span class="font-semibold">{{ sectionName }}:</span>
-        <FormLabel class="font-bold">{{ label }}</FormLabel>
-      </div>
-      <FormDescription class="text-xs font-normal">
-        {{ description }}
-      </FormDescription>
-      <FormControl>
-        <Input
-          :id="name"
-          :type
-          :placeholder
-          class="h-7 w-max text-xs"
-          v-bind="componentField"
-        />
-      </FormControl>
-      <FormMessage />
-    </FormItem>
+    <div class="settings-form-item-wrapper">
+      <FormItem class="settings-form-item">
+        <div class="flex gap-1">
+          <span class="font-semibold">{{ sectionName }}:</span>
+          <FormLabel class="font-bold">{{ label }}</FormLabel>
+        </div>
+        <FormDescription class="text-xs font-normal">
+          {{ description }}
+        </FormDescription>
+        <FormControl>
+          <Input
+            :id="name"
+            :type
+            :placeholder
+            class="h-7 w-max text-xs"
+            v-bind="componentField"
+          />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    </div>
   </FormField>
 </template>
 
