@@ -1,13 +1,19 @@
 <template>
   <div class="container-lg mt-13 flex gap-5">
-    <nav class="flex flex-col">
-      <ol class="sticky top-20">
-        <li><a href="#common-settings"> Common </a></li>
-        <li><a href="#editor-settings"> Editor </a></li>
-        <li><a href="#ai-settings"> AI </a></li>
+    <nav class="border-muted-foreground/50 flex min-w-40 flex-col border-r">
+      <ol class="sticky top-13 w-full">
+        <li class="cursor-pointer">
+          <a href="#common-settings"> Common </a>
+        </li>
+        <li class="cursor-pointer">
+          <a href="#editor-settings"> Editor </a>
+        </li>
+        <li class="cursor-pointer">
+          <a href="#ai-settings"> AI </a>
+        </li>
       </ol>
     </nav>
-    <main>
+    <main class="pb-20">
       <CommonSettings />
       <EditorSettings />
       <AiSettings />
