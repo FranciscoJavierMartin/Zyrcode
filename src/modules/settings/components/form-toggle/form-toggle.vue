@@ -5,15 +5,15 @@
     >
       <div class="flex gap-x-1">
         <span class="font-semibold">{{ sectionName }}:</span>
-        <FormLabel class="font-bold">{{ label }}</FormLabel>
+        <span class="font-bold">{{ label }}</span>
       </div>
-      <div class="flex items-center gap-x-2">
+      <div class="flex items-center">
         <FormControl>
           <Checkbox :model-value="value" @update:model-value="handleChange" />
+          <FormLabel class="text-muted-foreground pl-2 text-xs font-normal">
+            {{ description }}
+          </FormLabel>
         </FormControl>
-        <FormDescription class="text-xs">
-          {{ description }}
-        </FormDescription>
         <FormMessage />
       </div>
     </FormItem>
@@ -28,7 +28,6 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormDescription,
   FormMessage,
 } from '@/modules/common/components/ui/form';
 import type { FormEditorFields } from '@/modules/settings/interfaces/form';

@@ -7,7 +7,9 @@
         <span class="font-semibold">{{ sectionName }}:</span>
         <FormLabel class="font-bold">{{ label }}</FormLabel>
       </div>
-      <FormDescription class="text-xs"> {{ description }} </FormDescription>
+      <FormDescription class="text-xs font-normal">
+        {{ description }}
+      </FormDescription>
       <Select v-bind="componentField" :id="name">
         <FormControl>
           <SelectTrigger>

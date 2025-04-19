@@ -11,7 +11,7 @@
         <span class="font-semibold">{{ sectionName }}:</span>
         <FormLabel class="font-bold">{{ label }}</FormLabel>
       </div>
-      <FormDescription class="text-xs">
+      <FormDescription class="text-xs font-normal">
         {{ description }}
       </FormDescription>
       <FormControl>
