@@ -27,7 +27,21 @@
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
                     <CollapsibleContent>
-                      <SidebarMenuSub> Hello world </SidebarMenuSub>
+                      <SidebarMenuSub
+                        v-for="subItem of item.subItems"
+                        :key="subItem.title"
+                      >
+                        <SidebarMenuSubItem>
+                          <SidebarMenuButton
+                            as-child
+                            :is-active="subItem.title === 'Home'"
+                          >
+                            <a :href="subItem.url">
+                              {{ subItem.title }}
+                            </a>
+                          </SidebarMenuButton>
+                        </SidebarMenuSubItem>
+                      </SidebarMenuSub>
                     </CollapsibleContent>
                   </SidebarMenuItem>
                 </Collapsible>
@@ -61,16 +75,25 @@ import {
 
 const items = [
   {
-    title: 'Home',
+    title: 'Common',
     url: '#common-settings',
   },
   {
-    title: 'Inbox',
+    title: 'Editor',
     url: '#editor-settings',
-    subItems: [],
+    subItems: [
+      {
+        title: 'Formatter',
+        url: '#',
+      },
+      {
+        title: 'Second',
+        url: '#',
+      },
+    ],
   },
   {
-    title: 'Calendar',
+    title: 'IA',
     url: '#ai-settings',
   },
 ];
