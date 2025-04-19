@@ -31,3 +31,11 @@ import CommonSettings from '@/modules/settings/components/forms/common-settings/
 import EditorSettings from '@/modules/settings/components/forms/editor-settings/editor-settings.vue';
 import AiSettings from '@/modules/settings/components/forms/ai-settings/ai-settings.vue';
 </script>
+
+<style scoped>
+@reference '@/assets/styles.css';
+
+.current {
+  @apply bg-yellow-300;
+}
+</style>
