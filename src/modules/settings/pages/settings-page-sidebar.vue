@@ -1,5 +1,5 @@
 <template>
-  <SidebarProvider>
+  <SidebarProvider class="mt-13">
     <SettingsSidebar />
     <main>
       <SidebarTrigger />
