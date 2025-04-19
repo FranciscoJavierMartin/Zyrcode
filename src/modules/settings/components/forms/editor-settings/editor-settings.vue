@@ -31,6 +31,7 @@
         section-name="Editor"
         description="The number of spaces a tab is equal to."
       />
+      <h5>Formatter</h5>
       <FormInput
         :is-field-dirty="isFieldDirty"
         name="tabSize"

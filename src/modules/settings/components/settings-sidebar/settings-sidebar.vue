@@ -7,7 +7,10 @@
           <SidebarMenu>
             <template v-for="item of items" :key="item.title">
               <template v-if="!item.subItems">
-                <SidebarMenuButton as-child :is-active="item.title === 'Home'">
+                <SidebarMenuButton
+                  as-child
+                  :is-active="item.title === 'Common'"
+                >
                   <a :href="item.url">
                     {{ item.title }}
                   </a>
