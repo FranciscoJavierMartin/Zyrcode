@@ -14,7 +14,11 @@
                 </SidebarMenuButton>
               </template>
               <template v-else>
-                <Collapsible default-open classs="group/collapsible">
+                <Collapsible
+                  default-open
+                  classs="group/collapsible"
+                  v-slot="{ open }"
+                >
                   <SidebarMenuItem>
                     <CollapsibleTrigger as-child>
                       <SidebarMenuButton
@@ -23,8 +27,12 @@
                       >
                         <a :href="item.url" class="flex">
                           {{ item.title }}
-                          <ChevronDown
+                          <ChevronRight
                             class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
+                            :class="{
+                              'rotate-90': open,
+                              'rotate-0': !open,
+                            }"
                           />
                         </a>
                       </SidebarMenuButton>
@@ -58,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronDown } from 'lucide-vue-next';
+import { ChevronDown, ChevronRight } from 'lucide-vue-next';
 import {
   Sidebar,
   SidebarContent,
