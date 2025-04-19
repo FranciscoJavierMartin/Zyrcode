@@ -1,7 +1,7 @@
 <template>
-  <form @submit.prevent="onSubmit">
-    <section id="ai-settings">
-      <h4>IA Provider</h4>
+  <section id="ai-settings">
+    <h4>IA Provider</h4>
+    <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
         name="aiProvider"
@@ -23,8 +23,8 @@
           { value: 'qwen2.5-coder:1.5b', label: 'qwen2.5-coder:1.5b' },
         ]"
       />
-    </section>
-  </form>
+    </form>
+  </section>
 </template>
 
 <script setup lang="ts">

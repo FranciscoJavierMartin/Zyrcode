@@ -6,10 +6,9 @@
         <SidebarGroupContent>
           <SidebarMenu>
             <SidebarMenuItem v-for="item of items" :key="item.title">
-              <SidebarMenuButton as-child>
+              <SidebarMenuButton as-child :is-active="item.title === 'Home'">
                 <a :href="item.url">
-                  <component :is="item.icon" />
-                  <span>{{ item.title }}</span>
+                  {{ item.title }}
                 </a>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -21,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-vue-next';
 import {
   Sidebar,
   SidebarContent,
@@ -36,28 +34,15 @@ import {
 const items = [
   {
     title: 'Home',
-    url: '#',
-    icon: Home,
+    url: '#common-settings',
   },
   {
     title: 'Inbox',
-    url: '#',
-    icon: Inbox,
+    url: '#editor-settings',
   },
   {
     title: 'Calendar',
-    url: '#',
-    icon: Calendar,
-  },
-  {
-    title: 'Search',
-    url: '#',
-    icon: Search,
-  },
-  {
-    title: 'Settings',
-    url: '#',
-    icon: Settings,
+    url: '#ai-settings',
   },
 ];
 </script>

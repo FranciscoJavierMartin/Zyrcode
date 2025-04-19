@@ -1,7 +1,7 @@
 <template>
-  <form @submit.prevent="onSubmit">
-    <section id="editor-settings">
-      <h4>Editor settings</h4>
+  <section id="editor-settings">
+    <h4>Editor settings</h4>
+    <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
         name="language"
@@ -86,8 +86,8 @@
         section-name="Editor"
         description="Indent lines with tabs"
       />
-    </section>
-  </form>
+    </form>
+  </section>
 </template>
 
 <script setup lang="ts">

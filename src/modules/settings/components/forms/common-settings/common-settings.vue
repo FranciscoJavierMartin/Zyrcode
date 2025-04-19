@@ -1,7 +1,7 @@
 <template>
-  <form @submit.prevent="onSubmit">
-    <section id="common-settings">
-      <h4>Common settings</h4>
+  <section id="common-settings">
+    <h4>Common settings</h4>
+    <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
         name="appLanguage"
@@ -14,8 +14,8 @@
           { value: 'spanish', label: 'Spanish' },
         ]"
       />
-    </section>
-  </form>
+    </form>
+  </section>
 </template>
 
 <script setup lang="ts">
