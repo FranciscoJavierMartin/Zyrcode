@@ -1,7 +1,7 @@
 <template>
   <FormField v-slot="{ componentField }" :name>
     <FormItem
-      class="focus-within:border-muted-foreground border-l-2 py-0.5 pl-1 text-sm"
+      class="focus-within:border-muted-foreground border-l-2 border-transparent py-0.5 pl-1 text-sm"
     >
       <div class="flex gap-1">
         <span class="font-semibold">{{ sectionName }}:</span>
