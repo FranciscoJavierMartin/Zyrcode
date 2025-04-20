@@ -26,14 +26,12 @@
       <MenubarTrigger>AI options</MenubarTrigger>
       <MenubarContent>
         <MenubarItem>
-          <RouterLink
-            :to="{ name: ROUTES.SETTINGS.name, hash: '#ai-settings' }"
-          >
-            Settings
-          </RouterLink>
+          <a href="/Zyrcode/settings/#ai-settings" class="w-full"> Settings </a>
         </MenubarItem>
         <MenubarItem>
-          <a href="#">Ollama</a>
+          <a href="https://ollama.com/" class="flex w-full justify-between">
+            Ollama <ExternalLink />
+          </a>
         </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
@@ -41,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import { ExternalLink } from 'lucide-vue-next';
 import {
   Menubar,
   MenubarContent,
