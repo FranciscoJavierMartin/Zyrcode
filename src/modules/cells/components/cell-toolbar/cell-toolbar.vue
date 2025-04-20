@@ -20,6 +20,7 @@
     </div>
     <div class="flex items-center gap-2">
       <TooltipButton
+        v-if="language !== 'markdown'"
         :text="
           isConsoleOpen
             ? $t('notebook.toolbar.hideConsole')
@@ -35,7 +36,10 @@
           <Terminal class="size-5" />
         </Button>
       </TooltipButton>
-      <TooltipButton :text="$t('notebook.toolbar.clearConsole')">
+      <TooltipButton
+        v-if="language !== 'markdown'"
+        :text="$t('notebook.toolbar.clearConsole')"
+      >
         <Button
           :disabled="!areOutputsAvailable"
           variant="hover"
