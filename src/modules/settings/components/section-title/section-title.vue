@@ -1,6 +1,7 @@
 <template>
   <component
     :is="heading"
+    :id
     :class="
       cn('bg-background sticky top-13 -ml-8 w-full py-1 pl-8', props.class)
     "
@@ -15,6 +16,7 @@ import { cn } from '@/modules/common/helpers/utils';
 
 const props = withDefaults(
   defineProps<{
+    id?: string;
     heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     class?: HTMLAttributes['class'];
   }>(),
