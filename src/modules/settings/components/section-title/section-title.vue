@@ -1,16 +1,26 @@
 <template>
-  <!-- eslint-disable-next-line vuejs-accessibility/heading-has-content-->
-  <h4 class="heading-form">
+  <component
+    :is="heading"
+    :class="
+      cn('bg-background sticky top-13 -ml-8 w-full py-1 pl-8', props.class)
+    "
+  >
     <slot />
-  </h4>
+  </component>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { HTMLAttributes } from 'vue';
+import { cn } from '@/modules/common/helpers/utils';
 
-<style scoped>
-@reference '@/assets/styles.css';
-
-.heading-form {
-  @apply bg-background sticky top-13 -ml-8 w-full pl-8;
-}
-</style>
+const props = withDefaults(
+  defineProps<{
+    heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+    class?: HTMLAttributes['class'];
+  }>(),
+  {
+    heading: 'h4',
+    class: '',
+  },
+);
+</script>

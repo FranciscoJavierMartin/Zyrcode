@@ -1,7 +1,7 @@
 <template>
   <SidebarProvider class="mt-13" open>
     <SettingsSidebar />
-    <main class="w-full">
+    <main class="w-full pb-36">
       <CommonSettings />
       <EditorSettings />
       <AiSettings />
