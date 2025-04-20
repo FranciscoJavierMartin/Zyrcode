@@ -2,6 +2,13 @@
   <section id="ai-settings">
     <SectionTitle>AI settings</SectionTitle>
     <form @submit.prevent="onSubmit">
+      <FormToggle
+        :is-field-dirty="isFieldDirty"
+        name="isAIEnabled"
+        label="Enable AI options"
+        section-name="AI"
+        description="Enable AI features"
+      />
       <FormSelect
         :is-field-dirty="isFieldDirty"
         name="aiProvider"
@@ -33,6 +40,7 @@ import { toTypedSchema } from '@vee-validate/zod';
 import { useForm, type GenericObject } from 'vee-validate';
 import { watch } from 'vue';
 import FormSelect from '@/modules/settings/components/form-select/form-select.vue';
+import FormToggle from '@/modules/settings/components/form-toggle/form-toggle.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 
 const formAISchema = toTypedSchema(aiSchema);

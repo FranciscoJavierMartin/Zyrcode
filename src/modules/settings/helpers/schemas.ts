@@ -19,6 +19,7 @@ export const editorSchema = z.object({
 
 export const aiSchema = z.object({
   // TODO: Adjust value later
+  isAIEnabled: z.boolean(),
   autoCompleteModel: z.string().min(1),
   aiProvider: z.string().min(1),
 });

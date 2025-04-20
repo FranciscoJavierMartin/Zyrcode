@@ -20,8 +20,17 @@
   </FormField>
 </template>
 
-<!-- Add generic type -->
-<script setup lang="ts">
+<!-- TODO: Add better generic types for the form fields  -->
+<script
+  setup
+  lang="ts"
+  generic="
+    T extends
+      | (<TPath extends FormEditorFields>(path: TPath) => boolean)
+      | (<TPath extends FormAIFields>(path: TPath) => boolean)
+      | (<TPath extends FormCommonFields>(path: TPath) => boolean)
+  "
+>
 import Checkbox from '@/modules/common/components/ui/checkbox/Checkbox.vue';
 import {
   FormField,
@@ -30,13 +39,17 @@ import {
   FormControl,
   FormMessage,
 } from '@/modules/common/components/ui/form';
-import type { FormEditorFields } from '@/modules/settings/interfaces/form';
+import type {
+  FormEditorFields,
+  FormAIFields,
+  FormCommonFields,
+} from '@/modules/settings/interfaces/form';
 
 defineProps<{
   name: string;
   label: string;
   description: string;
   sectionName: string;
-  isFieldDirty: <TPath extends FormEditorFields>(path: TPath) => boolean;
+  isFieldDirty: T;
 }>();
 </script>
