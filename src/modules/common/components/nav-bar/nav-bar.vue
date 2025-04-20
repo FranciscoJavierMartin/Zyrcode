@@ -9,6 +9,7 @@
       placeholder="Enter notebook title"
       class="hidden max-w-96 sm:flex lg:absolute lg:left-[calc(50%_-_192px)]"
       @vue:mounted="focusOnMount"
+      @blur="onBlur"
     />
     <div class="flex flex-none items-center gap-3">
       <Button
@@ -58,6 +59,10 @@ const buttons = [
     label: 'settings',
   },
 ];
+
+function onBlur() {
+  console.log('blur');
+}
 
 function focusOnMount(element: VNode): void {
   if (isNotebookRoute.value) {
