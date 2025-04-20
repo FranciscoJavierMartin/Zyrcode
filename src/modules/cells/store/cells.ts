@@ -9,6 +9,7 @@ export const useCellsStore = defineStore('cells', () => {
   const orderedCells = computed<Cell[]>(() =>
     order.value.map((id) => cells[id]),
   );
+  const isEmpty = computed<boolean>(() => order.value.length === 0);
   const isLastOne = computed<boolean>(() => order.value.length === 1);
 
   function updateLanguage({
@@ -67,6 +68,11 @@ export const useCellsStore = defineStore('cells', () => {
     }
   }
 
+  function clearAll(): void {
+    order.value = [];
+    Object.keys(cells).forEach((key) => delete cells[key]);
+  }
+
   return {
     cells: orderedCells,
     updateContent,
@@ -76,5 +82,7 @@ export const useCellsStore = defineStore('cells', () => {
     removeCell,
     moveCell,
     isLastOne,
+    clearAll,
+    isEmpty,
   };
 });

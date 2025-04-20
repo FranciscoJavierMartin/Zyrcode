@@ -10,7 +10,9 @@
             {{ isMacOS ? 'Cmd + R' : 'Ctrl + R' }}
           </MenubarShortcut>
         </MenubarItem>
-        <MenubarItem disabled>Clear all</MenubarItem>
+        <MenubarItem :disabled="store.isEmpty" @click="store.clearAll()">
+          Clear all
+        </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
@@ -55,7 +57,9 @@ import {
   MenubarTrigger,
 } from '@/modules/common/components/ui/menubar';
 import isMacOSInfo from '@/modules/common/helpers/is-mac-os';
+import { useCellsStore } from '@/modules/cells/store/cells';
 
+const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
 
 function reloadPage(): void {
