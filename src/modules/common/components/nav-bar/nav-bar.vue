@@ -1,8 +1,16 @@
 <template>
-  <nav class="bg-background fixed top-0 z-50 flex w-full p-2">
-    <router-link :to="{ name: ROUTES.HOME.name }" class="ml-4 flex-1 text-xl">
+  <nav class="bg-background fixed top-0 z-50 flex w-full justify-between p-2">
+    <router-link :to="{ name: ROUTES.HOME.name }" class="ml-4 text-xl">
       {{ $t('appName') }}
     </router-link>
+    <Input
+      v-if="isNotebookRoute"
+      v-model="notebookTitle"
+      placeholder="Enter notebook title"
+      class="ml-10 max-w-96"
+      ref="input-title"
+      @vue:mounted="focusOnMount"
+    />
     <div class="flex flex-none items-center gap-3">
       <Button
         v-for="button of buttons"
@@ -25,10 +33,19 @@
 </template>
 
 <script setup lang="ts">
+import { computed, ref, type VNode } from 'vue';
+import { NotebookPen, Settings } from 'lucide-vue-next';
 import { ROUTES } from '@/router/routes';
 import ToggleTheme from '@/modules/common/components/toggle-theme/toggle-theme.vue';
 import { Button } from '@/modules/common/components/ui/button';
-import { NotebookPen, Settings } from 'lucide-vue-next';
+import { Input } from '@/modules/common/components/ui/input';
+import { useRoute } from 'vue-router';
+
+const notebookTitle = ref<string>('');
+const route = useRoute();
+const isNotebookRoute = computed<boolean>(
+  () => route.name === ROUTES.NOTEBOOK.name,
+);
 
 const buttons = [
   {
@@ -42,4 +59,10 @@ const buttons = [
     label: 'settings',
   },
 ];
+
+function focusOnMount(element: VNode): void {
+  if (isNotebookRoute.value) {
+    element.el?.focus();
+  }
+}
 </script>
