@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import type { OutputPreviewData } from '@/modules/cells/interfaces/preview';
+import type { OutputPreviewData } from '@/modules/previews/interfaces/preview';
 
 const outputs = defineModel<OutputPreviewData[]>();
 </script>

@@ -15,11 +15,11 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, useTemplateRef, watch } from 'vue';
-import { getPreviewHTMLContainer } from '@/modules/cells/helpers/preview-html-container';
+import { getPreviewHTMLContainer } from '@/modules/previews/helpers/preview-html-container';
 import type {
   LogLevel,
   OutputPreviewData,
-} from '@/modules/cells/interfaces/preview';
+} from '@/modules/previews/interfaces/preview';
 import { generateRandomID } from '@/modules/common/helpers/random';
 
 const iframe = useTemplateRef<HTMLIFrameElement>('iframe-preview');

@@ -50,18 +50,18 @@
 import { computed, ref, useTemplateRef } from 'vue';
 import CodeEditor from '@/modules/code-editor/components/code-editor/code-editor.vue';
 import { transpile } from '@/modules/cells/helpers/bundler';
-import CodePreview from '@/modules/cells/components/code-preview/code-preview.vue';
+import CodePreview from '@/modules/previews/components/code-preview/code-preview.vue';
 import ResizableHandle from '@/modules/common/components/ui/resizable/ResizableHandle.vue';
 import ResizablePanel from '@/modules/common/components/ui/resizable/ResizablePanel.vue';
 import ResizablePanelGroup from '@/modules/common/components/ui/resizable/ResizablePanelGroup.vue';
 import { useMediaQuery, watchDebounced } from '@vueuse/core';
 import type { Language } from '@/modules/cells/interfaces/code';
 import { useCellsStore } from '@/modules/cells/store/cells';
-import ConsolePreview from '@/modules/cells/components/console-preview/console-preview.vue';
-import type { OutputPreviewData } from '@/modules/cells/interfaces/preview';
+import ConsolePreview from '@/modules/previews/components/console-preview/console-preview.vue';
+import type { OutputPreviewData } from '@/modules/previews/interfaces/preview';
 import CellToolbar from '@/modules/cells/components/cell-toolbar/cell-toolbar.vue';
 import { parseMarkdown } from '@/modules/cells/helpers/markdown';
-import MarkdownPreview from '@/modules/cells/components/markdown-preview/markdown-preview.vue';
+import MarkdownPreview from '@/modules/previews/components/markdown-preview/markdown-preview.vue';
 
 const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
