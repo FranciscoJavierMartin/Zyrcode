@@ -137,11 +137,36 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
 
   .button-icon {
     @apply grid size-8 cursor-pointer place-content-center rounded shadow-sm;
+  }
+
+  .settings-form-item-wrapper {
+    @apply focus-within:border-muted-foreground focus:border-muted-foreground border border-transparent px-0.5 py-2.5;
+  }
+
+  .settings-form-item {
+    @apply focus-within:border-muted-foreground flex flex-col border-l-2 border-transparent py-0.5 pl-1 text-sm;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
   }
 }
