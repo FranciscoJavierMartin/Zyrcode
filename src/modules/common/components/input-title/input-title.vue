@@ -1,5 +1,5 @@
 <template>
-  <div class="flex max-w-96 flex-col">
+  <div class="flex max-w-96 flex-col justify-center">
     <Input
       v-if="showInput"
       v-model="value"
@@ -7,7 +7,9 @@
       class="h-9 w-full"
       @blur="showInput = false"
     />
-    <h1 v-else class="h-9 w-full" @dblclick="showInput = true">{{ value }}</h1>
+    <h1 v-else class="h-9 w-full px-3 py-1" @dblclick="showInput = true">
+      {{ value }}
+    </h1>
   </div>
 </template>
 
