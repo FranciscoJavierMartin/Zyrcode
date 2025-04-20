@@ -1,5 +1,5 @@
 <template>
-  <div ref="editor" class="size-full" />
+  <div ref="editor" class="size-full border border-red-500" />
 </template>
 
 <script setup lang="ts">

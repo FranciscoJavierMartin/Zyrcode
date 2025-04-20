@@ -7,7 +7,7 @@
       v-if="isNotebookRoute"
       v-model="notebookTitle"
       placeholder="Enter notebook title"
-      class="ml-10 max-w-96"
+      class="mx-auto hidden max-w-96 sm:flex"
       ref="input-title"
       @vue:mounted="focusOnMount"
     />
