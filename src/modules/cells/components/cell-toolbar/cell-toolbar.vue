@@ -69,12 +69,7 @@
       </TooltipButton>
       <RemoveCellDialog :id />
       <TooltipButton :text="$t('notebook.toolbar.addCellBelow')">
-        <Button
-          :disabled="!isCodeAvailable"
-          variant="hover"
-          class="button-icon"
-          @click="addCellBelow"
-        >
+        <Button variant="hover" class="button-icon" @click="addCellBelow">
           <Plus class="size-5" />
         </Button>
       </TooltipButton>
