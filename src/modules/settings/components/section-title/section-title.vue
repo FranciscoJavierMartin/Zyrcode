@@ -1,6 +1,8 @@
 <template>
   <!-- eslint-disable-next-line vuejs-accessibility/heading-has-content-->
-  <h4 class="heading-form"><slot /></h4>
+  <h4 class="heading-form">
+    <slot />
+  </h4>
 </template>
 
 <script setup lang="ts"></script>

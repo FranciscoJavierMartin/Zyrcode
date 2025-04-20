@@ -1,6 +1,5 @@
 <template>
   <section id="ai-settings">
-    <!-- <h4 class="heading-form">IA settings</h4> -->
     <SectionTitle>AI settings</SectionTitle>
     <form @submit.prevent="onSubmit">
       <FormSelect

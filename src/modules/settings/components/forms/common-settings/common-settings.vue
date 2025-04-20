@@ -1,6 +1,5 @@
 <template>
   <section id="common-settings">
-    <!-- <h4 class="heading-form">Common settings</h4> -->
     <SectionTitle>Common settings</SectionTitle>
     <form @submit.prevent="onSubmit">
       <FormSelect

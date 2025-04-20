@@ -1,6 +1,5 @@
 <template>
   <section id="editor-settings">
-    <!-- <h4 class="heading-form">Editor settings</h4> -->
     <SectionTitle>Editor settings</SectionTitle>
     <form @submit.prevent="onSubmit">
       <FormSelect
