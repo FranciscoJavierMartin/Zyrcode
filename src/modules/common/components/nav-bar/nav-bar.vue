@@ -7,8 +7,7 @@
       v-if="isNotebookRoute"
       v-model="notebookTitle"
       placeholder="Enter notebook title"
-      class="mx-auto hidden max-w-96 sm:flex"
-      ref="input-title"
+      class="hidden max-w-96 sm:flex lg:absolute lg:left-[calc(50%_-_192px)]"
       @vue:mounted="focusOnMount"
     />
     <div class="flex flex-none items-center gap-3">
