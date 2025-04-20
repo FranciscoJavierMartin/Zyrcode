@@ -4,8 +4,11 @@
       <MenubarTrigger>Notebook</MenubarTrigger>
       <MenubarContent>
         <MenubarItem disabled>Rename</MenubarItem>
-        <MenubarItem disabled
-          >Reload <MenubarShortcut></MenubarShortcut>
+        <MenubarItem @click="reloadPage">
+          Reload
+          <MenubarShortcut>
+            {{ isMacOS ? 'Cmd + R' : 'Ctrl + R' }}
+          </MenubarShortcut>
         </MenubarItem>
         <MenubarItem disabled>Clear all</MenubarItem>
       </MenubarContent>
@@ -41,6 +44,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { ExternalLink } from 'lucide-vue-next';
 import {
   Menubar,
@@ -50,4 +54,11 @@ import {
   MenubarShortcut,
   MenubarTrigger,
 } from '@/modules/common/components/ui/menubar';
+import isMacOSInfo from '@/modules/common/helpers/is-mac-os';
+
+const isMacOS = computed<boolean>(() => isMacOSInfo());
+
+function reloadPage(): void {
+  location.reload();
+}
 </script>
