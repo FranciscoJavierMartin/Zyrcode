@@ -24,7 +24,9 @@
     <MenubarMenu>
       <MenubarTrigger>Export</MenubarTrigger>
       <MenubarContent>
-        <MenubarItem>Export as HTML</MenubarItem>
+        <MenubarItem :disabled="store.isEmpty" @click="exportAsHTML">
+          Export as HTML
+        </MenubarItem>
         <MenubarItem disabled>Export as PDF</MenubarItem>
         <MenubarItem disabled>Export as JSON</MenubarItem>
       </MenubarContent>
@@ -64,5 +66,16 @@ const isMacOS = computed<boolean>(() => isMacOSInfo());
 
 function reloadPage(): void {
   location.reload();
+}
+
+function exportAsHTML(): void {
+  const htmlContent = '<div><h1>Hello world</h1></div>';
+  const blob = new Blob([htmlContent], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'notebook.html';
+  a.click();
+  URL.revokeObjectURL(url);
 }
 </script>
