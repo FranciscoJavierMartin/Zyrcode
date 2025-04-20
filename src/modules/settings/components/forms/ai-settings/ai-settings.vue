@@ -1,6 +1,7 @@
 <template>
   <section id="ai-settings">
-    <h4 class="heading-form">IA Provider</h4>
+    <!-- <h4 class="heading-form">IA settings</h4> -->
+    <SectionTitle>AI settings</SectionTitle>
     <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
@@ -33,6 +34,7 @@ import { toTypedSchema } from '@vee-validate/zod';
 import { useForm, type GenericObject } from 'vee-validate';
 import { watch } from 'vue';
 import FormSelect from '@/modules/settings/components/form-select/form-select.vue';
+import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 
 const formAISchema = toTypedSchema(aiSchema);
 

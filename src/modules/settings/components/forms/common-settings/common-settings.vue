@@ -1,6 +1,7 @@
 <template>
   <section id="common-settings">
-    <h4 class="heading-form">Common settings</h4>
+    <!-- <h4 class="heading-form">Common settings</h4> -->
+    <SectionTitle>Common settings</SectionTitle>
     <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
@@ -24,6 +25,7 @@ import { useForm, type GenericObject } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import { commonSchema } from '@/modules/settings/helpers/schemas';
 import FormSelect from '@/modules/settings/components/form-select/form-select.vue';
+import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 
 const formCommonSchema = toTypedSchema(commonSchema);
 
