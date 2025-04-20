@@ -158,6 +158,10 @@
     @apply focus-within:border-muted-foreground flex flex-col border-l-2 border-transparent py-0.5 pl-1 text-sm;
   }
 
+  .heading-form {
+    @apply bg-background sticky top-13 -mx-8 py-1 pl-8;
+  }
+
   /* Chrome, Safari, Edge, Opera */
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
