@@ -1,5 +1,5 @@
 <template>
-  <Menubar>
+  <Menubar class="bg-background fixed top-13 z-10 border-none shadow-none">
     <MenubarMenu>
       <MenubarTrigger>Notebook</MenubarTrigger>
       <MenubarContent>
@@ -48,5 +48,4 @@ import {
   MenubarShortcut,
   MenubarTrigger,
 } from '@/modules/common/components/ui/menubar';
-import { ROUTES } from '@/router/routes';
 </script>

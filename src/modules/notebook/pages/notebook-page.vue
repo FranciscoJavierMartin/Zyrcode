@@ -1,7 +1,7 @@
 <template>
   <div class="mt-13">
-    <NotebookMenu />
-    <template v-if="!isServiceLoading">
+    <NotebookMenu v-if="!isServiceLoading" />
+    <div v-if="!isServiceLoading" class="pt-9">
       <CodeCell
         v-for="cell of store.cells"
         :key="cell.id"
@@ -14,7 +14,7 @@
           {{ $t('notebook.addCell') }}
         </Button>
       </div>
-    </template>
+    </div>
     <NotebookSkeleton v-else />
   </div>
 </template>
