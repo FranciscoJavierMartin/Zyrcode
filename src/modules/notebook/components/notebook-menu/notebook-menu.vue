@@ -3,15 +3,17 @@
     <MenubarMenu>
       <MenubarTrigger>Notebook</MenubarTrigger>
       <MenubarContent>
-        <MenubarItem>Rename</MenubarItem>
-        <MenubarItem>Reload <MenubarShortcut></MenubarShortcut> </MenubarItem>
-        <MenubarItem>Clear all</MenubarItem>
+        <MenubarItem disabled>Rename</MenubarItem>
+        <MenubarItem disabled
+          >Reload <MenubarShortcut></MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem disabled>Clear all</MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
       <MenubarTrigger>Import</MenubarTrigger>
       <MenubarContent>
-        <MenubarItem>Import from JSON</MenubarItem>
+        <MenubarItem disabled>Import from JSON</MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
