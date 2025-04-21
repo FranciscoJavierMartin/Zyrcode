@@ -5,7 +5,7 @@
     </router-link>
     <InputTitle
       v-if="isNotebookRoute"
-      v-model="notebookTitle"
+      v-model="store.notebookTitle"
       placeholder="Enter notebook title"
       class="hidden w-full max-w-96 sm:flex lg:absolute lg:left-[calc(50%_-_192px)]"
       auto-focus
@@ -32,19 +32,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { NotebookPen, Settings } from 'lucide-vue-next';
 import { ROUTES } from '@/router/routes';
 import ToggleTheme from '@/modules/common/components/toggle-theme/toggle-theme.vue';
 import { Button } from '@/modules/common/components/ui/button';
 import InputTitle from '@/modules/common/components/input-title/input-title.vue';
+import { useCellsStore } from '@/modules/cells/store/cells';
 
-const notebookTitle = ref<string>('');
 const route = useRoute();
 const isNotebookRoute = computed<boolean>(
   () => route.name === ROUTES.NOTEBOOK.name,
 );
+const store = useCellsStore();
 
 const buttons = [
   {
