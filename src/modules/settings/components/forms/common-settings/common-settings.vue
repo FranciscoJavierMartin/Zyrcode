@@ -23,7 +23,7 @@ import { watch } from 'vue';
 import { useForm, type GenericObject } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import { commonSchema } from '@/modules/settings/helpers/schemas';
-import FormSelect from '@/modules/settings/components/form-select/form-select.vue';
+import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 
 const formCommonSchema = toTypedSchema(commonSchema);

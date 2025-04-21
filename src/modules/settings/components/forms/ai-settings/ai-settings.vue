@@ -39,8 +39,8 @@ import { aiSchema } from '@/modules/settings/helpers/schemas';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm, type GenericObject } from 'vee-validate';
 import { watch } from 'vue';
-import FormSelect from '@/modules/settings/components/form-select/form-select.vue';
-import FormToggle from '@/modules/settings/components/form-toggle/form-toggle.vue';
+import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
+import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-toggle.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 
 const formAISchema = toTypedSchema(aiSchema);
