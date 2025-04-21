@@ -3,13 +3,12 @@
     <router-link :to="{ name: ROUTES.HOME.name }" class="ml-4 text-xl">
       {{ $t('appName') }}
     </router-link>
-    <Input
+    <InputTitle
       v-if="isNotebookRoute"
       v-model="notebookTitle"
       placeholder="Enter notebook title"
-      class="hidden max-w-96 sm:flex lg:absolute lg:left-[calc(50%_-_192px)]"
-      @vue:mounted="focusOnMount"
-      @blur="onBlur"
+      class="hidden w-full max-w-96 sm:flex lg:absolute lg:left-[calc(50%_-_192px)]"
+      auto-focus
     />
     <div class="flex flex-none items-center gap-3">
       <Button
@@ -33,13 +32,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, type VNode } from 'vue';
+import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
 import { NotebookPen, Settings } from 'lucide-vue-next';
 import { ROUTES } from '@/router/routes';
 import ToggleTheme from '@/modules/common/components/toggle-theme/toggle-theme.vue';
 import { Button } from '@/modules/common/components/ui/button';
-import { Input } from '@/modules/common/components/ui/input';
-import { useRoute } from 'vue-router';
+import InputTitle from '@/modules/common/components/input-title/input-title.vue';
 
 const notebookTitle = ref<string>('');
 const route = useRoute();
@@ -59,14 +58,4 @@ const buttons = [
     label: 'settings',
   },
 ];
-
-function onBlur() {
-  console.log('blur');
-}
-
-function focusOnMount(element: VNode): void {
-  if (isNotebookRoute.value) {
-    element.el?.focus();
-  }
-}
 </script>

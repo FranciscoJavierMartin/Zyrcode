@@ -14,5 +14,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    modelValue: 'Hello, World!',
+    'onUpdate:modelValue': (value) => {
+      console.log('Updated value:', value);
+    },
+    placeholder: 'Enter title',
+    autoFocus: true,
+    class: 'max-w-96',
+  },
 };
