@@ -6,7 +6,6 @@
       :placeholder
       class="h-9 w-full"
       @blur="toggleShowInput"
-      @keydown.enter="showInput = false"
       @vue:mounted="focusOnMount"
     />
     <!-- eslint-disable-next-line vuejs-accessibility/interactive-supports-focus -->
