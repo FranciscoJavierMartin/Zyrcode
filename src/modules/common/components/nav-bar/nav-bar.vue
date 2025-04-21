@@ -6,7 +6,7 @@
     <InputTitle
       v-if="isNotebookRoute"
       v-model="store.notebookTitle"
-      placeholder="Enter notebook title"
+      :placeholder="$t('notebook.addTitlePlaceholder')"
       class="hidden w-full max-w-96 sm:flex lg:absolute lg:left-[calc(50%_-_192px)]"
       auto-focus
     />
