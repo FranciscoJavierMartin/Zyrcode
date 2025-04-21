@@ -4,6 +4,7 @@ import type { Cell } from '@/modules/cells/interfaces/store';
 import type { Language } from '@/modules/cells/interfaces/code';
 
 export const useCellsStore = defineStore('cells', () => {
+  const _notebookTitle = ref<string>('');
   const order = ref<string[]>([]);
   const cells = reactive<Record<string, Cell>>({});
   const orderedCells = computed<Cell[]>(() =>
@@ -11,6 +12,14 @@ export const useCellsStore = defineStore('cells', () => {
   );
   const isEmpty = computed<boolean>(() => order.value.length === 0);
   const isLastOne = computed<boolean>(() => order.value.length === 1);
+  const notebookTitle = computed<string>({
+    get() {
+      return _notebookTitle.value;
+    },
+    set(value: string) {
+      _notebookTitle.value = value;
+    },
+  });
 
   function updateLanguage({
     id,
@@ -74,6 +83,7 @@ export const useCellsStore = defineStore('cells', () => {
   }
 
   return {
+    notebookTitle,
     cells: orderedCells,
     updateContent,
     updateLanguage,
