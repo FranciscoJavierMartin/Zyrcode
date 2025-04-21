@@ -9,6 +9,7 @@
   },
   "notebooks": "Notebooks",
   "notebook": {
+    "addTitlePlaceholder": "Enter notebook title",
     "addCell": "Add cell",
     "areYouSure": "Are you sure?",
     "actionCannotBeUndo": "This action cannot be undone.",
