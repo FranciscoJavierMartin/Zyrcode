@@ -60,6 +60,7 @@ import {
 } from '@/modules/common/components/ui/menubar';
 import isMacOSInfo from '@/modules/common/helpers/is-mac-os';
 import { useCellsStore } from '@/modules/cells/store/cells';
+import exportToHtml from '@/modules/notebook/helpers/export-to-html';
 
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
@@ -69,13 +70,6 @@ function reloadPage(): void {
 }
 
 function exportAsHTML(): void {
-  const htmlContent = '<div><h1>Hello world</h1></div>';
-  const blob = new Blob([htmlContent], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'notebook.html';
-  a.click();
-  URL.revokeObjectURL(url);
+  exportToHtml({ title: store.notebookTitle, cells: store.cells });
 }
 </script>

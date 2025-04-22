@@ -5,8 +5,24 @@ import type { Language } from '@/modules/cells/interfaces/code';
 
 export const useCellsStore = defineStore('cells', () => {
   const _notebookTitle = ref<string>('');
-  const order = ref<string[]>([]);
-  const cells = reactive<Record<string, Cell>>({});
+  const order = ref<string[]>(['a', 'b', 'c']);
+  const cells = reactive<Record<string, Cell>>({
+    a: {
+      id: 'a',
+      content: "console.log('a')",
+      language: 'javascript',
+    },
+    b: {
+      id: 'b',
+      content: "console.log('a')",
+      language: 'javascript',
+    },
+    c: {
+      id: 'c',
+      content: '# Hello world',
+      language: 'markdown',
+    },
+  });
   const orderedCells = computed<Cell[]>(() =>
     order.value.map((id) => cells[id]),
   );
