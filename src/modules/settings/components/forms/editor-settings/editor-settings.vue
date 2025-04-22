@@ -98,9 +98,9 @@ import { editorSchema } from '@/modules/settings/helpers/schemas';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm, type GenericObject } from 'vee-validate';
 import { watch } from 'vue';
-import FormInput from '@/modules/settings/components/form-input/form-input.vue';
-import FormToggle from '@/modules/settings/components/form-toggle/form-toggle.vue';
-import FormSelect from '@/modules/settings/components/form-select/form-select.vue';
+import FormInput from '@/modules/settings/components/inputs/form-input/form-input.vue';
+import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-toggle.vue';
+import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 
 const formEditorSchema = toTypedSchema(editorSchema);
