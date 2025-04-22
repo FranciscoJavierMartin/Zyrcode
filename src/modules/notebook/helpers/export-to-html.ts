@@ -1,9 +1,13 @@
 import { parseMarkdown } from '@/modules/cells/helpers/markdown';
 import type { Cell } from '@/modules/cells/interfaces/store';
 
+interface Output {
+  text: string;
+  logLevel: string;
+}
 interface ExtendedCell extends Cell {
   iframeContent: string | undefined | null;
-  outputs: { text: string; logLevel: string }[];
+  outputs: Output[];
 }
 
 function getStyles(): string {
@@ -99,7 +103,7 @@ function getStyles(): string {
   `;
 }
 
-function getIframe(): string {
+function getIframe(iframeContent: string): string {
   return `
   <div class="iframe-container">
     <div id="error"></div>
@@ -107,25 +111,26 @@ function getIframe(): string {
   `;
 }
 
-function getConsoleOutput(output: string, logLevel: string): string {
-  return `<li class="log-item ${logLevel}">${output}</li>`;
+function getConsoleOutput({ logLevel, text }: Output): string {
+  return `<li class="log-item ${logLevel}">${text}</li>`;
 }
 
-function getConsoleOutputs(): string {
+function getConsoleOutputs(outputs: Output[]): string {
   return `
     <div class="console-output">
       <ol>
+        ${outputs.map(getConsoleOutput).join('')}
       </ol>
     </div>
   `;
 }
 
-function getCodeCell(content: string): string {
+function getCodeCell(cell: ExtendedCell): string {
   return `
     <div class="cell">
-      <textarea value="${content}"></textarea>
-      ${getIframe()}
-      ${getConsoleOutputs()}
+      <textarea value="${cell.content}"></textarea>
+      ${cell.iframeContent ? getIframe(cell.iframeContent) : ''}
+      ${cell.outputs.length > 0 ? getConsoleOutputs(cell.outputs) : ''}
     </div>
   `;
 }
@@ -141,11 +146,11 @@ async function getMarkdownCell(content: string): Promise<string> {
     : '';
 }
 
-async function getCells(cells: Cell[]): Promise<string> {
+async function getCells(cells: ExtendedCell[]): Promise<string> {
   const promisedCells = await Promise.allSettled(
     cells.map((cell) =>
       cell.language !== 'markdown'
-        ? getCodeCell(cell.content)
+        ? getCodeCell(cell)
         : getMarkdownCell(cell.content),
     ),
   ).then((res) =>
