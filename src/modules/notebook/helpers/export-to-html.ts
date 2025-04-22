@@ -1,6 +1,11 @@
 import { parseMarkdown } from '@/modules/cells/helpers/markdown';
 import type { Cell } from '@/modules/cells/interfaces/store';
 
+interface ExtendedCell extends Cell {
+  iframeContent: string | undefined | null;
+  outputs: { text: string; logLevel: string }[];
+}
+
 function getStyles(): string {
   return `
 .container {
@@ -159,7 +164,7 @@ async function getNoteboolHTML({
   cells,
 }: {
   title?: string;
-  cells: Cell[];
+  cells: ExtendedCell[];
 }): Promise<string> {
   return `
     <div class="container">
@@ -171,6 +176,31 @@ async function getNoteboolHTML({
   `;
 }
 
+function getOutputsFromCell(cell: Cell): {
+  iframeContent: string | undefined | null;
+  outputs: { text: string; logLevel: string }[];
+} {
+  const outputs: { text: string; logLevel: string }[] = [];
+  let iframeContent: string | undefined | null;
+
+  if (cell.language !== 'markdown') {
+    iframeContent = document.querySelector(`#${cell.id} iframe`)?.innerHTML;
+
+    document.querySelectorAll(`#${cell.id} .log-item`).forEach((logItem) => {
+      const logLevel = logItem.classList
+        .toString()
+        .replace('log-item', '')
+        .replace(' ', '');
+      outputs.push({
+        text: logItem.textContent ?? '',
+        logLevel,
+      });
+    });
+  }
+
+  return { iframeContent, outputs };
+}
+
 export default async function exportToHtml({
   title,
   cells,
@@ -178,13 +208,17 @@ export default async function exportToHtml({
   title?: string;
   cells: Cell[];
 }): Promise<void> {
-  const htmlContent = await getNoteboolHTML({ title, cells });
-  const blob = new Blob([htmlContent], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = title || 'notebook.html';
-  a.click();
-  URL.revokeObjectURL(url);
-  a.remove();
+  const data = cells.map<ExtendedCell>((cell) => ({
+    ...cell,
+    ...getOutputsFromCell(cell),
+  }));
+  const htmlContent = await getNoteboolHTML({ title, cells: data });
+  // const blob = new Blob([htmlContent], { type: 'text/html' });
+  // const url = URL.createObjectURL(blob);
+  // const a = document.createElement('a');
+  // a.href = url;
+  // a.download = title || 'notebook.html';
+  // a.click();
+  // URL.revokeObjectURL(url);
+  // a.remove();
 }

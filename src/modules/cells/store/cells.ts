@@ -14,7 +14,7 @@ export const useCellsStore = defineStore('cells', () => {
     },
     b: {
       id: 'b',
-      content: "console.log('a')",
+      content: "console.log('b')",
       language: 'javascript',
     },
     c: {
