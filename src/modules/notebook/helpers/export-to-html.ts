@@ -133,7 +133,7 @@ function getConsoleOutputs(outputs: Output[]): string {
 function getCodeCell(cell: ExtendedCell): string {
   return `
     <div class="cell">
-      <textarea value="${cell.content}"></textarea>
+      <textarea>${cell.content}</textarea>
       ${cell.iframeContent ? getIframe(cell.iframeContent) : ''}
       ${cell.outputs.length > 0 ? getConsoleOutputs(cell.outputs) : ''}
     </div>
