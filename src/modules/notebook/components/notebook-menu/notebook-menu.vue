@@ -1,5 +1,7 @@
 <template>
-  <Menubar class="bg-background fixed top-13 z-10 border-none shadow-none">
+  <Menubar
+    class="bg-background fixed top-13 z-10 w-full border-none shadow-none"
+  >
     <MenubarMenu>
       <MenubarTrigger>Notebook</MenubarTrigger>
       <MenubarContent>
