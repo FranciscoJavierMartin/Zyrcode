@@ -76,17 +76,17 @@ function getStyles(): string {
             }
 
             &.info,
-            .debug,
-            .log {
+            &.debug,
+            &.log {
               background-color: oklch(1 0 0);
             }
 
             &.error {
-              background-color: oklch(0.577 0.245 27.325) 50%;
+              background-color: rgba(231, 0, 11, 0.5);
             }
 
             &.warn {
-              background-color: oklch(0.554 0.135 66.442) 50%;
+              background-color: rgba(166, 95, 0, 0.5);
               color: oklch(1 0 0);
             }
           }
@@ -106,6 +106,11 @@ function getStyles(): string {
 function getIframe(iframeContent: string): string {
   return `
   <div class="iframe-container">
+    <iframe
+     title="code preview"
+     sandbox="allow-scripts"
+     srcdoc="${iframeContent}"
+    />
     <div id="error"></div>
   </div>
   `;
@@ -172,12 +177,20 @@ async function getNoteboolHTML({
   cells: ExtendedCell[];
 }): Promise<string> {
   return `
-    <div class="container">
-      ${getNotebookTitle(title)}
-      <div class="cell-container">
-        ${await getCells(cells)}
+  <html>
+    <head>
+      <title>${title}</title>
+      <style>${getStyles()}</style>
+    </head>
+    <body>
+      <div class="container">
+        ${getNotebookTitle(title)}
+        <div class="cell-container">
+          ${await getCells(cells)}
+        </div>
       </div>
-    </div>
+    </body>
+  </html>
   `;
 }
 
@@ -218,12 +231,12 @@ export default async function exportToHtml({
     ...getOutputsFromCell(cell),
   }));
   const htmlContent = await getNoteboolHTML({ title, cells: data });
-  // const blob = new Blob([htmlContent], { type: 'text/html' });
-  // const url = URL.createObjectURL(blob);
-  // const a = document.createElement('a');
-  // a.href = url;
-  // a.download = title || 'notebook.html';
-  // a.click();
-  // URL.revokeObjectURL(url);
-  // a.remove();
+  const blob = new Blob([htmlContent], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = title || 'notebook.html';
+  a.click();
+  URL.revokeObjectURL(url);
+  a.remove();
 }

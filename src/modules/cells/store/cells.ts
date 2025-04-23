@@ -9,12 +9,22 @@ export const useCellsStore = defineStore('cells', () => {
   const cells = reactive<Record<string, Cell>>({
     a: {
       id: 'a',
-      content: "console.log('a')",
+      content: `import React from 'react';
+import { createRoot } from 'react-dom/client';
+
+createRoot(document.getElementById('root')).render(
+    <h1>Hello world from React</h1>
+);`,
       language: 'javascript',
     },
     b: {
       id: 'b',
-      content: "console.log('b')",
+      content: `console.log('b')
+console.info('info')
+console.warn('warning');
+console.debug('debugging information');
+console.error('error message');
+      `,
       language: 'javascript',
     },
     c: {

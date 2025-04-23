@@ -44,19 +44,19 @@ const outputs = defineModel<OutputPreviewData[]>();
 
 .log-item {
   @apply border-b border-slate-400 py-1.5 pl-2 text-xs first-of-type:pt-2 last-of-type:border-none last-of-type:pb-2;
-}
 
-.info,
-.debug,
-.log {
-  @apply bg-background dark:bg-neutral-800;
-}
+  &.info,
+  &.debug,
+  &.log {
+    @apply bg-background dark:bg-neutral-800;
+  }
 
-.error {
-  @apply bg-destructive-foreground/50 text-background dark:text-foreground;
-}
+  &.error {
+    @apply bg-destructive-foreground/50 text-background dark:text-foreground;
+  }
 
-.warn {
-  @apply text-background dark:text-foreground bg-yellow-700/50;
+  &.warn {
+    @apply text-background dark:text-foreground bg-yellow-700/50;
+  }
 }
 </style>
