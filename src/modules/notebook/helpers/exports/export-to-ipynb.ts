@@ -4,27 +4,45 @@ import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function exportToIpynb(title: string, cells: Cell[]): void {
   const notebook: NotebookIpynb = {
-    cells: [
+    worksheets: [
       {
-        cell_type: 'markdown',
-        metadata: {},
-        source: ['# Multi-line statements and strings'],
-      },
-      {
-        cell_type: 'code',
-        execution_count: 1,
-        metadata: {},
-        outputs: [
+        cells: [
           {
-            name: 'stdout', // stdout, stderr
-            output_type: 'stream',
-            text: ['a'],
+            cell_type: 'markdown',
+            metadata: {},
+            language: 'python',
+            input: ['# Multi-line statements and strings'],
+            outputs: [
+              {
+                output_type: 'stream',
+                stream: 'stdout',
+                text: ['Multi-line statements and strings'],
+              },
+            ],
+            collapsed: false,
+            prompt_number: 0,
+          },
+          {
+            cell_type: 'code',
+            metadata: {},
+            input: ["console.log('a')"],
+            language: 'python',
+            collapsed: false,
+            prompt_number: 1,
+            outputs: [
+              {
+                output_type: 'stream',
+                stream: 'stdout',
+                text: ['a'],
+              },
+            ],
           },
         ],
-        source: ["console.log('a')"],
+        metadata: {},
       },
     ],
     metadata: {
+      name: '',
       kernelspec: {
         display_name: 'Javascript (Node.js)',
         language: 'javascript',
@@ -35,12 +53,13 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
         mimetype: 'application/javascript',
         file_extension: 'ts',
         version: '22.14.0',
-        codemirror_mode: {
-          name: '',
-          version: 22,
-        },
-        nbconvert_exporter: 'javascript',
-        pygments_lexer: 'javascript',
+
+        // codemirror_mode: {
+        //   name: '',
+        //   version: 22,
+        // },
+        // nbconvert_exporter: 'javascript',
+        // pygments_lexer: 'javascript',
       },
     },
     nbformat: 3,
