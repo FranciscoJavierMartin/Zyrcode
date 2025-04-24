@@ -13,7 +13,16 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
         cell_type: 'code',
         execution_count: 1,
         metadata: {},
-        outputs: [],
+        outputs: [
+          {
+            data: {
+              'text/plain': ['a'],
+            },
+            output_type: 'execute_result',
+            execution_count: 1,
+            metadata: {},
+          },
+        ],
         source: ["console.log('a')"],
       },
     ],
