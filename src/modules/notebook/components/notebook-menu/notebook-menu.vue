@@ -26,11 +26,12 @@
     <MenubarMenu>
       <MenubarTrigger>Export</MenubarTrigger>
       <MenubarContent>
-        <MenubarItem :disabled="store.isEmpty" @click="exportAsHTML">
+        <MenubarItem disabled @click="exportAsHTML">
           Export as HTML
         </MenubarItem>
         <MenubarItem disabled>Export as PDF</MenubarItem>
         <MenubarItem disabled>Export as JSON</MenubarItem>
+        <MenubarItem disabled>Export as ipynb</MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
@@ -62,7 +63,6 @@ import {
 } from '@/modules/common/components/ui/menubar';
 import isMacOSInfo from '@/modules/common/helpers/is-mac-os';
 import { useCellsStore } from '@/modules/cells/store/cells';
-import exportToHtml from '@/modules/notebook/helpers/export-to-html';
 
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
@@ -72,6 +72,6 @@ function reloadPage(): void {
 }
 
 function exportAsHTML(): void {
-  exportToHtml({ title: store.notebookTitle, cells: store.cells });
+  // exportToHtml({ title: store.notebookTitle, cells: store.cells });
 }
 </script>
