@@ -35,6 +35,7 @@ export function getPreviewHTMLContainer(id: string): string {
           console.error(error);
         };
 
+        //TODO: Move outside the handler listener
         window.addEventListener('error', (event) => {
           event.preventDefault();
           handleError(event.error)

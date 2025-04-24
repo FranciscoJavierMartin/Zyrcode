@@ -194,6 +194,44 @@ async function getNoteboolHTML({
   `;
 }
 
+function getIframeContent(id: string): string | null {
+  const iframeElement: HTMLIFrameElement =
+    document.querySelector<HTMLIFrameElement>(
+      `#${id} iframe[title="code preview"]`,
+    )!;
+
+  const sameOriginAllowed = iframeElement.sandbox
+    .toString()
+    .includes('allow-same-origin');
+
+  if (!sameOriginAllowed) {
+    console.log('Inside');
+    iframeElement.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+  }
+
+  console.log(iframeElement.attributes.getNamedItem('sandbox'));
+
+  const head = iframeElement.contentWindow?.document.head.innerHTML ?? '';
+  const body = iframeElement.contentWindow?.document.body.innerHTML ?? '';
+
+  const iframeContent = `
+  <html>
+    <head>
+      ${head}
+    </head>
+    <body>
+      ${body}
+    </body>
+  </html>
+`;
+
+  if (!sameOriginAllowed) {
+    iframeElement.setAttribute('sandbox', 'allow-scripts');
+  }
+
+  return iframeContent;
+}
+
 function getOutputsFromCell(cell: Cell): {
   iframeContent: string | undefined | null;
   outputs: { text: string; logLevel: string }[];
@@ -202,7 +240,7 @@ function getOutputsFromCell(cell: Cell): {
   let iframeContent: string | undefined | null;
 
   if (cell.language !== 'markdown') {
-    iframeContent = document.querySelector(`#${cell.id} iframe`)?.innerHTML;
+    iframeContent = getIframeContent(cell.id);
 
     document.querySelectorAll(`#${cell.id} .log-item`).forEach((logItem) => {
       const logLevel = logItem.classList
