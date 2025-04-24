@@ -7,27 +7,25 @@ export interface NotebookIpynb {
 
 export interface Cell {
   cell_type: 'code' | 'markdown';
-  // metadata: CellMetadata;
-  metadata: object;
+  metadata: CellMetadata;
   source: string[];
   execution_count?: number;
   outputs?: Output[];
 }
 
-// export interface CellMetadata {}
-
-export interface Output {
-  data?: Data;
-  execution_count?: number;
-  // metadata?: CellMetadata;
-  metadata?: object;
-  output_type: string;
-  name?: string;
-  text?: string[];
+export interface CellMetadata {
+  collapsed?: boolean;
+  jupyter?: Jupyter;
 }
 
-export interface Data {
-  'text/plain': string[];
+export interface Jupyter {
+  outputs_hidden: boolean;
+}
+
+export interface Output {
+  name: string;
+  output_type: string;
+  text: string[];
 }
 
 export interface NotebookIpynbMetadata {

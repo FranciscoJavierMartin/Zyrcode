@@ -16,12 +16,9 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
         metadata: {},
         outputs: [
           {
-            data: {
-              'text/plain': ['a'],
-            },
-            output_type: 'execute_result',
-            execution_count: 1,
-            metadata: {},
+            name: 'stdout', // stdout, stderr
+            output_type: 'stream',
+            text: ['a'],
           },
         ],
         source: ["console.log('a')"],
