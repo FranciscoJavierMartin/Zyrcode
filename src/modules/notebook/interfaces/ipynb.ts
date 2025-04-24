@@ -6,17 +6,12 @@ export interface NotebookIpynb {
 }
 
 export interface Cell {
-  cell_type: CellType;
+  cell_type: 'code' | 'markdown';
   // metadata: CellMetadata;
   metadata: object;
   source: string[];
   execution_count?: number;
   outputs?: Output[];
-}
-
-export enum CellType {
-  Code = 'code',
-  Markdown = 'markdown',
 }
 
 // export interface CellMetadata {}

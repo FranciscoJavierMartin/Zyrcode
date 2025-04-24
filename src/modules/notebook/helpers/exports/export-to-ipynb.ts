@@ -3,7 +3,20 @@ import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
 
 export default function exportToIpynb(title: string, cells: Cell[]): void {
   const notebook: NotebookIpynb = {
-    cells: [],
+    cells: [
+      {
+        cell_type: 'markdown',
+        metadata: {},
+        source: ['# Multi-line statements and strings'],
+      },
+      {
+        cell_type: 'code',
+        execution_count: 1,
+        metadata: {},
+        outputs: [],
+        source: ["console.log('a')"],
+      },
+    ],
     metadata: {
       kernelspec: {
         display_name: 'Javascript (Node.js)',
