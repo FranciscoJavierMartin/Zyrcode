@@ -31,7 +31,9 @@
         </MenubarItem>
         <MenubarItem disabled>Export as PDF</MenubarItem>
         <MenubarItem disabled>Export as JSON</MenubarItem>
-        <MenubarItem disabled>Export as ipynb</MenubarItem>
+        <MenubarItem :disabled="store.isEmpty" @click="exportAsIpynb">
+          Export as ipynb
+        </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
@@ -74,4 +76,6 @@ function reloadPage(): void {
 function exportAsHTML(): void {
   // exportToHtml({ title: store.notebookTitle, cells: store.cells });
 }
+
+function exportAsIpynb(): void {}
 </script>
