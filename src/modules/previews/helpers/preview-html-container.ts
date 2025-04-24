@@ -28,19 +28,18 @@ export function getPreviewHTMLContainer(id: string): string {
       const consoleMethods = ['log', 'error', 'warn', 'debug', 'info'];
       consoleMethods.forEach((method) => enhanceConsoleMethod(method));
 
+      const handleError = (error) => {
+        const root = document.getElementById('root');
+        root.innerHTML = '<div style="color: red;">' + error + '</div>';
+        console.error(error);
+      };
+
+      window.addEventListener('error', (event) => {
+        event.preventDefault();
+        handleError(event.error);
+      });
+
       window.addEventListener('message', (event) => {
-        const handleError = (error) => {
-          const root = document.getElementById('root');
-          root.innerHTML = '<div style="color: red;">' + error + '</div>';
-          console.error(error);
-        };
-
-        //TODO: Move outside the handler listener
-        window.addEventListener('error', (event) => {
-          event.preventDefault();
-          handleError(event.error)
-        });
-
         try {
           eval(event.data);
         } catch(error){
