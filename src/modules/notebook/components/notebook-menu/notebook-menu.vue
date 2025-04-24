@@ -1,0 +1,77 @@
+<template>
+  <Menubar
+    class="bg-background fixed top-13 z-10 w-full border-none shadow-none"
+  >
+    <MenubarMenu>
+      <MenubarTrigger>Notebook</MenubarTrigger>
+      <MenubarContent>
+        <MenubarItem disabled>Rename</MenubarItem>
+        <MenubarItem @click="reloadPage">
+          Reload
+          <MenubarShortcut>
+            {{ isMacOS ? 'Cmd + R' : 'Ctrl + R' }}
+          </MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem :disabled="store.isEmpty" @click="store.clearAll()">
+          Clear all
+        </MenubarItem>
+      </MenubarContent>
+    </MenubarMenu>
+    <MenubarMenu>
+      <MenubarTrigger>Import</MenubarTrigger>
+      <MenubarContent>
+        <MenubarItem disabled>Import from JSON</MenubarItem>
+      </MenubarContent>
+    </MenubarMenu>
+    <MenubarMenu>
+      <MenubarTrigger>Export</MenubarTrigger>
+      <MenubarContent>
+        <MenubarItem disabled @click="exportAsHTML">
+          Export as HTML
+        </MenubarItem>
+        <MenubarItem disabled>Export as PDF</MenubarItem>
+        <MenubarItem disabled>Export as JSON</MenubarItem>
+        <MenubarItem disabled>Export as ipynb</MenubarItem>
+      </MenubarContent>
+    </MenubarMenu>
+    <MenubarMenu>
+      <MenubarTrigger>AI options</MenubarTrigger>
+      <MenubarContent>
+        <MenubarItem>
+          <a href="/Zyrcode/settings/#ai-settings" class="w-full"> Settings </a>
+        </MenubarItem>
+        <MenubarItem>
+          <a href="https://ollama.com/" class="flex w-full justify-between">
+            Ollama <ExternalLink />
+          </a>
+        </MenubarItem>
+      </MenubarContent>
+    </MenubarMenu>
+  </Menubar>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import { ExternalLink } from 'lucide-vue-next';
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarShortcut,
+  MenubarTrigger,
+} from '@/modules/common/components/ui/menubar';
+import isMacOSInfo from '@/modules/common/helpers/is-mac-os';
+import { useCellsStore } from '@/modules/cells/store/cells';
+
+const store = useCellsStore();
+const isMacOS = computed<boolean>(() => isMacOSInfo());
+
+function reloadPage(): void {
+  location.reload();
+}
+
+function exportAsHTML(): void {
+  // exportToHtml({ title: store.notebookTitle, cells: store.cells });
+}
+</script>

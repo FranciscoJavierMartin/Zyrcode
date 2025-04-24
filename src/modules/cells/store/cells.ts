@@ -5,11 +5,38 @@ import type { Language } from '@/modules/cells/interfaces/code';
 
 export const useCellsStore = defineStore('cells', () => {
   const _notebookTitle = ref<string>('');
-  const order = ref<string[]>([]);
-  const cells = reactive<Record<string, Cell>>({});
+  const order = ref<string[]>(['a', 'b', 'c']);
+  const cells = reactive<Record<string, Cell>>({
+    a: {
+      id: 'a',
+      content: `import React from 'react';
+import { createRoot } from 'react-dom/client';
+
+createRoot(document.getElementById('root')).render(
+    <h1>Hello world from React</h1>
+);`,
+      language: 'javascript',
+    },
+    b: {
+      id: 'b',
+      content: `console.log('b')
+console.info('info')
+console.warn('warning');
+console.debug('debugging information');
+console.error('error message');
+      `,
+      language: 'javascript',
+    },
+    c: {
+      id: 'c',
+      content: '# Hello world',
+      language: 'markdown',
+    },
+  });
   const orderedCells = computed<Cell[]>(() =>
     order.value.map((id) => cells[id]),
   );
+  const isEmpty = computed<boolean>(() => order.value.length === 0);
   const isLastOne = computed<boolean>(() => order.value.length === 1);
   const notebookTitle = computed<string>({
     get() {
@@ -76,6 +103,11 @@ export const useCellsStore = defineStore('cells', () => {
     }
   }
 
+  function clearAll(): void {
+    order.value = [];
+    Object.keys(cells).forEach((key) => delete cells[key]);
+  }
+
   return {
     notebookTitle,
     cells: orderedCells,
@@ -86,5 +118,7 @@ export const useCellsStore = defineStore('cells', () => {
     removeCell,
     moveCell,
     isLastOne,
+    clearAll,
+    isEmpty,
   };
 });

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div :id class="flex flex-col">
     <CellToolbar
       :direction
       :id
@@ -41,7 +41,7 @@
       </ResizablePanel>
     </ResizablePanelGroup>
     <Transition name="appear">
-      <ConsolePreview v-if="isConsoleOpen" v-model="outputs" />
+      <ConsolePreview v-show="isConsoleOpen" v-model="outputs" />
     </Transition>
   </div>
 </template>

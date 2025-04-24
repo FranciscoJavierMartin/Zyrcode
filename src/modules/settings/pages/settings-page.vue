@@ -16,3 +16,11 @@ import CommonSettings from '@/modules/settings/components/forms/common-settings/
 import EditorSettings from '@/modules/settings/components/forms/editor-settings/editor-settings.vue';
 import AiSettings from '@/modules/settings/components/forms/ai-settings/ai-settings.vue';
 </script>
+
+<style>
+main {
+  section:last-of-type {
+    min-height: calc(100dvh - 52px);
+  }
+}
+</style>
