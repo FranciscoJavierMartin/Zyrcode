@@ -1,1 +1,29 @@
-export default function exportToIpynb(): void {}
+import type { Cell } from '@/modules/cells/interfaces/store';
+import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
+
+export default function exportToIpynb(title: string, cells: Cell[]): void {
+  const notebook: NotebookIpynb = {
+    cells: [],
+    metadata: {
+      kernelspec: {
+        display_name: 'Javascript (Node.js)',
+        language: 'javascript',
+        name: 'javascript',
+      },
+      language_info: {
+        name: 'typescript',
+        mimetype: 'application/javascript',
+        file_extension: 'ts',
+        version: '22.14.0',
+        codemirror_mode: {
+          name: '',
+          version: 22,
+        },
+        nbconvert_exporter: 'javascript',
+        pygments_lexer: 'javascript',
+      },
+    },
+    nbformat: 3,
+    nbformat_minor: 0,
+  };
+}
