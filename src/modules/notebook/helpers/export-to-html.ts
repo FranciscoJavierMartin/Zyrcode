@@ -200,36 +200,42 @@ function getIframeContent(id: string): string | null {
       `#${id} iframe[title="code preview"]`,
     )!;
 
-  const sameOriginAllowed = iframeElement.sandbox
-    .toString()
-    .includes('allow-same-origin');
+  iframeElement.setAttribute('sandbox', 'allow-scripts allow-same-origin');
 
-  if (!sameOriginAllowed) {
-    console.log('Inside');
-    iframeElement.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-  }
+  setTimeout(() => {
+    console.log(iframeElement.contentWindow?.document.body);
+  }, 1000);
+  //   const sameOriginAllowed = iframeElement.sandbox
+  //     .toString()
+  //     .includes('allow-same-origin');
 
-  console.log(iframeElement.attributes.getNamedItem('sandbox'));
+  //   if (!sameOriginAllowed) {
+  //     console.log('Inside');
+  //     iframeElement.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+  //   }
 
-  const head = iframeElement.contentWindow?.document.head.innerHTML ?? '';
-  const body = iframeElement.contentWindow?.document.body.innerHTML ?? '';
+  //   console.log(iframeElement.attributes.getNamedItem('sandbox'));
 
-  const iframeContent = `
-  <html>
-    <head>
-      ${head}
-    </head>
-    <body>
-      ${body}
-    </body>
-  </html>
-`;
+  //   const head = iframeElement.contentWindow?.document.head.innerHTML ?? '';
+  //   const body = iframeElement.contentWindow?.document.body.innerHTML ?? '';
 
-  if (!sameOriginAllowed) {
-    iframeElement.setAttribute('sandbox', 'allow-scripts');
-  }
+  //   const iframeContent = `
+  //   <html>
+  //     <head>
+  //       ${head}
+  //     </head>
+  //     <body>
+  //       ${body}
+  //     </body>
+  //   </html>
+  // `;
 
-  return iframeContent;
+  //   if (!sameOriginAllowed) {
+  //     iframeElement.setAttribute('sandbox', 'allow-scripts');
+  //   }
+
+  // return iframeContent;
+  return '';
 }
 
 function getOutputsFromCell(cell: Cell): {
