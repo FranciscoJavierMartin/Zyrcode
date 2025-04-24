@@ -1,6 +1,7 @@
 import type { Cell } from '@/modules/cells/interfaces/store';
 import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function exportToIpynb(title: string, cells: Cell[]): void {
   const notebook: NotebookIpynb = {
     cells: [
