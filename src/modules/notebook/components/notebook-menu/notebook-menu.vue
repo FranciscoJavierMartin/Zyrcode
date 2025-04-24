@@ -65,6 +65,7 @@ import {
 } from '@/modules/common/components/ui/menubar';
 import isMacOSInfo from '@/modules/common/helpers/is-mac-os';
 import { useCellsStore } from '@/modules/cells/store/cells';
+import exportToIpynb from '@/modules/notebook/helpers/exports/export-to-ipynb';
 
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
@@ -77,5 +78,7 @@ function exportAsHTML(): void {
   // exportToHtml({ title: store.notebookTitle, cells: store.cells });
 }
 
-function exportAsIpynb(): void {}
+function exportAsIpynb(): void {
+  exportToIpynb(store.notebookTitle, store.cells);
+}
 </script>

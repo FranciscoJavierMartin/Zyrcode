@@ -48,4 +48,15 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
     nbformat: 3,
     nbformat_minor: 0,
   };
+
+  const blob = new Blob([JSON.stringify(notebook)], {
+    type: 'application/json',
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = title || 'notebook.ipynb';
+  a.click();
+  URL.revokeObjectURL(url);
+  a.remove();
 }
