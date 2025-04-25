@@ -2,53 +2,115 @@ export interface NotebookIpynb {
   metadata: NotebookIpynbMetadata;
   nbformat: number;
   nbformat_minor: number;
-  worksheets: Worksheet[];
-}
-
-export interface NotebookIpynbMetadata {
-  kernelspec: Kernelspec;
-  language_info: LanguageInfo;
-  name: string;
-}
-
-export interface Kernelspec {
-  display_name: string;
-  language: string;
-  name: string;
-}
-
-export interface LanguageInfo {
-  file_extension: string;
-  mimetype: string;
-  name: string;
-  version: string;
-}
-
-export interface Worksheet {
   cells: Cell[];
-  metadata: CellMetadata;
 }
 
-export interface Cell {
-  cell_type: string;
-  collapsed: boolean;
-  input: string[];
-  language: string;
-  metadata: CellMetadata;
+interface KernelSpec {
+  name: string;
+  display_name: string;
+}
+
+interface LanguageInfo {
+  name: string;
+  codemirror_mode?: string | object;
+  file_extension?: string;
+  mimetype?: string;
+  pygments_lexer?: string;
+}
+
+interface NotebookIpynbMetadata {
+  kernelspec?: KernelSpec;
+  lenguage_info?: LanguageInfo;
+  orig_nbformat: number;
+  title?: string;
+  authors?: { name: string }[];
+}
+
+interface MarkdownCell {
+  id: string;
+  cell_type: 'markdown';
+  metadata: {
+    name: string;
+    tags: string[];
+    jupyter: {
+      source_hidden: boolean;
+    };
+  };
+  source: Source;
+}
+
+interface CodeCell {
+  id: string;
+  cell_type: 'code';
+  metadata: {
+    name: string;
+    tags: string[];
+    jupyter: {
+      source_hidden: boolean;
+      outputs_hidden: boolean;
+    };
+    execution: {
+      'iopub.execute_input': string;
+      'iopub.status.busy': string;
+      'iopub.status.idle': string;
+      'shell.execute_reply': string;
+    };
+    collapsed: boolean;
+    scrolled: boolean | 'auto';
+  };
+  source: Source;
   outputs: Output[];
-  prompt_number: number;
+  execution_count: number | null;
 }
 
-export type CellMetadata = object;
-
-export interface Output {
-  html?: string[];
-  metadata?: CellMetadata;
-  output_type: string;
-  prompt_number?: number;
-  text?: string[];
-  stream?: string;
-  ename?: string;
-  evalue?: string;
-  traceback?: string[];
+interface RawCell {
+  id: string;
+  cell_type: 'raw';
+  metadata: {
+    format: string;
+    jupyter: {
+      source_hidden: boolean;
+    };
+    name: string;
+    tags: string[];
+  };
+  source: Source;
 }
+
+type Cell = MarkdownCell | CodeCell | RawCell;
+
+type Source = MultilineString;
+
+type Output = ExecutedResult | DisplayData | Stream | Error;
+
+interface ExecutedResult {
+  output_type: 'execute_result';
+  execution_count: number | null;
+  data: MimeBundle;
+  metatadata: OutputMetadata;
+}
+
+interface DisplayData {
+  output_type: 'display_data';
+  data: MimeBundle;
+  metadata: OutputMetadata;
+}
+
+interface Stream {
+  output_type: 'stream';
+  name: string; // stdout, stderr
+  text: string;
+}
+
+interface Error {
+  output_type: 'error';
+  ename: string;
+  evalue: string;
+  traceback: string[];
+}
+
+type MimeBundle = 'application/json';
+
+type MultilineString = string | string[];
+
+type OutputMetadata = object;
