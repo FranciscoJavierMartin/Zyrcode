@@ -26,7 +26,7 @@ interface NotebookIpynbMetadata {
   authors?: { name: string }[];
 }
 
-interface MarkdownCell {
+export interface MarkdownCell {
   id: string;
   cell_type: 'markdown';
   metadata: {
@@ -39,7 +39,7 @@ interface MarkdownCell {
   source: Source;
 }
 
-interface CodeCell {
+export interface CodeCell {
   id: string;
   cell_type: 'code';
   metadata: {
@@ -77,7 +77,7 @@ interface RawCell {
   source: Source;
 }
 
-type Cell = MarkdownCell | CodeCell | RawCell;
+export type Cell = MarkdownCell | CodeCell | RawCell;
 
 type Source = MultilineString;
 
