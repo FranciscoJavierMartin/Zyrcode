@@ -22,17 +22,17 @@ function getCellOutputs(id: string): ConsoleOutput[] {
       case 'info':
       case 'debug':
       case 'log':
+      case 'warn':
         outputs.push({
           output_type: 'stream',
           name: 'stdout', // stdout, stderr
           text: logItem.textContent ?? '',
         } as ConsoleOutputStream);
         break;
-      case 'warn':
-        break;
       case 'error':
         outputs.push({
           output_type: 'error',
+          ename: logItem.textContent ?? '',
           evalue: logItem.textContent ?? '',
         } as ConsoleOutputError);
         break;
