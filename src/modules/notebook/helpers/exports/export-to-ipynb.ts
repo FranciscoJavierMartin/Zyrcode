@@ -33,7 +33,7 @@ function getCellOutputs(id: string): ConsoleOutput[] {
         outputs.push({
           output_type: 'error',
           ename: logItem.textContent ?? '',
-          evalue: logItem.textContent ?? '',
+          evalue: logItem.textContent ?? 'My error',
           traceback: [],
         } as ConsoleOutputError);
         break;
