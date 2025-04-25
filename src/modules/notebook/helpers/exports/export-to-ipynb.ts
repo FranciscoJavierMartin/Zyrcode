@@ -14,14 +14,37 @@ function getCell(cell: Cell): NotebookCell {
       cell_type: 'markdown',
       id: cell.id,
       source: cell.content,
+      metadata: {
+        jupyter: {
+          source_hidden: true,
+        },
+        name: cell.id,
+        tags: [],
+      },
     } as MarkdownCell;
   } else {
     notebookCell = {
       cell_type: 'code',
       id: cell.id,
       execution_count: null,
+      metadata: {
+        collapsed: false,
+        scrolled: false,
+        execution: {
+          'iopub.execute_input': '',
+          'iopub.status.busy': '',
+          'iopub.status.idle': '',
+          'shell.execute_reply': '',
+        },
+        jupyter: {
+          outputs_hidden: false,
+          source_hidden: false,
+        },
+        name: cell.id,
+        tags: [],
+      },
       source: cell.content,
-      // outputs: []
+      outputs: [],
     } as CodeCell;
   }
 
