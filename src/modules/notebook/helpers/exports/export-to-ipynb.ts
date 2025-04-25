@@ -4,7 +4,43 @@ import type {
   Cell as NotebookCell,
   CodeCell,
   MarkdownCell,
+  Output as ConsoleOutput,
+  Error as ConsoleOutputError,
+  Stream as ConsoleOutputStream,
 } from '@/modules/notebook/interfaces/ipynb';
+
+function getCellOutputs(id: string): ConsoleOutput[] {
+  const outputs: ConsoleOutput[] = [];
+
+  document.querySelectorAll(`#${id} .log-item`).forEach((logItem) => {
+    const logLevel = logItem.classList
+      .toString()
+      .replace('log-item', '')
+      .replace(' ', '');
+
+    switch (logLevel) {
+      case 'info':
+      case 'debug':
+      case 'log':
+        outputs.push({
+          output_type: 'stream',
+          name: 'stdout', // stdout, stderr
+          text: logItem.textContent ?? '',
+        } as ConsoleOutputStream);
+        break;
+      case 'warn':
+        break;
+      case 'error':
+        outputs.push({
+          output_type: 'error',
+          evalue: logItem.textContent ?? '',
+        } as ConsoleOutputError);
+        break;
+    }
+  });
+
+  return outputs;
+}
 
 function getCell(cell: Cell): NotebookCell {
   let notebookCell: NotebookCell;
@@ -44,7 +80,7 @@ function getCell(cell: Cell): NotebookCell {
         tags: [],
       },
       source: cell.content,
-      outputs: [],
+      outputs: getCellOutputs(cell.id),
     } as CodeCell;
   }
 

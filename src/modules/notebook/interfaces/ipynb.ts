@@ -81,28 +81,28 @@ export type Cell = MarkdownCell | CodeCell | RawCell;
 
 type Source = MultilineString;
 
-type Output = ExecutedResult | DisplayData | Stream | Error;
+export type Output = ExecutedResult | DisplayData | Stream | Error;
 
-interface ExecutedResult {
+export interface ExecutedResult {
   output_type: 'execute_result';
   execution_count: number | null;
   data: MimeBundle;
   metatadata: OutputMetadata;
 }
 
-interface DisplayData {
+export interface DisplayData {
   output_type: 'display_data';
   data: MimeBundle;
   metadata: OutputMetadata;
 }
 
-interface Stream {
+export interface Stream {
   output_type: 'stream';
   name: string; // stdout, stderr
   text: string;
 }
 
-interface Error {
+export interface Error {
   output_type: 'error';
   ename: string;
   evalue: string;
