@@ -4,6 +4,7 @@ import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
 // TODO: Remove eslint no-unused-vars
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function exportToIpynb(title: string, cells: Cell[]): void {
+  // TODO: Validate via zod
   const notebook: NotebookIpynb = {
     nbformat: 4,
     nbformat_minor: 5,
@@ -25,7 +26,7 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
         cell_type: 'markdown',
         id: 'cell-0',
         metadata: {
-          name: '',
+          name: 'cell.0',
           tags: [],
           jupyter: {
             source_hidden: false,
@@ -45,7 +46,7 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
             source_hidden: false,
           },
           tags: [],
-          name: '',
+          name: 'cell.1',
           execution: {
             'iopub.execute_input': '',
             'iopub.status.busy': '',
