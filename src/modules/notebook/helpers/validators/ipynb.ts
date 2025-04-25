@@ -1,5 +1,32 @@
 import * as z from 'zod';
 
+const cellIdSchema = z
+  .string()
+  .min(1)
+  .max(64)
+  .regex(/^[a-zA-Z0-9-_]+$/);
+
+const execution_count = z.number().int().min(0).nullable();
+const metadataNameSchema = z.string().regex(/^.+$/);
+const metadataTagsSchema = z
+  .array(z.string().regex(/^[^,]+$/))
+  .superRefine((items, ctx) => {
+    const uniqueItemsCount = new Set(items).size;
+
+    if (uniqueItemsCount !== items.length) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Duplicated values are not allowed',
+      });
+    }
+  });
+const sourceSchema = z.union([z.string(), z.array(z.string())]);
+
+// TODO: https://github.com/jupyter/nbformat/blob/main/nbformat/v4/nbformat.v4.schema.json
+const outputSchema = z.discriminatedUnion('outpyt_type', [
+  z.object({ outpyt_type: z.literal('execute_result'), execution_count }),
+]);
+
 export const ipynbSchema = z.object({
   nbformat_minor: z.number(),
   nbformat: z.number(),
@@ -19,5 +46,51 @@ export const ipynbSchema = z.object({
     title: z.string(),
     authors: z.array(z.object({ name: z.string() })),
   }),
-  cells: z.array(z.object({})),
+  cells: z.array(
+    z.discriminatedUnion('cell_type', [
+      z.object({
+        cell_type: z.literal('markdown'),
+        id: cellIdSchema,
+        metadata: z.object({
+          name: metadataNameSchema,
+          tags: metadataTagsSchema,
+          jupyter: z.object({
+            source_hidden: z.boolean(),
+          }),
+        }),
+        source: sourceSchema,
+      }),
+      z.object({
+        cell_type: z.literal('code'),
+        id: cellIdSchema,
+        metadata: z.object({
+          jupyter: z.object({
+            source_hidden: z.boolean(),
+            outputs_hidden: z.boolean(),
+          }),
+          execution: z.object({
+            'iopub.execute_input': z
+              .string()
+              .datetime()
+              .regex(/^.*$/)
+              .optional(),
+            'iopub.status.busy': z.string().datetime().regex(/^.*$/).optional(),
+            'shell.execute_reply': z
+              .string()
+              .datetime()
+              .regex(/^.*$/)
+              .optional(),
+            'iopub.status.idle': z.string().datetime().regex(/^.*$/).optional(),
+          }),
+          collapsed: z.boolean(),
+          scrolled: z.union([z.boolean(), z.literal('auto')]),
+          name: metadataNameSchema,
+          tags: metadataTagsSchema,
+        }),
+        source: sourceSchema,
+        outputs: z.array(outputSchema),
+        execution_count,
+      }),
+    ]),
+  ),
 });
