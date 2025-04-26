@@ -59,6 +59,8 @@ function getCell(cell: Cell): NotebookCell {
       },
     } as MarkdownCell;
   } else {
+    const date = new Date().toISOString();
+
     notebookCell = {
       cell_type: 'code',
       id: cell.id,
@@ -67,10 +69,10 @@ function getCell(cell: Cell): NotebookCell {
         collapsed: false,
         scrolled: false,
         execution: {
-          'iopub.execute_input': '',
-          'iopub.status.busy': '',
-          'iopub.status.idle': '',
-          'shell.execute_reply': '',
+          'iopub.execute_input': date,
+          'iopub.status.busy': date,
+          'iopub.status.idle': date,
+          'shell.execute_reply': date,
         },
         jupyter: {
           outputs_hidden: false,
@@ -115,16 +117,16 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
     console.log(error);
   }
 
-  // const blob = new Blob([JSON.stringify(notebook)], {
-  //   type: 'application/json',
-  // });
-  // const url = URL.createObjectURL(blob);
-  // const a = document.createElement('a');
-  // a.href = url;
-  // a.download = `${title || 'notebook'}.ipynb`;
-  // a.click();
-  // URL.revokeObjectURL(url);
-  // a.remove();
+  const blob = new Blob([JSON.stringify(notebook)], {
+    type: 'application/json',
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${title || 'notebook'}.ipynb`;
+  a.click();
+  URL.revokeObjectURL(url);
+  a.remove();
 }
 
 /*const notebook: NotebookIpynb = {
