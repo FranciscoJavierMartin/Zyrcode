@@ -49,6 +49,16 @@
           <MessageCircleOff class="size-5" />
         </Button>
       </TooltipButton>
+      <TooltipButton :text="$t('notebook.toolbar.copyCell')">
+        <Button
+          :disabled="!isCodeAvailable"
+          variant="hover"
+          class="button-icon"
+          @click="copyCell"
+        >
+          <Copy class="size-5" />
+        </Button>
+      </TooltipButton>
       <TooltipButton
         :text="$t('notebook.toolbar.splitHorizontal')"
         v-if="isLargeScreen"
@@ -87,6 +97,7 @@ import { computed } from 'vue';
 import {
   ArrowDown,
   ArrowUp,
+  Copy,
   MessageCircleOff,
   PencilRuler,
   Plus,
@@ -136,5 +147,9 @@ function moveDown(): void {
 
 function addCellBelow(): void {
   store.addCellBelow(props.id, props.language);
+}
+
+function copyCell(): void {
+  store.copyCell(props.id);
 }
 </script>

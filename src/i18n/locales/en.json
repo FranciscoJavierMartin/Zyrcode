@@ -17,6 +17,7 @@
       "showConsole": "Show console",
       "hideConsole": "Hide console",
       "clearConsole": "Clear console",
+      "copyCell": "Copy cell",
       "splitHorizontal": "Split horizontal",
       "splitVertical": "Split vertical",
       "formatCode": "Format code",
