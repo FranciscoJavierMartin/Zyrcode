@@ -40,7 +40,7 @@
         <MenubarItem disabled>
           {{ $t('notebook.menu.export.pdf') }}
         </MenubarItem>
-        <MenubarItem disabled>
+        <MenubarItem :disabled="store.isEmpty" @click="exportAsJson">
           {{ $t('notebook.menu.export.json') }}
         </MenubarItem>
         <MenubarItem :disabled="store.isEmpty" @click="exportAsIpynb">
@@ -83,6 +83,7 @@ import {
 import isMacOSInfo from '@/modules/common/helpers/is-mac-os';
 import { useCellsStore } from '@/modules/cells/store/cells';
 import exportToIpynb from '@/modules/notebook/helpers/exports/export-to-ipynb';
+import exportToJson from '@/modules/notebook/helpers/exports/export-to-json';
 
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
@@ -98,6 +99,14 @@ function exportAsHTML(): void {
 
 function exportAsIpynb(): void {
   exportToIpynb(
+    store.notebookTitle,
+    store.cells,
+    t('notebook.menu.export.error'),
+  );
+}
+
+function exportAsJson(): void {
+  exportToJson(
     store.notebookTitle,
     store.cells,
     t('notebook.menu.export.error'),
