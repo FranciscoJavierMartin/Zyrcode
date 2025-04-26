@@ -8,6 +8,7 @@ import type {
   Stream as ConsoleOutputStream,
 } from '@/modules/notebook/interfaces/ipynb';
 import { ipynbSchema } from '@/modules/notebook/helpers/validators/ipynb';
+import { toast } from 'vue-sonner';
 
 function getCellOutputs(id: string): ConsoleOutput[] {
   const outputs: ConsoleOutput[] = [];
@@ -109,20 +110,22 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
     cells: cells.map(getCell),
   };
 
-  try {
-    ipynbSchema.parse(notebook);
+  toast.error('Something went wrong');
 
-    const blob = new Blob([JSON.stringify(notebook)], {
-      type: 'application/json',
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${title || 'notebook'}.ipynb`;
-    a.click();
-    URL.revokeObjectURL(url);
-    a.remove();
-  } catch (error) {
-    console.log(error);
-  }
+  // try {
+  //   ipynbSchema.parse(notebook);
+
+  //   const blob = new Blob([JSON.stringify(notebook)], {
+  //     type: 'application/json',
+  //   });
+  //   const url = URL.createObjectURL(blob);
+  //   const a = document.createElement('a');
+  //   a.href = url;
+  //   a.download = `${title || 'notebook'}.ipynb`;
+  //   a.click();
+  //   URL.revokeObjectURL(url);
+  //   a.remove();
+  // } catch (error) {
+  //   console.log(error);
+  // }
 }

@@ -40,7 +40,7 @@ const display_data = z.object({
 
 const stream = z.object({
   output_type: z.literal('stream'),
-  name: z.string(),
+  name: z.union([z.literal('stdout'), z.literal('stderr')]),
   text: multilineString,
 });
 

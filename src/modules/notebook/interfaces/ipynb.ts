@@ -98,7 +98,7 @@ export interface DisplayData {
 
 export interface Stream {
   output_type: 'stream';
-  name: string; // stdout, stderr
+  name: 'stdout' | 'stderr';
   text: string;
 }
 
