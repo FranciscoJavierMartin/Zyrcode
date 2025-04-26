@@ -37,14 +37,14 @@ export const ipynbSchema = z.object({
     }),
     lenguage_info: z.object({
       name: z.string(),
-      codemirror_mode: z.union([z.string(), z.object({})]),
+      codemirror_mode: z.union([z.string(), z.object({})]).optional(),
       file_extension: z.string(),
       mimetype: z.string(),
-      pygments_lexer: z.string(),
+      pygments_lexer: z.string().optional(),
     }),
     orig_nbformat: z.number().int().min(1),
-    title: z.string(),
-    authors: z.array(z.object({ name: z.string() })),
+    title: z.string().optional(),
+    authors: z.array(z.object({ name: z.string() })).optional(),
   }),
   cells: z.array(
     z.discriminatedUnion('cell_type', [

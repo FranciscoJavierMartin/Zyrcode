@@ -5,9 +5,9 @@ import type {
   CodeCell,
   MarkdownCell,
   Output as ConsoleOutput,
-  // Error as ConsoleOutputError,
   Stream as ConsoleOutputStream,
 } from '@/modules/notebook/interfaces/ipynb';
+import { ipynbSchema } from '../validators/ipynb';
 
 function getCellOutputs(id: string): ConsoleOutput[] {
   const outputs: ConsoleOutput[] = [];
@@ -35,12 +35,6 @@ function getCellOutputs(id: string): ConsoleOutput[] {
           name: 'stderr', // stdout, stderr
           text: logItem.textContent ?? '',
         } as ConsoleOutputStream);
-        // outputs.push({
-        //   output_type: 'error',
-        //   ename: logItem.textContent ?? '',
-        //   evalue: logItem.textContent ?? 'My error',
-        //   traceback: [],
-        // } as ConsoleOutputError);
         break;
     }
   });
@@ -114,16 +108,23 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
     cells: cells.map(getCell),
   };
 
-  const blob = new Blob([JSON.stringify(notebook)], {
-    type: 'application/json',
-  });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `${title || 'notebook'}.ipynb`;
-  a.click();
-  URL.revokeObjectURL(url);
-  a.remove();
+  try {
+    ipynbSchema.parse(notebook);
+    console.log('Validated successfully');
+  } catch (error) {
+    console.log(error);
+  }
+
+  // const blob = new Blob([JSON.stringify(notebook)], {
+  //   type: 'application/json',
+  // });
+  // const url = URL.createObjectURL(blob);
+  // const a = document.createElement('a');
+  // a.href = url;
+  // a.download = `${title || 'notebook'}.ipynb`;
+  // a.click();
+  // URL.revokeObjectURL(url);
+  // a.remove();
 }
 
 /*const notebook: NotebookIpynb = {
