@@ -22,6 +22,28 @@
       "formatCode": "Formatear código",
       "removeCell": "Borrar celda",
       "addCellBelow": "Agregar celda debajo"
+    },
+    "menu": {
+      "notebook": {
+        "rename": "Renombrar",
+        "reload": "Recargar",
+        "clearAll": "Limpiar celdas"
+      },
+      "import": {
+        "title": "Importar",
+        "json": "Importar desde JSON"
+      },
+      "export": {
+        "title": "Exportar",
+        "error": "Error durante la exportacion del notebook.",
+        "html": "Exportar como HTML",
+        "ipynb": "Exportar como ipynb",
+        "pdf": "Exportar como PDF",
+        "json": "Exportar como JSON"
+      },
+      "ai": {
+        "title": "Opciones IA"
+      }
     }
   },
   "settings": "Ajustes",

@@ -5,40 +5,58 @@
     <MenubarMenu>
       <MenubarTrigger>Notebook</MenubarTrigger>
       <MenubarContent>
-        <MenubarItem disabled>Rename</MenubarItem>
+        <MenubarItem disabled>
+          {{ $t('notebook.menu.notebook.rename') }}
+        </MenubarItem>
         <MenubarItem @click="reloadPage">
-          Reload
+          {{ $t('notebook.menu.notebook.reload') }}
           <MenubarShortcut>
             {{ isMacOS ? 'Cmd + R' : 'Ctrl + R' }}
           </MenubarShortcut>
         </MenubarItem>
         <MenubarItem :disabled="store.isEmpty" @click="store.clearAll()">
-          Clear all
+          {{ $t('notebook.menu.notebook.clearAll') }}
         </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
-      <MenubarTrigger>Import</MenubarTrigger>
+      <MenubarTrigger>
+        {{ $t('notebook.menu.import.title') }}
+      </MenubarTrigger>
       <MenubarContent>
-        <MenubarItem disabled>Import from JSON</MenubarItem>
+        <MenubarItem disabled>
+          {{ $t('notebook.menu.import.json') }}
+        </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
-      <MenubarTrigger>Export</MenubarTrigger>
+      <MenubarTrigger>
+        {{ $t('notebook.menu.export.title') }}
+      </MenubarTrigger>
       <MenubarContent>
         <MenubarItem disabled @click="exportAsHTML">
-          Export as HTML
+          {{ $t('notebook.menu.export.html') }}
         </MenubarItem>
-        <MenubarItem disabled>Export as PDF</MenubarItem>
-        <MenubarItem disabled>Export as JSON</MenubarItem>
-        <MenubarItem disabled>Export as ipynb</MenubarItem>
+        <MenubarItem disabled>
+          {{ $t('notebook.menu.export.pdf') }}
+        </MenubarItem>
+        <MenubarItem disabled>
+          {{ $t('notebook.menu.export.json') }}
+        </MenubarItem>
+        <MenubarItem :disabled="store.isEmpty" @click="exportAsIpynb">
+          {{ $t('notebook.menu.export.ipynb') }}
+        </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
-      <MenubarTrigger>AI options</MenubarTrigger>
+      <MenubarTrigger>
+        {{ $t('notebook.menu.ai.title') }}
+      </MenubarTrigger>
       <MenubarContent>
         <MenubarItem>
-          <a href="/Zyrcode/settings/#ai-settings" class="w-full"> Settings </a>
+          <a href="/Zyrcode/settings/#ai-settings" class="w-full">
+            {{ $t('settings') }}
+          </a>
         </MenubarItem>
         <MenubarItem>
           <a href="https://ollama.com/" class="flex w-full justify-between">
@@ -53,6 +71,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { ExternalLink } from 'lucide-vue-next';
+import { useI18n } from 'vue-i18n';
 import {
   Menubar,
   MenubarContent,
@@ -63,9 +82,11 @@ import {
 } from '@/modules/common/components/ui/menubar';
 import isMacOSInfo from '@/modules/common/helpers/is-mac-os';
 import { useCellsStore } from '@/modules/cells/store/cells';
+import exportToIpynb from '@/modules/notebook/helpers/exports/export-to-ipynb';
 
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
+const { t } = useI18n();
 
 function reloadPage(): void {
   location.reload();
@@ -73,5 +94,13 @@ function reloadPage(): void {
 
 function exportAsHTML(): void {
   // exportToHtml({ title: store.notebookTitle, cells: store.cells });
+}
+
+function exportAsIpynb(): void {
+  exportToIpynb(
+    store.notebookTitle,
+    store.cells,
+    t('notebook.menu.export.error'),
+  );
 }
 </script>
