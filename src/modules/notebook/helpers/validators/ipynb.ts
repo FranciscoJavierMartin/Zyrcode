@@ -20,11 +20,43 @@ const metadataTagsSchema = z
       });
     }
   });
-const sourceSchema = z.union([z.string(), z.array(z.string())]);
+const outputMetadata = z.record(z.string(), z.any());
+const mimebundle = z.string();
+const multilineString = z.union([z.string(), z.array(z.string())]);
+const sourceSchema = multilineString;
+
+const execute_result = z.object({
+  output_type: z.literal('execute_result'),
+  execution_count,
+  data: mimebundle,
+  metadata: outputMetadata,
+});
+
+const display_data = z.object({
+  output_type: z.literal('display_data'),
+  data: mimebundle,
+  metadata: outputMetadata,
+});
+
+const stream = z.object({
+  output_type: z.literal('stream'),
+  name: z.string(),
+  text: multilineString,
+});
+
+const error_output = z.object({
+  output_type: z.literal('error'),
+  ename: z.string(),
+  evalue: z.string(),
+  traceback: z.array(z.string()),
+});
 
 // TODO: https://github.com/jupyter/nbformat/blob/main/nbformat/v4/nbformat.v4.schema.json
-const outputSchema = z.discriminatedUnion('outpyt_type', [
-  z.object({ outpyt_type: z.literal('execute_result'), execution_count }),
+const outputSchema = z.discriminatedUnion('output_type', [
+  execute_result,
+  display_data,
+  stream,
+  error_output,
 ]);
 
 export const ipynbSchema = z.object({
