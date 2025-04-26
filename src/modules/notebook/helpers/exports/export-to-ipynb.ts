@@ -42,7 +42,7 @@ function getCellOutputs(id: string): ConsoleOutput[] {
   return outputs;
 }
 
-function getCell(cell: Cell): NotebookCell {
+function getCell(cell: Cell, index: number): NotebookCell {
   let notebookCell: NotebookCell;
 
   if (cell.language === 'markdown') {
@@ -64,7 +64,7 @@ function getCell(cell: Cell): NotebookCell {
     notebookCell = {
       cell_type: 'code',
       id: cell.id,
-      execution_count: null,
+      execution_count: index + 1,
       metadata: {
         collapsed: false,
         scrolled: false,
