@@ -1,6 +1,7 @@
 import type { Cell } from '@/modules/cells/interfaces/store';
 import { errorToast } from '@/modules/common/composables/toasts';
 import { jsonSchema } from '@/modules/notebook/helpers/validators/json';
+import downloadNotebook from '@/modules/notebook/helpers/exports/download-notebook';
 
 export default function exportToJson(
   title: string,
@@ -18,17 +19,7 @@ export default function exportToJson(
 
   try {
     jsonSchema.parse(notebook);
-
-    const blob = new Blob([JSON.stringify(notebook)], {
-      type: 'application/json',
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${title || 'notebook'}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-    a.remove();
+    downloadNotebook(title, notebook, 'json');
   } catch (error) {
     console.log(error);
     errorToast(errorMessage);
