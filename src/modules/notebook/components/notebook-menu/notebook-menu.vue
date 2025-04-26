@@ -24,8 +24,10 @@
         {{ $t('notebook.menu.import.title') }}
       </MenubarTrigger>
       <MenubarContent>
-        <MenubarItem disabled>
+        <MenubarItem @select="openInput">
           {{ $t('notebook.menu.import.json') }}
+          <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
+          <input ref="notebookJson" type="file" class="hidden" />
         </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
@@ -69,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, useTemplateRef } from 'vue';
 import { ExternalLink } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
 import {
@@ -85,6 +87,7 @@ import { useCellsStore } from '@/modules/cells/store/cells';
 import exportToIpynb from '@/modules/notebook/helpers/exports/export-to-ipynb';
 import exportToJson from '@/modules/notebook/helpers/exports/export-to-json';
 
+const notebookJson = useTemplateRef('notebookJson');
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
 const { t } = useI18n();
@@ -111,5 +114,9 @@ function exportAsJson(): void {
     store.cells,
     t('notebook.menu.export.error'),
   );
+}
+
+function openInput(): void {
+  notebookJson.value?.click();
 }
 </script>
