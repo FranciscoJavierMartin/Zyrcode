@@ -110,7 +110,12 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
     cells: cells.map(getCell),
   };
 
-  toast.error('Something went wrong');
+  toast.error('Something went wrong', {
+    style: {
+      '--normal-bg': 'var(--error-background)',
+      '--normal-text': 'var(--muted)',
+    },
+  });
 
   // try {
   //   ipynbSchema.parse(notebook);
