@@ -31,7 +31,8 @@
       },
       "import": {
         "title": "Import",
-        "json": "Import from JSON"
+        "json": "Import from JSON",
+        "error": "Something went wrong while importing notebook."
       },
       "export": {
         "title": "Export",

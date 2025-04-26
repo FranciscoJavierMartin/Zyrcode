@@ -31,7 +31,8 @@
       },
       "import": {
         "title": "Importar",
-        "json": "Importar desde JSON"
+        "json": "Importar desde JSON",
+        "error": "Error durante la importacion del notebook."
       },
       "export": {
         "title": "Exportar",

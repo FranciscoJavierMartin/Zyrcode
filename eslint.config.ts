@@ -56,6 +56,17 @@ export default defineConfigWithVueTs(
           order: ['template', 'script', 'style'],
         },
       ],
+      'vuejs-accessibility/label-has-for': [
+        'error',
+        {
+          components: ['VLabel', 'label'],
+          controlComponents: ['VInput', 'input'],
+          required: {
+            every: ['nesting', 'id'],
+          },
+          allowChildren: true,
+        },
+      ],
     },
   },
 );
