@@ -23,7 +23,7 @@ createRoot(document.getElementById('root')).render(
 console.info('info')
 console.warn('warning');
 console.debug('debugging information');
-console.error('error message');
+console.error('error message for logger');
       `,
       language: 'javascript',
     },

@@ -31,11 +31,16 @@ function getCellOutputs(id: string): ConsoleOutput[] {
         break;
       case 'error':
         outputs.push({
-          output_type: 'error',
-          ename: logItem.textContent ?? '',
-          evalue: logItem.textContent ?? 'My error',
-          traceback: [],
-        } as ConsoleOutputError);
+          output_type: 'stream',
+          name: 'stderr', // stdout, stderr
+          text: logItem.textContent ?? '',
+        } as ConsoleOutputStream);
+        // outputs.push({
+        //   output_type: 'error',
+        //   ename: logItem.textContent ?? '',
+        //   evalue: logItem.textContent ?? 'My error',
+        //   traceback: [],
+        // } as ConsoleOutputError);
         break;
     }
   });
