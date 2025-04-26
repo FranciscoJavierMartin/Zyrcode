@@ -55,6 +55,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { ExternalLink } from 'lucide-vue-next';
+import { useI18n } from 'vue-i18n';
 import {
   Menubar,
   MenubarContent,
@@ -69,6 +70,7 @@ import exportToIpynb from '@/modules/notebook/helpers/exports/export-to-ipynb';
 
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
+const { t } = useI18n();
 
 function reloadPage(): void {
   location.reload();
@@ -79,6 +81,6 @@ function exportAsHTML(): void {
 }
 
 function exportAsIpynb(): void {
-  exportToIpynb(store.notebookTitle, store.cells);
+  exportToIpynb(store.notebookTitle, store.cells, t('notebook.export.error'));
 }
 </script>

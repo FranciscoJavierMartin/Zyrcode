@@ -22,6 +22,9 @@
       "formatCode": "Formatear código",
       "removeCell": "Borrar celda",
       "addCellBelow": "Agregar celda debajo"
+    },
+    "export": {
+      "error": "Error durante la exportacion del notebook."
     }
   },
   "settings": "Ajustes",

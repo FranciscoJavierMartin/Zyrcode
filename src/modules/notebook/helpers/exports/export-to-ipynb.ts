@@ -90,7 +90,11 @@ function getCell(cell: Cell, index: number): NotebookCell {
   return notebookCell;
 }
 
-export default function exportToIpynb(title: string, cells: Cell[]): void {
+export default function exportToIpynb(
+  title: string,
+  cells: Cell[],
+  errorMessage: string,
+): void {
   const notebook: NotebookIpynb = {
     nbformat: 4,
     nbformat_minor: 5,
@@ -124,6 +128,6 @@ export default function exportToIpynb(title: string, cells: Cell[]): void {
     URL.revokeObjectURL(url);
     a.remove();
   } catch {
-    errorToast('Something went wrong while exporting notebook.');
+    errorToast(errorMessage);
   }
 }

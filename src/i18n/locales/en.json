@@ -22,6 +22,9 @@
       "formatCode": "Format code",
       "removeCell": "Remove cell",
       "addCellBelow": "Add cell below"
+    },
+    "export": {
+      "error": "Something went wrong while exporting notebook."
     }
   },
   "settings": "Settings",
