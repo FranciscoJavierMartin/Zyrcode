@@ -108,6 +108,19 @@ console.error('error message for logger');
     Object.keys(cells).forEach((key) => delete cells[key]);
   }
 
+  function loadNotebook(notebookData: {
+    title: string;
+    cells: Record<string, Cell>;
+    order: string[];
+  }): void {
+    clearAll();
+    notebookTitle.value = notebookData.title;
+    Object.entries(notebookData.cells).map(([id, cell]) => {
+      cells[id] = cell;
+    });
+    order.value = notebookData.order;
+  }
+
   return {
     notebookTitle,
     cells: orderedCells,
@@ -120,5 +133,6 @@ console.error('error message for logger');
     isLastOne,
     clearAll,
     isEmpty,
+    loadNotebook,
   };
 });
