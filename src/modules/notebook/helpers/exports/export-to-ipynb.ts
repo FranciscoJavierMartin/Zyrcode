@@ -9,6 +9,7 @@ import type {
 } from '@/modules/notebook/interfaces/ipynb';
 import { ipynbSchema } from '@/modules/notebook/helpers/validators/ipynb';
 import { errorToast } from '@/modules/common/composables/toasts';
+import downloadNotebook from '@/modules/notebook/helpers/exports/download-notebook';
 
 function getCellOutputs(id: string): ConsoleOutput[] {
   const outputs: ConsoleOutput[] = [];
@@ -26,14 +27,14 @@ function getCellOutputs(id: string): ConsoleOutput[] {
       case 'warn':
         outputs.push({
           output_type: 'stream',
-          name: 'stdout', // stdout, stderr
+          name: 'stdout',
           text: logItem.textContent ?? '',
         } as ConsoleOutputStream);
         break;
       case 'error':
         outputs.push({
           output_type: 'stream',
-          name: 'stderr', // stdout, stderr
+          name: 'stderr',
           text: logItem.textContent ?? '',
         } as ConsoleOutputStream);
         break;
@@ -116,17 +117,7 @@ export default function exportToIpynb(
 
   try {
     ipynbSchema.parse(notebook);
-
-    const blob = new Blob([JSON.stringify(notebook)], {
-      type: 'application/json',
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${title || 'notebook'}.ipynb`;
-    a.click();
-    URL.revokeObjectURL(url);
-    a.remove();
+    downloadNotebook(title, notebook, 'ipynb');
   } catch {
     errorToast(errorMessage);
   }
