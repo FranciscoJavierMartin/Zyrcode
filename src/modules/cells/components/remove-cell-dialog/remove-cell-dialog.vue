@@ -76,7 +76,7 @@ function closeAlertDialog(): void {
 
 .remove-cell-button {
   svg {
-    @apply group-hover:text-background dark:group-hover:text-background dark:text-foreground text-red-500;
+    @apply text-error-background group-hover:text-background dark:group-hover:text-background;
   }
 }
 </style>
