@@ -51,7 +51,6 @@ const error_output = z.object({
   traceback: z.array(z.string()),
 });
 
-// TODO: https://github.com/jupyter/nbformat/blob/main/nbformat/v4/nbformat.v4.schema.json
 const outputSchema = z.discriminatedUnion('output_type', [
   execute_result,
   display_data,

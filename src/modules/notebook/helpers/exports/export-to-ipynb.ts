@@ -102,7 +102,7 @@ export default function exportToIpynb(
       title,
       orig_nbformat: 4,
       kernelspec: {
-        display_name: 'Javascript (Node.js)',
+        display_name: 'Javascript',
         name: 'javascript',
       },
       lenguage_info: {

@@ -23,8 +23,27 @@
       "removeCell": "Remove cell",
       "addCellBelow": "Add cell below"
     },
-    "export": {
-      "error": "Something went wrong while exporting notebook."
+    "menu": {
+      "notebook": {
+        "rename": "Rename",
+        "reload": "Reload",
+        "clearAll": "Clear all"
+      },
+      "import": {
+        "title": "Import",
+        "json": "Import from JSON"
+      },
+      "export": {
+        "title": "Export",
+        "error": "Something went wrong while exporting notebook.",
+        "html": "Export as HTML",
+        "ipynb": "Export as ipynb",
+        "pdf": "Export as PDF",
+        "json": "Export as JSON"
+      },
+      "ai": {
+        "title": "AI options"
+      }
     }
   },
   "settings": "Settings",
