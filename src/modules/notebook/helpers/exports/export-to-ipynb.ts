@@ -5,7 +5,7 @@ import type {
   CodeCell,
   MarkdownCell,
   Output as ConsoleOutput,
-  Error as ConsoleOutputError,
+  // Error as ConsoleOutputError,
   Stream as ConsoleOutputStream,
 } from '@/modules/notebook/interfaces/ipynb';
 
