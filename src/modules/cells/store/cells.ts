@@ -34,14 +34,18 @@ export const useCellsStore = defineStore('cells', () => {
     cells[id].content = content;
   }
 
-  function addCellBelow(id: string, language?: Language): void {
+  function addCellBelow(
+    id: string,
+    language?: Language,
+    content?: string,
+  ): void {
     // Random Id
     const newCellId: string = Date.now().toString();
     const previousIndex = order.value.indexOf(id);
 
     cells[newCellId] = {
       id: newCellId,
-      content: '',
+      content: content ?? '',
       language: language ?? 'javascript',
     };
 
@@ -95,6 +99,10 @@ export const useCellsStore = defineStore('cells', () => {
     order.value = notebookData.order;
   }
 
+  function copyCell(id: string): void {
+    addCellBelow(id, cells[id].language, cells[id].content);
+  }
+
   return {
     notebookTitle,
     cells: orderedCells,
@@ -108,5 +116,6 @@ export const useCellsStore = defineStore('cells', () => {
     clearAll,
     isEmpty,
     loadNotebook,
+    copyCell,
   };
 });
