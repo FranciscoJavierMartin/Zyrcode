@@ -1,10 +1,12 @@
 import * as z from 'zod';
+import * as v from 'valibot';
 
-const cellIdSchema = z
-  .string()
-  .min(1)
-  .max(64)
-  .regex(/^[a-zA-Z0-9-_]+$/);
+const cellIdSchema = v.pipe(
+  v.string(),
+  v.minLength(1),
+  v.maxLength(64),
+  v.regex(/^[a-zA-Z0-9-_]+$/),
+);
 
 const execution_count = z.number().int().min(0).nullable();
 const metadataNameSchema = z.string().regex(/^.+$/);
