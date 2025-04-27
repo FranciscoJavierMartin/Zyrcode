@@ -39,6 +39,18 @@
         section-name="Editor"
         description="The number of spaces a tab is equal to."
       />
+      <FormInput
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.fontSize === initialState.fontSize
+        "
+        name="fontSize"
+        type="number"
+        label="Font Size"
+        placeholder="Font size"
+        section-name="Editor"
+        description="Controls the font size in pixels."
+      />
       <SectionTitle id="formatter-settings" heading="h5" class="top-20">
         Formatter
       </SectionTitle>
@@ -65,18 +77,6 @@
         placeholder="Print width"
         section-name="Formatter"
         description="Fit code within this line limit."
-      />
-      <FormInput
-        :is-field-dirty="isFieldDirty"
-        :is-default="
-          editorSettingsStore.$state.fontSize === initialState.fontSize
-        "
-        name="fontSize"
-        type="number"
-        label="Font Size"
-        placeholder="Font size"
-        section-name="Formatter"
-        description="Controls the font size in pixels."
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
