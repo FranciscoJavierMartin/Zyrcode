@@ -103,7 +103,7 @@
           initialState.jsxSingleQuote
         "
         name="jsxSingleQuote"
-        label="Jsx single quote"
+        label="JSX single quote"
         section-name="Formatter"
         description="Use single instead of double quotes in JSX."
       />
@@ -115,7 +115,33 @@
         name="useTabs"
         label="Use tabs"
         section-name="Formatter"
-        description="Indent lines with tabs"
+        description="Indent lines with tabs."
+      />
+      <FormSelect
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.trailingComma ===
+          initialState.trailingComma
+        "
+        name="trailingComma"
+        label="Trailing comma"
+        section-name="Formatter"
+        placeholder="Select option"
+        description="Controls the printing of trailing commas wherever possible."
+        :options="[
+          {
+            label: 'none',
+            value: 'none',
+          },
+          {
+            label: 'es5',
+            value: 'es5',
+          },
+          {
+            label: 'all',
+            value: 'all',
+          },
+        ]"
       />
     </form>
   </section>

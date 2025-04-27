@@ -13,6 +13,7 @@ export const initialState: FormEditorSettings = {
   singleQuote: true,
   tabSize: 2,
   useTabs: true,
+  trailingComma: 'all',
 };
 
 export const useEditorSettingsStore = defineStore(
@@ -28,6 +29,9 @@ export const useEditorSettingsStore = defineStore(
     const singleQuote = ref<boolean>(initialState.singleQuote);
     const tabSize = ref<number>(initialState.tabSize);
     const useTabs = ref<boolean>(initialState.useTabs);
+    const trailingComma = ref<FormEditorSettings['trailingComma']>(
+      initialState.trailingComma,
+    );
 
     return {
       fontSize,
@@ -40,6 +44,7 @@ export const useEditorSettingsStore = defineStore(
       singleQuote,
       tabSize,
       useTabs,
+      trailingComma,
     };
   },
   {
