@@ -102,16 +102,16 @@ import FormInput from '@/modules/settings/components/inputs/form-input/form-inpu
 import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-toggle.vue';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
-import { useSettingsStore } from '@/modules/settings/store/settings';
+import { useEditorSettingsStore } from '@/modules/settings/store/editor-settings';
 
-const settingsStore = useSettingsStore();
+const editorSettingsStore = useEditorSettingsStore();
 
 const formEditorSchema = toTypedSchema(editorSchema);
 
 const { isFieldDirty, handleSubmit, values } = useForm({
   name: 'editorForm',
   validationSchema: formEditorSchema,
-  initialValues: settingsStore.editorSettings,
+  initialValues: { ...editorSettingsStore.$state },
 });
 
 const onSubmit = handleSubmit((values: GenericObject) => {
@@ -121,7 +121,7 @@ const onSubmit = handleSubmit((values: GenericObject) => {
 watch(
   values,
   (newValues) => {
-    console.log(newValues);
+    editorSettingsStore.$patch(newValues);
   },
   { deep: true },
 );
