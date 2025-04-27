@@ -34,6 +34,7 @@
       </ResizablePanel>
     </ResizablePanelGroup>
     <MarkdownCell
+      v-else
       :id
       :code
       @update:code="updateCode"
