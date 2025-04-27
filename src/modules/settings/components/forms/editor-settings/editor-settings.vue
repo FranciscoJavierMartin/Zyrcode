@@ -94,20 +94,24 @@
 </template>
 
 <script setup lang="ts">
-import { editorSchema } from '@/modules/settings/helpers/schemas';
-import { toTypedSchema } from '@vee-validate/valibot';
-import { useForm, type GenericObject } from 'vee-validate';
 import { watch } from 'vue';
+import { useForm, type GenericObject } from 'vee-validate';
+import { toTypedSchema } from '@vee-validate/valibot';
+import { editorSchema } from '@/modules/settings/helpers/schemas';
 import FormInput from '@/modules/settings/components/inputs/form-input/form-input.vue';
 import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-toggle.vue';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
+import { useEditorSettingsStore } from '@/modules/settings/store/editor-settings';
+
+const editorSettingsStore = useEditorSettingsStore();
 
 const formEditorSchema = toTypedSchema(editorSchema);
 
 const { isFieldDirty, handleSubmit, values } = useForm({
   name: 'editorForm',
   validationSchema: formEditorSchema,
+  initialValues: { ...editorSettingsStore.$state },
 });
 
 const onSubmit = handleSubmit((values: GenericObject) => {
@@ -117,7 +121,7 @@ const onSubmit = handleSubmit((values: GenericObject) => {
 watch(
   values,
   (newValues) => {
-    console.log(newValues);
+    editorSettingsStore.$patch(newValues);
   },
   { deep: true },
 );

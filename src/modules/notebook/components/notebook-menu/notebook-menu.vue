@@ -142,8 +142,7 @@ function uploadNotebookJson(e: Event): void {
         const notebookDataRaw = JSON.parse(reader.result.toString());
         const notebookData = parse(jsonSchema, notebookDataRaw);
         store.loadNotebook(notebookData);
-      } catch (error) {
-        console.log(error);
+      } catch {
         errorToast(t('notebook.menu.import.error'));
       }
     }
