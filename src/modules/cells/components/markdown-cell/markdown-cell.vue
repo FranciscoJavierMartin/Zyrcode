@@ -10,8 +10,8 @@
     <MarkdownPreview
       v-else
       :text
-      @dblclick="toggleEdit"
       class="editor-and-preview-zone"
+      @dblclick="toggleEdit"
     />
   </div>
 </template>
