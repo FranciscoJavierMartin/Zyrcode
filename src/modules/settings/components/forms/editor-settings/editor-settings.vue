@@ -67,6 +67,7 @@
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        :is-default="editorSettingsStore.$state.semi === initialState.semi"
         name="semi"
         label="Semi"
         section-name="Formatter"
@@ -74,6 +75,9 @@
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.singleQuote === initialState.singleQuote
+        "
         name="singleQuote"
         label="Single quote"
         section-name="Formatter"
@@ -81,6 +85,10 @@
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.jsxSingleQuote ===
+          initialState.jsxSingleQuote
+        "
         name="jsxSingleQuote"
         label="Jsx single quote"
         section-name="Formatter"
@@ -88,6 +96,9 @@
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.useTabs === initialState.useTabs
+        "
         name="useTabs"
         label="Use tabs"
         section-name="Formatter"

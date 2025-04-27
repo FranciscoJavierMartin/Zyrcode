@@ -4,6 +4,7 @@
     <form @submit.prevent="onSubmit">
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        is-default
         name="isAIEnabled"
         label="Enable AI options"
         section-name="AI"
