@@ -95,7 +95,7 @@
 
 <script setup lang="ts">
 import { editorSchema } from '@/modules/settings/helpers/schemas';
-import { toTypedSchema } from '@vee-validate/zod';
+import { toTypedSchema } from '@vee-validate/valibot';
 import { useForm, type GenericObject } from 'vee-validate';
 import { watch } from 'vue';
 import FormInput from '@/modules/settings/components/inputs/form-input/form-input.vue';
