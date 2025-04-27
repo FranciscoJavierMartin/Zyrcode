@@ -40,7 +40,7 @@ const metadataTagsSchema = v.pipe(
 
 const outputMetadata = v.record(v.string(), v.any());
 const mimebundle = v.string();
-const multilineString = z.union([z.string(), z.array(z.string())]);
+const multilineString = v.union([v.string(), v.array(v.string())]);
 const sourceSchema = multilineString;
 
 const execute_result = z.object({
