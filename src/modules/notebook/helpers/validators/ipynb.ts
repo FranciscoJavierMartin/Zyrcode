@@ -1,4 +1,3 @@
-import * as z from 'zod';
 import * as v from 'valibot';
 
 const cellIdSchema = v.pipe(
@@ -13,29 +12,15 @@ const execution_count = v.nullable(
 );
 
 const metadataNameSchema = v.pipe(v.string(), v.regex(/^.+$/));
-// const metadataTagsSchema = z
-//   .array(z.string().regex(/^[^,]+$/))
-//   .superRefine((items, ctx) => {
-//     const uniqueItemsCount = new Set(items).size;
-
-//     if (uniqueItemsCount !== items.length) {
-//       ctx.addIssue({
-//         code: z.ZodIssueCode.custom,
-//         message: 'Duplicated values are not allowed',
-//       });
-//     }
-//   });
 const metadataTagsSchema = v.pipe(
   v.array(v.pipe(v.string(), v.regex(/^[^,]+$/))),
-  v.rawCheck<string[]>(({ addIssue, dataset }) => {
-    const uniqueItemsCount = new Set(dataset.value as string[]).size;
-
-    if (uniqueItemsCount !== dataset.value) {
-      addIssue({
-        message: 'Duplicated values are not allowed',
-      });
-    }
-  }),
+  v.check(
+    (tags) => new Set(tags).size === tags.length,
+    'Duplicated values are not allowed',
+  ),
+);
+const metadataExecutionSchema = v.optional(
+  v.pipe(v.string(), v.isoDateTime(), v.regex(/^.*$/)),
 );
 
 const outputMetadata = v.record(v.string(), v.any());
@@ -76,68 +61,60 @@ const outputSchema = v.variant('output_type', [
   error_output,
 ]);
 
-export const ipynbSchema = z.object({
-  nbformat_minor: z.number(),
-  nbformat: z.number(),
-  metadata: z.object({
-    kernelspec: z.object({
-      name: z.string(),
-      display_name: z.string(),
+export const ipynbSchema = v.object({
+  nbformat_minor: v.number(),
+  nbformat: v.number(),
+  metadata: v.object({
+    kernelspec: v.object({
+      name: v.string(),
+      display_name: v.string(),
     }),
-    lenguage_info: z.object({
-      name: z.string(),
-      codemirror_mode: z.union([z.string(), z.object({})]).optional(),
-      file_extension: z.string(),
-      mimetype: z.string(),
-      pygments_lexer: z.string().optional(),
+    lenguage_info: v.object({
+      name: v.string(),
+      codemirror_mode: v.optional(v.union([v.string(), v.object({})])),
+      file_extension: v.pipe(v.string(), v.minLength(1)),
+      mimetype: v.string(),
+      pygments_lexer: v.optional(v.string()),
     }),
-    orig_nbformat: z.number().int().min(1),
-    title: z.string().optional(),
-    authors: z.array(z.object({ name: z.string() })).optional(),
+    orig_nbformat: v.pipe(v.number(), v.integer(), v.minValue(1)),
+    title: v.optional(v.string()),
+    authors: v.optional(v.array(v.object({ name: v.string() }))),
   }),
-  cells: z.array(
-    z.discriminatedUnion('cell_type', [
-      z.object({
-        cell_type: z.literal('markdown'),
+  cells: v.array(
+    v.variant('cell_type', [
+      v.object({
+        cell_type: v.literal('markdown'),
         id: cellIdSchema,
-        metadata: z.object({
+        metadata: v.object({
           name: metadataNameSchema,
           tags: metadataTagsSchema,
-          jupyter: z.object({
-            source_hidden: z.boolean(),
+          jupyter: v.object({
+            source_hidden: v.boolean(),
           }),
         }),
         source: sourceSchema,
       }),
-      z.object({
-        cell_type: z.literal('code'),
+      v.object({
+        cell_type: v.literal('code'),
         id: cellIdSchema,
-        metadata: z.object({
-          jupyter: z.object({
-            source_hidden: z.boolean(),
-            outputs_hidden: z.boolean(),
+        metadata: v.object({
+          jupyter: v.object({
+            source_hidden: v.boolean(),
+            outputs_hidden: v.boolean(),
           }),
-          execution: z.object({
-            'iopub.execute_input': z
-              .string()
-              .datetime()
-              .regex(/^.*$/)
-              .optional(),
-            'iopub.status.busy': z.string().datetime().regex(/^.*$/).optional(),
-            'shell.execute_reply': z
-              .string()
-              .datetime()
-              .regex(/^.*$/)
-              .optional(),
-            'iopub.status.idle': z.string().datetime().regex(/^.*$/).optional(),
+          execution: v.object({
+            'iopub.execute_input': metadataExecutionSchema,
+            'iopub.status.busy': metadataExecutionSchema,
+            'shell.execute_reply': metadataExecutionSchema,
+            'iopub.status.idle': metadataExecutionSchema,
           }),
-          collapsed: z.boolean(),
-          scrolled: z.union([z.boolean(), z.literal('auto')]),
+          collapsed: v.boolean(),
+          scrolled: v.union([v.boolean(), v.literal('auto')]),
           name: metadataNameSchema,
           tags: metadataTagsSchema,
         }),
         source: sourceSchema,
-        outputs: z.array(outputSchema),
+        outputs: v.array(outputSchema),
         execution_count,
       }),
     ]),
