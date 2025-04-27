@@ -30,10 +30,6 @@
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
         <CodePreview :id :code="transpiledCode" :error @output="addOutputs" />
-        <!-- <MarkdownPreview
-          v-else-if="language === 'markdown'"
-          :text="transpiledCode"
-        /> -->
       </ResizablePanel>
     </ResizablePanelGroup>
     <MarkdownCell
@@ -64,7 +60,6 @@ import ConsolePreview from '@/modules/previews/components/console-preview/consol
 import type { OutputPreviewData } from '@/modules/previews/interfaces/preview';
 import CellToolbar from '@/modules/cells/components/cell-toolbar/cell-toolbar.vue';
 import { parseMarkdown } from '@/modules/cells/helpers/markdown';
-import MarkdownPreview from '@/modules/previews/components/markdown-preview/markdown-preview.vue';
 import MarkdownCell from '@/modules/cells/components/markdown-cell/markdown-cell.vue';
 
 const props = defineProps<{ id: string; code: string; language: Language }>();
