@@ -1,3 +1,4 @@
+import { parse } from 'valibot';
 import type { Cell } from '@/modules/cells/interfaces/store';
 import type {
   NotebookIpynb,
@@ -116,7 +117,7 @@ export default function exportToIpynb(
   };
 
   try {
-    ipynbSchema.parse(notebook);
+    parse(ipynbSchema, notebook);
     downloadNotebook(title, notebook, 'ipynb');
   } catch {
     errorToast(errorMessage);

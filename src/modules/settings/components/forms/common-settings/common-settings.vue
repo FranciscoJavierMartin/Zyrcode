@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { watch } from 'vue';
 import { useForm, type GenericObject } from 'vee-validate';
-import { toTypedSchema } from '@vee-validate/zod';
+import { toTypedSchema } from '@vee-validate/valibot';
 import { commonSchema } from '@/modules/settings/helpers/schemas';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';

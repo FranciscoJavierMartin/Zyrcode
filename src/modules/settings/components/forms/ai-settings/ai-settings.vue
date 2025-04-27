@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { aiSchema } from '@/modules/settings/helpers/schemas';
-import { toTypedSchema } from '@vee-validate/zod';
+import { toTypedSchema } from '@vee-validate/valibot';
 import { useForm, type GenericObject } from 'vee-validate';
 import { watch } from 'vue';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';

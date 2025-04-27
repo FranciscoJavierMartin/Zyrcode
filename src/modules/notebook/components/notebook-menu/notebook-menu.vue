@@ -84,6 +84,7 @@
 import { computed, useTemplateRef } from 'vue';
 import { ExternalLink } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
+import { parse } from 'valibot';
 import {
   Menubar,
   MenubarContent,
@@ -139,7 +140,7 @@ function uploadNotebookJson(e: Event): void {
     if (reader.result) {
       try {
         const notebookDataRaw = JSON.parse(reader.result.toString());
-        const notebookData = jsonSchema.parse(notebookDataRaw);
+        const notebookData = parse(jsonSchema, notebookDataRaw);
         store.loadNotebook(notebookData);
       } catch (error) {
         console.log(error);

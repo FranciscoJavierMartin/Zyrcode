@@ -1,3 +1,4 @@
+import { parse } from 'valibot';
 import type { Cell } from '@/modules/cells/interfaces/store';
 import { errorToast } from '@/modules/common/helpers/toasts';
 import { jsonSchema } from '@/modules/notebook/helpers/validators/json';
@@ -18,10 +19,9 @@ export default function exportToJson(
   };
 
   try {
-    jsonSchema.parse(notebook);
+    parse(jsonSchema, notebook);
     downloadNotebook(title, notebook, 'json');
-  } catch (error) {
-    console.log(error);
+  } catch {
     errorToast(errorMessage);
   }
 }
