@@ -1,13 +1,17 @@
-import * as z from 'zod';
+import * as v from 'valibot';
 
-const cellSchema = z.object({
-  id: z.string(),
-  language: z.enum(['javascript', 'typescript', 'markdown']),
-  content: z.string(),
+const cellSchema = v.object({
+  id: v.string(),
+  language: v.union([
+    v.literal('javascript'),
+    v.literal('typescript'),
+    v.literal('markdown'),
+  ]),
+  content: v.string(),
 });
 
-export const jsonSchema = z.object({
-  title: z.string(),
-  order: z.string().array(),
-  cells: z.record(z.string(), cellSchema),
+export const jsonSchema = v.object({
+  title: v.string(),
+  order: v.array(v.string()),
+  cells: v.record(v.string(), cellSchema),
 });
