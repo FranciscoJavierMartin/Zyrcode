@@ -158,7 +158,7 @@
   }
 
   .settings-form-item {
-    @apply focus-within:border-muted-foreground flex flex-col border-l-2 border-transparent py-0.5 pl-1 text-sm;
+    @apply focus-within:border-l-muted-foreground flex flex-col border-l-2 border-transparent py-0.5 pl-1 text-sm;
   }
 
   .editor-and-preview-zone {

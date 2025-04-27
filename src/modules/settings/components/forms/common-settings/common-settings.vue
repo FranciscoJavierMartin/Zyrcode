@@ -4,6 +4,7 @@
     <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
+        is-default
         name="appLanguage"
         label="Change app language"
         section-name="Langugage"

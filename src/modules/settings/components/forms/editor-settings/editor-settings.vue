@@ -4,6 +4,9 @@
     <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.language === initialState.language
+        "
         name="language"
         label="Change editor language"
         section-name="Editor"
@@ -17,6 +20,7 @@
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
+        :is-default="editorSettingsStore.$state.ruler === initialState.ruler"
         name="ruler"
         type="number"
         label="Ruler"
@@ -26,16 +30,35 @@
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.showLineNumbers ===
+          initialState.showLineNumbers
+        "
         name="showLineNumbers"
         label="Show line numbers"
         section-name="Editor"
         description="The number of spaces a tab is equal to."
+      />
+      <FormInput
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.fontSize === initialState.fontSize
+        "
+        name="fontSize"
+        type="number"
+        label="Font Size"
+        placeholder="Font size"
+        section-name="Editor"
+        description="Controls the font size in pixels."
       />
       <SectionTitle id="formatter-settings" heading="h5" class="top-20">
         Formatter
       </SectionTitle>
       <FormInput
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.tabSize === initialState.tabSize
+        "
         name="tabSize"
         type="number"
         label="Tab Size"
@@ -45,6 +68,9 @@
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.printWidth === initialState.printWidth
+        "
         name="printWidth"
         type="number"
         label="Print width"
@@ -52,17 +78,9 @@
         section-name="Formatter"
         description="Fit code within this line limit."
       />
-      <FormInput
-        :is-field-dirty="isFieldDirty"
-        name="fontSize"
-        type="number"
-        label="Font Size"
-        placeholder="Font size"
-        section-name="Formatter"
-        description="Controls the font size in pixels."
-      />
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        :is-default="editorSettingsStore.$state.semi === initialState.semi"
         name="semi"
         label="Semi"
         section-name="Formatter"
@@ -70,6 +88,9 @@
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.singleQuote === initialState.singleQuote
+        "
         name="singleQuote"
         label="Single quote"
         section-name="Formatter"
@@ -77,6 +98,10 @@
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.jsxSingleQuote ===
+          initialState.jsxSingleQuote
+        "
         name="jsxSingleQuote"
         label="Jsx single quote"
         section-name="Formatter"
@@ -84,6 +109,9 @@
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.useTabs === initialState.useTabs
+        "
         name="useTabs"
         label="Use tabs"
         section-name="Formatter"
@@ -102,7 +130,10 @@ import FormInput from '@/modules/settings/components/inputs/form-input/form-inpu
 import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-toggle.vue';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
-import { useEditorSettingsStore } from '@/modules/settings/store/editor-settings';
+import {
+  useEditorSettingsStore,
+  initialState,
+} from '@/modules/settings/store/editor-settings';
 
 const editorSettingsStore = useEditorSettingsStore();
 
