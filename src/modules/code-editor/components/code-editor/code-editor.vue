@@ -46,7 +46,7 @@ async function formatCode(): Promise<void> {
       useTabs: editorSettingsStore.$state.useTabs,
       semi: editorSettingsStore.$state.semi,
       singleQuote: editorSettingsStore.$state.singleQuote,
-      trailingComma: 'all',
+      trailingComma: editorSettingsStore.$state.trailingComma,
       printWidth: editorSettingsStore.$state.printWidth,
       jsxSingleQuote: editorSettingsStore.$state.jsxSingleQuote,
     })

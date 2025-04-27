@@ -15,6 +15,11 @@ export const editorSchema = v.object({
   useTabs: v.boolean(),
   printWidth: v.pipe(v.number(), v.integer(), v.minValue(70)),
   ruler: v.pipe(v.number(), v.integer(), v.minValue(70), v.maxValue(256)),
+  trailingComma: v.union([
+    v.literal('none'),
+    v.literal('es5'),
+    v.literal('all'),
+  ]),
 });
 
 export const aiSchema = v.object({
