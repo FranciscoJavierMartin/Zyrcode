@@ -42,11 +42,13 @@ async function formatCode(): Promise<void> {
     .format(code.value, {
       parser: 'babel-ts',
       plugins: [parserBabel, parserTypeScript, parserEstree],
-      tabWidth: 2,
-      semi: true,
-      singleQuote: true,
+      tabWidth: editorSettingsStore.$state.tabSize,
+      useTabs: editorSettingsStore.$state.useTabs,
+      semi: editorSettingsStore.$state.semi,
+      singleQuote: editorSettingsStore.$state.singleQuote,
       trailingComma: 'all',
-      printWidth: 80,
+      printWidth: editorSettingsStore.$state.printWidth,
+      jsxSingleQuote: editorSettingsStore.$state.jsxSingleQuote,
     })
     .then((res) => res.replace(/\n$/, ''));
 
