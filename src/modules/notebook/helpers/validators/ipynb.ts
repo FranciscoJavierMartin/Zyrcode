@@ -69,7 +69,7 @@ const error_output = v.object({
   traceback: v.array(v.string()),
 });
 
-const outputSchema = z.discriminatedUnion('output_type', [
+const outputSchema = v.variant('output_type', [
   execute_result,
   display_data,
   stream,
