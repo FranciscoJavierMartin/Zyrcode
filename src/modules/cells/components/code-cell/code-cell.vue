@@ -11,6 +11,7 @@
       @format="format"
       @toggle-direction="toggleDirection"
       @clear-outputs="clearOutputs"
+      @run="runMarkdown"
     />
     <ResizablePanelGroup
       :direction="panelSplitDirection"
@@ -35,7 +36,13 @@
         /> -->
       </ResizablePanel>
     </ResizablePanelGroup>
-    <MarkdownCell :id :code @update:code="updateCode" />
+    <MarkdownCell
+      :id
+      :code
+      @update:code="updateCode"
+      :text="transpiledCode"
+      :is-text-shown
+    />
     <Transition name="appear">
       <ConsolePreview v-show="isConsoleOpen" v-model="outputs" />
     </Transition>
@@ -64,6 +71,7 @@ const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
 const error = ref<string>('');
 const isConsoleOpen = ref<boolean>(false);
+const isTextShown = ref<boolean>(false);
 const outputs = ref<OutputPreviewData[]>([]);
 const editor = useTemplateRef('editor');
 const isLargeScreen = useMediaQuery('(min-width: 1024px)');
@@ -93,6 +101,13 @@ function addOutputs(data: OutputPreviewData[]): void {
 
 function clearOutputs(): void {
   outputs.value = [];
+}
+
+async function runMarkdown(): Promise<void> {
+  const result = await parseMarkdown(props.code);
+  transpiledCode.value = result.code;
+  error.value = result.error;
+  isTextShown.value = true;
 }
 
 watchDebounced(

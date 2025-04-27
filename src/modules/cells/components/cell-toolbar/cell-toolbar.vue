@@ -61,7 +61,7 @@
       </TooltipButton>
       <TooltipButton
         :text="$t('notebook.toolbar.splitHorizontal')"
-        v-if="isLargeScreen"
+        v-if="isLargeScreen && language !== 'markdown'"
       >
         <Button
           variant="hover"
@@ -69,6 +69,16 @@
           @click="$emit('toggle-direction')"
         >
           <SplitIcon :is-horizontal="direction === 'horizontal'" />
+        </Button>
+      </TooltipButton>
+      <TooltipButton :text="$t('notebook.toolbar.run')">
+        <Button
+          :disabled="!isCodeAvailable"
+          variant="hover"
+          class="button-icon"
+          @click="$emit('run')"
+        >
+          <Play class="size-5" />
         </Button>
       </TooltipButton>
       <TooltipButton :text="$t('notebook.toolbar.formatCode')">
@@ -100,6 +110,7 @@ import {
   Copy,
   MessageCircleOff,
   PencilRuler,
+  Play,
   Plus,
   Terminal,
 } from 'lucide-vue-next';
@@ -121,6 +132,7 @@ const props = defineProps<{
 }>();
 defineEmits<{
   (e: 'format'): void;
+  (e: 'run'): void;
   (e: 'toggle-direction'): void;
   (e: 'clear-outputs'): void;
 }>();

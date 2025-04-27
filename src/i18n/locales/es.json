@@ -18,6 +18,7 @@
       "hideConsole": "Ocultar consola",
       "clearConsole": "Limpiar consola",
       "copyCell": "Copiar celda",
+      "run": "Ejecutar",
       "splitHorizontal": "Dividir horizontalmente",
       "splitVertical": "Dividir verticalmente",
       "formatCode": "Formatear código",
