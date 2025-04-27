@@ -8,7 +8,10 @@ const cellIdSchema = v.pipe(
   v.regex(/^[a-zA-Z0-9-_]+$/),
 );
 
-const execution_count = z.number().int().min(0).nullable();
+const execution_count = v.nullable(
+  v.pipe(v.number(), v.integer(), v.minValue(0)),
+);
+
 const metadataNameSchema = z.string().regex(/^.+$/);
 const metadataTagsSchema = z
   .array(z.string().regex(/^[^,]+$/))
