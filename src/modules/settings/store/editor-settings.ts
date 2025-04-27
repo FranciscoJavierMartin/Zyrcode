@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 import type { FormEditorSettings } from '@/modules/settings/interfaces/form';
 
-const initialState: FormEditorSettings = {
+export const initialState: FormEditorSettings = {
   fontSize: 14,
   jsxSingleQuote: true,
   language: 'javascript',

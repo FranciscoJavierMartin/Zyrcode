@@ -26,6 +26,10 @@
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.showLineNumbers ===
+          initialState.showLineNumbers
+        "
         name="showLineNumbers"
         label="Show line numbers"
         section-name="Editor"
@@ -102,7 +106,10 @@ import FormInput from '@/modules/settings/components/inputs/form-input/form-inpu
 import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-toggle.vue';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
-import { useEditorSettingsStore } from '@/modules/settings/store/editor-settings';
+import {
+  useEditorSettingsStore,
+  initialState,
+} from '@/modules/settings/store/editor-settings';
 
 const editorSettingsStore = useEditorSettingsStore();
 

@@ -1,7 +1,10 @@
 <template>
   <FormField v-slot="{ value, handleChange }" type="checkbox" :name>
     <div class="settings-form-item-wrapper">
-      <FormItem class="settings-form-item">
+      <FormItem
+        class="settings-form-item"
+        :class="{ 'border-l-muted-foreground': !isDefault }"
+      >
         <div class="flex gap-x-1">
           <span class="font-semibold">{{ sectionName }}:</span>
           <span class="font-bold">{{ label }}</span>
@@ -51,5 +54,6 @@ defineProps<{
   description: string;
   sectionName: string;
   isFieldDirty: T;
+  isDefault: boolean;
 }>();
 </script>
