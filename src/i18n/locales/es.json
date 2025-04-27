@@ -19,6 +19,7 @@
       "clearConsole": "Limpiar consola",
       "copyCell": "Copiar celda",
       "run": "Ejecutar",
+      "edit": "Editar",
       "splitHorizontal": "Dividir horizontalmente",
       "splitVertical": "Dividir verticalmente",
       "formatCode": "Formatear código",

@@ -19,36 +19,34 @@
       </Button>
     </div>
     <div class="flex items-center gap-2">
-      <TooltipButton
-        v-if="language !== 'markdown'"
-        :text="
-          isConsoleOpen
-            ? $t('notebook.toolbar.hideConsole')
-            : $t('notebook.toolbar.showConsole')
-        "
-      >
-        <Button
-          :disabled="!areOutputsAvailable"
-          variant="hover"
-          class="button-icon"
-          @click="isConsoleOpen = !isConsoleOpen"
+      <template v-if="language !== 'markdown'">
+        <TooltipButton
+          :text="
+            isConsoleOpen
+              ? $t('notebook.toolbar.hideConsole')
+              : $t('notebook.toolbar.showConsole')
+          "
         >
-          <Terminal class="size-5" />
-        </Button>
-      </TooltipButton>
-      <TooltipButton
-        v-if="language !== 'markdown'"
-        :text="$t('notebook.toolbar.clearConsole')"
-      >
-        <Button
-          :disabled="!areOutputsAvailable"
-          variant="hover"
-          class="button-icon"
-          @click="$emit('clear-outputs')"
-        >
-          <MessageCircleOff class="size-5" />
-        </Button>
-      </TooltipButton>
+          <Button
+            :disabled="!areOutputsAvailable"
+            variant="hover"
+            class="button-icon"
+            @click="isConsoleOpen = !isConsoleOpen"
+          >
+            <Terminal class="size-5" />
+          </Button>
+        </TooltipButton>
+        <TooltipButton :text="$t('notebook.toolbar.clearConsole')">
+          <Button
+            :disabled="!areOutputsAvailable"
+            variant="hover"
+            class="button-icon"
+            @click="$emit('clear-outputs')"
+          >
+            <MessageCircleOff class="size-5" />
+          </Button>
+        </TooltipButton>
+      </template>
       <TooltipButton :text="$t('notebook.toolbar.copyCell')">
         <Button
           :disabled="!isCodeAvailable"
@@ -71,16 +69,28 @@
           <SplitIcon :is-horizontal="direction === 'horizontal'" />
         </Button>
       </TooltipButton>
-      <TooltipButton :text="$t('notebook.toolbar.run')">
-        <Button
-          :disabled="!isCodeAvailable"
-          variant="hover"
-          class="button-icon"
-          @click="$emit('run')"
-        >
-          <Play class="size-5" />
-        </Button>
-      </TooltipButton>
+      <template v-if="language === 'markdown'">
+        <TooltipButton v-if="isTextShown" :text="$t('notebook.toolbar.edit')">
+          <Button
+            :disabled="!isCodeAvailable"
+            variant="hover"
+            class="button-icon"
+            @click="isTextShown = false"
+          >
+            <Pencil class="size-5" />
+          </Button>
+        </TooltipButton>
+        <TooltipButton v-else :text="$t('notebook.toolbar.run')">
+          <Button
+            :disabled="!isCodeAvailable"
+            variant="hover"
+            class="button-icon"
+            @click="$emit('run')"
+          >
+            <Play class="size-5" />
+          </Button>
+        </TooltipButton>
+      </template>
       <TooltipButton :text="$t('notebook.toolbar.formatCode')">
         <Button
           :disabled="!isCodeAvailable"
@@ -109,6 +119,7 @@ import {
   ArrowUp,
   Copy,
   MessageCircleOff,
+  Pencil,
   PencilRuler,
   Play,
   Plus,
@@ -139,6 +150,7 @@ defineEmits<{
 const isConsoleOpen = defineModel<boolean>('is-console-open', {
   required: true,
 });
+const isTextShown = defineModel<boolean>('isTextShown', { required: true });
 const store = useCellsStore();
 const isFirstCell = computed<boolean>(() => store.cells[0].id === props.id);
 const isLastCell = computed<boolean>(

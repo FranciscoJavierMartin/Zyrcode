@@ -8,6 +8,7 @@
       :are-outputs-available="outputs.length > 0"
       :is-code-available="code.length > 0"
       v-model:is-console-open="isConsoleOpen"
+      v-model:is-text-shown="isTextShown"
       @format="format"
       @toggle-direction="toggleDirection"
       @clear-outputs="clearOutputs"
@@ -37,7 +38,7 @@
       :code
       @update:code="updateCode"
       :text="transpiledCode"
-      :is-text-shown
+      v-model:is-text-shown="isTextShown"
     />
     <Transition name="appear">
       <ConsolePreview v-show="isConsoleOpen" v-model="outputs" />
