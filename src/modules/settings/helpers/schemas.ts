@@ -26,5 +26,5 @@ export const aiSchema = v.object({
   // TODO: Adjust value later
   isAIEnabled: v.boolean(),
   autoCompleteModel: v.pipe(v.string(), v.minLength(1)),
-  aiProvider: v.pipe(v.string(), v.minLength(1)),
+  aiProvider: v.union([v.literal('ollama')]),
 });

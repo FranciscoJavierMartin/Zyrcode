@@ -4,7 +4,6 @@
     <form @submit.prevent="onSubmit">
       <FormToggle
         :is-field-dirty="isFieldDirty"
-        is-default
         name="isAIEnabled"
         label="Enable AI options"
         section-name="AI"
@@ -12,7 +11,6 @@
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
-        is-default
         name="aiProvider"
         label="IA provider"
         section-name="AI"
@@ -22,7 +20,6 @@
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
-        is-default
         name="autoCompleteModel"
         label="IA model for code completion"
         section-name="AI"
@@ -45,11 +42,16 @@ import { watch } from 'vue';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-toggle.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
+import { useAISettingsStore } from '@/modules/settings/store/ai-settings';
+
+const aiSettingsStore = useAISettingsStore();
 
 const formAISchema = toTypedSchema(aiSchema);
 
 const { isFieldDirty, handleSubmit, values } = useForm({
+  name: 'aiForm',
   validationSchema: formAISchema,
+  initialValues: { ...aiSettingsStore.$state },
 });
 
 const onSubmit = handleSubmit((values: GenericObject) => {
@@ -59,7 +61,7 @@ const onSubmit = handleSubmit((values: GenericObject) => {
 watch(
   values,
   (newValues) => {
-    console.log(newValues);
+    aiSettingsStore.$patch(newValues);
   },
   { deep: true },
 );
