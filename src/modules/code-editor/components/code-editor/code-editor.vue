@@ -22,6 +22,7 @@ import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
 import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-formatter';
 import '@/modules/code-editor/utils/worker';
 import type { Language } from '@/modules/cells/interfaces/code';
+import { useEditorSettingsStore } from '@/modules/settings/store/editor-settings';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
 const editorId = ref('');
@@ -34,6 +35,7 @@ const theme = useColorMode({ disableTransition: false });
 const editor = computed<monaco.editor.ICodeEditor | undefined>(() =>
   monaco.editor.getEditors().find((e) => e.getId() === editorId.value),
 );
+const editorSettingsStore = useEditorSettingsStore();
 
 async function formatCode(): Promise<void> {
   const formattedCode = await prettier
@@ -136,8 +138,10 @@ onMounted(() => {
         language: props.language,
         minimap: { enabled: false },
         automaticLayout: true,
-        // lineNumbers: 'off',
-        // rulers: [80],
+        lineNumbers: editorSettingsStore.$state.showLineNumbers ? 'on' : 'off',
+        fontSize: editorSettingsStore.$state.fontSize,
+        rulers: [editorSettingsStore.$state.ruler],
+        tabSize: editorSettingsStore.$state.tabSize,
       })
       .getId();
 
