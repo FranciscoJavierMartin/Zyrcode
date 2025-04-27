@@ -17,6 +17,9 @@
         <MenubarItem :disabled="store.isEmpty" @click="store.clearAll()">
           {{ $t('notebook.menu.notebook.clearAll') }}
         </MenubarItem>
+        <MenubarItem>
+          {{ $t('notebook.menu.notebook.clearCache') }}
+        </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>

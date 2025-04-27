@@ -28,7 +28,8 @@
       "notebook": {
         "rename": "Rename",
         "reload": "Reload",
-        "clearAll": "Clear all"
+        "clearAll": "Clear all",
+        "clearCache": "Clear cache"
       },
       "import": {
         "title": "Import",
