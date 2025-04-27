@@ -44,14 +44,17 @@ import {
 import { Input } from '@/modules/common/components/ui/input';
 import type { FormEditorFields } from '@/modules/settings/interfaces/form';
 
-defineProps<{
-  name: string;
-  label: string;
-  type: string;
-  description: string;
-  sectionName: string;
-  placeholder: string;
-  isFieldDirty: <TPath extends FormEditorFields>(path: TPath) => boolean;
-  isDefault: boolean;
-}>();
+withDefaults(
+  defineProps<{
+    name: string;
+    label: string;
+    type: string;
+    description: string;
+    sectionName: string;
+    placeholder: string;
+    isFieldDirty: <TPath extends FormEditorFields>(path: TPath) => boolean;
+    isDefault?: boolean;
+  }>(),
+  { isDefault: true },
+);
 </script>

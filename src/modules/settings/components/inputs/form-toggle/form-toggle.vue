@@ -48,12 +48,15 @@ import type {
   FormCommonFields,
 } from '@/modules/settings/interfaces/form';
 
-defineProps<{
-  name: string;
-  label: string;
-  description: string;
-  sectionName: string;
-  isFieldDirty: T;
-  isDefault: boolean;
-}>();
+withDefaults(
+  defineProps<{
+    name: string;
+    label: string;
+    description: string;
+    sectionName: string;
+    isFieldDirty: T;
+    isDefault?: boolean;
+  }>(),
+  { isDefault: true },
+);
 </script>

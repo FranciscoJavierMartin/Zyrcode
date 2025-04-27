@@ -171,6 +171,7 @@ const { isFieldDirty, handleSubmit, values } = useForm({
   initialValues: { ...editorSettingsStore.$state },
 });
 
+// TODO: Check if can be removed
 const onSubmit = handleSubmit((values: GenericObject) => {
   console.log('Form submitted:', values);
 });

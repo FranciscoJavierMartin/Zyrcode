@@ -4,7 +4,6 @@
     <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
-        is-default
         name="appLanguage"
         label="Change app language"
         section-name="Langugage"
@@ -26,14 +25,19 @@ import { toTypedSchema } from '@vee-validate/valibot';
 import { commonSchema } from '@/modules/settings/helpers/schemas';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
+import { useCommonSettingsStore } from '@/modules/settings/store/common-settings';
+
+const commonSettingsStore = useCommonSettingsStore();
 
 const formCommonSchema = toTypedSchema(commonSchema);
 
 const { isFieldDirty, handleSubmit, values } = useForm({
   name: 'commonForm',
   validationSchema: formCommonSchema,
+  initialValues: { ...commonSettingsStore.$state },
 });
 
+// TODO: Check if can be removed
 const onSubmit = handleSubmit((values: GenericObject) => {
   console.log('Form submitted:', values);
 });
@@ -41,7 +45,7 @@ const onSubmit = handleSubmit((values: GenericObject) => {
 watch(
   values,
   (newValue) => {
-    console.log(newValue);
+    commonSettingsStore.$patch(newValue);
   },
   { deep: true },
 );

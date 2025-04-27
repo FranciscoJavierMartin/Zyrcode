@@ -68,14 +68,17 @@ import type {
   FormEditorFields,
 } from '@/modules/settings/interfaces/form';
 
-defineProps<{
-  name: string;
-  label: string;
-  description: string;
-  sectionName: string;
-  placeholder: string;
-  options: { value: string; label: string }[];
-  isFieldDirty: T;
-  isDefault: boolean;
-}>();
+withDefaults(
+  defineProps<{
+    name: string;
+    label: string;
+    description: string;
+    sectionName: string;
+    placeholder: string;
+    options: { value: string; label: string }[];
+    isFieldDirty: T;
+    isDefault?: boolean;
+  }>(),
+  { isDefault: true },
+);
 </script>
