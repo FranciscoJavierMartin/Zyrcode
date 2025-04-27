@@ -1,5 +1,5 @@
 import type { Cell } from '@/modules/cells/interfaces/store';
-import { errorToast } from '@/modules/common/composables/toasts';
+import { errorToast } from '@/modules/common/helpers/toasts';
 import { jsonSchema } from '@/modules/notebook/helpers/validators/json';
 import downloadNotebook from '@/modules/notebook/helpers/exports/download-notebook';
 

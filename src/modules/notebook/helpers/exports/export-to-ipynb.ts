@@ -8,7 +8,7 @@ import type {
   Stream as ConsoleOutputStream,
 } from '@/modules/notebook/interfaces/ipynb';
 import { ipynbSchema } from '@/modules/notebook/helpers/validators/ipynb';
-import { errorToast } from '@/modules/common/composables/toasts';
+import { errorToast } from '@/modules/common/helpers/toasts';
 import downloadNotebook from '@/modules/notebook/helpers/exports/download-notebook';
 
 function getCellOutputs(id: string): ConsoleOutput[] {

@@ -8,3 +8,7 @@ export function errorToast(text: string): string | number {
     },
   });
 }
+
+export function successToast(text: string): string | number {
+  return toast.success(text);
+}

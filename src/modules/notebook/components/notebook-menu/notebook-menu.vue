@@ -17,6 +17,9 @@
         <MenubarItem :disabled="store.isEmpty" @click="store.clearAll()">
           {{ $t('notebook.menu.notebook.clearAll') }}
         </MenubarItem>
+        <MenubarItem @click="clearCache">
+          {{ $t('notebook.menu.notebook.clearCache') }}
+        </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
@@ -94,7 +97,8 @@ import { useCellsStore } from '@/modules/cells/store/cells';
 import exportToIpynb from '@/modules/notebook/helpers/exports/export-to-ipynb';
 import exportToJson from '@/modules/notebook/helpers/exports/export-to-json';
 import { jsonSchema } from '@/modules/notebook/helpers/validators/json';
-import { errorToast } from '@/modules/common/composables/toasts';
+import { errorToast, successToast } from '@/modules/common/helpers/toasts';
+import { clearCache as clearCacheHelper } from '@/modules/common/helpers/package-cache';
 
 const notebookJson = useTemplateRef('notebookJson');
 const store = useCellsStore();
@@ -144,5 +148,14 @@ function uploadNotebookJson(e: Event): void {
     }
   };
   reader.readAsText((e.target as HTMLInputElement).files?.[0] as Blob);
+}
+
+async function clearCache(): Promise<void> {
+  try {
+    await clearCacheHelper();
+    successToast('Cache cleared successfully');
+  } catch {
+    errorToast('Error clearing cache');
+  }
 }
 </script>
