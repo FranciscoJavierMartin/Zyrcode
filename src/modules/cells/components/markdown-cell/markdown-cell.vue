@@ -1,13 +1,18 @@
 <template>
-  <div class="min-h-[500px] w-full lg:min-h-[300px]">
+  <div class="editor-and-preview-zone">
     <CodeEditor
       v-if="!isTextShown"
       :id
       v-model:code="code"
       language="markdown"
-      class="min-h-[500px] w-full lg:min-h-[300px]"
+      class="editor-and-preview-zone"
     />
-    <MarkdownPreview v-else :text @dblclick="toggleEdit" />
+    <MarkdownPreview
+      v-else
+      :text
+      @dblclick="toggleEdit"
+      class="editor-and-preview-zone"
+    />
   </div>
 </template>
 

@@ -15,7 +15,7 @@
     />
     <ResizablePanelGroup
       :direction="panelSplitDirection"
-      class="min-h-[500px] w-full lg:min-h-[300px]"
+      class="editor-and-preview-zone"
       v-if="language !== 'markdown'"
     >
       <ResizablePanel :default-size="50">
