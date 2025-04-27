@@ -18,6 +18,8 @@
       "hideConsole": "Hide console",
       "clearConsole": "Clear console",
       "copyCell": "Copy cell",
+      "run": "Run",
+      "edit": "Edit",
       "splitHorizontal": "Split horizontal",
       "splitVertical": "Split vertical",
       "formatCode": "Format code",

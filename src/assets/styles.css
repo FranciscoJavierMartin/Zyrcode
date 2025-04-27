@@ -161,6 +161,10 @@
     @apply focus-within:border-muted-foreground flex flex-col border-l-2 border-transparent py-0.5 pl-1 text-sm;
   }
 
+  .editor-and-preview-zone {
+    @apply min-h-[500px] w-full lg:min-h-[300px];
+  }
+
   /* Chrome, Safari, Edge, Opera */
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {

@@ -8,13 +8,16 @@
       :are-outputs-available="outputs.length > 0"
       :is-code-available="code.length > 0"
       v-model:is-console-open="isConsoleOpen"
+      v-model:is-text-shown="isTextShown"
       @format="format"
       @toggle-direction="toggleDirection"
       @clear-outputs="clearOutputs"
+      @run="runMarkdown"
     />
     <ResizablePanelGroup
       :direction="panelSplitDirection"
-      class="min-h-[500px] w-full lg:min-h-[300px]"
+      class="editor-and-preview-zone"
+      v-if="language !== 'markdown'"
     >
       <ResizablePanel :default-size="50">
         <CodeEditor
@@ -27,19 +30,16 @@
       </ResizablePanel>
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
-        <CodePreview
-          v-if="language !== 'markdown'"
-          :id
-          :code="transpiledCode"
-          :error
-          @output="addOutputs"
-        />
-        <MarkdownPreview
-          v-else-if="language === 'markdown'"
-          :text="transpiledCode"
-        />
+        <CodePreview :id :code="transpiledCode" :error @output="addOutputs" />
       </ResizablePanel>
     </ResizablePanelGroup>
+    <MarkdownCell
+      :id
+      :code
+      @update:code="updateCode"
+      :text="transpiledCode"
+      v-model:is-text-shown="isTextShown"
+    />
     <Transition name="appear">
       <ConsolePreview v-show="isConsoleOpen" v-model="outputs" />
     </Transition>
@@ -61,12 +61,13 @@ import ConsolePreview from '@/modules/previews/components/console-preview/consol
 import type { OutputPreviewData } from '@/modules/previews/interfaces/preview';
 import CellToolbar from '@/modules/cells/components/cell-toolbar/cell-toolbar.vue';
 import { parseMarkdown } from '@/modules/cells/helpers/markdown';
-import MarkdownPreview from '@/modules/previews/components/markdown-preview/markdown-preview.vue';
+import MarkdownCell from '@/modules/cells/components/markdown-cell/markdown-cell.vue';
 
 const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
 const error = ref<string>('');
 const isConsoleOpen = ref<boolean>(false);
+const isTextShown = ref<boolean>(false);
 const outputs = ref<OutputPreviewData[]>([]);
 const editor = useTemplateRef('editor');
 const isLargeScreen = useMediaQuery('(min-width: 1024px)');
@@ -96,6 +97,13 @@ function addOutputs(data: OutputPreviewData[]): void {
 
 function clearOutputs(): void {
   outputs.value = [];
+}
+
+async function runMarkdown(): Promise<void> {
+  const result = await parseMarkdown(props.code);
+  transpiledCode.value = result.code;
+  error.value = result.error;
+  isTextShown.value = true;
 }
 
 watchDebounced(
