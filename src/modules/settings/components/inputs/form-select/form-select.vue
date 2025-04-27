@@ -1,7 +1,10 @@
 <template>
   <FormField v-slot="{ componentField }" :name>
     <div class="settings-form-item-wrapper">
-      <FormItem class="settings-form-item">
+      <FormItem
+        class="settings-form-item"
+        :class="{ 'border-l-muted-foreground': !isDefault }"
+      >
         <div class="flex gap-1">
           <span class="font-semibold">{{ sectionName }}:</span>
           <FormLabel class="font-bold">{{ label }}</FormLabel>
@@ -73,5 +76,6 @@ defineProps<{
   placeholder: string;
   options: { value: string; label: string }[];
   isFieldDirty: T;
+  isDefault: boolean;
 }>();
 </script>

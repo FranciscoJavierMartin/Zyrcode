@@ -12,6 +12,7 @@
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
+        is-default
         name="aiProvider"
         label="IA provider"
         section-name="AI"
@@ -21,6 +22,7 @@
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
+        is-default
         name="autoCompleteModel"
         label="IA model for code completion"
         section-name="AI"

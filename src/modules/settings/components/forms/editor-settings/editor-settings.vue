@@ -4,6 +4,9 @@
     <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.language === initialState.language
+        "
         name="language"
         label="Change editor language"
         section-name="Editor"
@@ -17,6 +20,7 @@
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
+        :is-default="editorSettingsStore.$state.ruler === initialState.ruler"
         name="ruler"
         type="number"
         label="Ruler"
@@ -40,6 +44,9 @@
       </SectionTitle>
       <FormInput
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.tabSize === initialState.tabSize
+        "
         name="tabSize"
         type="number"
         label="Tab Size"
@@ -49,6 +56,9 @@
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.printWidth === initialState.printWidth
+        "
         name="printWidth"
         type="number"
         label="Print width"
@@ -58,6 +68,9 @@
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.fontSize === initialState.fontSize
+        "
         name="fontSize"
         type="number"
         label="Font Size"
