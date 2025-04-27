@@ -43,30 +43,30 @@ const mimebundle = v.string();
 const multilineString = v.union([v.string(), v.array(v.string())]);
 const sourceSchema = multilineString;
 
-const execute_result = z.object({
-  output_type: z.literal('execute_result'),
+const execute_result = v.object({
+  output_type: v.literal('execute_result'),
   execution_count,
   data: mimebundle,
   metadata: outputMetadata,
 });
 
-const display_data = z.object({
-  output_type: z.literal('display_data'),
+const display_data = v.object({
+  output_type: v.literal('display_data'),
   data: mimebundle,
   metadata: outputMetadata,
 });
 
-const stream = z.object({
-  output_type: z.literal('stream'),
-  name: z.union([z.literal('stdout'), z.literal('stderr')]),
+const stream = v.object({
+  output_type: v.literal('stream'),
+  name: v.union([v.literal('stdout'), v.literal('stderr')]),
   text: multilineString,
 });
 
-const error_output = z.object({
-  output_type: z.literal('error'),
-  ename: z.string(),
-  evalue: z.string(),
-  traceback: z.array(z.string()),
+const error_output = v.object({
+  output_type: v.literal('error'),
+  ename: v.string(),
+  evalue: v.string(),
+  traceback: v.array(v.string()),
 });
 
 const outputSchema = z.discriminatedUnion('output_type', [
