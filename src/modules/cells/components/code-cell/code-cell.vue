@@ -34,6 +34,7 @@
       </ResizablePanel>
     </ResizablePanelGroup>
     <MarkdownCell
+      v-else
       :id
       :code
       @update:code="updateCode"
@@ -78,6 +79,16 @@ const panelSplitDirection = computed<'horizontal' | 'vertical'>(() =>
 
 const store = useCellsStore();
 
+const cumulativeCode = computed<string>(() => {
+  const currentIndex = store.cells.findIndex((cell) => cell.id === props.id);
+
+  return store.cells
+    .slice(0, currentIndex + 1)
+    .filter((cell) => cell.language !== 'markdown')
+    .map((cell) => cell.content)
+    .join('\n');
+});
+
 async function format(): Promise<void> {
   await editor.value?.formatCode();
 }
@@ -110,7 +121,11 @@ watchDebounced(
   () => [props.code, props.language],
   async ([newCode, newLanguage]) => {
     if (newLanguage === 'javascript' || newLanguage === 'typescript') {
-      const result = await transpile(newCode, newLanguage as Language);
+      console.log(cumulativeCode.value);
+      const result = await transpile(
+        cumulativeCode.value,
+        newLanguage as Language,
+      );
       transpiledCode.value = result.code;
       error.value = result.error;
     } else if (newLanguage === 'markdown') {
