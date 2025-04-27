@@ -12,7 +12,7 @@ const execution_count = v.nullable(
   v.pipe(v.number(), v.integer(), v.minValue(0)),
 );
 
-const metadataNameSchema = z.string().regex(/^.+$/);
+const metadataNameSchema = v.pipe(v.string(), v.regex(/^.+$/));
 const metadataTagsSchema = z
   .array(z.string().regex(/^[^,]+$/))
   .superRefine((items, ctx) => {
