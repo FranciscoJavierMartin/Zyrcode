@@ -13,18 +13,31 @@ const execution_count = v.nullable(
 );
 
 const metadataNameSchema = v.pipe(v.string(), v.regex(/^.+$/));
-const metadataTagsSchema = z
-  .array(z.string().regex(/^[^,]+$/))
-  .superRefine((items, ctx) => {
-    const uniqueItemsCount = new Set(items).size;
+// const metadataTagsSchema = z
+//   .array(z.string().regex(/^[^,]+$/))
+//   .superRefine((items, ctx) => {
+//     const uniqueItemsCount = new Set(items).size;
 
-    if (uniqueItemsCount !== items.length) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+//     if (uniqueItemsCount !== items.length) {
+//       ctx.addIssue({
+//         code: z.ZodIssueCode.custom,
+//         message: 'Duplicated values are not allowed',
+//       });
+//     }
+//   });
+const metadataTagsSchema = v.pipe(
+  v.array(v.pipe(v.string(), v.regex(/^[^,]+$/))),
+  v.rawCheck<string[]>(({ addIssue, dataset }) => {
+    const uniqueItemsCount = new Set(dataset.value as string[]).size;
+
+    if (uniqueItemsCount !== dataset.value) {
+      addIssue({
         message: 'Duplicated values are not allowed',
       });
     }
-  });
+  }),
+);
+
 const outputMetadata = z.record(z.string(), z.any());
 const mimebundle = z.string();
 const multilineString = z.union([z.string(), z.array(z.string())]);
