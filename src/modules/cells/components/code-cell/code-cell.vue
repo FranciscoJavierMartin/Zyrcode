@@ -15,6 +15,7 @@
     <ResizablePanelGroup
       :direction="panelSplitDirection"
       class="min-h-[500px] w-full lg:min-h-[300px]"
+      v-if="language !== 'markdown'"
     >
       <ResizablePanel :default-size="50">
         <CodeEditor
@@ -27,19 +28,14 @@
       </ResizablePanel>
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="50">
-        <CodePreview
-          v-if="language !== 'markdown'"
-          :id
-          :code="transpiledCode"
-          :error
-          @output="addOutputs"
-        />
-        <MarkdownPreview
+        <CodePreview :id :code="transpiledCode" :error @output="addOutputs" />
+        <!-- <MarkdownPreview
           v-else-if="language === 'markdown'"
           :text="transpiledCode"
-        />
+        /> -->
       </ResizablePanel>
     </ResizablePanelGroup>
+    <MarkdownCell :id :code @update:code="updateCode" />
     <Transition name="appear">
       <ConsolePreview v-show="isConsoleOpen" v-model="outputs" />
     </Transition>
@@ -62,6 +58,7 @@ import type { OutputPreviewData } from '@/modules/previews/interfaces/preview';
 import CellToolbar from '@/modules/cells/components/cell-toolbar/cell-toolbar.vue';
 import { parseMarkdown } from '@/modules/cells/helpers/markdown';
 import MarkdownPreview from '@/modules/previews/components/markdown-preview/markdown-preview.vue';
+import MarkdownCell from '@/modules/cells/components/markdown-cell/markdown-cell.vue';
 
 const props = defineProps<{ id: string; code: string; language: Language }>();
 const transpiledCode = ref<string>('');
