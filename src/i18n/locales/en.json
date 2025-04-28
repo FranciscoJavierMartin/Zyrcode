@@ -73,6 +73,7 @@
     },
     "common": {
       "title": "Common settings",
+      "sectionMain": "Common",
       "sectionLanguage": "Language",
       "appLanguage": {
         "label": "Change app language",

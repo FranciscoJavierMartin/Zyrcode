@@ -2,7 +2,7 @@
   <Sidebar class="mt-13">
     <SidebarContent>
       <SidebarGroup>
-        <SidebarGroupLabel>Settings</SidebarGroupLabel>
+        <SidebarGroupLabel>{{ $t('settings.name') }}</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             <template v-for="item of items" :key="item.title">
@@ -70,6 +70,7 @@
 
 <script setup lang="ts">
 import { ChevronRight } from 'lucide-vue-next';
+const { t } = useI18n();
 import {
   Sidebar,
   SidebarContent,
@@ -87,24 +88,25 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/modules/common/components/ui/collapsible';
+import { useI18n } from 'vue-i18n';
 
 const items = [
   {
-    title: 'Common',
+    title: t('settings.common.sectionMain'),
     url: '#common-settings',
   },
   {
-    title: 'Editor',
+    title: t('settings.editor.sectionMain'),
     url: '#editor-settings',
     subItems: [
       {
-        title: 'Formatter',
+        title: t('settings.formatter.section'),
         url: '#formatter-settings',
       },
     ],
   },
   {
-    title: 'IA',
+    title: t('settings.ai.section'),
     url: '#ai-settings',
   },
 ];
