@@ -15,3 +15,5 @@ export type FormCommonFields = keyof typeof commonSchema.entries;
 export type FormEditorFields = keyof typeof editorSchema.entries;
 export type FormFormatterFields = keyof typeof formatterSchema.entries;
 export type FormAIFields = keyof typeof aiSchema.entries;
+
+// TODO: Create an all fields type for forms inputs
