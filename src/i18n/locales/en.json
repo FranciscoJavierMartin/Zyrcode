@@ -51,7 +51,96 @@
       }
     }
   },
-  "settings": "Settings",
+  "settings": {
+    "name": "Settings",
+    "ai": {
+      "title": "AI settings",
+      "section": "AI",
+      "enable": {
+        "label": "Enable AI options",
+        "description": "Enable AI features."
+      },
+      "provider": {
+        "label": "AI provider",
+        "description": "Select the AI provider to use.",
+        "placeholder": "Select provider"
+      },
+      "model": {
+        "label": "IA model for code completion",
+        "description": "Select model for code completion.",
+        "placeholder": "Select model"
+      }
+    },
+    "common": {
+      "title": "Common settings",
+      "sectionLanguage": "Language",
+      "appLanguage": {
+        "label": "Change app language",
+        "description": "Select app language.",
+        "placeholder": "Set app language",
+        "english": "English",
+        "spanish": "Spanish"
+      }
+    },
+    "editor": {
+      "title": "Editor settings",
+      "sectionMain": "Editor",
+      "language": {
+        "label": "Change editor language",
+        "description": "Select default language.",
+        "placeholder": "Set default language"
+      },
+      "ruler": {
+        "label": "Ruler",
+        "placeholder": "Ruler",
+        "description": "Render vertical ruler after a certain number of monospace characters."
+      },
+      "showLineNumbers": {
+        "label": "Show line numbers",
+        "description": "Controls whether to show line numbers for search results."
+      },
+      "fontSize": {
+        "label": "Font Size",
+        "placeholder": "Font size",
+        "description": "Controls the font size in pixels."
+      }
+    },
+    "formatter": {
+      "title": "Formatter",
+      "section": "Formatter",
+      "tabSize": {
+        "label": "Tab Size",
+        "placeholder": "Tab size",
+        "description": "The number of spaces a tab is equal to."
+      },
+      "printWidth": {
+        "label": "Print width",
+        "placeholder": "Print width",
+        "description": "Fit code within this line limit."
+      },
+      "semi": {
+        "label": "Semi",
+        "description": "Whether to use semicolons at the end of every line."
+      },
+      "singleQuote": {
+        "label": "Single quote",
+        "description": "Use single instead of double quotes."
+      },
+      "jsxSingleQuote": {
+        "label": "JSX single quote",
+        "description": "Use single instead of double quotes in JSX."
+      },
+      "useTabs": {
+        "label": "Use tabs",
+        "description": "Indent lines with tabs."
+      },
+      "trailingComma": {
+        "label": "Trailing comma",
+        "placeholder": "Select option",
+        "description": "Controls the printing of trailing commas wherever possible."
+      }
+    }
+  },
   "cancel": "Cancel",
   "remove": "Remove"
 }

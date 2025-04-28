@@ -56,7 +56,7 @@ const buttons = [
   {
     route: ROUTES.SETTINGS.name,
     icon: Settings,
-    label: 'settings',
+    label: 'settings.name',
   },
 ];
 </script>

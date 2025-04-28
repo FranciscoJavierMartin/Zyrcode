@@ -1,30 +1,30 @@
 <template>
   <section id="ai-settings">
-    <SectionTitle>AI settings</SectionTitle>
+    <SectionTitle>{{ $t('settings.name') }}</SectionTitle>
     <form @submit.prevent="onSubmit">
       <FormToggle
         :is-field-dirty="isFieldDirty"
         name="isAIEnabled"
-        label="Enable AI options"
-        section-name="AI"
-        description="Enable AI features"
+        :label="$t('settings.ai.enable.label')"
+        :section-name="$t('settings.ai.section')"
+        :description="$t('settings.ai.enable.description')"
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
         name="aiProvider"
-        label="IA provider"
-        section-name="AI"
-        placeholder="Select AI provider"
-        description="Select AI provider"
+        :label="$t('settings.ai.provider.label')"
+        :section-name="$t('settings.ai.section')"
+        :placeholder="$t('settings.ai.provider.placeholder')"
+        :description="$t('settings.ai.provider.description')"
         :options="[{ value: 'ollama', label: 'Ollama' }]"
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
         name="autoCompleteModel"
-        label="IA model for code completion"
-        section-name="AI"
-        placeholder="Select AI model"
-        description="Select the model for code completion."
+        :label="$t('settings.ai.model.label')"
+        :section-name="$t('settings.ai.section')"
+        :placeholder="$t('settings.ai.model.placeholder')"
+        :description="$t('settings.ai.model.description')"
         :options="[
           { value: 'qwen2.5-coder:0.5b', label: 'qwen2.5-coder:0.5b' },
           { value: 'qwen2.5-coder:1.5b', label: 'qwen2.5-coder:1.5b' },

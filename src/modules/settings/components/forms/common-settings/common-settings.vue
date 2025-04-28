@@ -1,17 +1,23 @@
 <template>
   <section id="common-settings">
-    <SectionTitle>Common settings</SectionTitle>
+    <SectionTitle>{{ $t('settings.common.title') }}</SectionTitle>
     <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
         name="appLanguage"
-        label="Change app language"
-        section-name="Langugage"
-        placeholder="Set app language"
-        description="Select app language."
+        :label="$t('settings.common.appLanguage.label')"
+        :section-name="$t('settings.common.sectionLanguage')"
+        :placeholder="$t('settings.common.appLanguage.placeholder')"
+        :description="$t('settings.common.appLanguage.description')"
         :options="[
-          { value: 'english', label: 'English' },
-          { value: 'spanish', label: 'Spanish' },
+          {
+            value: 'english',
+            label: $t('settings.common.appLanguage.english'),
+          },
+          {
+            value: 'spanish',
+            label: $t('settings.common.appLanguage.spanish'),
+          },
         ]"
       />
     </form>

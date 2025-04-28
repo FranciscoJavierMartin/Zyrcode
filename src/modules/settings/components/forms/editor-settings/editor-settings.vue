@@ -1,6 +1,6 @@
 <template>
   <section id="editor-settings">
-    <SectionTitle>Editor settings</SectionTitle>
+    <SectionTitle>{{ $t('settings.editor.title') }}</SectionTitle>
     <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
@@ -8,10 +8,10 @@
           editorSettingsStore.$state.language === initialState.language
         "
         name="language"
-        label="Change editor language"
-        section-name="Editor"
-        placeholder="Set default language"
-        description="Select default language."
+        :label="$t('settings.editor.language.label')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :placeholder="$t('settings.editor.language.placeholder')"
+        :description="$t('settings.editor.language.description')"
         :options="[
           { value: 'javascript', label: 'JavaScript' },
           { value: 'typescript', label: 'TypeScript' },
@@ -23,10 +23,10 @@
         :is-default="editorSettingsStore.$state.ruler === initialState.ruler"
         name="ruler"
         type="number"
-        label="Ruler"
-        placeholder="Ruler"
-        section-name="Editor"
-        description="Render vertical ruler after a certain number of monospace characters."
+        :label="$t('settings.editor.ruler.label')"
+        :placeholder="$t('settings.editor.ruler.placeholder')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :description="$t('settings.editor.ruler.description')"
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
@@ -35,9 +35,9 @@
           initialState.showLineNumbers
         "
         name="showLineNumbers"
-        label="Show line numbers"
-        section-name="Editor"
-        description="The number of spaces a tab is equal to."
+        :label="$t('settings.editor.showLineNumbers.label')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :description="$t('settings.editor.showLineNumbers.description')"
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
@@ -46,13 +46,13 @@
         "
         name="fontSize"
         type="number"
-        label="Font Size"
-        placeholder="Font size"
-        section-name="Editor"
-        description="Controls the font size in pixels."
+        :label="$t('settings.editor.fontSize.label')"
+        :placeholder="$t('settings.editor.fontSize.placeholder')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :description="$t('settings.editor.fontSize.description')"
       />
       <SectionTitle id="formatter-settings" heading="h5" class="top-20">
-        Formatter
+        {{ $t('settings.formatter.title') }}
       </SectionTitle>
       <FormInput
         :is-field-dirty="isFieldDirty"
@@ -61,10 +61,10 @@
         "
         name="tabSize"
         type="number"
-        label="Tab Size"
-        placeholder="Tab size"
-        section-name="Formatter"
-        description="The number of spaces a tab is equal to."
+        :label="$t('settings.formatter.tabSize.label')"
+        :placeholder="$t('settings.formatter.tabSize.placeholder')"
+        :section-name="$t('settings.formatter.section')"
+        :description="$t('settings.formatter.tabSize.description')"
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
@@ -73,18 +73,18 @@
         "
         name="printWidth"
         type="number"
-        label="Print width"
-        placeholder="Print width"
-        section-name="Formatter"
-        description="Fit code within this line limit."
+        :label="$t('settings.formatter.printWidth.label')"
+        :placeholder="$t('settings.formatter.printWidth.placeholder')"
+        :section-name="$t('settings.formatter.section')"
+        :description="$t('settings.formatter.printWidth.description')"
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
         :is-default="editorSettingsStore.$state.semi === initialState.semi"
         name="semi"
-        label="Semi"
-        section-name="Formatter"
-        description="Whether to use semicolons at the end of every line."
+        :label="$t('settings.formatter.semi.label')"
+        :section-name="$t('settings.formatter.section')"
+        :description="$t('settings.formatter.semi.description')"
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
@@ -92,9 +92,9 @@
           editorSettingsStore.$state.singleQuote === initialState.singleQuote
         "
         name="singleQuote"
-        label="Single quote"
-        section-name="Formatter"
-        description="Use single instead of double quotes."
+        :label="$t('settings.formatter.singleQuote.label')"
+        :section-name="$t('settings.formatter.section')"
+        :description="$t('settings.formatter.singleQuote.description')"
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
@@ -103,9 +103,9 @@
           initialState.jsxSingleQuote
         "
         name="jsxSingleQuote"
-        label="JSX single quote"
-        section-name="Formatter"
-        description="Use single instead of double quotes in JSX."
+        :label="$t('settings.formatter.jsxSingleQuote.label')"
+        :section-name="$t('settings.formatter.section')"
+        :description="$t('settings.formatter.jsxSingleQuote.description')"
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
@@ -113,9 +113,9 @@
           editorSettingsStore.$state.useTabs === initialState.useTabs
         "
         name="useTabs"
-        label="Use tabs"
-        section-name="Formatter"
-        description="Indent lines with tabs."
+        :label="$t('settings.formatter.useTabs.label')"
+        :section-name="$t('settings.formatter.section')"
+        :description="$t('settings.formatter.useTabs.description')"
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
@@ -124,10 +124,10 @@
           initialState.trailingComma
         "
         name="trailingComma"
-        label="Trailing comma"
-        section-name="Formatter"
-        placeholder="Select option"
-        description="Controls the printing of trailing commas wherever possible."
+        :label="$t('settings.formatter.trailingComma.label')"
+        :section-name="$t('settings.formatter.section')"
+        :placeholder="$t('settings.formatter.trailingComma.placeholder')"
+        :description="$t('settings.formatter.trailingComma.description')"
         :options="[
           {
             label: 'none',
