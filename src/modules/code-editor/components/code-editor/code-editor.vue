@@ -23,6 +23,7 @@ import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-fo
 import '@/modules/code-editor/utils/worker';
 import type { Language } from '@/modules/cells/interfaces/code';
 import { useEditorSettingsStore } from '@/modules/settings/store/editor-settings';
+import { useFormatterSettingsStore } from '@/modules/settings/store/formatter-settings';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
 const editorId = ref('');
@@ -36,19 +37,20 @@ const editor = computed<monaco.editor.ICodeEditor | undefined>(() =>
   monaco.editor.getEditors().find((e) => e.getId() === editorId.value),
 );
 const editorSettingsStore = useEditorSettingsStore();
+const formatterSettingsStore = useFormatterSettingsStore();
 
 async function formatCode(): Promise<void> {
   const formattedCode = await prettier
     .format(code.value, {
       parser: 'babel-ts',
       plugins: [parserBabel, parserTypeScript, parserEstree],
-      tabWidth: editorSettingsStore.$state.tabSize,
-      useTabs: editorSettingsStore.$state.useTabs,
-      semi: editorSettingsStore.$state.semi,
-      singleQuote: editorSettingsStore.$state.singleQuote,
-      trailingComma: editorSettingsStore.$state.trailingComma,
-      printWidth: editorSettingsStore.$state.printWidth,
-      jsxSingleQuote: editorSettingsStore.$state.jsxSingleQuote,
+      tabWidth: formatterSettingsStore.$state.tabSize,
+      useTabs: formatterSettingsStore.$state.useTabs,
+      semi: formatterSettingsStore.$state.semi,
+      singleQuote: formatterSettingsStore.$state.singleQuote,
+      trailingComma: formatterSettingsStore.$state.trailingComma,
+      printWidth: formatterSettingsStore.$state.printWidth,
+      jsxSingleQuote: formatterSettingsStore.$state.jsxSingleQuote,
     })
     .then((res) => res.replace(/\n$/, ''));
 
@@ -143,7 +145,7 @@ onMounted(() => {
         lineNumbers: editorSettingsStore.$state.showLineNumbers ? 'on' : 'off',
         fontSize: editorSettingsStore.$state.fontSize,
         rulers: [editorSettingsStore.$state.ruler],
-        tabSize: editorSettingsStore.$state.tabSize,
+        tabSize: formatterSettingsStore.$state.tabSize,
       })
       .getId();
 

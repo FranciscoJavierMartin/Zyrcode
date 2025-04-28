@@ -9,6 +9,7 @@ export const initialState: FormFormatterSettings = {
   singleQuote: true,
   useTabs: true,
   trailingComma: 'all',
+  tabSize: 2,
 };
 
 export const useFormatterSettingsStore = defineStore(
@@ -22,6 +23,7 @@ export const useFormatterSettingsStore = defineStore(
     const trailingComma = ref<FormFormatterSettings['trailingComma']>(
       initialState.trailingComma,
     );
+    const tabSize = ref<number>(initialState.tabSize);
 
     return {
       jsxSingleQuote,
@@ -30,6 +32,7 @@ export const useFormatterSettingsStore = defineStore(
       singleQuote,
       useTabs,
       trailingComma,
+      tabSize,
     };
   },
   {

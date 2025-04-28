@@ -30,6 +30,7 @@
   generic="
     T extends
       | (<TPath extends FormEditorFields>(path: TPath) => boolean)
+      | (<TPath extends FormFormatterFields>(path: TPath) => boolean)
       | (<TPath extends FormAIFields>(path: TPath) => boolean)
       | (<TPath extends FormCommonFields>(path: TPath) => boolean)
   "
@@ -46,6 +47,7 @@ import type {
   FormEditorFields,
   FormAIFields,
   FormCommonFields,
+  FormFormatterFields,
 } from '@/modules/settings/interfaces/form';
 
 withDefaults(
