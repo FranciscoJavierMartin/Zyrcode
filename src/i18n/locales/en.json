@@ -66,7 +66,7 @@
         "placeholder": "Select provider"
       },
       "model": {
-        "label": "IA model for code completion",
+        "label": "AI model for code completion",
         "description": "Select model for code completion.",
         "placeholder": "Select model"
       }
