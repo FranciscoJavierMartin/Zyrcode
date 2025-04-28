@@ -1,6 +1,7 @@
 <template>
   <section id="formatter-settings">
-    <SectionTitle id="formatter-settings" heading="h5" class="top-20">
+    <!-- TODO: Adjust to keep sticky on scroll -->
+    <SectionTitle id="formatter-settings" heading="h5" class="top-13">
       {{ $t('settings.formatter.title') }}
     </SectionTitle>
     <form @submit.prevent="onSubmit">
