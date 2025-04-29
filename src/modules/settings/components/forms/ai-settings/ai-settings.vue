@@ -1,33 +1,30 @@
 <template>
   <section id="ai-settings">
-    <SectionTitle>AI settings</SectionTitle>
+    <SectionTitle>{{ $t('settings.name') }}</SectionTitle>
     <form @submit.prevent="onSubmit">
       <FormToggle
         :is-field-dirty="isFieldDirty"
-        is-default
         name="isAIEnabled"
-        label="Enable AI options"
-        section-name="AI"
-        description="Enable AI features"
+        :label="$t('settings.ai.enable.label')"
+        :section-name="$t('settings.ai.section')"
+        :description="$t('settings.ai.enable.description')"
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
-        is-default
         name="aiProvider"
-        label="IA provider"
-        section-name="AI"
-        placeholder="Select AI provider"
-        description="Select AI provider"
+        :label="$t('settings.ai.provider.label')"
+        :section-name="$t('settings.ai.section')"
+        :placeholder="$t('settings.ai.provider.placeholder')"
+        :description="$t('settings.ai.provider.description')"
         :options="[{ value: 'ollama', label: 'Ollama' }]"
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
-        is-default
         name="autoCompleteModel"
-        label="IA model for code completion"
-        section-name="AI"
-        placeholder="Select AI model"
-        description="Select the model for code completion."
+        :label="$t('settings.ai.model.label')"
+        :section-name="$t('settings.ai.section')"
+        :placeholder="$t('settings.ai.model.placeholder')"
+        :description="$t('settings.ai.model.description')"
         :options="[
           { value: 'qwen2.5-coder:0.5b', label: 'qwen2.5-coder:0.5b' },
           { value: 'qwen2.5-coder:1.5b', label: 'qwen2.5-coder:1.5b' },
@@ -45,11 +42,16 @@ import { watch } from 'vue';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-toggle.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
+import { useAISettingsStore } from '@/modules/settings/store/ai-settings';
+
+const aiSettingsStore = useAISettingsStore();
 
 const formAISchema = toTypedSchema(aiSchema);
 
 const { isFieldDirty, handleSubmit, values } = useForm({
+  name: 'aiForm',
   validationSchema: formAISchema,
+  initialValues: { ...aiSettingsStore.$state },
 });
 
 const onSubmit = handleSubmit((values: GenericObject) => {
@@ -59,7 +61,7 @@ const onSubmit = handleSubmit((values: GenericObject) => {
 watch(
   values,
   (newValues) => {
-    console.log(newValues);
+    aiSettingsStore.$patch(newValues);
   },
   { deep: true },
 );

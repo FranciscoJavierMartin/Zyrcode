@@ -51,7 +51,97 @@
       }
     }
   },
-  "settings": "Ajustes",
+  "settings": {
+    "name": "Ajustes",
+    "ai": {
+      "title": "Ajustes de IA",
+      "section": "IA",
+      "enable": {
+        "label": "Habilitar opciones de IA",
+        "description": "Habilitar caracteristicas de IA."
+      },
+      "provider": {
+        "label": "Proveedor de IA",
+        "description": "Seleccionar proveedor de IA a usar.",
+        "placeholder": "Seleccionar proveedor"
+      },
+      "model": {
+        "label": "Modelo de IA para autocompleción de código",
+        "description": "Seleccionar modelo para compleción de código.",
+        "placeholder": "Seleccionar modelo"
+      }
+    },
+    "common": {
+      "title": "Ajustes generales",
+      "sectionMain": "General",
+      "sectionLanguage": "Idioma",
+      "appLanguage": {
+        "label": "Cambiar idioma de la aplicación",
+        "description": "Seleccionar idioma de la aplicación.",
+        "placeholder": "Elige idioma",
+        "english": "Inglés",
+        "spanish": "Español"
+      }
+    },
+    "editor": {
+      "title": "Ajustes de editor",
+      "sectionMain": "Editor",
+      "language": {
+        "label": "Cambiar lenguaje",
+        "description": "Seleccionar lenguage por defecto.",
+        "placeholder": "Elegir lenguaje"
+      },
+      "ruler": {
+        "label": "Ruler",
+        "placeholder": "Ruler",
+        "description": "Render vertical ruler after a certain number of monospace characters."
+      },
+      "showLineNumbers": {
+        "label": "Mostrar número de linea",
+        "description": "Controla cuando mostrar el número de linea en el editor."
+      },
+      "fontSize": {
+        "label": "Tamaño de la fuente",
+        "placeholder": "Tamaño de la fuente",
+        "description": "Controla el tamaño de la fuente en pixeles."
+      }
+    },
+    "formatter": {
+      "title": "Formateador",
+      "section": "Formateador",
+      "tabSize": {
+        "label": "Tamaño del tabulador",
+        "placeholder": "Tamaño del tabulador",
+        "description": "Número de espacios en blanco que son equivalentes a un tabulador."
+      },
+      "printWidth": {
+        "label": "Ancho de impresión",
+        "placeholder": "Ancho de impresión",
+        "description": "Ajusta el código dentro del limite de columnas."
+      },
+      "semi": {
+        "label": "Punto y coma",
+        "description": "Si usar puntos y coma al final de cada línea."
+      },
+      "singleQuote": {
+        "label": "Comillas simple",
+        "description": "Usa comillas simples en lugar de dobles."
+      },
+      "jsxSingleQuote": {
+        "label": "Comillas simples en JSX",
+        "description": "Usa comullas simples en lugar de dobles en JSX."
+      },
+      "useTabs": {
+        "label": "Usar tabuladores",
+        "description": "Indentar lines con tabuladores en lugar de espacios."
+      },
+      "trailingComma": {
+        "label": "Coma al final",
+        "placeholder": "Seleccionar opción",
+        "description": "Controla cuando usar coma al final de cada línea."
+      }
+    }
+  },
   "cancel": "Cancelar",
   "remove": "Borrar"
 }

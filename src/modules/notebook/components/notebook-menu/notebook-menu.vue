@@ -67,7 +67,7 @@
       <MenubarContent>
         <MenubarItem>
           <a href="/Zyrcode/settings/#ai-settings" class="w-full">
-            {{ $t('settings') }}
+            {{ $t('settings.name') }}
           </a>
         </MenubarItem>
         <MenubarItem>

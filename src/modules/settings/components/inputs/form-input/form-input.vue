@@ -31,8 +31,18 @@
   </FormField>
 </template>
 
-<!-- Add generic type -->
-<script setup lang="ts">
+<!-- TODO: Add generic type -->
+<script
+  setup
+  lang="ts"
+  generic="
+    T extends
+      | (<TPath extends FormEditorFields>(path: TPath) => boolean)
+      | (<TPath extends FormFormatterFields>(path: TPath) => boolean)
+      | (<TPath extends FormAIFields>(path: TPath) => boolean)
+      | (<TPath extends FormCommonFields>(path: TPath) => boolean)
+  "
+>
 import {
   FormField,
   FormItem,
@@ -42,16 +52,24 @@ import {
   FormMessage,
 } from '@/modules/common/components/ui/form';
 import { Input } from '@/modules/common/components/ui/input';
-import type { FormEditorFields } from '@/modules/settings/interfaces/form';
+import type {
+  FormAIFields,
+  FormCommonFields,
+  FormEditorFields,
+  FormFormatterFields,
+} from '@/modules/settings/interfaces/form';
 
-defineProps<{
-  name: string;
-  label: string;
-  type: string;
-  description: string;
-  sectionName: string;
-  placeholder: string;
-  isFieldDirty: <TPath extends FormEditorFields>(path: TPath) => boolean;
-  isDefault: boolean;
-}>();
+withDefaults(
+  defineProps<{
+    name: string;
+    label: string;
+    type: string;
+    description: string;
+    sectionName: string;
+    placeholder: string;
+    isFieldDirty: T;
+    isDefault?: boolean;
+  }>(),
+  { isDefault: true },
+);
 </script>

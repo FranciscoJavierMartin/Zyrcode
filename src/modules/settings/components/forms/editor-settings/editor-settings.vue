@@ -1,6 +1,6 @@
 <template>
   <section id="editor-settings">
-    <SectionTitle>Editor settings</SectionTitle>
+    <SectionTitle>{{ $t('settings.editor.title') }}</SectionTitle>
     <form @submit.prevent="onSubmit">
       <FormSelect
         :is-field-dirty="isFieldDirty"
@@ -8,10 +8,10 @@
           editorSettingsStore.$state.language === initialState.language
         "
         name="language"
-        label="Change editor language"
-        section-name="Editor"
-        placeholder="Set default language"
-        description="Select default language."
+        :label="$t('settings.editor.language.label')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :placeholder="$t('settings.editor.language.placeholder')"
+        :description="$t('settings.editor.language.description')"
         :options="[
           { value: 'javascript', label: 'JavaScript' },
           { value: 'typescript', label: 'TypeScript' },
@@ -23,10 +23,10 @@
         :is-default="editorSettingsStore.$state.ruler === initialState.ruler"
         name="ruler"
         type="number"
-        label="Ruler"
-        placeholder="Ruler"
-        section-name="Editor"
-        description="Render vertical ruler after a certain number of monospace characters."
+        :label="$t('settings.editor.ruler.label')"
+        :placeholder="$t('settings.editor.ruler.placeholder')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :description="$t('settings.editor.ruler.description')"
       />
       <FormToggle
         :is-field-dirty="isFieldDirty"
@@ -35,9 +35,9 @@
           initialState.showLineNumbers
         "
         name="showLineNumbers"
-        label="Show line numbers"
-        section-name="Editor"
-        description="The number of spaces a tab is equal to."
+        :label="$t('settings.editor.showLineNumbers.label')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :description="$t('settings.editor.showLineNumbers.description')"
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
@@ -46,102 +46,10 @@
         "
         name="fontSize"
         type="number"
-        label="Font Size"
-        placeholder="Font size"
-        section-name="Editor"
-        description="Controls the font size in pixels."
-      />
-      <SectionTitle id="formatter-settings" heading="h5" class="top-20">
-        Formatter
-      </SectionTitle>
-      <FormInput
-        :is-field-dirty="isFieldDirty"
-        :is-default="
-          editorSettingsStore.$state.tabSize === initialState.tabSize
-        "
-        name="tabSize"
-        type="number"
-        label="Tab Size"
-        placeholder="Tab size"
-        section-name="Formatter"
-        description="The number of spaces a tab is equal to."
-      />
-      <FormInput
-        :is-field-dirty="isFieldDirty"
-        :is-default="
-          editorSettingsStore.$state.printWidth === initialState.printWidth
-        "
-        name="printWidth"
-        type="number"
-        label="Print width"
-        placeholder="Print width"
-        section-name="Formatter"
-        description="Fit code within this line limit."
-      />
-      <FormToggle
-        :is-field-dirty="isFieldDirty"
-        :is-default="editorSettingsStore.$state.semi === initialState.semi"
-        name="semi"
-        label="Semi"
-        section-name="Formatter"
-        description="Whether to use semicolons at the end of every line."
-      />
-      <FormToggle
-        :is-field-dirty="isFieldDirty"
-        :is-default="
-          editorSettingsStore.$state.singleQuote === initialState.singleQuote
-        "
-        name="singleQuote"
-        label="Single quote"
-        section-name="Formatter"
-        description="Use single instead of double quotes."
-      />
-      <FormToggle
-        :is-field-dirty="isFieldDirty"
-        :is-default="
-          editorSettingsStore.$state.jsxSingleQuote ===
-          initialState.jsxSingleQuote
-        "
-        name="jsxSingleQuote"
-        label="JSX single quote"
-        section-name="Formatter"
-        description="Use single instead of double quotes in JSX."
-      />
-      <FormToggle
-        :is-field-dirty="isFieldDirty"
-        :is-default="
-          editorSettingsStore.$state.useTabs === initialState.useTabs
-        "
-        name="useTabs"
-        label="Use tabs"
-        section-name="Formatter"
-        description="Indent lines with tabs."
-      />
-      <FormSelect
-        :is-field-dirty="isFieldDirty"
-        :is-default="
-          editorSettingsStore.$state.trailingComma ===
-          initialState.trailingComma
-        "
-        name="trailingComma"
-        label="Trailing comma"
-        section-name="Formatter"
-        placeholder="Select option"
-        description="Controls the printing of trailing commas wherever possible."
-        :options="[
-          {
-            label: 'none',
-            value: 'none',
-          },
-          {
-            label: 'es5',
-            value: 'es5',
-          },
-          {
-            label: 'all',
-            value: 'all',
-          },
-        ]"
+        :label="$t('settings.editor.fontSize.label')"
+        :placeholder="$t('settings.editor.fontSize.placeholder')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :description="$t('settings.editor.fontSize.description')"
       />
     </form>
   </section>
@@ -171,6 +79,7 @@ const { isFieldDirty, handleSubmit, values } = useForm({
   initialValues: { ...editorSettingsStore.$state },
 });
 
+// TODO: Check if can be removed
 const onSubmit = handleSubmit((values: GenericObject) => {
   console.log('Form submitted:', values);
 });
