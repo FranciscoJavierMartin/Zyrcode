@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import type { FormCommonSettings } from '@/modules/settings/interfaces/form';
 
 export const initialState: FormCommonSettings = {
-  appLanguage: '',
+  appLanguage: 'en',
 };
 
 export const useCommonSettingsStore = defineStore(
