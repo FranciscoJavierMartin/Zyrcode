@@ -92,6 +92,7 @@ import type {
   FormCommonFields,
   FormEditorFields,
   FormFormatterFields,
+  FormSelectOption,
 } from '@/modules/settings/interfaces/form';
 
 const props = withDefaults(
@@ -102,7 +103,7 @@ const props = withDefaults(
     description: string;
     sectionName: string;
     placeholder: string;
-    options: { value: string; label: string; icon?: string }[];
+    options: FormSelectOption[];
     isFieldDirty: T;
     isDefault?: boolean;
   }>(),

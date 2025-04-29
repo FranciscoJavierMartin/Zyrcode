@@ -5,6 +5,13 @@ import type {
   editorSchema,
   formatterSchema,
 } from '@/modules/settings/helpers/schemas';
+import type { VNode } from 'vue';
+
+export type FormSelectOption = {
+  value: string;
+  label: string;
+  icon?: string | SVGElement;
+};
 
 export type FormCommonSettings = InferOutput<typeof commonSchema>;
 export type FormEditorSettings = InferOutput<typeof editorSchema>;

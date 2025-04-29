@@ -27,6 +27,7 @@ import SectionTitle from '@/modules/settings/components/section-title/section-ti
 import { useCommonSettingsStore } from '@/modules/settings/store/common-settings';
 import esFlag from '@/assets/flags/spain.svg';
 import enFlag from '@/assets/flags/united-kingdom.svg';
+import type { FormSelectOption } from '@/modules/settings/interfaces/form';
 
 const { locale, availableLocales, fallbackLocale, t } = useI18n();
 
@@ -44,7 +45,9 @@ const options: Record<string, { value: string; label: string; icon?: string }> =
     },
   };
 
-const localeOptions = computed(() => availableLocales.map((l) => options[l]));
+const localeOptions = computed<FormSelectOption[]>(() =>
+  availableLocales.map((l) => options[l]),
+);
 
 const commonSettingsStore = useCommonSettingsStore();
 

@@ -12,11 +12,7 @@
         :section-name="$t('settings.editor.sectionMain')"
         :placeholder="$t('settings.editor.language.placeholder')"
         :description="$t('settings.editor.language.description')"
-        :options="[
-          { value: 'javascript', label: 'JavaScript' },
-          { value: 'typescript', label: 'TypeScript' },
-          { value: 'markdown', label: 'Markdown' },
-        ]"
+        :options="languageOptions"
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
@@ -68,6 +64,14 @@ import {
   useEditorSettingsStore,
   initialState,
 } from '@/modules/settings/store/editor-settings';
+import type { FormSelectOption } from '@/modules/settings/interfaces/form';
+import JavascriptIcon from '@/modules/common/components/icons/javascript-icon.vue';
+
+const languageOptions: FormSelectOption[] = [
+  { value: 'javascript', label: 'JavaScript', icon: JavascriptIcon },
+  { value: 'typescript', label: 'TypeScript' },
+  { value: 'markdown', label: 'Markdown' },
+];
 
 const editorSettingsStore = useEditorSettingsStore();
 
