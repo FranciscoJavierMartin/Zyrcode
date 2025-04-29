@@ -15,7 +15,19 @@
         <Select v-bind="componentField" :id="name">
           <FormControl>
             <SelectTrigger>
-              <SelectValue :placeholder="placeholder" />
+              <SelectValue :placeholder="placeholder">
+                <div class="flex items-center gap-2">
+                  <img
+                    v-if="selectedOption?.icon"
+                    src="@/assets/flags/spain.svg"
+                    alt="Spain flag"
+                    class="h-4"
+                  />
+                  <span class="text-foreground text-sm">
+                    {{ selectedOption?.label }}
+                  </span>
+                </div>
+              </SelectValue>
             </SelectTrigger>
           </FormControl>
           <SelectContent>
@@ -57,6 +69,7 @@
       | (<TPath extends FormCommonFields>(path: TPath) => boolean)
   "
 >
+import { computed } from 'vue';
 import {
   FormItem,
   FormField,
@@ -79,10 +92,11 @@ import type {
   FormFormatterFields,
 } from '@/modules/settings/interfaces/form';
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     name: string;
     label: string;
+    value?: string;
     description: string;
     sectionName: string;
     placeholder: string;
@@ -91,5 +105,9 @@ withDefaults(
     isDefault?: boolean;
   }>(),
   { isDefault: true },
+);
+
+const selectedOption = computed(() =>
+  props.options.find((option) => option.value === props.value),
 );
 </script>
