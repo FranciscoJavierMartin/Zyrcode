@@ -25,8 +25,17 @@
                 :key="option.value"
                 :value="option.value"
               >
-                <!-- TODO: Add icon -->
-                {{ option.label }}
+                <div class="flex items-center gap-2">
+                  <img
+                    v-if="option.icon"
+                    src="@/assets/flags/spain.svg"
+                    alt="Spain flag"
+                    class="h-4"
+                  />
+                  <span class="text-foreground text-sm">
+                    {{ option.label }}
+                  </span>
+                </div>
               </SelectItem>
             </SelectGroup>
           </SelectContent>
@@ -77,7 +86,7 @@ withDefaults(
     description: string;
     sectionName: string;
     placeholder: string;
-    options: { value: string; label: string }[];
+    options: { value: string; label: string; icon?: string }[];
     isFieldDirty: T;
     isDefault?: boolean;
   }>(),

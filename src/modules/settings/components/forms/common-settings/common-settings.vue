@@ -27,16 +27,19 @@ import { useI18n } from 'vue-i18n';
 
 const { locale, availableLocales, fallbackLocale, t } = useI18n();
 
-const options: Record<string, { value: string; label: string }> = {
-  en: {
-    value: 'en',
-    label: t('settings.common.appLanguage.english'),
-  },
-  es: {
-    value: 'es',
-    label: t('settings.common.appLanguage.spanish'),
-  },
-};
+const options: Record<string, { value: string; label: string; icon?: string }> =
+  {
+    en: {
+      value: 'en',
+      label: t('settings.common.appLanguage.english'),
+      icon: '@/assets/flags/spain.svg',
+    },
+    es: {
+      value: 'es',
+      label: t('settings.common.appLanguage.spanish'),
+      icon: '@/assets/flags/spain.svg',
+    },
+  };
 
 const localeOptions = computed(() => availableLocales.map((l) => options[l]));
 
