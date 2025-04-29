@@ -13,6 +13,7 @@
         :placeholder="$t('settings.editor.language.placeholder')"
         :description="$t('settings.editor.language.description')"
         :options="languageOptions"
+        :value="values['language']"
       />
       <FormInput
         :is-field-dirty="isFieldDirty"
