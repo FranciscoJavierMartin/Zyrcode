@@ -25,8 +25,8 @@ import { commonSchema } from '@/modules/settings/helpers/schemas';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 import { useCommonSettingsStore } from '@/modules/settings/store/common-settings';
-import esFlag from '@/assets/flags/spain.svg';
-import enFlag from '@/assets/flags/united-kingdom.svg';
+import esFlag from '@/assets/flags/es.svg';
+import enFlag from '@/assets/flags/en.svg';
 import type { FormSelectOption } from '@/modules/settings/interfaces/form';
 
 const { locale, availableLocales, fallbackLocale, t } = useI18n();

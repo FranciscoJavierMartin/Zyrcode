@@ -65,12 +65,14 @@ import {
   initialState,
 } from '@/modules/settings/store/editor-settings';
 import type { FormSelectOption } from '@/modules/settings/interfaces/form';
-import JavascriptIcon from '@/modules/common/components/icons/javascript-icon.vue';
+import JavascriptIcon from '@/assets/languages/javascript-icon.svg';
+import TypescriptIcon from '@/assets/languages/typescript-icon.svg';
+import MarkdownIcon from '@/assets/languages/markdown-icon.svg';
 
 const languageOptions: FormSelectOption[] = [
   { value: 'javascript', label: 'JavaScript', icon: JavascriptIcon },
-  { value: 'typescript', label: 'TypeScript' },
-  { value: 'markdown', label: 'Markdown' },
+  { value: 'typescript', label: 'TypeScript', icon: TypescriptIcon },
+  { value: 'markdown', label: 'Markdown', icon: MarkdownIcon },
 ];
 
 const editorSettingsStore = useEditorSettingsStore();
