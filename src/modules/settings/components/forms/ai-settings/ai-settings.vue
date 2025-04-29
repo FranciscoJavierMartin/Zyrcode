@@ -16,7 +16,8 @@
         :section-name="$t('settings.ai.section')"
         :placeholder="$t('settings.ai.provider.placeholder')"
         :description="$t('settings.ai.provider.description')"
-        :options="[{ value: 'ollama', label: 'Ollama' }]"
+        :options="aiProviderOptions"
+        :value="values['aiProvider']"
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
@@ -43,7 +44,13 @@ import FormSelect from '@/modules/settings/components/inputs/form-select/form-se
 import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-toggle.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 import { useAISettingsStore } from '@/modules/settings/store/ai-settings';
+import type { FormSelectOption } from '@/modules/settings/interfaces/form';
+// TODO: Adjust for diferents themes light/dark
+import ollamaIcon from '@/assets/ai-provider/ollama-light.svg';
 
+const aiProviderOptions: FormSelectOption[] = [
+  { value: 'ollama', label: 'Ollama', icon: ollamaIcon },
+];
 const aiSettingsStore = useAISettingsStore();
 
 const formAISchema = toTypedSchema(aiSchema);

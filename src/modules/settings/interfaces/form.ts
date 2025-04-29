@@ -10,6 +10,7 @@ export type FormSelectOption = {
   value: string;
   label: string;
   icon?: string;
+  alt?: string;
 };
 
 export type FormCommonSettings = InferOutput<typeof commonSchema>;
