@@ -16,9 +16,11 @@
           <FormControl>
             <SelectTrigger>
               <SelectValue :placeholder="placeholder">
-                <div class="flex items-center gap-2">
+                <div
+                  v-if="selectedOption?.icon"
+                  class="flex items-center gap-2"
+                >
                   <img
-                    v-if="selectedOption?.icon"
                     :src="selectedOption?.icon"
                     alt="Spain flag"
                     class="h-4"
