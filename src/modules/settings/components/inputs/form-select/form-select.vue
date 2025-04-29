@@ -19,7 +19,7 @@
                 <div class="flex items-center gap-2">
                   <img
                     v-if="selectedOption?.icon"
-                    src="@/assets/flags/spain.svg"
+                    :src="selectedOption?.icon"
                     alt="Spain flag"
                     class="h-4"
                   />
@@ -40,8 +40,8 @@
                 <div class="flex items-center gap-2">
                   <img
                     v-if="option.icon"
-                    src="@/assets/flags/spain.svg"
-                    alt="Spain flag"
+                    :src="option.icon"
+                    :alt="`${option.label} flag`"
                     class="h-4"
                   />
                   <span class="text-foreground text-sm">

@@ -18,13 +18,15 @@
 
 <script setup lang="ts">
 import { computed, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useForm, type GenericObject } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/valibot';
 import { commonSchema } from '@/modules/settings/helpers/schemas';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 import { useCommonSettingsStore } from '@/modules/settings/store/common-settings';
-import { useI18n } from 'vue-i18n';
+import esFlag from '@/assets/flags/spain.svg';
+import enFlag from '@/assets/flags/united-kingdom.svg';
 
 const { locale, availableLocales, fallbackLocale, t } = useI18n();
 
@@ -33,12 +35,12 @@ const options: Record<string, { value: string; label: string; icon?: string }> =
     en: {
       value: 'en',
       label: t('settings.common.appLanguage.english'),
-      icon: '@/assets/flags/spain.svg',
+      icon: enFlag,
     },
     es: {
       value: 'es',
       label: t('settings.common.appLanguage.spanish'),
-      icon: '@/assets/flags/spain.svg',
+      icon: esFlag,
     },
   };
 
