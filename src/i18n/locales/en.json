@@ -142,6 +142,14 @@
       }
     }
   },
+  "icons": {
+    "javascriptIcon": "javascript icon",
+    "typescriptIcon": "typescript icon",
+    "markdownIcon": "markdown icon",
+    "ollamaIcon": "Ollama",
+    "enFlag": "United Kingdom flag",
+    "esFlag": "Spain flag"
+  },
   "cancel": "Cancel",
   "remove": "Remove"
 }

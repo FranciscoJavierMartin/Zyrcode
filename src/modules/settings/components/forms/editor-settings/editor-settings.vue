@@ -54,6 +54,7 @@
 
 <script setup lang="ts">
 import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useForm, type GenericObject } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/valibot';
 import { editorSchema } from '@/modules/settings/helpers/schemas';
@@ -70,24 +71,26 @@ import JavascriptIcon from '@/modules/common/components/icons/languages/javascri
 import TypescriptIcon from '@/modules/common/components/icons/languages/typescript-icon.vue';
 import MarkdownIcon from '@/modules/common/components/icons/languages/markdown-icon.vue';
 
+const { t } = useI18n();
+
 const languageOptions: FormSelectOption[] = [
   {
     value: 'javascript',
     label: 'JavaScript',
     icon: JavascriptIcon,
-    alt: 'Javascript icon',
+    alt: t('icons.javascriptIcon'),
   },
   {
     value: 'typescript',
     label: 'TypeScript',
     icon: TypescriptIcon,
-    alt: 'Typescript icon',
+    alt: t('icons.typescriptIcon'),
   },
   {
     value: 'markdown',
     label: 'Markdown',
     icon: MarkdownIcon,
-    alt: 'Markdown icon',
+    alt: t('icons.markdownIcon'),
   },
 ];
 

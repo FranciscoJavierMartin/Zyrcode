@@ -36,13 +36,13 @@ const options: Record<string, FormSelectOption> = {
     value: 'en',
     label: t('settings.common.appLanguage.english'),
     icon: enFlag,
-    alt: 'English flag',
+    alt: t('icons.enFlag'),
   },
   es: {
     value: 'es',
     label: t('settings.common.appLanguage.spanish'),
     icon: esFlag,
-    alt: 'Spanish flag',
+    alt: t('icons.esFlag'),
   },
 };
 

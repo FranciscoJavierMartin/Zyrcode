@@ -36,10 +36,11 @@
 </template>
 
 <script setup lang="ts">
-import { aiSchema } from '@/modules/settings/helpers/schemas';
+import { watch } from 'vue';
 import { toTypedSchema } from '@vee-validate/valibot';
 import { useForm, type GenericObject } from 'vee-validate';
-import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { aiSchema } from '@/modules/settings/helpers/schemas';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-toggle.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
@@ -47,8 +48,15 @@ import { useAISettingsStore } from '@/modules/settings/store/ai-settings';
 import type { FormSelectOption } from '@/modules/settings/interfaces/form';
 import ollamaIcon from '@/modules/common/components/icons/ai-providers/ollama.vue';
 
+const { t } = useI18n();
+
 const aiProviderOptions: FormSelectOption[] = [
-  { value: 'ollama', label: 'Ollama', icon: ollamaIcon, alt: 'Ollama' },
+  {
+    value: 'ollama',
+    label: 'Ollama',
+    icon: ollamaIcon,
+    alt: t('icons.ollamaIcon'),
+  },
 ];
 const aiSettingsStore = useAISettingsStore();
 
