@@ -71,9 +71,24 @@ import TypescriptIcon from '@/modules/common/components/icons/languages/typescri
 import MarkdownIcon from '@/modules/common/components/icons/languages/markdown-icon.vue';
 
 const languageOptions: FormSelectOption[] = [
-  { value: 'javascript', label: 'JavaScript', icon: JavascriptIcon },
-  { value: 'typescript', label: 'TypeScript', icon: TypescriptIcon },
-  { value: 'markdown', label: 'Markdown', icon: MarkdownIcon },
+  {
+    value: 'javascript',
+    label: 'JavaScript',
+    icon: JavascriptIcon,
+    alt: 'Javascript icon',
+  },
+  {
+    value: 'typescript',
+    label: 'TypeScript',
+    icon: TypescriptIcon,
+    alt: 'Typescript icon',
+  },
+  {
+    value: 'markdown',
+    label: 'Markdown',
+    icon: MarkdownIcon,
+    alt: 'Markdown icon',
+  },
 ];
 
 const editorSettingsStore = useEditorSettingsStore();

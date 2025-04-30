@@ -48,7 +48,7 @@ import type { FormSelectOption } from '@/modules/settings/interfaces/form';
 import ollamaIcon from '@/modules/common/components/icons/ai-providers/ollama.vue';
 
 const aiProviderOptions: FormSelectOption[] = [
-  { value: 'ollama', label: 'Ollama', icon: ollamaIcon },
+  { value: 'ollama', label: 'Ollama', icon: ollamaIcon, alt: 'Ollama' },
 ];
 const aiSettingsStore = useAISettingsStore();
 

@@ -20,7 +20,11 @@
                   v-if="selectedOption?.icon"
                   class="flex items-center gap-2"
                 >
-                  <component :is="selectedOption.icon" class="size-4" />
+                  <component
+                    :is="selectedOption.icon"
+                    class="size-4"
+                    :alt="selectedOption.alt"
+                  />
                   <span class="text-foreground text-sm">
                     {{ selectedOption?.label }}
                   </span>
