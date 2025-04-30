@@ -16,6 +16,7 @@
           <FormControl>
             <SelectTrigger>
               <SelectValue :placeholder="placeholder">
+                <!-- If there is no icon, then show the normal button -->
                 <div
                   v-if="selectedOption?.icon"
                   class="flex items-center gap-2"
