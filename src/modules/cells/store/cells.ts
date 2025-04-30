@@ -9,8 +9,8 @@ export const useCellsStore = defineStore('cells', () => {
   const cells = reactive<Record<string, Cell>>({
     a: {
       id: 'a',
-      language: 'markdown',
-      content: '# Hello world',
+      language: 'javascript',
+      content: 'console.log("Hello");',
     },
   });
   const orderedCells = computed<Cell[]>(() =>

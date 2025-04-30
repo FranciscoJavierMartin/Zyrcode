@@ -1,9 +1,6 @@
 <template>
   <div
-    :class="[
-      'border-foreground group-hover:border-background size-5 rounded-[4px] border-2',
-      props.class,
-    ]"
+    :class="['border-foreground size-5 rounded-[4px] border-2', props.class]"
   >
     <div
       :class="[
@@ -39,6 +36,6 @@ const props = withDefaults(
 @reference '@/assets/styles.css';
 
 .ruler {
-  @apply border-foreground group-hover:border-background border transition-transform duration-300;
+  @apply border-foreground border transition-transform duration-300;
 }
 </style>
