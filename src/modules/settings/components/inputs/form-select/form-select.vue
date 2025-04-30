@@ -20,11 +20,7 @@
                   v-if="selectedOption?.icon"
                   class="flex items-center gap-2"
                 >
-                  <img
-                    :src="selectedOption?.icon"
-                    alt="Spain flag"
-                    class="h-4"
-                  />
+                  <component :is="selectedOption.icon" class="size-4" />
                   <span class="text-foreground text-sm">
                     {{ selectedOption?.label }}
                   </span>
@@ -40,11 +36,10 @@
                 :value="option.value"
               >
                 <div class="flex items-center gap-2">
-                  <img
+                  <component
                     v-if="option.icon"
-                    :src="option.icon"
-                    :alt="`${option.label} flag`"
-                    class="h-4"
+                    :is="option.icon"
+                    class="size-4"
                   />
                   <span class="text-foreground text-sm">
                     {{ option.label }}

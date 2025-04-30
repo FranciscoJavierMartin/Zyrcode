@@ -25,25 +25,24 @@ import { commonSchema } from '@/modules/settings/helpers/schemas';
 import FormSelect from '@/modules/settings/components/inputs/form-select/form-select.vue';
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 import { useCommonSettingsStore } from '@/modules/settings/store/common-settings';
-import esFlag from '@/assets/flags/es.svg';
-import enFlag from '@/assets/flags/en.svg';
+import esFlag from '@/modules/common/components/icons/flags/es-flag.vue';
+import enFlag from '@/modules/common/components/icons/flags/en-flag.vue';
 import type { FormSelectOption } from '@/modules/settings/interfaces/form';
 
 const { locale, availableLocales, fallbackLocale, t } = useI18n();
 
-const options: Record<string, { value: string; label: string; icon?: string }> =
-  {
-    en: {
-      value: 'en',
-      label: t('settings.common.appLanguage.english'),
-      icon: enFlag,
-    },
-    es: {
-      value: 'es',
-      label: t('settings.common.appLanguage.spanish'),
-      icon: esFlag,
-    },
-  };
+const options: Record<string, FormSelectOption> = {
+  en: {
+    value: 'en',
+    label: t('settings.common.appLanguage.english'),
+    icon: enFlag,
+  },
+  es: {
+    value: 'es',
+    label: t('settings.common.appLanguage.spanish'),
+    icon: esFlag,
+  },
+};
 
 const localeOptions = computed<FormSelectOption[]>(() =>
   availableLocales.map((l) => options[l]),

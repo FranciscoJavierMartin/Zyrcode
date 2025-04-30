@@ -1,3 +1,4 @@
+import type { Component } from 'vue';
 import type { InferOutput } from 'valibot';
 import type {
   aiSchema,
@@ -9,7 +10,7 @@ import type {
 export type FormSelectOption = {
   value: string;
   label: string;
-  icon?: string;
+  icon?: Component;
   alt?: string;
 };
 

@@ -45,8 +45,7 @@ import FormToggle from '@/modules/settings/components/inputs/form-toggle/form-to
 import SectionTitle from '@/modules/settings/components/section-title/section-title.vue';
 import { useAISettingsStore } from '@/modules/settings/store/ai-settings';
 import type { FormSelectOption } from '@/modules/settings/interfaces/form';
-// TODO: Adjust for diferents themes light/dark
-import ollamaIcon from '@/assets/ai-provider/ollama-light.svg';
+import ollamaIcon from '@/modules/common/components/icons/ai-providers/ollama.vue';
 
 const aiProviderOptions: FormSelectOption[] = [
   { value: 'ollama', label: 'Ollama', icon: ollamaIcon },
