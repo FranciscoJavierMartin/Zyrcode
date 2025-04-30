@@ -17,7 +17,7 @@
         :placeholder="$t('settings.ai.provider.placeholder')"
         :description="$t('settings.ai.provider.description')"
         :options="aiProviderOptions"
-        :value="values['aiProvider']"
+        :value="values.aiProvider"
       />
       <FormSelect
         :is-field-dirty="isFieldDirty"
@@ -26,6 +26,7 @@
         :section-name="$t('settings.ai.section')"
         :placeholder="$t('settings.ai.model.placeholder')"
         :description="$t('settings.ai.model.description')"
+        :value="values.autoCompleteModel"
         :options="[
           { value: 'qwen2.5-coder:0.5b', label: 'qwen2.5-coder:0.5b' },
           { value: 'qwen2.5-coder:1.5b', label: 'qwen2.5-coder:1.5b' },

@@ -10,7 +10,7 @@
         :placeholder="$t('settings.common.appLanguage.placeholder')"
         :description="$t('settings.common.appLanguage.description')"
         :options="localeOptions"
-        :value="values['appLanguage']"
+        :value="values.appLanguage"
       />
     </form>
   </section>

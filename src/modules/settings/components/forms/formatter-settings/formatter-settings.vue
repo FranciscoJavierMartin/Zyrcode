@@ -79,6 +79,7 @@
         :section-name="$t('settings.formatter.section')"
         :placeholder="$t('settings.formatter.trailingComma.placeholder')"
         :description="$t('settings.formatter.trailingComma.description')"
+        :value="values.trailingComma"
         :options="[
           {
             label: 'none',
