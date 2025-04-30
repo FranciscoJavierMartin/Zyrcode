@@ -143,12 +143,12 @@
     }
   },
   "icons": {
-    "javascriptIcon": "javascript icon",
-    "typescriptIcon": "typescript icon",
-    "markdownIcon": "markdown icon",
+    "javascriptIcon": "Icono de Javascript",
+    "typescriptIcon": "Icono de Typescript",
+    "markdownIcon": "Icono de Markdown",
     "ollamaIcon": "Ollama",
-    "enFlag": "United Kingdom flag",
-    "esFlag": "Spain flag"
+    "enFlag": "Bandera de Reino Unido",
+    "esFlag": "Bandera de España"
   },
   "cancel": "Cancelar",
   "remove": "Borrar"

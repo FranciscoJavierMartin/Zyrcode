@@ -143,9 +143,9 @@
     }
   },
   "icons": {
-    "javascriptIcon": "javascript icon",
-    "typescriptIcon": "typescript icon",
-    "markdownIcon": "markdown icon",
+    "javascriptIcon": "Javascript icon",
+    "typescriptIcon": "Typescript icon",
+    "markdownIcon": "Markdown icon",
     "ollamaIcon": "Ollama",
     "enFlag": "United Kingdom flag",
     "esFlag": "Spain flag"
