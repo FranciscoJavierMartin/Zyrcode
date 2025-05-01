@@ -15,7 +15,22 @@
         <Select v-bind="componentField" :id="name">
           <FormControl>
             <SelectTrigger>
-              <SelectValue :placeholder="placeholder" />
+              <SelectValue :placeholder="placeholder" as-child>
+                <!-- If there is no icon, then show the normal button -->
+                <div
+                  v-if="selectedOption?.icon"
+                  class="flex items-center gap-2"
+                >
+                  <component
+                    :is="selectedOption.icon"
+                    class="size-4"
+                    :alt="selectedOption.alt"
+                  />
+                  <span class="text-foreground text-sm">
+                    {{ selectedOption?.label }}
+                  </span>
+                </div>
+              </SelectValue>
             </SelectTrigger>
           </FormControl>
           <SelectContent>
@@ -25,8 +40,16 @@
                 :key="option.value"
                 :value="option.value"
               >
-                <!-- TODO: Add icon -->
-                {{ option.label }}
+                <div class="flex items-center gap-2">
+                  <component
+                    v-if="option.icon"
+                    :is="option.icon"
+                    class="size-4"
+                  />
+                  <span class="text-foreground text-sm">
+                    {{ option.label }}
+                  </span>
+                </div>
               </SelectItem>
             </SelectGroup>
           </SelectContent>
@@ -48,6 +71,7 @@
       | (<TPath extends FormCommonFields>(path: TPath) => boolean)
   "
 >
+import { computed } from 'vue';
 import {
   FormItem,
   FormField,
@@ -68,19 +92,25 @@ import type {
   FormCommonFields,
   FormEditorFields,
   FormFormatterFields,
+  FormSelectOption,
 } from '@/modules/settings/interfaces/form';
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     name: string;
     label: string;
+    value?: string;
     description: string;
     sectionName: string;
     placeholder: string;
-    options: { value: string; label: string }[];
+    options: FormSelectOption[];
     isFieldDirty: T;
     isDefault?: boolean;
   }>(),
   { isDefault: true },
+);
+
+const selectedOption = computed(() =>
+  props.options.find((option) => option.value === props.value),
 );
 </script>

@@ -1,3 +1,4 @@
+import type { Component } from 'vue';
 import type { InferOutput } from 'valibot';
 import type {
   aiSchema,
@@ -5,6 +6,13 @@ import type {
   editorSchema,
   formatterSchema,
 } from '@/modules/settings/helpers/schemas';
+
+export type FormSelectOption = {
+  value: string;
+  label: string;
+  icon?: Component;
+  alt?: string;
+};
 
 export type FormCommonSettings = InferOutput<typeof commonSchema>;
 export type FormEditorSettings = InferOutput<typeof editorSchema>;
