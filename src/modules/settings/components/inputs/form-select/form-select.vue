@@ -15,7 +15,7 @@
         <Select v-bind="componentField" :id="name">
           <FormControl>
             <SelectTrigger>
-              <SelectValue :placeholder="placeholder">
+              <SelectValue :placeholder="placeholder" as-child>
                 <!-- If there is no icon, then show the normal button -->
                 <div
                   v-if="selectedOption?.icon"
