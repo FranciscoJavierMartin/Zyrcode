@@ -121,8 +121,7 @@ export default function exportToIpynb(
   try {
     parse(ipynbSchema, notebook);
     downloadNotebook(title, notebook, 'ipynb');
-  } catch (error) {
-    console.log(error);
+  } catch {
     errorToast(errorMessage);
   }
 }
