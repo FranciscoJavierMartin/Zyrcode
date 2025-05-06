@@ -20,7 +20,7 @@ const metadataTagsSchema = v.pipe(
   ),
 );
 const metadataExecutionSchema = v.optional(
-  v.pipe(v.string(), v.isoDateTime(), v.regex(/^.*$/)),
+  v.pipe(v.string(), v.regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/)),
 );
 
 const outputMetadata = v.record(v.string(), v.any());
