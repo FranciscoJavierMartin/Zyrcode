@@ -14,33 +14,35 @@ import downloadNotebook from '@/modules/notebook/helpers/exports/download-notebo
 
 function getCellOutputs(id: string): ConsoleOutput[] {
   const outputs: ConsoleOutput[] = [];
+  document
+    .getElementById(id)
+    ?.querySelectorAll('.log-item')
+    .forEach((logItem) => {
+      const logLevel = logItem.classList
+        .toString()
+        .replace('log-item', '')
+        .replace(' ', '');
 
-  document.querySelectorAll(`#${id} .log-item`).forEach((logItem) => {
-    const logLevel = logItem.classList
-      .toString()
-      .replace('log-item', '')
-      .replace(' ', '');
-
-    switch (logLevel) {
-      case 'info':
-      case 'debug':
-      case 'log':
-      case 'warn':
-        outputs.push({
-          output_type: 'stream',
-          name: 'stdout',
-          text: logItem.textContent ?? '',
-        } as ConsoleOutputStream);
-        break;
-      case 'error':
-        outputs.push({
-          output_type: 'stream',
-          name: 'stderr',
-          text: logItem.textContent ?? '',
-        } as ConsoleOutputStream);
-        break;
-    }
-  });
+      switch (logLevel) {
+        case 'info':
+        case 'debug':
+        case 'log':
+        case 'warn':
+          outputs.push({
+            output_type: 'stream',
+            name: 'stdout',
+            text: logItem.textContent ?? '',
+          } as ConsoleOutputStream);
+          break;
+        case 'error':
+          outputs.push({
+            output_type: 'stream',
+            name: 'stderr',
+            text: logItem.textContent ?? '',
+          } as ConsoleOutputStream);
+          break;
+      }
+    });
 
   return outputs;
 }
@@ -119,7 +121,8 @@ export default function exportToIpynb(
   try {
     parse(ipynbSchema, notebook);
     downloadNotebook(title, notebook, 'ipynb');
-  } catch {
+  } catch (error) {
+    console.log(error);
     errorToast(errorMessage);
   }
 }
