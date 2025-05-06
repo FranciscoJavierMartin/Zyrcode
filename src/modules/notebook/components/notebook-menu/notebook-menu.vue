@@ -110,8 +110,10 @@ import { useCellsStore } from '@/modules/cells/store/cells';
 import exportToIpynb from '@/modules/notebook/helpers/exports/export-to-ipynb';
 import exportToJson from '@/modules/notebook/helpers/exports/export-to-json';
 import { jsonSchema } from '@/modules/notebook/helpers/validators/json';
+import { ipynbSchema } from '@/modules/notebook/helpers/validators/ipynb';
 import { errorToast, successToast } from '@/modules/common/helpers/toasts';
 import { clearCache as clearCacheHelper } from '@/modules/common/helpers/package-cache';
+import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
 
 const notebookJson = useTemplateRef('notebookJson');
 const notebookIpynb = useTemplateRef('notebookIpynb');
@@ -172,9 +174,9 @@ function uploadNotebookIpynb(e: Event): void {
   reader.onload = () => {
     if (reader.result) {
       try {
-        console.log(reader.result.toString());
-        // const notebookData = parse(jsonSchema, notebookDataRaw);
-        // store.loadNotebook(notebookData);
+        const notebookDataRaw = JSON.parse(reader.result.toString());
+        const notebookData = parse(ipynbSchema, notebookDataRaw);
+        store.loadNotebookFromIpynb(notebookData as NotebookIpynb);
       } catch (error) {
         console.log(error);
         errorToast(t('notebook.menu.import.error'));
