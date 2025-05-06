@@ -39,6 +39,18 @@
             @change="uploadNotebookJson"
           />
         </MenubarItem>
+        <MenubarItem @select="openInputIpynb">
+          {{ $t('notebook.menu.import.ipynb') }}
+          <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
+          <input
+            ref="notebookIpynb"
+            type="file"
+            class="hidden"
+            hidden
+            accept=".ipynb"
+            @change="uploadNotebookIpynb"
+          />
+        </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
@@ -102,6 +114,7 @@ import { errorToast, successToast } from '@/modules/common/helpers/toasts';
 import { clearCache as clearCacheHelper } from '@/modules/common/helpers/package-cache';
 
 const notebookJson = useTemplateRef('notebookJson');
+const notebookIpynb = useTemplateRef('notebookIpynb');
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
 const { t } = useI18n();
@@ -134,6 +147,10 @@ function openInput(): void {
   notebookJson.value?.click();
 }
 
+function openInputIpynb(): void {
+  notebookIpynb.value?.click();
+}
+
 function uploadNotebookJson(e: Event): void {
   const reader = new FileReader();
   reader.onload = () => {
@@ -143,6 +160,23 @@ function uploadNotebookJson(e: Event): void {
         const notebookData = parse(jsonSchema, notebookDataRaw);
         store.loadNotebook(notebookData);
       } catch {
+        errorToast(t('notebook.menu.import.error'));
+      }
+    }
+  };
+  reader.readAsText((e.target as HTMLInputElement).files?.[0] as Blob);
+}
+
+function uploadNotebookIpynb(e: Event): void {
+  const reader = new FileReader();
+  reader.onload = () => {
+    if (reader.result) {
+      try {
+        console.log(reader.result.toString());
+        // const notebookData = parse(jsonSchema, notebookDataRaw);
+        // store.loadNotebook(notebookData);
+      } catch (error) {
+        console.log(error);
         errorToast(t('notebook.menu.import.error'));
       }
     }
