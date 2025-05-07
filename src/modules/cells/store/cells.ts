@@ -6,15 +6,15 @@ import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
 
 export const useCellsStore = defineStore('cells', () => {
   const _notebookTitle = ref<string>('');
-  const order = ref<string[]>(['a', '1746556633735']);
+  const order = ref<string[]>(['1746633060562', '1746633038990']);
   const cells = reactive<Record<string, Cell>>({
-    a: {
-      id: 'a',
+    '1746633060562': {
+      id: '1746633060562',
       language: 'markdown',
-      content: '# Hello world1',
+      content: '# Hello world',
     },
-    '1746556633735': {
-      id: '1746556633735',
+    '1746633038990': {
+      id: '1746633038990',
       language: 'javascript',
       content: 'console.log("Hello world1");',
     },

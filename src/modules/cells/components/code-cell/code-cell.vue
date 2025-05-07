@@ -37,9 +37,9 @@
       v-else
       :id
       :code
-      @update:code="updateCode"
       :text="transpiledCode"
       v-model:is-text-shown="isTextShown"
+      @update:code="updateCode"
     />
     <Transition name="appear">
       <ConsolePreview v-show="isConsoleOpen" v-model="outputs" />
