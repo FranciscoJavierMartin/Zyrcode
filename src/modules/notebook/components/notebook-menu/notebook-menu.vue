@@ -27,6 +27,9 @@
         {{ $t('notebook.menu.import.title') }}
       </MenubarTrigger>
       <MenubarContent>
+        <MenubarItem @select="loadNotebook">
+          {{ $t('notebook.menu.import.json') }}
+        </MenubarItem>
         <MenubarItem @select="openInput">
           {{ $t('notebook.menu.import.json') }}
           <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
@@ -193,5 +196,30 @@ async function clearCache(): Promise<void> {
   } catch {
     errorToast('Error clearing cache');
   }
+}
+
+function loadNotebook(): void {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.className = 'hidden';
+  input.hidden = true;
+  input.accept = '.json';
+  input.onchange = (event: Event) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.result) {
+        try {
+          const notebookDataRaw = JSON.parse(reader.result.toString());
+          const notebookData = parse(jsonSchema, notebookDataRaw);
+          store.loadNotebook(notebookData);
+        } catch (error) {
+          console.log(error);
+          errorToast(t('notebook.menu.import.error'));
+        }
+      }
+    };
+    reader.readAsText((event.target as HTMLInputElement).files?.[0] as Blob);
+  };
+  input.click();
 }
 </script>
