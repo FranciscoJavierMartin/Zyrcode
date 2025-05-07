@@ -109,7 +109,15 @@ async function runMarkdown(): Promise<void> {
 
 watchDebounced(
   () => [props.code, props.language],
-  async ([newCode, newLanguage]) => {
+  async ([newCode, newLanguage], oldValue) => {
+    // Reset outputs when language changes
+    if (newLanguage !== oldValue?.[1]) {
+      outputs.value = [];
+      isTextShown.value = false;
+      isConsoleOpen.value = false;
+    }
+
+    // Transpile/parse code
     if (newLanguage === 'javascript' || newLanguage === 'typescript') {
       const result = await transpile(newCode, newLanguage as Language);
       outputs.value = [];
