@@ -112,6 +112,7 @@ watchDebounced(
   async ([newCode, newLanguage]) => {
     if (newLanguage === 'javascript' || newLanguage === 'typescript') {
       const result = await transpile(newCode, newLanguage as Language);
+      outputs.value = [];
       transpiledCode.value = result.code;
       error.value = result.error;
     } else if (newLanguage === 'markdown') {
