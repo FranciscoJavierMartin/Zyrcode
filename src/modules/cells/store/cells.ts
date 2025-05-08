@@ -11,7 +11,7 @@ export const useCellsStore = defineStore('cells', () => {
     '1746633060562': {
       id: '1746633060562',
       language: 'markdown',
-      content: '# Hello world',
+      content: '# Hello wo',
     },
     '1746633038990': {
       id: '1746633038990',

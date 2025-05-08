@@ -27,7 +27,7 @@
         {{ $t('notebook.menu.import.title') }}
       </MenubarTrigger>
       <MenubarContent>
-        <MenubarItem @select="loadNotebook">
+        <MenubarItem @select="loadNotebookFromJson">
           {{ $t('notebook.menu.import.json') }}
         </MenubarItem>
         <MenubarItem @select="openInput">
@@ -99,7 +99,7 @@
 import { computed, useTemplateRef } from 'vue';
 import { ExternalLink } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
-import { parse } from 'valibot';
+import { parse, type ObjectSchema } from 'valibot';
 import {
   Menubar,
   MenubarContent,
@@ -117,12 +117,14 @@ import { ipynbSchema } from '@/modules/notebook/helpers/validators/ipynb';
 import { errorToast, successToast } from '@/modules/common/helpers/toasts';
 import { clearCache as clearCacheHelper } from '@/modules/common/helpers/package-cache';
 import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
+import useLoadNotebook from '@/modules/notebook/composables/use-load-notebook';
 
 const notebookJson = useTemplateRef('notebookJson');
 const notebookIpynb = useTemplateRef('notebookIpynb');
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
 const { t } = useI18n();
+const { loadNotebookFromJson } = useLoadNotebook();
 
 function reloadPage(): void {
   location.reload();
@@ -198,7 +200,11 @@ async function clearCache(): Promise<void> {
   }
 }
 
-function loadNotebook(): void {
+function loadNotebookJson() {
+  loadNotebook('.json', jsonSchema, setInStore);
+}
+
+function loadNotebook(accept: string, schema): void {
   const input = document.createElement('input');
   input.type = 'file';
   input.className = 'hidden';
