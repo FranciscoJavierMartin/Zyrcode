@@ -33,30 +33,6 @@
         <MenubarItem @select="loadNotebookFromIpynb">
           {{ $t('notebook.menu.import.ipynb') }}
         </MenubarItem>
-        <MenubarItem @select="openInput">
-          {{ $t('notebook.menu.import.json') }}
-          <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
-          <input
-            ref="notebookJson"
-            type="file"
-            class="hidden"
-            hidden
-            accept=".json"
-            @change="uploadNotebookJson"
-          />
-        </MenubarItem>
-        <MenubarItem @select="openInputIpynb">
-          {{ $t('notebook.menu.import.ipynb') }}
-          <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
-          <input
-            ref="notebookIpynb"
-            type="file"
-            class="hidden"
-            hidden
-            accept=".ipynb"
-            @change="uploadNotebookIpynb"
-          />
-        </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
     <MenubarMenu>
@@ -99,10 +75,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue';
+import { computed } from 'vue';
 import { ExternalLink } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
-import { parse, type ObjectSchema } from 'valibot';
 import {
   Menubar,
   MenubarContent,
@@ -115,15 +90,10 @@ import isMacOSInfo from '@/modules/common/helpers/is-mac-os';
 import { useCellsStore } from '@/modules/cells/store/cells';
 import exportToIpynb from '@/modules/notebook/helpers/exports/export-to-ipynb';
 import exportToJson from '@/modules/notebook/helpers/exports/export-to-json';
-import { jsonSchema } from '@/modules/notebook/helpers/validators/json';
-import { ipynbSchema } from '@/modules/notebook/helpers/validators/ipynb';
 import { errorToast, successToast } from '@/modules/common/helpers/toasts';
 import { clearCache as clearCacheHelper } from '@/modules/common/helpers/package-cache';
-import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
 import useLoadNotebook from '@/modules/notebook/composables/use-load-notebook';
 
-const notebookJson = useTemplateRef('notebookJson');
-const notebookIpynb = useTemplateRef('notebookIpynb');
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
 const { t } = useI18n();
@@ -153,47 +123,6 @@ function exportAsJson(): void {
   );
 }
 
-function openInput(): void {
-  notebookJson.value?.click();
-}
-
-function openInputIpynb(): void {
-  notebookIpynb.value?.click();
-}
-
-function uploadNotebookJson(e: Event): void {
-  const reader = new FileReader();
-  reader.onload = () => {
-    if (reader.result) {
-      try {
-        const notebookDataRaw = JSON.parse(reader.result.toString());
-        const notebookData = parse(jsonSchema, notebookDataRaw);
-        store.loadNotebook(notebookData);
-      } catch {
-        errorToast(t('notebook.menu.import.error'));
-      }
-    }
-  };
-  reader.readAsText((e.target as HTMLInputElement).files?.[0] as Blob);
-}
-
-function uploadNotebookIpynb(e: Event): void {
-  const reader = new FileReader();
-  reader.onload = () => {
-    if (reader.result) {
-      try {
-        const notebookDataRaw = JSON.parse(reader.result.toString());
-        const notebookData = parse(ipynbSchema, notebookDataRaw);
-        store.loadNotebookFromIpynb(notebookData as NotebookIpynb);
-      } catch (error) {
-        console.log(error);
-        errorToast(t('notebook.menu.import.error'));
-      }
-    }
-  };
-  reader.readAsText((e.target as HTMLInputElement).files?.[0] as Blob);
-}
-
 async function clearCache(): Promise<void> {
   try {
     await clearCacheHelper();
@@ -201,34 +130,5 @@ async function clearCache(): Promise<void> {
   } catch {
     errorToast('Error clearing cache');
   }
-}
-
-function loadNotebookJson() {
-  loadNotebook('.json', jsonSchema, setInStore);
-}
-
-function loadNotebook(accept: string, schema): void {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.className = 'hidden';
-  input.hidden = true;
-  input.accept = '.json';
-  input.onchange = (event: Event) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.result) {
-        try {
-          const notebookDataRaw = JSON.parse(reader.result.toString());
-          const notebookData = parse(jsonSchema, notebookDataRaw);
-          store.loadNotebook(notebookData);
-        } catch (error) {
-          console.log(error);
-          errorToast(t('notebook.menu.import.error'));
-        }
-      }
-    };
-    reader.readAsText((event.target as HTMLInputElement).files?.[0] as Blob);
-  };
-  input.click();
 }
 </script>
