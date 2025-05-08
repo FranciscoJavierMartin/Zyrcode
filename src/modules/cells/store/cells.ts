@@ -2,20 +2,21 @@ import { computed, reactive, ref } from 'vue';
 import { defineStore } from 'pinia';
 import type { Cell } from '@/modules/cells/interfaces/store';
 import type { Language } from '@/modules/cells/interfaces/code';
+import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
 
 export const useCellsStore = defineStore('cells', () => {
   const _notebookTitle = ref<string>('');
-  const order = ref<string[]>(['a', '1746556633735']);
+  const order = ref<string[]>(['1746633060562', '1746633038990']);
   const cells = reactive<Record<string, Cell>>({
-    a: {
-      id: 'a',
+    '1746633060562': {
+      id: '1746633060562',
       language: 'markdown',
-      content: '# Hello world',
+      content: '# Hello wo',
     },
-    '1746556633735': {
-      id: '1746556633735',
+    '1746633038990': {
+      id: '1746633038990',
       language: 'javascript',
-      content: 'console.log("Hello world");',
+      content: 'console.log("Hello world1");',
     },
   });
   const orderedCells = computed<Cell[]>(() =>
@@ -110,6 +111,19 @@ export const useCellsStore = defineStore('cells', () => {
     order.value = notebookData.order;
   }
 
+  function loadNotebookFromIpynb(notebookData: NotebookIpynb): void {
+    clearAll();
+    notebookTitle.value = notebookData.metadata.title ?? '';
+    notebookData.cells.forEach((cell) => {
+      cells[cell.id] = {
+        id: cell.id,
+        language: cell.cell_type === 'code' ? 'typescript' : 'markdown',
+        content: cell.source.toString(),
+      };
+      order.value.push(cell.id);
+    });
+  }
+
   function copyCell(id: string): void {
     addCellBelow(id, cells[id].language, cells[id].content);
   }
@@ -127,6 +141,7 @@ export const useCellsStore = defineStore('cells', () => {
     clearAll,
     isEmpty,
     loadNotebook,
+    loadNotebookFromIpynb,
     copyCell,
   };
 });

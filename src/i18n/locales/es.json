@@ -36,6 +36,7 @@
       "import": {
         "title": "Importar",
         "json": "Importar desde JSON",
+        "ipynb": "Importar desde ipynb",
         "error": "Error durante la importacion del notebook."
       },
       "export": {

@@ -37,9 +37,9 @@
       v-else
       :id
       :code
-      @update:code="updateCode"
       :text="transpiledCode"
       v-model:is-text-shown="isTextShown"
+      @update:code="updateCode"
     />
     <Transition name="appear">
       <ConsolePreview v-show="isConsoleOpen" v-model="outputs" />
@@ -109,9 +109,18 @@ async function runMarkdown(): Promise<void> {
 
 watchDebounced(
   () => [props.code, props.language],
-  async ([newCode, newLanguage]) => {
+  async ([newCode, newLanguage], oldValue) => {
+    // Reset outputs when language changes
+    if (newLanguage !== oldValue?.[1]) {
+      outputs.value = [];
+      isTextShown.value = false;
+      isConsoleOpen.value = false;
+    }
+
+    // Transpile/parse code
     if (newLanguage === 'javascript' || newLanguage === 'typescript') {
       const result = await transpile(newCode, newLanguage as Language);
+      outputs.value = [];
       transpiledCode.value = result.code;
       error.value = result.error;
     } else if (newLanguage === 'markdown') {
