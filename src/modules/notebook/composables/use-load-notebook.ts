@@ -16,6 +16,7 @@ export default function useLoadNotebook() {
   }: {
     accept: string;
     schema: BaseSchema<unknown, unknown, BaseIssue<unknown>>;
+    // TODO: Add better types
     setInStore: (data: unknown) => void;
   }): void {
     const input = document.createElement('input');
