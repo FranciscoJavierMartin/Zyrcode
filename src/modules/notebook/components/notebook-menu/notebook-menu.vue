@@ -30,6 +30,9 @@
         <MenubarItem @select="loadNotebookFromJson">
           {{ $t('notebook.menu.import.json') }}
         </MenubarItem>
+        <MenubarItem @select="loadNotebookFromIpynb">
+          {{ $t('notebook.menu.import.ipynb') }}
+        </MenubarItem>
         <MenubarItem @select="openInput">
           {{ $t('notebook.menu.import.json') }}
           <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
@@ -124,7 +127,7 @@ const notebookIpynb = useTemplateRef('notebookIpynb');
 const store = useCellsStore();
 const isMacOS = computed<boolean>(() => isMacOSInfo());
 const { t } = useI18n();
-const { loadNotebookFromJson } = useLoadNotebook();
+const { loadNotebookFromJson, loadNotebookFromIpynb } = useLoadNotebook();
 
 function reloadPage(): void {
   location.reload();
