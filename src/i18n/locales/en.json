@@ -54,6 +54,7 @@
   },
   "settings": {
     "name": "Settings",
+    "reset": "Reset settings",
     "ai": {
       "title": "AI settings",
       "section": "AI",

@@ -98,10 +98,10 @@ const editorSettingsStore = useEditorSettingsStore();
 
 const formEditorSchema = toTypedSchema(editorSchema);
 
-const { isFieldDirty, handleSubmit, values } = useForm({
+const { isFieldDirty, handleSubmit, values, handleReset, resetForm } = useForm({
   name: 'editorForm',
   validationSchema: formEditorSchema,
-  initialValues: { ...editorSettingsStore.$state },
+  initialValues: editorSettingsStore.$state,
 });
 
 const onSubmit = handleSubmit((values: GenericObject) => {
@@ -112,6 +112,14 @@ watch(
   values,
   (newValues) => {
     editorSettingsStore.$patch(newValues);
+  },
+  { deep: true },
+);
+
+watch(
+  editorSettingsStore.$state,
+  (newValues) => {
+    console.log(newValues);
   },
   { deep: true },
 );

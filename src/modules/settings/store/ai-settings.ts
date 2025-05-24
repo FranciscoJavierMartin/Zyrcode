@@ -17,10 +17,17 @@ export const useAISettingsStore = defineStore(
     const autoCompleteModel = ref<string>(initialState.autoCompleteModel);
     const isAIEnabled = ref<boolean>(initialState.isAIEnabled);
 
+    function $reset(): void {
+      aiProvider.value = initialState.aiProvider;
+      autoCompleteModel.value = initialState.autoCompleteModel;
+      isAIEnabled.value = initialState.isAIEnabled;
+    }
+
     return {
       aiProvider,
       autoCompleteModel,
       isAIEnabled,
+      $reset,
     };
   },
   {

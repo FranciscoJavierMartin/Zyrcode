@@ -120,7 +120,7 @@ const formFormatterSchema = toTypedSchema(formatterSchema);
 const { isFieldDirty, handleSubmit, values } = useForm({
   name: 'formatterForm',
   validationSchema: formFormatterSchema,
-  initialValues: { ...formatterSettingsStore.$state },
+  initialValues: formatterSettingsStore.$state,
 });
 
 const onSubmit = handleSubmit((values: GenericObject) => {

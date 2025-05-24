@@ -54,6 +54,7 @@
   },
   "settings": {
     "name": "Ajustes",
+    "reset": "Ajustes por defecto",
     "ai": {
       "title": "Ajustes de IA",
       "section": "IA",
