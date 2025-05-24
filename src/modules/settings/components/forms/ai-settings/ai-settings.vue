@@ -66,7 +66,7 @@ const formAISchema = toTypedSchema(aiSchema);
 const { isFieldDirty, handleSubmit, values } = useForm({
   name: 'aiForm',
   validationSchema: formAISchema,
-  initialValues: { ...aiSettingsStore.$state },
+  initialValues: aiSettingsStore.$state,
 });
 
 const onSubmit = handleSubmit((values: GenericObject) => {
