@@ -101,7 +101,7 @@ const formEditorSchema = toTypedSchema(editorSchema);
 const { isFieldDirty, handleSubmit, values } = useForm({
   name: 'editorForm',
   validationSchema: formEditorSchema,
-  initialValues: { ...editorSettingsStore.$state },
+  initialValues: editorSettingsStore.$state,
 });
 
 const onSubmit = handleSubmit((values: GenericObject) => {

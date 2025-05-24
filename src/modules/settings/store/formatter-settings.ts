@@ -25,6 +25,16 @@ export const useFormatterSettingsStore = defineStore(
     );
     const tabSize = ref<number>(initialState.tabSize);
 
+    function $reset(): void {
+      jsxSingleQuote.value = initialState.jsxSingleQuote;
+      printWidth.value = initialState.printWidth;
+      semi.value = initialState.semi;
+      singleQuote.value = initialState.singleQuote;
+      useTabs.value = initialState.useTabs;
+      trailingComma.value = initialState.trailingComma;
+      tabSize.value = initialState.tabSize;
+    }
+
     return {
       jsxSingleQuote,
       printWidth,
@@ -33,6 +43,7 @@ export const useFormatterSettingsStore = defineStore(
       useTabs,
       trailingComma,
       tabSize,
+      $reset,
     };
   },
   {

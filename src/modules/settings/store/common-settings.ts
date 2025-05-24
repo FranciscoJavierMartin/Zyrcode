@@ -11,8 +11,13 @@ export const useCommonSettingsStore = defineStore(
   () => {
     const appLanguage = ref<string>(initialState.appLanguage);
 
+    function $reset(): void {
+      appLanguage.value = initialState.appLanguage;
+    }
+
     return {
       appLanguage,
+      $reset,
     };
   },
   {

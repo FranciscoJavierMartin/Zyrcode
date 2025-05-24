@@ -17,11 +17,19 @@ export const useEditorSettingsStore = defineStore(
     const ruler = ref<number>(initialState.ruler);
     const showLineNumbers = ref<boolean>(initialState.showLineNumbers);
 
+    function $reset(): void {
+      fontSize.value = initialState.fontSize;
+      language.value = initialState.language;
+      ruler.value = initialState.ruler;
+      showLineNumbers.value = initialState.showLineNumbers;
+    }
+
     return {
       fontSize,
       language,
       ruler,
       showLineNumbers,
+      $reset,
     };
   },
   {
