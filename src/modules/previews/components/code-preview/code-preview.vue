@@ -30,7 +30,7 @@ const props = withDefaults(
   },
 );
 const emit = defineEmits<{
-  (e: 'output', value: OutputPreviewData[]): void;
+  output: [value: OutputPreviewData[]];
 }>();
 const previewHTMLContainer = getPreviewHTMLContainer(props.id);
 

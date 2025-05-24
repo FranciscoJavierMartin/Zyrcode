@@ -142,10 +142,10 @@ const props = defineProps<{
   isCodeAvailable: boolean;
 }>();
 defineEmits<{
-  (e: 'format'): void;
-  (e: 'run'): void;
-  (e: 'toggle-direction'): void;
-  (e: 'clear-outputs'): void;
+  format: [void];
+  run: [void];
+  'toggle-direction': [void];
+  'clear-outputs': [void];
 }>();
 const isConsoleOpen = defineModel<boolean>('is-console-open', {
   required: true,
