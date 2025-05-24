@@ -22,11 +22,11 @@ const editorSettingsStore = useEditorSettingsStore();
 const formatterSettingsStore = useFormatterSettingsStore();
 
 function resetSettings(): void {
-  console.log('Hello');
   aiSettingsStore.$reset();
   commonSettingsStore.$reset();
   editorSettingsStore.$reset();
   formatterSettingsStore.$reset();
+  // FIXME: Avoid reload when reset form.
   location.reload();
 }
 </script>
