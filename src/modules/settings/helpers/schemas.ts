@@ -33,6 +33,12 @@ export const formatterSchema = v.object({
   arrowParens: v.union([v.literal('avoid'), v.literal('always')]),
   bracketSpacing: v.boolean(),
   bracketSameLine: v.boolean(),
+  endOfLine: v.union([
+    v.literal('auto'),
+    v.literal('lf'),
+    v.literal('crlf'),
+    v.literal('cr'),
+  ]),
 });
 
 export const aiSchema = v.object({

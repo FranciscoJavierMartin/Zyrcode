@@ -139,6 +139,36 @@
         :section-name="$t('settings.formatter.section')"
         :description="$t('settings.formatter.bracketSameLine.description')"
       />
+      <FormSelect
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.endOfLine === initialState.endOfLine
+        "
+        name="endOfLine"
+        :label="$t('settings.formatter.endOfLine.label')"
+        :section-name="$t('settings.formatter.section')"
+        :placeholder="$t('settings.formatter.endOfLine.placeholder')"
+        :description="$t('settings.formatter.endOfLine.description')"
+        :value="values.endOfLine"
+        :options="[
+          {
+            label: 'auto',
+            value: 'auto',
+          },
+          {
+            label: 'lf',
+            value: 'lf',
+          },
+          {
+            label: 'crlf',
+            value: 'crlf',
+          },
+          {
+            label: 'cr',
+            value: 'cr',
+          },
+        ]"
+      />
     </form>
   </section>
 </template>

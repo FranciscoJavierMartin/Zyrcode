@@ -59,7 +59,7 @@ async function formatCode(): Promise<void> {
       arrowParens: formatterSettingsStore.$state.arrowParens,
       bracketSpacing: formatterSettingsStore.$state.bracketSpacing,
       bracketSameLine: formatterSettingsStore.$state.bracketSameLine,
-      // endOfLine,
+      endOfLine: formatterSettingsStore.$state.endOfLine,
       // quoteProps,
       // singleAttributePerLine,
     })
