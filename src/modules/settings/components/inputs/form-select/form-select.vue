@@ -12,7 +12,7 @@
         <FormDescription class="text-xs font-normal">
           {{ description }}
         </FormDescription>
-        <Select v-bind="componentField" :id="name">
+        <Select v-bind="componentField" :id="name" :disabled>
           <FormControl>
             <SelectTrigger>
               <SelectValue :placeholder as-child>
@@ -103,11 +103,15 @@ const props = withDefaults(
     description: string;
     sectionName: string;
     placeholder?: string;
+    disabled?: boolean;
     options: FormSelectOption[];
     isFieldDirty: T;
     isDefault?: boolean;
   }>(),
-  { isDefault: true },
+  {
+    isDefault: true,
+    disabled: false,
+  },
 );
 
 const selectedOption = computed(() =>
