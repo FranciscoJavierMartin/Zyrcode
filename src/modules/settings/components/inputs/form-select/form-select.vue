@@ -15,7 +15,7 @@
         <Select v-bind="componentField" :id="name">
           <FormControl>
             <SelectTrigger>
-              <SelectValue :placeholder="placeholder" as-child>
+              <SelectValue :placeholder as-child>
                 <!-- If there is no icon, then show the normal button -->
                 <div
                   v-if="selectedOption?.icon"
@@ -102,7 +102,7 @@ const props = withDefaults(
     value?: string;
     description: string;
     sectionName: string;
-    placeholder: string;
+    placeholder?: string;
     options: FormSelectOption[];
     isFieldDirty: T;
     isDefault?: boolean;

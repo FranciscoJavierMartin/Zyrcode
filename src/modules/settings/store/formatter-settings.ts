@@ -10,6 +10,12 @@ export const initialState: FormFormatterSettings = {
   useTabs: true,
   trailingComma: 'all',
   tabSize: 2,
+  arrowParens: 'always',
+  bracketSpacing: true,
+  bracketSameLine: false,
+  endOfLine: 'lf',
+  quoteProps: 'as-needed',
+  singleAttributePerLine: false,
 };
 
 export const useFormatterSettingsStore = defineStore(
@@ -24,6 +30,20 @@ export const useFormatterSettingsStore = defineStore(
       initialState.trailingComma,
     );
     const tabSize = ref<number>(initialState.tabSize);
+    const arrowParens = ref<FormFormatterSettings['arrowParens']>(
+      initialState.arrowParens,
+    );
+    const bracketSpacing = ref<boolean>(initialState.bracketSpacing);
+    const bracketSameLine = ref<boolean>(initialState.bracketSameLine);
+    const endOfLine = ref<FormFormatterSettings['endOfLine']>(
+      initialState.endOfLine,
+    );
+    const quoteProps = ref<FormFormatterSettings['quoteProps']>(
+      initialState.quoteProps,
+    );
+    const singleAttributePerLine = ref<boolean>(
+      initialState.singleAttributePerLine,
+    );
 
     function $reset(): void {
       jsxSingleQuote.value = initialState.jsxSingleQuote;
@@ -33,9 +53,20 @@ export const useFormatterSettingsStore = defineStore(
       useTabs.value = initialState.useTabs;
       trailingComma.value = initialState.trailingComma;
       tabSize.value = initialState.tabSize;
+      arrowParens.value = initialState.arrowParens;
+      bracketSpacing.value = initialState.bracketSpacing;
+      bracketSameLine.value = initialState.bracketSameLine;
+      endOfLine.value = initialState.endOfLine;
+      quoteProps.value = initialState.quoteProps;
+      singleAttributePerLine.value = initialState.singleAttributePerLine;
     }
 
     return {
+      arrowParens,
+      bracketSpacing,
+      bracketSameLine,
+      endOfLine,
+      quoteProps,
       jsxSingleQuote,
       printWidth,
       semi,
@@ -43,6 +74,7 @@ export const useFormatterSettingsStore = defineStore(
       useTabs,
       trailingComma,
       tabSize,
+      singleAttributePerLine,
       $reset,
     };
   },

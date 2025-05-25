@@ -6,6 +6,9 @@ export const commonSchema = v.object({
 
 export const editorSchema = v.object({
   fontSize: v.pipe(v.number(), v.integer(), v.minValue(6), v.maxValue(30)),
+  fontLigatures: v.boolean(),
+  formatOnPaste: v.boolean(),
+  formatOnType: v.boolean(),
   showLineNumbers: v.boolean(),
   language: v.union([
     v.literal('typescript'),
@@ -27,6 +30,21 @@ export const formatterSchema = v.object({
     v.literal('es5'),
     v.literal('all'),
   ]),
+  arrowParens: v.union([v.literal('avoid'), v.literal('always')]),
+  bracketSpacing: v.boolean(),
+  bracketSameLine: v.boolean(),
+  endOfLine: v.union([
+    v.literal('auto'),
+    v.literal('lf'),
+    v.literal('crlf'),
+    v.literal('cr'),
+  ]),
+  quoteProps: v.union([
+    v.literal('as-needed'),
+    v.literal('consistent'),
+    v.literal('preserve'),
+  ]),
+  singleAttributePerLine: v.boolean(),
 });
 
 export const aiSchema = v.object({

@@ -95,6 +95,119 @@
           },
         ]"
       />
+      <FormSelect
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.arrowParens === initialState.arrowParens
+        "
+        name="arrowParens"
+        :label="$t('settings.formatter.arrowParens.label')"
+        :section-name="$t('settings.formatter.section')"
+        :placeholder="$t('settings.formatter.arrowParens.placeholder')"
+        :description="$t('settings.formatter.arrowParens.description')"
+        :value="values.arrowParens"
+        :options="[
+          {
+            label: 'avoid',
+            value: 'avoid',
+          },
+          {
+            label: 'always',
+            value: 'always',
+          },
+        ]"
+      />
+      <FormToggle
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.bracketSpacing ===
+          initialState.bracketSpacing
+        "
+        name="bracketSpacing"
+        :label="$t('settings.formatter.bracketSpacing.label')"
+        :section-name="$t('settings.formatter.section')"
+        :description="$t('settings.formatter.bracketSpacing.description')"
+      />
+      <FormToggle
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.bracketSameLine ===
+          initialState.bracketSameLine
+        "
+        name="bracketSameLine"
+        :label="$t('settings.formatter.bracketSameLine.label')"
+        :section-name="$t('settings.formatter.section')"
+        :description="$t('settings.formatter.bracketSameLine.description')"
+      />
+      <FormSelect
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.endOfLine === initialState.endOfLine
+        "
+        name="endOfLine"
+        :label="$t('settings.formatter.endOfLine.label')"
+        :section-name="$t('settings.formatter.section')"
+        :placeholder="$t('settings.formatter.endOfLine.placeholder')"
+        :description="$t('settings.formatter.endOfLine.description')"
+        :value="values.endOfLine"
+        :options="[
+          {
+            label: 'auto',
+            value: 'auto',
+          },
+          {
+            label: 'lf',
+            value: 'lf',
+          },
+          {
+            label: 'crlf',
+            value: 'crlf',
+          },
+          {
+            label: 'cr',
+            value: 'cr',
+          },
+        ]"
+      />
+      <FormSelect
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.quoteProps === initialState.quoteProps
+        "
+        name="quoteProps"
+        :label="$t('settings.formatter.quoteProps.label')"
+        :section-name="$t('settings.formatter.section')"
+        :placeholder="$t('settings.formatter.quoteProps.placeholder')"
+        :description="$t('settings.formatter.quoteProps.description')"
+        :value="values.quoteProps"
+        :options="[
+          {
+            label: 'As needed',
+            value: 'as-needed',
+          },
+          {
+            label: 'Consistent',
+            value: 'consistent',
+          },
+          {
+            label: 'Preserve',
+            value: 'preserve',
+          },
+        ]"
+      />
+      <FormToggle
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.singleAttributePerLine ===
+          initialState.singleAttributePerLine
+        "
+        name="singleAttributePerLine"
+        :label="$t('settings.formatter.singleAttributePerLine.label')"
+        :section-name="$t('settings.formatter.section')"
+        :description="
+          $t('settings.formatter.singleAttributePerLine.description')
+        "
+      />
     </form>
   </section>
 </template>
