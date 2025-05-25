@@ -60,7 +60,7 @@ async function formatCode(): Promise<void> {
       bracketSpacing: formatterSettingsStore.$state.bracketSpacing,
       bracketSameLine: formatterSettingsStore.$state.bracketSameLine,
       endOfLine: formatterSettingsStore.$state.endOfLine,
-      // quoteProps,
+      quoteProps: formatterSettingsStore.$state.quoteProps,
       // singleAttributePerLine,
     })
     .then((res) => res.replace(/\n$/, ''));

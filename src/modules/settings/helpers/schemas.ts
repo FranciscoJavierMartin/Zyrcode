@@ -39,6 +39,11 @@ export const formatterSchema = v.object({
     v.literal('crlf'),
     v.literal('cr'),
   ]),
+  quoteProps: v.union([
+    v.literal('as-needed'),
+    v.literal('consistent'),
+    v.literal('preserve'),
+  ]),
 });
 
 export const aiSchema = v.object({

@@ -169,6 +169,32 @@
           },
         ]"
       />
+      <FormSelect
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.quoteProps === initialState.quoteProps
+        "
+        name="quoteProps"
+        :label="$t('settings.formatter.quoteProps.label')"
+        :section-name="$t('settings.formatter.section')"
+        :placeholder="$t('settings.formatter.quoteProps.placeholder')"
+        :description="$t('settings.formatter.quoteProps.description')"
+        :value="values.quoteProps"
+        :options="[
+          {
+            label: 'As needed',
+            value: 'as-needed',
+          },
+          {
+            label: 'Consistent',
+            value: 'consistent',
+          },
+          {
+            label: 'Preserve',
+            value: 'preserve',
+          },
+        ]"
+      />
     </form>
   </section>
 </template>

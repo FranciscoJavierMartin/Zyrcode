@@ -179,6 +179,11 @@
         "label": "Fin de linea",
         "placeholder": "Seleccionar opción",
         "description": "Especifica el fin de línea utilizado por prettier."
+      },
+      "quoteProps": {
+        "label": "Quote props",
+        "placeholder": "Select option",
+        "description": "Change when properties in objects are quoted."
       }
     }
   },

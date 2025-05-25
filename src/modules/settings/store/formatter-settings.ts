@@ -14,6 +14,7 @@ export const initialState: FormFormatterSettings = {
   bracketSpacing: true,
   bracketSameLine: false,
   endOfLine: 'lf',
+  quoteProps: 'as-needed',
 };
 
 export const useFormatterSettingsStore = defineStore(
@@ -36,6 +37,9 @@ export const useFormatterSettingsStore = defineStore(
     const endOfLine = ref<FormFormatterSettings['endOfLine']>(
       initialState.endOfLine,
     );
+    const quoteProps = ref<FormFormatterSettings['quoteProps']>(
+      initialState.quoteProps,
+    );
 
     function $reset(): void {
       jsxSingleQuote.value = initialState.jsxSingleQuote;
@@ -49,6 +53,7 @@ export const useFormatterSettingsStore = defineStore(
       bracketSpacing.value = initialState.bracketSpacing;
       bracketSameLine.value = initialState.bracketSameLine;
       endOfLine.value = initialState.endOfLine;
+      quoteProps.value = initialState.quoteProps;
     }
 
     return {
@@ -56,6 +61,7 @@ export const useFormatterSettingsStore = defineStore(
       bracketSpacing,
       bracketSameLine,
       endOfLine,
+      quoteProps,
       jsxSingleQuote,
       printWidth,
       semi,
