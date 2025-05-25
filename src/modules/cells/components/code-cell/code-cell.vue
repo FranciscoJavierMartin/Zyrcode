@@ -1,5 +1,5 @@
 <template>
-  <div :id class="flex flex-col">
+  <div :id class="flex flex-col space-y-2">
     <CellToolbar
       :direction
       :id
