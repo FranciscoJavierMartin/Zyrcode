@@ -124,9 +124,11 @@ function registerInlineCompletionsProvider(
 watch(
   () => [props.language, aiSettingsStore.isAIEnabled],
   ([newLanguage, isAIEnabled]: (Language | boolean)[]) => {
-    inlineCompletionsProvider.value = registerInlineCompletionsProvider(
-      newLanguage as Language,
-    );
+    if (aiSettingsStore.isAIEnabled) {
+      inlineCompletionsProvider.value = registerInlineCompletionsProvider(
+        newLanguage as Language,
+      );
+    }
     editor.value?.setModel(
       monaco.editor.createModel(code.value, newLanguage as Language),
     );
