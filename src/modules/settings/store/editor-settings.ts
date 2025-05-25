@@ -4,7 +4,7 @@ import type { FormEditorSettings } from '@/modules/settings/interfaces/form';
 
 export const initialState: FormEditorSettings = {
   fontSize: 14,
-  language: 'javascript',
+  language: 'typescript',
   ruler: 80,
   showLineNumbers: true,
 };
@@ -13,7 +13,7 @@ export const useEditorSettingsStore = defineStore(
   'editor-settings',
   () => {
     const fontSize = ref<number>(initialState.fontSize);
-    const language = ref<string>(initialState.language);
+    const language = ref<FormEditorSettings['language']>(initialState.language);
     const ruler = ref<number>(initialState.ruler);
     const showLineNumbers = ref<boolean>(initialState.showLineNumbers);
 
