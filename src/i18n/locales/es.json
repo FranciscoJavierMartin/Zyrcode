@@ -184,6 +184,10 @@
         "label": "Quote props",
         "placeholder": "Select option",
         "description": "Change when properties in objects are quoted."
+      },
+      "singleAttributePerLine": {
+        "label": "Único atributo por línea",
+        "description": "Fuerza un solo atributo por línea en HTML, JSX, Vue y Angular."
       }
     }
   },

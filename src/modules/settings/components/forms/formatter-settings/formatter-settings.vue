@@ -195,6 +195,19 @@
           },
         ]"
       />
+      <FormToggle
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.singleAttributePerLine ===
+          initialState.singleAttributePerLine
+        "
+        name="singleAttributePerLine"
+        :label="$t('settings.formatter.singleAttributePerLine.label')"
+        :section-name="$t('settings.formatter.section')"
+        :description="
+          $t('settings.formatter.singleAttributePerLine.description')
+        "
+      />
     </form>
   </section>
 </template>

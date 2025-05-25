@@ -44,6 +44,7 @@ export const formatterSchema = v.object({
     v.literal('consistent'),
     v.literal('preserve'),
   ]),
+  singleAttributePerLine: v.boolean(),
 });
 
 export const aiSchema = v.object({
