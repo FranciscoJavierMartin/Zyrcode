@@ -163,7 +163,7 @@ onMounted(() => {
         rulers: [editorSettingsStore.$state.ruler],
         tabSize: formatterSettingsStore.$state.tabSize,
         fontLigatures: editorSettingsStore.fontLigatures,
-        // formatOnPaste,
+        formatOnPaste: editorSettingsStore.formatOnPaste,
         // formatOnType,
         // guides,
         // insertSpaces,

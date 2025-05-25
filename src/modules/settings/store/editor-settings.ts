@@ -8,6 +8,7 @@ export const initialState: FormEditorSettings = {
   ruler: 80,
   showLineNumbers: true,
   fontLigatures: false,
+  formatOnPaste: false,
 };
 
 export const useEditorSettingsStore = defineStore(
@@ -18,16 +19,20 @@ export const useEditorSettingsStore = defineStore(
     const ruler = ref<number>(initialState.ruler);
     const showLineNumbers = ref<boolean>(initialState.showLineNumbers);
     const fontLigatures = ref<boolean>(initialState.fontLigatures);
+    const formatOnPaste = ref<boolean>(initialState.formatOnPaste);
 
     function $reset(): void {
       fontSize.value = initialState.fontSize;
       language.value = initialState.language;
       ruler.value = initialState.ruler;
       showLineNumbers.value = initialState.showLineNumbers;
+      fontLigatures.value = initialState.fontLigatures;
+      formatOnPaste.value = initialState.formatOnPaste;
     }
 
     return {
       fontLigatures,
+      formatOnPaste,
       fontSize,
       language,
       ruler,

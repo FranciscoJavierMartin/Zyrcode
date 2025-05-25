@@ -118,6 +118,10 @@
       "fontLigatures": {
         "label": "Font Ligatures",
         "description": "Configures font ligatures or font features."
+      },
+      "formatOnPaste": {
+        "label": "Format on paste",
+        "description": "Controls whether the editor should automatically format the pasted content."
       }
     },
     "formatter": {

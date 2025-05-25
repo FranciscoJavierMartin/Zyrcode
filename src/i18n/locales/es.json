@@ -118,6 +118,10 @@
       "fontLigatures": {
         "label": "Ligaduras de fuentes",
         "description": "Configura ligaduras o características de fuente."
+      },
+      "formatOnPaste": {
+        "label": "Formatear al pegar",
+        "description": "Controla cuando el editor debe formatear el contenido pegado automáticamente."
       }
     },
     "formatter": {

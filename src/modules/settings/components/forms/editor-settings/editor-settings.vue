@@ -59,6 +59,17 @@
         :section-name="$t('settings.editor.sectionMain')"
         :description="$t('settings.editor.fontLigatures.description')"
       />
+      <FormToggle
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.formatOnPaste ===
+          initialState.formatOnPaste
+        "
+        name="formatOnPaste"
+        :label="$t('settings.editor.formatOnPaste.label')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :description="$t('settings.editor.formatOnPaste.description')"
+      />
     </form>
   </section>
 </template>
