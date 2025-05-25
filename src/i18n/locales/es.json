@@ -13,6 +13,14 @@
     "addCell": "Agregar celda",
     "areYouSure": "¿Estás seguro?",
     "actionCannotBeUndo": "Esta acción no se puede deshacer.",
+    "editor": {
+      "code": {
+        "placeholder": "Escribe el código aquí..."
+      },
+      "markdown": {
+        "placeholder": "Escribe tus notas aquí..."
+      }
+    },
     "toolbar": {
       "showConsole": "Mostrar consola",
       "hideConsole": "Ocultar consola",

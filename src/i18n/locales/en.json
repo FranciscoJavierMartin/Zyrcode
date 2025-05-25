@@ -13,6 +13,14 @@
     "addCell": "Add cell",
     "areYouSure": "Are you sure?",
     "actionCannotBeUndo": "This action cannot be undone.",
+    "editor": {
+      "code": {
+        "placeholder": "Write your code here..."
+      },
+      "markdown": {
+        "placeholder": "Write your notes here..."
+      }
+    },
     "toolbar": {
       "showConsole": "Show console",
       "hideConsole": "Hide console",
