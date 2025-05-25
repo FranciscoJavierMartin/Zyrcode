@@ -122,6 +122,10 @@
       "formatOnPaste": {
         "label": "Formatear al pegar",
         "description": "Controla cuando el editor debe formatear el contenido pegado automáticamente."
+      },
+      "formatOnType": {
+        "label": "Formatear al escribir",
+        "description": "Controla cuando el editor debe formatear el contenido despues de escribir."
       }
     },
     "formatter": {

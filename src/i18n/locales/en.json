@@ -122,6 +122,10 @@
       "formatOnPaste": {
         "label": "Format on paste",
         "description": "Controls whether the editor should automatically format the pasted content."
+      },
+      "formatOnType": {
+        "label": "Format on type",
+        "description": "Controls whether the editor should automatically format the line after typing."
       }
     },
     "formatter": {

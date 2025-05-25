@@ -164,7 +164,7 @@ onMounted(() => {
         tabSize: formatterSettingsStore.$state.tabSize,
         fontLigatures: editorSettingsStore.fontLigatures,
         formatOnPaste: editorSettingsStore.formatOnPaste,
-        // formatOnType,
+        formatOnType: editorSettingsStore.formatOnType,
         // guides,
         // insertSpaces,
         // detectIndentation,

@@ -70,6 +70,16 @@
         :section-name="$t('settings.editor.sectionMain')"
         :description="$t('settings.editor.formatOnPaste.description')"
       />
+      <FormToggle
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.formatOnType === initialState.formatOnType
+        "
+        name="formatOnType"
+        :label="$t('settings.editor.formatOnType.label')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :description="$t('settings.editor.formatOnType.description')"
+      />
     </form>
   </section>
 </template>
