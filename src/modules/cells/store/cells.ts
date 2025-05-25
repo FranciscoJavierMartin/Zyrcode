@@ -58,7 +58,7 @@ export const useCellsStore = defineStore('cells', () => {
     cells[newCellId] = {
       id: newCellId,
       content: content ?? '',
-      language: language ?? 'javascript',
+      language: language ?? 'typescript',
     };
 
     order.value.splice(previousIndex + 1, 0, newCellId);
