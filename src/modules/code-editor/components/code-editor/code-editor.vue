@@ -57,7 +57,7 @@ async function formatCode(): Promise<void> {
       printWidth: formatterSettingsStore.$state.printWidth,
       jsxSingleQuote: formatterSettingsStore.$state.jsxSingleQuote,
       arrowParens: formatterSettingsStore.$state.arrowParens,
-      // bracketSpacing,
+      bracketSpacing: formatterSettingsStore.$state.bracketSpacing,
       // bracketSameLine,
       // endOfLine,
       // quoteProps,

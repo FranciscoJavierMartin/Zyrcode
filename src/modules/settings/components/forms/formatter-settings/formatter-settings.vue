@@ -117,6 +117,17 @@
           },
         ]"
       />
+      <FormToggle
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.bracketSpacing ===
+          initialState.bracketSpacing
+        "
+        name="bracketSpacing"
+        :label="$t('settings.formatter.bracketSpacing.label')"
+        :section-name="$t('settings.formatter.section')"
+        :description="$t('settings.formatter.bracketSpacing.description')"
+      />
     </form>
   </section>
 </template>

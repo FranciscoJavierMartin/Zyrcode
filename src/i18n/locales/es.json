@@ -166,6 +166,10 @@
         "label": "Parentesis en funciones de flecha",
         "placeholder": "Seleccionar opción",
         "description": "Incluye parentesis alrededor de un solo parámetro en una función de flecha."
+      },
+      "bracketSpacing": {
+        "label": "Espacio entre paréntesis",
+        "description": "Controla el espacio entre paréntesis en objetos literales."
       }
     }
   },
