@@ -170,6 +170,10 @@
       "bracketSpacing": {
         "label": "Espacio entre paréntesis",
         "description": "Controla el espacio entre paréntesis en objetos literales."
+      },
+      "bracketSameLine": {
+        "label": "Parentesis en la misma linea",
+        "description": "Inserta '>' al final de una multilinea HTML (HTML, JSX, Vue, Angular) en lugar de estar solo en la siguiente línea (no se aplica a los elementos sin cerrar)."
       }
     }
   },

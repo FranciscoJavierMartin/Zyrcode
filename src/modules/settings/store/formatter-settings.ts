@@ -12,6 +12,7 @@ export const initialState: FormFormatterSettings = {
   tabSize: 2,
   arrowParens: 'always',
   bracketSpacing: true,
+  bracketSameLine: false,
 };
 
 export const useFormatterSettingsStore = defineStore(
@@ -30,6 +31,7 @@ export const useFormatterSettingsStore = defineStore(
       initialState.arrowParens,
     );
     const bracketSpacing = ref<boolean>(initialState.bracketSpacing);
+    const bracketSameLine = ref<boolean>(initialState.bracketSameLine);
 
     function $reset(): void {
       jsxSingleQuote.value = initialState.jsxSingleQuote;
@@ -41,11 +43,13 @@ export const useFormatterSettingsStore = defineStore(
       tabSize.value = initialState.tabSize;
       arrowParens.value = initialState.arrowParens;
       bracketSpacing.value = initialState.bracketSpacing;
+      bracketSameLine.value = initialState.bracketSameLine;
     }
 
     return {
       arrowParens,
       bracketSpacing,
+      bracketSameLine,
       jsxSingleQuote,
       printWidth,
       semi,

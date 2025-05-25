@@ -128,6 +128,17 @@
         :section-name="$t('settings.formatter.section')"
         :description="$t('settings.formatter.bracketSpacing.description')"
       />
+      <FormToggle
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.bracketSameLine ===
+          initialState.bracketSameLine
+        "
+        name="bracketSameLine"
+        :label="$t('settings.formatter.bracketSameLine.label')"
+        :section-name="$t('settings.formatter.section')"
+        :description="$t('settings.formatter.bracketSameLine.description')"
+      />
     </form>
   </section>
 </template>
