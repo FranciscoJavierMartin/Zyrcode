@@ -13,3 +13,7 @@ export const db = new Dexie('packageCache') as Dexie & {
 db.version(1).stores({
   packages: 'path, content',
 });
+
+export async function clearCache(): Promise<void> {
+  await db.packages.clear();
+}

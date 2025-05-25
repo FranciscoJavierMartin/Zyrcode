@@ -1,6 +1,7 @@
 <template>
   <div class="mt-13">
-    <template v-if="!isServiceLoading">
+    <NotebookMenu v-if="!isServiceLoading" />
+    <div v-if="!isServiceLoading" class="pt-9">
       <CodeCell
         v-for="cell of store.cells"
         :key="cell.id"
@@ -13,7 +14,7 @@
           {{ $t('notebook.addCell') }}
         </Button>
       </div>
-    </template>
+    </div>
     <NotebookSkeleton v-else />
   </div>
 </template>
@@ -24,6 +25,7 @@ import { useCellsStore } from '@/modules/cells/store/cells';
 import useBundler from '@/modules/notebook/composables/use-bundler';
 import NotebookSkeleton from '@/modules/notebook/components/notebook-skeleton/notebook-skeleton.vue';
 import Button from '@/modules/common/components/ui/button/Button.vue';
+import NotebookMenu from '@/modules/notebook/components/notebook-menu/notebook-menu.vue';
 
 const { isServiceLoading } = useBundler();
 const store = useCellsStore();

@@ -18,10 +18,14 @@ import parserBabel from 'prettier/plugins/babel';
 import parserEstree from 'prettier/plugins/estree';
 import parserTypeScript from 'prettier/plugins/typescript';
 import { useColorMode } from '@vueuse/core';
+import { useI18n } from 'vue-i18n';
 import { getSuggestion } from '@/modules/code-editor/helpers/get-suggestion';
 import { CompletionFormatter } from '@/modules/code-editor/helpers/completion-formatter';
 import '@/modules/code-editor/utils/worker';
 import type { Language } from '@/modules/cells/interfaces/code';
+import { useEditorSettingsStore } from '@/modules/settings/store/editor-settings';
+import { useFormatterSettingsStore } from '@/modules/settings/store/formatter-settings';
+import { useAISettingsStore } from '@/modules/settings/store/ai-settings';
 
 const editorRef = useTemplateRef<HTMLDivElement>('editor');
 const editorId = ref('');
@@ -34,17 +38,31 @@ const theme = useColorMode({ disableTransition: false });
 const editor = computed<monaco.editor.ICodeEditor | undefined>(() =>
   monaco.editor.getEditors().find((e) => e.getId() === editorId.value),
 );
+const editorSettingsStore = useEditorSettingsStore();
+const formatterSettingsStore = useFormatterSettingsStore();
+const aiSettingsStore = useAISettingsStore();
+
+const { t } = useI18n();
 
 async function formatCode(): Promise<void> {
   const formattedCode = await prettier
     .format(code.value, {
       parser: 'babel-ts',
       plugins: [parserBabel, parserTypeScript, parserEstree],
-      tabWidth: 2,
-      semi: true,
-      singleQuote: true,
-      trailingComma: 'all',
-      printWidth: 80,
+      tabWidth: formatterSettingsStore.$state.tabSize,
+      useTabs: formatterSettingsStore.$state.useTabs,
+      semi: formatterSettingsStore.$state.semi,
+      singleQuote: formatterSettingsStore.$state.singleQuote,
+      trailingComma: formatterSettingsStore.$state.trailingComma,
+      printWidth: formatterSettingsStore.$state.printWidth,
+      jsxSingleQuote: formatterSettingsStore.$state.jsxSingleQuote,
+      arrowParens: formatterSettingsStore.$state.arrowParens,
+      bracketSpacing: formatterSettingsStore.$state.bracketSpacing,
+      bracketSameLine: formatterSettingsStore.$state.bracketSameLine,
+      endOfLine: formatterSettingsStore.$state.endOfLine,
+      quoteProps: formatterSettingsStore.$state.quoteProps,
+      singleAttributePerLine:
+        formatterSettingsStore.$state.singleAttributePerLine,
     })
     .then((res) => res.replace(/\n$/, ''));
 
@@ -104,11 +122,24 @@ function registerInlineCompletionsProvider(
 }
 
 watch(
-  () => props.language,
-  (newLanguage: string) => {
-    inlineCompletionsProvider.value =
-      registerInlineCompletionsProvider(newLanguage);
-    editor.value?.setModel(monaco.editor.createModel(code.value, newLanguage));
+  () => [props.language, aiSettingsStore.isAIEnabled],
+  ([newLanguage, isAIEnabled]: (Language | boolean)[]) => {
+    if (aiSettingsStore.isAIEnabled) {
+      inlineCompletionsProvider.value = registerInlineCompletionsProvider(
+        newLanguage as Language,
+      );
+    }
+    editor.value?.setModel(
+      monaco.editor.createModel(code.value, newLanguage as Language),
+    );
+
+    editor.value?.updateOptions({
+      placeholder: isAIEnabled
+        ? undefined
+        : newLanguage === 'markdown'
+          ? t('notebook.editor.markdown.placeholder')
+          : t('notebook.editor.code.placeholder'),
+    });
 
     onWatcherCleanup(() => {
       inlineCompletionsProvider.value?.dispose();
@@ -136,6 +167,18 @@ onMounted(() => {
         language: props.language,
         minimap: { enabled: false },
         automaticLayout: true,
+        lineNumbers: editorSettingsStore.$state.showLineNumbers ? 'on' : 'off',
+        fontSize: editorSettingsStore.$state.fontSize,
+        rulers: [editorSettingsStore.$state.ruler],
+        tabSize: formatterSettingsStore.$state.tabSize,
+        fontLigatures: editorSettingsStore.$state.fontLigatures,
+        formatOnPaste: editorSettingsStore.$state.formatOnPaste,
+        formatOnType: editorSettingsStore.$state.formatOnType,
+        placeholder: aiSettingsStore.$state.isAIEnabled
+          ? undefined
+          : props.language === 'markdown'
+            ? t('notebook.editor.markdown.placeholder')
+            : t('notebook.editor.code.placeholder'),
       })
       .getId();
 

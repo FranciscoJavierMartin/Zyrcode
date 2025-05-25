@@ -1,6 +1,6 @@
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger as-chil>
+    <DropdownMenuTrigger as-child>
       <Button
         variant="outline"
         class="bg-background size-8 cursor-pointer rounded capitalize shadow-xs lg:w-32"
@@ -19,10 +19,10 @@
           <JavascriptIcon />
           JavaScript
         </DropdownMenuRadioItem>
-        <!-- <DropdownMenuRadioItem value="markdown" class="language-option">
+        <DropdownMenuRadioItem value="markdown" class="language-option">
           <MarkdownIcon />
           Markdown
-        </DropdownMenuRadioItem> -->
+        </DropdownMenuRadioItem>
       </DropdownMenuRadioGroup>
     </DropdownMenuContent>
   </DropdownMenu>
@@ -30,9 +30,9 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import JavascriptIcon from '@/modules/common/components/icons/javascript-icon.vue';
-import TypescriptIcon from '@/modules/common/components/icons/typescript-icon.vue';
-import MarkdownIcon from '@/modules/common/components/icons/markdown-icon.vue';
+import JavascriptIcon from '@/modules/common/components/icons/languages/javascript-icon.vue';
+import TypescriptIcon from '@/modules/common/components/icons/languages/typescript-icon.vue';
+import MarkdownIcon from '@/modules/common/components/icons/languages/markdown-icon.vue';
 import { Button } from '@/modules/common/components/ui/button';
 import {
   DropdownMenu,

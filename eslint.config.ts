@@ -22,7 +22,13 @@ export default defineConfigWithVueTs(
 
   {
     name: 'app/files-to-ignore',
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/html/**'],
+    ignores: [
+      '**/dist/**',
+      '**/dist-ssr/**',
+      '**/coverage/**',
+      '**/html/**',
+      '**/playwright-report/**',
+    ],
   },
 
   pluginVue.configs['flat/essential'],
@@ -48,6 +54,17 @@ export default defineConfigWithVueTs(
         'error',
         {
           order: ['template', 'script', 'style'],
+        },
+      ],
+      'vuejs-accessibility/label-has-for': [
+        'error',
+        {
+          components: ['VLabel', 'label'],
+          controlComponents: ['VInput', 'input'],
+          required: {
+            every: ['nesting', 'id'],
+          },
+          allowChildren: true,
         },
       ],
     },

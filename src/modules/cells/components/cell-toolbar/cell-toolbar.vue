@@ -19,44 +19,80 @@
       </Button>
     </div>
     <div class="flex items-center gap-2">
-      <TooltipButton
-        :text="
-          isConsoleOpen
-            ? $t('notebook.toolbar.hideConsole')
-            : $t('notebook.toolbar.showConsole')
-        "
-      >
+      <template v-if="language !== 'markdown'">
+        <TooltipButton
+          :text="
+            isConsoleOpen
+              ? $t('notebook.toolbar.hideConsole')
+              : $t('notebook.toolbar.showConsole')
+          "
+        >
+          <Button
+            :disabled="!areOutputsAvailable"
+            variant="hover"
+            class="button-icon"
+            @click="isConsoleOpen = !isConsoleOpen"
+          >
+            <Terminal class="size-5" />
+          </Button>
+        </TooltipButton>
+        <TooltipButton :text="$t('notebook.toolbar.clearConsole')">
+          <Button
+            :disabled="!areOutputsAvailable"
+            variant="hover"
+            class="button-icon"
+            @click="$emit('clear-outputs')"
+          >
+            <MessageCircleOff class="size-5" />
+          </Button>
+        </TooltipButton>
+      </template>
+      <TooltipButton :text="$t('notebook.toolbar.copyCell')">
         <Button
-          :disabled="!areOutputsAvailable"
+          :disabled="!isCodeAvailable"
           variant="hover"
           class="button-icon"
-          @click="isConsoleOpen = !isConsoleOpen"
+          @click="copyCell"
         >
-          <Terminal class="size-5" />
-        </Button>
-      </TooltipButton>
-      <TooltipButton :text="$t('notebook.toolbar.clearConsole')">
-        <Button
-          :disabled="!areOutputsAvailable"
-          variant="hover"
-          class="button-icon"
-          @click="$emit('clear-outputs')"
-        >
-          <MessageCircleOff class="size-5" />
+          <Copy class="size-5" />
         </Button>
       </TooltipButton>
       <TooltipButton
         :text="$t('notebook.toolbar.splitHorizontal')"
-        v-if="isLargeScreen"
+        v-if="isLargeScreen && language !== 'markdown'"
       >
-        <Button
-          variant="hover"
-          class="button-icon group"
-          @click="$emit('toggle-direction')"
-        >
-          <SplitIcon :is-horizontal="direction === 'horizontal'" />
-        </Button>
+        <Toggle as-child>
+          <Button
+            variant="hover"
+            class="button-icon group"
+            @click="$emit('toggle-direction')"
+          >
+            <SplitIcon :is-horizontal="direction === 'horizontal'" />
+          </Button>
+        </Toggle>
       </TooltipButton>
+      <template v-if="language === 'markdown'">
+        <TooltipButton v-if="isTextShown" :text="$t('notebook.toolbar.edit')">
+          <Button
+            :disabled="!isCodeAvailable"
+            variant="hover"
+            class="button-icon"
+            @click="isTextShown = false"
+          >
+            <Pencil class="size-5" />
+          </Button>
+        </TooltipButton>
+        <TooltipButton v-else :text="$t('notebook.toolbar.run')">
+          <Button
+            :disabled="!isCodeAvailable"
+            variant="hover"
+            class="button-icon"
+            @click="$emit('run')"
+          >
+            <Play class="size-5" />
+          </Button>
+        </TooltipButton>
+      </template>
       <TooltipButton :text="$t('notebook.toolbar.formatCode')">
         <Button
           :disabled="!isCodeAvailable"
@@ -69,12 +105,7 @@
       </TooltipButton>
       <RemoveCellDialog :id />
       <TooltipButton :text="$t('notebook.toolbar.addCellBelow')">
-        <Button
-          :disabled="!isCodeAvailable"
-          variant="hover"
-          class="button-icon"
-          @click="addCellBelow"
-        >
+        <Button variant="hover" class="button-icon" @click="addCellBelow">
           <Plus class="size-5" />
         </Button>
       </TooltipButton>
@@ -88,8 +119,11 @@ import { computed } from 'vue';
 import {
   ArrowDown,
   ArrowUp,
+  Copy,
   MessageCircleOff,
+  Pencil,
   PencilRuler,
+  Play,
   Plus,
   Terminal,
 } from 'lucide-vue-next';
@@ -100,6 +134,7 @@ import { useCellsStore } from '@/modules/cells/store/cells';
 import type { Language } from '@/modules/cells/interfaces/code';
 import Button from '@/modules/common/components/ui/button/Button.vue';
 import TooltipButton from '@/modules/common/components/ui/tooltip-button/tooltip-button.vue';
+import Toggle from '@/modules/common/components/ui/toggle/Toggle.vue';
 
 const props = defineProps<{
   id: string;
@@ -110,13 +145,15 @@ const props = defineProps<{
   isCodeAvailable: boolean;
 }>();
 defineEmits<{
-  (e: 'format'): void;
-  (e: 'toggle-direction'): void;
-  (e: 'clear-outputs'): void;
+  format: [void];
+  run: [void];
+  'toggle-direction': [void];
+  'clear-outputs': [void];
 }>();
 const isConsoleOpen = defineModel<boolean>('is-console-open', {
   required: true,
 });
+const isTextShown = defineModel<boolean>('isTextShown', { required: true });
 const store = useCellsStore();
 const isFirstCell = computed<boolean>(() => store.cells[0].id === props.id);
 const isLastCell = computed<boolean>(
@@ -137,5 +174,9 @@ function moveDown(): void {
 
 function addCellBelow(): void {
   store.addCellBelow(props.id, props.language);
+}
+
+function copyCell(): void {
+  store.copyCell(props.id);
 }
 </script>

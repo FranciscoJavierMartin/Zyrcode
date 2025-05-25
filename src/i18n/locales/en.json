@@ -9,21 +9,196 @@
   },
   "notebooks": "Notebooks",
   "notebook": {
+    "addTitlePlaceholder": "Enter notebook title",
     "addCell": "Add cell",
     "areYouSure": "Are you sure?",
     "actionCannotBeUndo": "This action cannot be undone.",
+    "editor": {
+      "code": {
+        "placeholder": "Write your code here..."
+      },
+      "markdown": {
+        "placeholder": "Write your notes here..."
+      }
+    },
     "toolbar": {
       "showConsole": "Show console",
       "hideConsole": "Hide console",
       "clearConsole": "Clear console",
+      "copyCell": "Copy cell",
+      "run": "Run",
+      "edit": "Edit",
       "splitHorizontal": "Split horizontal",
       "splitVertical": "Split vertical",
       "formatCode": "Format code",
       "removeCell": "Remove cell",
       "addCellBelow": "Add cell below"
+    },
+    "menu": {
+      "notebook": {
+        "rename": "Rename",
+        "reload": "Reload",
+        "clearAll": "Clear all",
+        "clearCache": "Clear cache"
+      },
+      "import": {
+        "title": "Import",
+        "json": "Import from JSON",
+        "ipynb": "Import from ipynb",
+        "error": "Something went wrong while importing notebook."
+      },
+      "export": {
+        "title": "Export",
+        "error": "Something went wrong while exporting notebook.",
+        "html": "Export as HTML",
+        "ipynb": "Export as ipynb",
+        "pdf": "Export as PDF",
+        "json": "Export as JSON"
+      },
+      "ai": {
+        "title": "AI options"
+      }
     }
   },
-  "settings": "Settings",
+  "settings": {
+    "name": "Settings",
+    "reset": "Reset settings",
+    "ai": {
+      "title": "AI settings",
+      "section": "AI",
+      "enable": {
+        "label": "Enable AI options",
+        "description": "Enable AI features."
+      },
+      "provider": {
+        "label": "AI provider",
+        "description": "Select the AI provider to use.",
+        "placeholder": "Select provider"
+      },
+      "model": {
+        "label": "AI model for code completion",
+        "description": "Select model for code completion.",
+        "placeholder": "Select model"
+      }
+    },
+    "common": {
+      "title": "Common settings",
+      "sectionMain": "Common",
+      "sectionLanguage": "Language",
+      "appLanguage": {
+        "label": "Change app language",
+        "description": "Select app language.",
+        "placeholder": "Set app language",
+        "english": "English",
+        "spanish": "Spanish"
+      }
+    },
+    "editor": {
+      "title": "Editor settings",
+      "sectionMain": "Editor",
+      "language": {
+        "label": "Change editor language",
+        "description": "Select default language.",
+        "placeholder": "Set default language"
+      },
+      "ruler": {
+        "label": "Ruler",
+        "placeholder": "Ruler",
+        "description": "Render vertical ruler after a certain number of monospace characters."
+      },
+      "showLineNumbers": {
+        "label": "Show line numbers",
+        "description": "Controls whether to show line numbers for search results."
+      },
+      "fontSize": {
+        "label": "Font Size",
+        "placeholder": "Font size",
+        "description": "Controls the font size in pixels."
+      },
+      "fontLigatures": {
+        "label": "Font Ligatures",
+        "description": "Configures font ligatures or font features."
+      },
+      "formatOnPaste": {
+        "label": "Format on paste",
+        "description": "Controls whether the editor should automatically format the pasted content."
+      },
+      "formatOnType": {
+        "label": "Format on type",
+        "description": "Controls whether the editor should automatically format the line after typing."
+      }
+    },
+    "formatter": {
+      "title": "Formatter",
+      "section": "Formatter",
+      "tabSize": {
+        "label": "Tab Size",
+        "placeholder": "Tab size",
+        "description": "The number of spaces a tab is equal to."
+      },
+      "printWidth": {
+        "label": "Print width",
+        "placeholder": "Print width",
+        "description": "Fit code within this line limit."
+      },
+      "semi": {
+        "label": "Semi",
+        "description": "Whether to use semicolons at the end of every line."
+      },
+      "singleQuote": {
+        "label": "Single quote",
+        "description": "Use single instead of double quotes."
+      },
+      "jsxSingleQuote": {
+        "label": "JSX single quote",
+        "description": "Use single instead of double quotes in JSX."
+      },
+      "useTabs": {
+        "label": "Use tabs",
+        "description": "Indent lines with tabs."
+      },
+      "trailingComma": {
+        "label": "Trailing comma",
+        "placeholder": "Select option",
+        "description": "Controls the printing of trailing commas wherever possible."
+      },
+      "arrowParens": {
+        "label": "Arrow Parens",
+        "placeholder": "Select option",
+        "description": "Include parentheses around a sole arrow function parameter."
+      },
+      "bracketSpacing": {
+        "label": "Bracket spacing",
+        "description": "Controls the printing of spaces inside object literals."
+      },
+      "bracketSameLine": {
+        "label": "Bracket same liine",
+        "description": "Put the '>' of a multi-line HTML (HTML, JSX, Vue, Angular) element at the end of the last line instead of being alone on the next line (does not apply to self closing elements)."
+      },
+      "endOfLine": {
+        "label": "End of line",
+        "placeholder": "Select option",
+        "description": "Specify the end of line used by prettier."
+      },
+      "quoteProps": {
+        "label": "Quote props",
+        "placeholder": "Select option",
+        "description": "Change when properties in objects are quoted."
+      },
+      "singleAttributePerLine": {
+        "label": "Single attribute per line",
+        "description": "Enforces single attribute per line in HTML, JSX, Vue and Angular."
+      }
+    }
+  },
+  "icons": {
+    "javascriptIcon": "Javascript icon",
+    "typescriptIcon": "Typescript icon",
+    "markdownIcon": "Markdown icon",
+    "ollamaIcon": "Ollama",
+    "enFlag": "United Kingdom flag",
+    "esFlag": "Spain flag"
+  },
   "cancel": "Cancel",
   "remove": "Remove"
 }

@@ -9,21 +9,196 @@
   },
   "notebooks": "Notebooks",
   "notebook": {
+    "addTitlePlaceholder": "Introduce un título",
     "addCell": "Agregar celda",
     "areYouSure": "¿Estás seguro?",
     "actionCannotBeUndo": "Esta acción no se puede deshacer.",
+    "editor": {
+      "code": {
+        "placeholder": "Escribe el código aquí..."
+      },
+      "markdown": {
+        "placeholder": "Escribe tus notas aquí..."
+      }
+    },
     "toolbar": {
       "showConsole": "Mostrar consola",
       "hideConsole": "Ocultar consola",
       "clearConsole": "Limpiar consola",
+      "copyCell": "Copiar celda",
+      "run": "Ejecutar",
+      "edit": "Editar",
       "splitHorizontal": "Dividir horizontalmente",
       "splitVertical": "Dividir verticalmente",
       "formatCode": "Formatear código",
       "removeCell": "Borrar celda",
       "addCellBelow": "Agregar celda debajo"
+    },
+    "menu": {
+      "notebook": {
+        "rename": "Renombrar",
+        "reload": "Recargar",
+        "clearAll": "Limpiar celdas",
+        "clearCache": "Limpiar cache"
+      },
+      "import": {
+        "title": "Importar",
+        "json": "Importar desde JSON",
+        "ipynb": "Importar desde ipynb",
+        "error": "Error durante la importacion del notebook."
+      },
+      "export": {
+        "title": "Exportar",
+        "error": "Error durante la exportacion del notebook.",
+        "html": "Exportar como HTML",
+        "ipynb": "Exportar como ipynb",
+        "pdf": "Exportar como PDF",
+        "json": "Exportar como JSON"
+      },
+      "ai": {
+        "title": "Opciones IA"
+      }
     }
   },
-  "settings": "Ajustes",
+  "settings": {
+    "name": "Ajustes",
+    "reset": "Ajustes por defecto",
+    "ai": {
+      "title": "Ajustes de IA",
+      "section": "IA",
+      "enable": {
+        "label": "Habilitar opciones de IA",
+        "description": "Habilitar caracteristicas de IA."
+      },
+      "provider": {
+        "label": "Proveedor de IA",
+        "description": "Seleccionar proveedor de IA a usar.",
+        "placeholder": "Seleccionar proveedor"
+      },
+      "model": {
+        "label": "Modelo de IA para autocompleción de código",
+        "description": "Seleccionar modelo para compleción de código.",
+        "placeholder": "Seleccionar modelo"
+      }
+    },
+    "common": {
+      "title": "Ajustes generales",
+      "sectionMain": "General",
+      "sectionLanguage": "Idioma",
+      "appLanguage": {
+        "label": "Cambiar idioma de la aplicación",
+        "description": "Seleccionar idioma de la aplicación.",
+        "placeholder": "Elige idioma",
+        "english": "Inglés",
+        "spanish": "Español"
+      }
+    },
+    "editor": {
+      "title": "Ajustes de editor",
+      "sectionMain": "Editor",
+      "language": {
+        "label": "Cambiar lenguaje",
+        "description": "Seleccionar lenguage por defecto.",
+        "placeholder": "Elegir lenguaje"
+      },
+      "ruler": {
+        "label": "Ruler",
+        "placeholder": "Ruler",
+        "description": "Render vertical ruler after a certain number of monospace characters."
+      },
+      "showLineNumbers": {
+        "label": "Mostrar número de linea",
+        "description": "Controla cuando mostrar el número de linea en el editor."
+      },
+      "fontSize": {
+        "label": "Tamaño de la fuente",
+        "placeholder": "Tamaño de la fuente",
+        "description": "Controla el tamaño de la fuente en pixeles."
+      },
+      "fontLigatures": {
+        "label": "Ligaduras de fuentes",
+        "description": "Configura ligaduras o características de fuente."
+      },
+      "formatOnPaste": {
+        "label": "Formatear al pegar",
+        "description": "Controla cuando el editor debe formatear el contenido pegado automáticamente."
+      },
+      "formatOnType": {
+        "label": "Formatear al escribir",
+        "description": "Controla cuando el editor debe formatear el contenido despues de escribir."
+      }
+    },
+    "formatter": {
+      "title": "Formateador",
+      "section": "Formateador",
+      "tabSize": {
+        "label": "Tamaño del tabulador",
+        "placeholder": "Tamaño del tabulador",
+        "description": "Número de espacios en blanco que son equivalentes a un tabulador."
+      },
+      "printWidth": {
+        "label": "Ancho de impresión",
+        "placeholder": "Ancho de impresión",
+        "description": "Ajusta el código dentro del limite de columnas."
+      },
+      "semi": {
+        "label": "Punto y coma",
+        "description": "Si usar puntos y coma al final de cada línea."
+      },
+      "singleQuote": {
+        "label": "Comillas simple",
+        "description": "Usa comillas simples en lugar de dobles."
+      },
+      "jsxSingleQuote": {
+        "label": "Comillas simples en JSX",
+        "description": "Usa comullas simples en lugar de dobles en JSX."
+      },
+      "useTabs": {
+        "label": "Usar tabuladores",
+        "description": "Indentar lines con tabuladores en lugar de espacios."
+      },
+      "trailingComma": {
+        "label": "Coma al final",
+        "placeholder": "Seleccionar opción",
+        "description": "Controla cuando usar coma al final de cada línea."
+      },
+      "arrowParens": {
+        "label": "Parentesis en funciones de flecha",
+        "placeholder": "Seleccionar opción",
+        "description": "Incluye parentesis alrededor de un solo parámetro en una función de flecha."
+      },
+      "bracketSpacing": {
+        "label": "Espacio entre paréntesis",
+        "description": "Controla el espacio entre paréntesis en objetos literales."
+      },
+      "bracketSameLine": {
+        "label": "Parentesis en la misma linea",
+        "description": "Inserta '>' al final de una multilinea HTML (HTML, JSX, Vue, Angular) en lugar de estar solo en la siguiente línea (no se aplica a los elementos sin cerrar)."
+      },
+      "endOfLine": {
+        "label": "Fin de linea",
+        "placeholder": "Seleccionar opción",
+        "description": "Especifica el fin de línea utilizado por prettier."
+      },
+      "quoteProps": {
+        "label": "Quote props",
+        "placeholder": "Select option",
+        "description": "Change when properties in objects are quoted."
+      },
+      "singleAttributePerLine": {
+        "label": "Único atributo por línea",
+        "description": "Fuerza un solo atributo por línea en HTML, JSX, Vue y Angular."
+      }
+    }
+  },
+  "icons": {
+    "javascriptIcon": "Icono de Javascript",
+    "typescriptIcon": "Icono de Typescript",
+    "markdownIcon": "Icono de Markdown",
+    "ollamaIcon": "Ollama",
+    "enFlag": "Bandera de Reino Unido",
+    "esFlag": "Bandera de España"
+  },
   "cancel": "Cancelar",
   "remove": "Borrar"
 }

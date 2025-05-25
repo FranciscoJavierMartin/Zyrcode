@@ -2,66 +2,36 @@ import { computed, reactive, ref } from 'vue';
 import { defineStore } from 'pinia';
 import type { Cell } from '@/modules/cells/interfaces/store';
 import type { Language } from '@/modules/cells/interfaces/code';
+import type { NotebookIpynb } from '@/modules/notebook/interfaces/ipynb';
 
 export const useCellsStore = defineStore('cells', () => {
-  const order = ref<string[]>(['z', 'a', 'b', 'c']);
+  const _notebookTitle = ref<string>('');
+  const order = ref<string[]>(['1746633060562', '1746633038990']);
   const cells = reactive<Record<string, Cell>>({
-    z: {
-      id: 'z',
-      language: 'javascript',
-      content: `
-  console.log('Log');
-  console.error('Error');
-  console.warn('Warn');
-  console.debug('Debug');
-  console.info('Info');
-        `,
+    '1746633060562': {
+      id: '1746633060562',
+      language: 'markdown',
+      content: '# Hello wo',
     },
-    a: {
-      id: 'a',
-      content: `
-        console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-console.log('Hello world! from JavaScr!');
-        `,
+    '1746633038990': {
+      id: '1746633038990',
       language: 'javascript',
-    },
-    b: {
-      id: 'b',
-      content: 'console.log("Hello world! from TypeScript!");',
-      language: 'javascript',
-    },
-    c: {
-      id: 'c',
-      content: 'console.log("Third cell!");',
-      language: 'javascript',
+      content: 'console.log("Hello world1");',
     },
   });
   const orderedCells = computed<Cell[]>(() =>
     order.value.map((id) => cells[id]),
   );
+  const isEmpty = computed<boolean>(() => order.value.length === 0);
   const isLastOne = computed<boolean>(() => order.value.length === 1);
+  const notebookTitle = computed<string>({
+    get() {
+      return _notebookTitle.value;
+    },
+    set(value: string) {
+      _notebookTitle.value = value;
+    },
+  });
 
   function updateLanguage({
     id,
@@ -76,15 +46,19 @@ console.log('Hello world! from JavaScr!');
     cells[id].content = content;
   }
 
-  function addCellBelow(id: string, language?: Language): void {
+  function addCellBelow(
+    id: string,
+    language?: Language,
+    content?: string,
+  ): void {
     // Random Id
     const newCellId: string = Date.now().toString();
     const previousIndex = order.value.indexOf(id);
 
     cells[newCellId] = {
       id: newCellId,
-      content: '',
-      language: language ?? 'javascript',
+      content: content ?? '',
+      language: language ?? 'typescript',
     };
 
     order.value.splice(previousIndex + 1, 0, newCellId);
@@ -119,7 +93,43 @@ console.log('Hello world! from JavaScr!');
     }
   }
 
+  function clearAll(): void {
+    order.value = [];
+    Object.keys(cells).forEach((key) => delete cells[key]);
+  }
+
+  function loadNotebook(notebookData: {
+    title: string;
+    cells: Record<string, Cell>;
+    order: string[];
+  }): void {
+    clearAll();
+    notebookTitle.value = notebookData.title;
+    Object.entries(notebookData.cells).map(([id, cell]) => {
+      cells[id] = cell;
+    });
+    order.value = notebookData.order;
+  }
+
+  function loadNotebookFromIpynb(notebookData: NotebookIpynb): void {
+    clearAll();
+    notebookTitle.value = notebookData.metadata.title ?? '';
+    notebookData.cells.forEach((cell) => {
+      cells[cell.id] = {
+        id: cell.id,
+        language: cell.cell_type === 'code' ? 'typescript' : 'markdown',
+        content: cell.source.toString(),
+      };
+      order.value.push(cell.id);
+    });
+  }
+
+  function copyCell(id: string): void {
+    addCellBelow(id, cells[id].language, cells[id].content);
+  }
+
   return {
+    notebookTitle,
     cells: orderedCells,
     updateContent,
     updateLanguage,
@@ -128,5 +138,10 @@ console.log('Hello world! from JavaScr!');
     removeCell,
     moveCell,
     isLastOne,
+    clearAll,
+    isEmpty,
+    loadNotebook,
+    loadNotebookFromIpynb,
+    copyCell,
   };
 });
