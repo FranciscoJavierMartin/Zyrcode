@@ -110,7 +110,6 @@ const props = withDefaults(
   }>(),
   {
     isDefault: true,
-    disabled: false,
   },
 );
 
