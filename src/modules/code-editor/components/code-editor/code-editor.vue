@@ -56,6 +56,12 @@ async function formatCode(): Promise<void> {
       trailingComma: formatterSettingsStore.$state.trailingComma,
       printWidth: formatterSettingsStore.$state.printWidth,
       jsxSingleQuote: formatterSettingsStore.$state.jsxSingleQuote,
+      arrowParens: formatterSettingsStore.$state.arrowParens,
+      // bracketSpacing,
+      // bracketSameLine,
+      // endOfLine,
+      // quoteProps,
+      // singleAttributePerLine,
     })
     .then((res) => res.replace(/\n$/, ''));
 
@@ -162,13 +168,10 @@ onMounted(() => {
         fontSize: editorSettingsStore.$state.fontSize,
         rulers: [editorSettingsStore.$state.ruler],
         tabSize: formatterSettingsStore.$state.tabSize,
-        fontLigatures: editorSettingsStore.fontLigatures,
-        formatOnPaste: editorSettingsStore.formatOnPaste,
-        formatOnType: editorSettingsStore.formatOnType,
-        // guides,
-        // insertSpaces,
-        // detectIndentation,
-        placeholder: aiSettingsStore.isAIEnabled
+        fontLigatures: editorSettingsStore.$state.fontLigatures,
+        formatOnPaste: editorSettingsStore.$state.formatOnPaste,
+        formatOnType: editorSettingsStore.$state.formatOnType,
+        placeholder: aiSettingsStore.$state.isAIEnabled
           ? undefined
           : props.language === 'markdown'
             ? t('notebook.editor.markdown.placeholder')

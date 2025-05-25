@@ -161,6 +161,11 @@
         "label": "Trailing comma",
         "placeholder": "Select option",
         "description": "Controls the printing of trailing commas wherever possible."
+      },
+      "arrowParens": {
+        "label": "Arrow Parens",
+        "placeholder": "Select option",
+        "description": "Include parentheses around a sole arrow function parameter."
       }
     }
   },

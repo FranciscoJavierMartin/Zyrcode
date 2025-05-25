@@ -95,6 +95,28 @@
           },
         ]"
       />
+      <FormSelect
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          formatterSettingsStore.$state.arrowParens === initialState.arrowParens
+        "
+        name="arrowParens"
+        :label="$t('settings.formatter.arrowParens.label')"
+        :section-name="$t('settings.formatter.section')"
+        :placeholder="$t('settings.formatter.arrowParens.placeholder')"
+        :description="$t('settings.formatter.arrowParens.description')"
+        :value="values.arrowParens"
+        :options="[
+          {
+            label: 'avoid',
+            value: 'avoid',
+          },
+          {
+            label: 'always',
+            value: 'always',
+          },
+        ]"
+      />
     </form>
   </section>
 </template>

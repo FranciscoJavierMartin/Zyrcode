@@ -30,6 +30,7 @@ export const formatterSchema = v.object({
     v.literal('es5'),
     v.literal('all'),
   ]),
+  arrowParens: v.union([v.literal('avoid'), v.literal('always')]),
 });
 
 export const aiSchema = v.object({

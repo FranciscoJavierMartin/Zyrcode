@@ -10,6 +10,7 @@ export const initialState: FormFormatterSettings = {
   useTabs: true,
   trailingComma: 'all',
   tabSize: 2,
+  arrowParens: 'always',
 };
 
 export const useFormatterSettingsStore = defineStore(
@@ -24,6 +25,9 @@ export const useFormatterSettingsStore = defineStore(
       initialState.trailingComma,
     );
     const tabSize = ref<number>(initialState.tabSize);
+    const arrowParens = ref<FormFormatterSettings['arrowParens']>(
+      initialState.arrowParens,
+    );
 
     function $reset(): void {
       jsxSingleQuote.value = initialState.jsxSingleQuote;
@@ -33,9 +37,11 @@ export const useFormatterSettingsStore = defineStore(
       useTabs.value = initialState.useTabs;
       trailingComma.value = initialState.trailingComma;
       tabSize.value = initialState.tabSize;
+      arrowParens.value = initialState.arrowParens;
     }
 
     return {
+      arrowParens,
       jsxSingleQuote,
       printWidth,
       semi,

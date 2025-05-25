@@ -161,6 +161,11 @@
         "label": "Coma al final",
         "placeholder": "Seleccionar opción",
         "description": "Controla cuando usar coma al final de cada línea."
+      },
+      "arrowParens": {
+        "label": "Parentesis en funciones de flecha",
+        "placeholder": "Seleccionar opción",
+        "description": "Incluye parentesis alrededor de un solo parámetro en una función de flecha."
       }
     }
   },
