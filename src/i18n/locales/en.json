@@ -114,6 +114,10 @@
         "label": "Font Size",
         "placeholder": "Font size",
         "description": "Controls the font size in pixels."
+      },
+      "fontLigatures": {
+        "label": "Font Ligatures",
+        "description": "Configures font ligatures or font features."
       }
     },
     "formatter": {

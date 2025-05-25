@@ -6,6 +6,7 @@ export const commonSchema = v.object({
 
 export const editorSchema = v.object({
   fontSize: v.pipe(v.number(), v.integer(), v.minValue(6), v.maxValue(30)),
+  fontLigatures: v.boolean(),
   showLineNumbers: v.boolean(),
   language: v.union([
     v.literal('typescript'),

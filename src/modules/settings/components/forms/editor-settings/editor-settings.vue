@@ -48,6 +48,17 @@
         :section-name="$t('settings.editor.sectionMain')"
         :description="$t('settings.editor.fontSize.description')"
       />
+      <FormToggle
+        :is-field-dirty="isFieldDirty"
+        :is-default="
+          editorSettingsStore.$state.fontLigatures ===
+          initialState.fontLigatures
+        "
+        name="fontLigatures"
+        :label="$t('settings.editor.fontLigatures.label')"
+        :section-name="$t('settings.editor.sectionMain')"
+        :description="$t('settings.editor.fontLigatures.description')"
+      />
     </form>
   </section>
 </template>

@@ -114,6 +114,10 @@
         "label": "Tamaño de la fuente",
         "placeholder": "Tamaño de la fuente",
         "description": "Controla el tamaño de la fuente en pixeles."
+      },
+      "fontLigatures": {
+        "label": "Ligaduras de fuentes",
+        "description": "Configura ligaduras o características de fuente."
       }
     },
     "formatter": {

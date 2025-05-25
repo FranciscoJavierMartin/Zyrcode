@@ -7,6 +7,7 @@ export const initialState: FormEditorSettings = {
   language: 'typescript',
   ruler: 80,
   showLineNumbers: true,
+  fontLigatures: false,
 };
 
 export const useEditorSettingsStore = defineStore(
@@ -16,6 +17,7 @@ export const useEditorSettingsStore = defineStore(
     const language = ref<FormEditorSettings['language']>(initialState.language);
     const ruler = ref<number>(initialState.ruler);
     const showLineNumbers = ref<boolean>(initialState.showLineNumbers);
+    const fontLigatures = ref<boolean>(initialState.fontLigatures);
 
     function $reset(): void {
       fontSize.value = initialState.fontSize;
@@ -25,6 +27,7 @@ export const useEditorSettingsStore = defineStore(
     }
 
     return {
+      fontLigatures,
       fontSize,
       language,
       ruler,

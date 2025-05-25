@@ -162,7 +162,7 @@ onMounted(() => {
         fontSize: editorSettingsStore.$state.fontSize,
         rulers: [editorSettingsStore.$state.ruler],
         tabSize: formatterSettingsStore.$state.tabSize,
-        // fontLigatures,
+        fontLigatures: editorSettingsStore.fontLigatures,
         // formatOnPaste,
         // formatOnType,
         // guides,
