@@ -61,13 +61,15 @@
         :text="$t('notebook.toolbar.splitHorizontal')"
         v-if="isLargeScreen && language !== 'markdown'"
       >
-        <Button
-          variant="hover"
-          class="button-icon group"
-          @click="$emit('toggle-direction')"
-        >
-          <SplitIcon :is-horizontal="direction === 'horizontal'" />
-        </Button>
+        <Toggle as-child>
+          <Button
+            variant="hover"
+            class="button-icon group"
+            @click="$emit('toggle-direction')"
+          >
+            <SplitIcon :is-horizontal="direction === 'horizontal'" />
+          </Button>
+        </Toggle>
       </TooltipButton>
       <template v-if="language === 'markdown'">
         <TooltipButton v-if="isTextShown" :text="$t('notebook.toolbar.edit')">
@@ -132,6 +134,7 @@ import { useCellsStore } from '@/modules/cells/store/cells';
 import type { Language } from '@/modules/cells/interfaces/code';
 import Button from '@/modules/common/components/ui/button/Button.vue';
 import TooltipButton from '@/modules/common/components/ui/tooltip-button/tooltip-button.vue';
+import Toggle from '@/modules/common/components/ui/toggle/Toggle.vue';
 
 const props = defineProps<{
   id: string;
